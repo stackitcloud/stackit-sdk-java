@@ -1,7 +1,7 @@
 lazy val root = (project in file(".")).
   settings(
     organization := "cloud.stackit",
-    name := "stackit-resourcemanager",
+    name := "stackit-sdk-resourcemanager",
     version := "2.0",
     scalaVersion := "2.11.12",
     scalacOptions ++= Seq("-feature"),

@@ -2,9 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>cloud.stackit</groupId>
-    <artifactId>stackit-resourcemanager</artifactId>
+    <artifactId>stackit-sdk-resourcemanager</artifactId>
     <packaging>jar</packaging>
-    <name>stackit-resourcemanager</name>
+    <name>stackit-sdk-resourcemanager</name>
     <version>2.0</version>
     <url>https://github.com/stackitcloud/stackit-sdk-java</url>
     <description>Resource Manager API</description>

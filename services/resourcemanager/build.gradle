@@ -89,7 +89,7 @@ if(hasProperty('target') && target == 'android') {
     publishing {
         publications {
             maven(MavenPublication) {
-               artifactId = 'stackit-resourcemanager'
+               artifactId = 'stackit-sdk-resourcemanager'
                from components.java
             }
         }
