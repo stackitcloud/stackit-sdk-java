@@ -128,54 +128,6 @@ public class DefaultApiExample {
 
 ```
 
-## Documentation for API Endpoints
-
-All URIs are relative to *https://resource-manager.api.stackit.cloud*
-
-Class | Method | HTTP request | Description
------------- | ------------- | ------------- | -------------
-*DefaultApi* | [**createFolder**](docs/DefaultApi.md#createFolder) | **POST** /v2/folders | Create Folder
-*DefaultApi* | [**createProject**](docs/DefaultApi.md#createProject) | **POST** /v2/projects | Create Project
-*DefaultApi* | [**deleteFolder**](docs/DefaultApi.md#deleteFolder) | **DELETE** /v2/folders/{containerId} | Delete Folder
-*DefaultApi* | [**deleteFolderLabels**](docs/DefaultApi.md#deleteFolderLabels) | **DELETE** /v2/folders/{containerId}/labels | Delete Folder Labels
-*DefaultApi* | [**deleteOrganizationLabels**](docs/DefaultApi.md#deleteOrganizationLabels) | **DELETE** /v2/organizations/{containerId}/labels | Delete Organization Labels
-*DefaultApi* | [**deleteProject**](docs/DefaultApi.md#deleteProject) | **DELETE** /v2/projects/{id} | Delete Project
-*DefaultApi* | [**deleteProjectLabels**](docs/DefaultApi.md#deleteProjectLabels) | **DELETE** /v2/projects/{containerId}/labels | Delete Project Labels
-*DefaultApi* | [**getFolderDetails**](docs/DefaultApi.md#getFolderDetails) | **GET** /v2/folders/{containerId} | Get Folder Details
-*DefaultApi* | [**getOrganization**](docs/DefaultApi.md#getOrganization) | **GET** /v2/organizations/{id} | Get Organization Details
-*DefaultApi* | [**getProject**](docs/DefaultApi.md#getProject) | **GET** /v2/projects/{id} | Get Project Details
-*DefaultApi* | [**listFolders**](docs/DefaultApi.md#listFolders) | **GET** /v2/folders | Get All Folders
-*DefaultApi* | [**listOrganizations**](docs/DefaultApi.md#listOrganizations) | **GET** /v2/organizations | Get All Organizations
-*DefaultApi* | [**listProjects**](docs/DefaultApi.md#listProjects) | **GET** /v2/projects | Get All Projects
-*DefaultApi* | [**partialUpdateFolder**](docs/DefaultApi.md#partialUpdateFolder) | **PATCH** /v2/folders/{containerId} | Update Folder
-*DefaultApi* | [**partialUpdateOrganization**](docs/DefaultApi.md#partialUpdateOrganization) | **PATCH** /v2/organizations/{id} | Update Organization
-*DefaultApi* | [**partialUpdateProject**](docs/DefaultApi.md#partialUpdateProject) | **PATCH** /v2/projects/{id} | Update Project
-
-
-## Documentation for Models
-
- - [CreateFolderPayload](docs/CreateFolderPayload.md)
- - [CreateProjectPayload](docs/CreateProjectPayload.md)
- - [ErrorResponse](docs/ErrorResponse.md)
- - [FolderResponse](docs/FolderResponse.md)
- - [GetFolderDetailsResponse](docs/GetFolderDetailsResponse.md)
- - [GetProjectResponse](docs/GetProjectResponse.md)
- - [LifecycleState](docs/LifecycleState.md)
- - [ListFoldersResponse](docs/ListFoldersResponse.md)
- - [ListFoldersResponseItemsInner](docs/ListFoldersResponseItemsInner.md)
- - [ListOrganizationsResponse](docs/ListOrganizationsResponse.md)
- - [ListOrganizationsResponseItemsInner](docs/ListOrganizationsResponseItemsInner.md)
- - [ListProjectsResponse](docs/ListProjectsResponse.md)
- - [Member](docs/Member.md)
- - [OrganizationResponse](docs/OrganizationResponse.md)
- - [Parent](docs/Parent.md)
- - [ParentListInner](docs/ParentListInner.md)
- - [PartialUpdateFolderPayload](docs/PartialUpdateFolderPayload.md)
- - [PartialUpdateOrganizationPayload](docs/PartialUpdateOrganizationPayload.md)
- - [PartialUpdateProjectPayload](docs/PartialUpdateProjectPayload.md)
- - [Project](docs/Project.md)
-
-
 ## Recommendation
 
 It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
