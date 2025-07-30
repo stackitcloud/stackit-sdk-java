@@ -1,9 +1,9 @@
-package cloud.stackit.sdk.core.keyflow;
+package cloud.stackit.sdk.core;
 
-import cloud.stackit.sdk.core.KeyFlowAuthenticator;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
@@ -14,6 +14,7 @@ public class KeyFlowInterceptor implements Interceptor {
         this.authenticator = authenticator;
     }
 
+    @NotNull
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request originalRequest = chain.request();

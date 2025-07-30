@@ -2,12 +2,8 @@ package cloud.stackit.sdk.core.model;
 
 import com.google.gson.Gson;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
-import java.security.PublicKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
@@ -24,7 +20,6 @@ public class ServiceAccountKey {
     private final boolean active;
     private final Date validUntil;
     private final ServiceAccountCredentials credentials;
-
 
     public ServiceAccountKey(String id, String publicKey, Date created, String keyType, String keyOrigin, String keyAlgorithm, boolean active, Date validUntil, ServiceAccountCredentials credentials) {
         this.id = id;
@@ -93,10 +88,7 @@ public class ServiceAccountKey {
         return pubKey;
     }
 
-//    public static ServiceAccountKey loadCredentials(InputStream jsonStream) {
-//        return new Gson().fromJson(new InputStreamReader(jsonStream, StandardCharsets.UTF_8), ServiceAccountKey.class);
-//    }
-    public static ServiceAccountKey loadCredentials(String json) {
+    public static ServiceAccountKey loadCredentials(String json) throws com.google.gson.JsonSyntaxException {
         return new Gson().fromJson(json, ServiceAccountKey.class);
     }
 }

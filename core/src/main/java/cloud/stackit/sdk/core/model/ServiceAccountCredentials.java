@@ -2,7 +2,6 @@ package cloud.stackit.sdk.core.model;
 
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
@@ -13,7 +12,7 @@ public class ServiceAccountCredentials {
     private final String aud;
     private final String iss;
     private final String kid;
-    private final String privateKey;
+    private String privateKey;
     private final UUID sub;
 
     public ServiceAccountCredentials(String aud, String iss, String kid, String privateKey, UUID sub) {
@@ -38,6 +37,14 @@ public class ServiceAccountCredentials {
 
     public String getPrivateKey() {
         return privateKey;
+    }
+
+    public void setPrivateKey(String privateKey) {
+        this.privateKey = privateKey;
+    }
+
+    public boolean isPrivateKeySet() {
+        return !privateKey.trim().isEmpty();
     }
 
     public UUID getSub() {

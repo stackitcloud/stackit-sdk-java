@@ -1,6 +1,5 @@
 package cloud.stackit.sdk.core;
 
-import cloud.stackit.sdk.core.model.ServiceAccountCredentials;
 import cloud.stackit.sdk.core.model.ServiceAccountKey;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -9,12 +8,10 @@ import com.google.gson.annotations.SerializedName;
 import okhttp3.*;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,7 +60,6 @@ public class KeyFlowAuthenticator {
         this.tokenUrl = "https://service-account.api.stackit.cloud/token";
         createAccessToken();
     }
-
 
     public synchronized String getAccessToken() throws IOException {
         if (token == null || token.isExpired()) {
