@@ -12,6 +12,7 @@
 
 package cloud.stackit.sdk.resourcemanager.api;
 
+import cloud.stackit.sdk.core.config.CoreConfiguration;
 import cloud.stackit.sdk.resourcemanager.ApiCallback;
 import cloud.stackit.sdk.resourcemanager.ApiClient;
 import cloud.stackit.sdk.resourcemanager.ApiException;
@@ -26,12 +27,17 @@ import cloud.stackit.sdk.resourcemanager.model.GetProjectResponse;
 import cloud.stackit.sdk.resourcemanager.model.ListFoldersResponse;
 import cloud.stackit.sdk.resourcemanager.model.ListOrganizationsResponse;
 import cloud.stackit.sdk.resourcemanager.model.ListProjectsResponse;
+
+import java.security.spec.InvalidKeySpecException;
+import java.time.OffsetDateTime;
 import cloud.stackit.sdk.resourcemanager.model.OrganizationResponse;
 import cloud.stackit.sdk.resourcemanager.model.PartialUpdateFolderPayload;
 import cloud.stackit.sdk.resourcemanager.model.PartialUpdateOrganizationPayload;
 import cloud.stackit.sdk.resourcemanager.model.PartialUpdateProjectPayload;
 import cloud.stackit.sdk.resourcemanager.model.Project;
 import com.google.gson.reflect.TypeToken;
+
+import javax.security.auth.login.CredentialNotFoundException;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -53,9 +59,16 @@ public class DefaultApi {
 		this.localVarApiClient = apiClient;
 	}
 
-	public ApiClient getApiClient() {
-		return localVarApiClient;
-	}
+	public DefaultApi(CoreConfiguration config) throws IOException, InvalidKeySpecException, CredentialNotFoundException {
+        if (config.getCustomEndpoint() != null && !config.getCustomEndpoint().trim().isEmpty()) {
+            localCustomBaseUrl = config.getCustomEndpoint();
+        }
+        this.localVarApiClient = new ApiClient(config);
+    }
+
+    public ApiClient getApiClient() {
+        return localVarApiClient;
+    }
 
 	public void setApiClient(ApiClient apiClient) {
 		this.localVarApiClient = apiClient;

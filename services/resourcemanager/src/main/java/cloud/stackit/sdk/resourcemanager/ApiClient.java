@@ -118,9 +118,25 @@ public class ApiClient {
 		authentications = Collections.unmodifiableMap(authentications);
 	}
 
-	protected void initHttpClient() {
-		initHttpClient(Collections.<Interceptor>emptyList());
-	}
+	public ApiClient(CoreConfiguration config) throws IOException, InvalidKeySpecException, CredentialNotFoundException {
+        init();
+
+        if (config.getCustomEndpoint() != null && !config.getCustomEndpoint().trim().isEmpty()) {
+            basePath = config.getCustomEndpoint();
+        }
+        if (config.getDefaultHeader() != null) {
+            defaultHeaderMap = config.getDefaultHeader();
+        }
+        SetupAuth auth;
+        auth = new SetupAuth(config);
+        List<Interceptor> interceptors = new LinkedList<>();
+        interceptors.add(auth.getAuthHandler());
+        initHttpClient(interceptors);
+    }
+
+    protected void initHttpClient() {
+        initHttpClient(Collections.<Interceptor>emptyList());
+    }
 
 	protected void initHttpClient(List<Interceptor> interceptors) {
 		OkHttpClient.Builder builder = new OkHttpClient.Builder();

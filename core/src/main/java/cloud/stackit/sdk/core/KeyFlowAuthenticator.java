@@ -1,6 +1,6 @@
 package cloud.stackit.sdk.core;
 
-import cloud.stackit.sdk.core.config.Configuration;
+import cloud.stackit.sdk.core.config.CoreConfiguration;
 import cloud.stackit.sdk.core.model.ServiceAccountKey;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -66,7 +66,7 @@ public class KeyFlowAuthenticator {
      * @throws InvalidKeySpecException Throws, when the private key in the service account can not be parsed
      * @throws IOException Throws, when on unexpected responses from the key flow
      */
-    public KeyFlowAuthenticator(Configuration cfg, ServiceAccountKey saKey) throws InvalidKeySpecException, IOException {
+    public KeyFlowAuthenticator(CoreConfiguration cfg, ServiceAccountKey saKey) throws InvalidKeySpecException, IOException {
         this.saKey = saKey;
         this.gson = new Gson();
         this.httpClient = new OkHttpClient.Builder()

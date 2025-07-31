@@ -2,7 +2,7 @@ package cloud.stackit.sdk.core.config;
 
 import java.util.Map;
 
-public class Configuration {
+public class CoreConfiguration {
     private final Map<String, String> defaultHeader;
     private final String serviceAccountKey;
     private final String serviceAccountKeyPath;
@@ -13,7 +13,7 @@ public class Configuration {
     private final String tokenCustomUrl;
     private final Long tokenExpirationLeeway;
 
-    Configuration(Builder builder) {
+    CoreConfiguration(Builder builder) {
         this.defaultHeader = builder.defaultHeader;
         this.serviceAccountKey = builder.serviceAccountKey;
         this.serviceAccountKeyPath = builder.serviceAccountKeyPath;
@@ -117,8 +117,8 @@ public class Configuration {
             return this;
         }
         
-        public Configuration build() {
-            return new Configuration(this);
+        public CoreConfiguration build() {
+            return new CoreConfiguration(this);
         }
     }
 }

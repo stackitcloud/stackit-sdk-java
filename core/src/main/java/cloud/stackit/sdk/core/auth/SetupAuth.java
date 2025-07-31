@@ -1,7 +1,7 @@
 package cloud.stackit.sdk.core.auth;
 
 import cloud.stackit.sdk.core.KeyFlowAuthenticator;
-import cloud.stackit.sdk.core.config.Configuration;
+import cloud.stackit.sdk.core.config.CoreConfiguration;
 import cloud.stackit.sdk.core.config.EnvironmentVariables;
 import cloud.stackit.sdk.core.KeyFlowInterceptor;
 import cloud.stackit.sdk.core.model.ServiceAccountKey;
@@ -37,7 +37,7 @@ public class SetupAuth {
      * @throws InvalidKeySpecException when the private key can not be parsed
      */
     public SetupAuth() throws IOException, InvalidKeySpecException, CredentialNotFoundException {
-        this(new Configuration.Builder().build());
+        this(new CoreConfiguration.Builder().build());
     }
 
     /**
@@ -47,9 +47,9 @@ public class SetupAuth {
      * @throws CredentialNotFoundException when no configuration is set or can be found
      * @throws InvalidKeySpecException when the private key can not be parsed
      */
-    public SetupAuth(Configuration cfg) throws IOException, CredentialNotFoundException, InvalidKeySpecException {
+    public SetupAuth(CoreConfiguration cfg) throws IOException, CredentialNotFoundException, InvalidKeySpecException {
         if (cfg == null) {
-            cfg = new Configuration.Builder().build();
+            cfg = new CoreConfiguration.Builder().build();
         }
 
         ServiceAccountKey saKey = setupKeyFlow(cfg);
@@ -93,7 +93,7 @@ public class SetupAuth {
      * @throws CredentialNotFoundException throws error when no service account key or private key can be found
      * @throws IOException throws an error if a file can not be found
      */
-    private ServiceAccountKey setupKeyFlow(Configuration cfg) throws CredentialNotFoundException, IOException {
+    private ServiceAccountKey setupKeyFlow(CoreConfiguration cfg) throws CredentialNotFoundException, IOException {
         // Explicit config in code
         if (cfg.getServiceAccountKey() != null && !cfg.getServiceAccountKey().trim().isEmpty()) {
             ServiceAccountKey saKey = ServiceAccountKey.loadFromJson(cfg.getServiceAccountKey());
@@ -135,7 +135,7 @@ public class SetupAuth {
         }
     }
 
-    private void loadPrivateKey(Configuration cfg, ServiceAccountKey saKey) throws CredentialNotFoundException {
+    private void loadPrivateKey(CoreConfiguration cfg, ServiceAccountKey saKey) throws CredentialNotFoundException {
         if (!saKey.getCredentials().isPrivateKeySet()) {
             try {
              String privateKey = getPrivateKey(cfg);
@@ -178,7 +178,7 @@ public class SetupAuth {
      * @throws CredentialNotFoundException throws if no private key could be found
      * @throws IOException throws if the provided path can not be found or the file within the pathKey can not be found
      */
-    private String getPrivateKey(Configuration cfg) throws CredentialNotFoundException, IOException {
+    private String getPrivateKey(CoreConfiguration cfg) throws CredentialNotFoundException, IOException {
         // Explicit code config
         // Set private key
         if (cfg.getPrivateKey() != null && !cfg.getPrivateKey().trim().isEmpty()) {
