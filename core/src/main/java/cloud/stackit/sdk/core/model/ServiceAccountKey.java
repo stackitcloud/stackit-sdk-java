@@ -1,6 +1,7 @@
 package cloud.stackit.sdk.core.model;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -69,26 +70,27 @@ public class ServiceAccountKey {
         return credentials;
     }
 
-    public RSAPublicKey getPublicKeyParsed() {
-        RSAPublicKey pubKey = null;
-        try {
-            String trimmedKey = publicKey.replaceFirst("-----BEGIN PUBLIC KEY-----", "");
-            trimmedKey = trimmedKey.replaceFirst("-----END PUBLIC KEY-----", "");
-            trimmedKey = trimmedKey.replaceAll("\n","");
+    public RSAPublicKey getPublicKeyParsed() throws NoSuchAlgorithmException, InvalidKeySpecException {
+        String trimmedKey = publicKey.replaceFirst("-----BEGIN PUBLIC KEY-----", "");
+        trimmedKey = trimmedKey.replaceFirst("-----END PUBLIC KEY-----", "");
+        trimmedKey = trimmedKey.replaceAll("\n","");
 
-            byte[] publicBytes = Base64.getDecoder().decode(trimmedKey);
-            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicBytes);
-            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-            pubKey = (RSAPublicKey) keyFactory.generatePublic(keySpec);
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            System.out.println(e);
-        }
+        byte[] publicBytes = Base64.getDecoder().decode(trimmedKey);
+        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicBytes);
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        RSAPublicKey pubKey = (RSAPublicKey) keyFactory.generatePublic(keySpec);
         return pubKey;
     }
 
-    public static ServiceAccountKey loadCredentials(String json) throws com.google.gson.JsonSyntaxException {
-        return new Gson().fromJson(json, ServiceAccountKey.class);
+    public static ServiceAccountKey loadFromJson(String json) throws com.google.gson.JsonSyntaxException {
+        ServiceAccountKey saKey = new Gson().fromJson(json, ServiceAccountKey.class);
+        if (!saKey.isCredentialsSet()) {
+            throw new JsonSyntaxException("required field `credentials` in service account key is missing.");
+        }
+        return saKey;
+    }
+
+    private boolean isCredentialsSet() {
+        return credentials != null;
     }
 }

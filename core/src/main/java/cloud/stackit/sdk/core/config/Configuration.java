@@ -11,7 +11,7 @@ public class Configuration {
     private final String customEndpoint;
     private final String credentialsFilePath;
     private final String tokenCustomUrl;
-    private final String tokenExpirationLeeway;
+    private final Long tokenExpirationLeeway;
 
     Configuration(Builder builder) {
         this.defaultHeader = builder.defaultHeader;
@@ -57,7 +57,7 @@ public class Configuration {
         return tokenCustomUrl;
     }
 
-    public String getTokenExpirationLeeway() {
+    public Long getTokenExpirationLeeway() {
         return tokenExpirationLeeway;
     }
 
@@ -70,7 +70,7 @@ public class Configuration {
         private String customEndpoint;
         private String credentialsFilePath;
         private String tokenCustomUrl;
-        private String tokenExpirationLeeway;
+        private Long tokenExpirationLeeway;
 
         public Builder defaultHeader(Map<String, String> defaultHeader) {
             this.defaultHeader = defaultHeader;
@@ -112,7 +112,7 @@ public class Configuration {
             return this;
         }
 
-        public Builder tokenExpirationLeeway(String tokenExpirationLeeway) {
+        public Builder tokenExpirationLeeway(Long tokenExpirationLeeway) {
             this.tokenExpirationLeeway = tokenExpirationLeeway;
             return this;
         }

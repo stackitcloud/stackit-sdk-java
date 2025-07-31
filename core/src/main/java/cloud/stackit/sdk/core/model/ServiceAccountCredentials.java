@@ -44,29 +44,21 @@ public class ServiceAccountCredentials {
     }
 
     public boolean isPrivateKeySet() {
-        return !privateKey.trim().isEmpty();
+        return privateKey != null && !privateKey.trim().isEmpty();
     }
 
     public UUID getSub() {
         return sub;
     }
 
-    public RSAPrivateKey getPrivateKeyParsed() {
-        RSAPrivateKey prvKey = null;
-        try {
-            String trimmedKey = privateKey.replaceFirst("-----BEGIN PRIVATE KEY-----", "");
-            trimmedKey = trimmedKey.replaceFirst("-----END PRIVATE KEY-----", "");
-            trimmedKey = trimmedKey.replaceAll("\n","");
+    public RSAPrivateKey getPrivateKeyParsed() throws NoSuchAlgorithmException, InvalidKeySpecException {
+        String trimmedKey = privateKey.replaceFirst("-----BEGIN PRIVATE KEY-----", "");
+        trimmedKey = trimmedKey.replaceFirst("-----END PRIVATE KEY-----", "");
+        trimmedKey = trimmedKey.replaceAll("\n","");
 
-            byte[] privateBytes = Base64.getDecoder().decode(trimmedKey);
-            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateBytes);
-            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-            prvKey = (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            System.out.println(e);
-        }
-        return prvKey;
+        byte[] privateBytes = Base64.getDecoder().decode(trimmedKey);
+        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateBytes);
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        return (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
     }
 }
