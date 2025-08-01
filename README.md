@@ -15,6 +15,20 @@ This repository contains the STACKIT SDKs for Java.
 
 If you encounter any issues or have suggestions for improvements, please open an issue in the repository or create a ticket in the [STACKIT Help Center](https://support.stackit.cloud/).
 
+## Development
+
+Building the STACKIT Java SDK requires:
+1. Java SDK (version 11 to 21 should be supported) installed on your system
+
+In case you want to open the project in your preferred IDE, run `./gradlew idea` or `./gradlew eclipse` beforehand.
+
+## Installation
+
+To install the API client library to your local Maven repository, simply execute:
+
+```bash
+./gradlew publishToMavenLocal
+```
 
 ## Release creation
 

@@ -39,3 +39,8 @@ gradle-app.setting
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+
+*.iws
+*.iml
+*.ipr
+.idea

@@ -1,0 +1,17 @@
+rootProject.name = 'stackit-sdk-java'
+
+include 'core'
+
+// find all subprojects in the 'services' subdirectory automatically
+new File(rootDir, "services").listFiles().each {
+	if (it.directory && new File(it, 'build.gradle').exists()) {
+		include ":services:${it.name}"
+	}
+}
+
+// find all subprojects in the 'examples' subdirectory automatically
+new File(rootDir, "examples").listFiles().each {
+	if (it.directory && new File(it, 'build.gradle').exists()) {
+		include ":examples:${it.name}"
+	}
+}

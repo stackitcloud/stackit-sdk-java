@@ -34,7 +34,7 @@ This package is part of the STACKIT Java SDK. For additional information, please
 ## Requirements
 
 Building the API client library requires:
-1. Java 1.8+
+1. Java SDK (version 11 to 21 should be supported) installed on your system
 
 ## Installation
 
