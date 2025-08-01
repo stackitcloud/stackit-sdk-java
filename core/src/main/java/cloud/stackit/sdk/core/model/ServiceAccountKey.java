@@ -78,11 +78,10 @@ public class ServiceAccountKey {
         byte[] publicBytes = Base64.getDecoder().decode(trimmedKey);
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicBytes);
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        RSAPublicKey pubKey = (RSAPublicKey) keyFactory.generatePublic(keySpec);
-        return pubKey;
+        return (RSAPublicKey) keyFactory.generatePublic(keySpec);
     }
 
-    public static ServiceAccountKey loadFromJson(String json) throws com.google.gson.JsonSyntaxException {
+    public static ServiceAccountKey loadFromJson(String json) throws JsonSyntaxException {
         ServiceAccountKey saKey = new Gson().fromJson(json, ServiceAccountKey.class);
         if (!saKey.isCredentialsSet()) {
             throw new JsonSyntaxException("required field `credentials` in service account key is missing.");

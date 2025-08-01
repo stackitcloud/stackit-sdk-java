@@ -1,6 +1,7 @@
 package cloud.stackit.sdk.core;
 
 import cloud.stackit.sdk.core.config.CoreConfiguration;
+import cloud.stackit.sdk.core.exception.ApiException;
 import cloud.stackit.sdk.core.model.ServiceAccountKey;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -63,10 +64,11 @@ public class KeyFlowAuthenticator {
      * Creates the initial service account and refreshes expired access token.
      * @param cfg Configuration to set a custom token endpoint and the token expiration leeway.
      * @param saKey Service Account Key, which should be used for the authentication
-     * @throws InvalidKeySpecException Throws, when the private key in the service account can not be parsed
-     * @throws IOException Throws, when on unexpected responses from the key flow
+     * @throws InvalidKeySpecException thrown when the private key in the service account can not be parsed
+     * @throws IOException thrown on unexpected responses from the key flow
+     * @throws ApiException thrown on unexpected responses from the key flow
      */
-    public KeyFlowAuthenticator(CoreConfiguration cfg, ServiceAccountKey saKey) throws InvalidKeySpecException, IOException {
+    public KeyFlowAuthenticator(CoreConfiguration cfg, ServiceAccountKey saKey) throws InvalidKeySpecException, IOException, ApiException {
         this.saKey = saKey;
         this.gson = new Gson();
         this.httpClient = new OkHttpClient.Builder()
@@ -86,7 +88,13 @@ public class KeyFlowAuthenticator {
         createAccessToken();
     }
 
-    public synchronized String getAccessToken() throws IOException {
+
+    /**
+     * Returns access token. If the token is expired it creates a new token.
+     * @throws IOException request for new access token failed
+     * @throws ApiException response for new access token with bad status code
+     */
+    public synchronized String getAccessToken() throws IOException, ApiException {
         if (token == null || token.isExpired()) {
             createAccessTokenWithRefreshToken();
         }
@@ -94,12 +102,13 @@ public class KeyFlowAuthenticator {
     }
 
     /**
-     * Creates the inital accessToken and stores it in `this.token`
+     * Creates the initial accessToken and stores it in `this.token`
      * @throws InvalidKeySpecException can not parse private key
      * @throws IOException request for access token failed
+     * @throws ApiException response for new access token with bad status code
      * @throws JsonSyntaxException parsing of the created access token failed
      */
-    private void createAccessToken() throws InvalidKeySpecException, IOException, JsonSyntaxException {
+    private void createAccessToken() throws InvalidKeySpecException, IOException, JsonSyntaxException, ApiException {
         String grant = "urn:ietf:params:oauth:grant-type:jwt-bearer";
         String assertion;
         try {
@@ -107,29 +116,22 @@ public class KeyFlowAuthenticator {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("could not find required algorithm for jwt signing. This should not happen and should be reported on https://github.com/stackitcloud/stackit-sdk-java/issues", e);
         }
-        try(Response response = requestToken(grant, assertion).execute()) {
-            parseTokenResponse(response);
-        } catch (IOException | ApiException e) {
-            throw new IOException("request for access token failed", e);
-        } catch (JsonSyntaxException e) {
-            throw new JsonSyntaxException("parsing access token failed", e);
+        Response response = requestToken(grant, assertion).execute();
+        parseTokenResponse(response);
+        response.close();
         }
-    }
 
     /**
      * Creates a new access token with the existing refresh token
      * @throws IOException request for new access token failed
+     * @throws ApiException response for new access token with bad status code
      * @throws JsonSyntaxException can not parse new access token
      */
-    private synchronized void createAccessTokenWithRefreshToken() throws IOException, JsonSyntaxException {
+    private synchronized void createAccessTokenWithRefreshToken() throws IOException, JsonSyntaxException, ApiException {
         String refreshToken = token.refreshToken;
-        try (Response response = requestToken(REFRESH_TOKEN, refreshToken).execute()) {
-            parseTokenResponse(response);
-        } catch (IOException | ApiException e) {
-            throw new IOException("request for new access token failed", e);
-        } catch (JsonSyntaxException e) {
-            throw new JsonSyntaxException("parsing refreshed access token failed", e);
-        }
+        Response response = requestToken(REFRESH_TOKEN, refreshToken).execute();
+        parseTokenResponse(response);
+        response.close();
     }
 
     private synchronized void parseTokenResponse(Response response) throws ApiException, JsonSyntaxException {
@@ -145,13 +147,9 @@ public class KeyFlowAuthenticator {
             throw new JsonSyntaxException("body from token creation is null");
         }
 
-        try {
-            token = gson.fromJson(new InputStreamReader(response.body().byteStream(), StandardCharsets.UTF_8), KeyFlowTokenResponse.class);
-            token.expiresIn = JWT.decode(token.accessToken).getExpiresAt().toInstant().minusSeconds(tokenLeewayInSeconds).getEpochSecond();
-            response.body().close();
-        } catch (JsonSyntaxException e) {
-            throw new JsonSyntaxException("could not parse response of created token", e);
-        }
+        token = gson.fromJson(new InputStreamReader(response.body().byteStream(), StandardCharsets.UTF_8), KeyFlowTokenResponse.class);
+        token.expiresIn = JWT.decode(token.accessToken).getExpiresAt().toInstant().minusSeconds(tokenLeewayInSeconds).getEpochSecond();
+        response.body().close();
     }
 
     private Call requestToken(String grant, String assertionValue) throws IOException {
@@ -171,11 +169,8 @@ public class KeyFlowAuthenticator {
 
     private String generateSelfSignedJWT() throws InvalidKeySpecException, NoSuchAlgorithmException {
         RSAPrivateKey prvKey;
-        try {
-            prvKey = saKey.getCredentials().getPrivateKeyParsed();
-        } catch (InvalidKeySpecException e) {
-            throw new InvalidKeySpecException("could not parse private key", e);
-        }
+
+        prvKey = saKey.getCredentials().getPrivateKeyParsed();
         Algorithm algorithm  = Algorithm.RSA512(prvKey);
 
         Map<String, Object> jwtHeader = new HashMap<>();

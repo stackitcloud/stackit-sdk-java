@@ -59,7 +59,8 @@ public class DefaultApi {
 		this.localVarApiClient = apiClient;
 	}
 
-	public DefaultApi(CoreConfiguration config) throws IOException, InvalidKeySpecException, CredentialNotFoundException {
+	// TODO: remove in follow up story the service specific ApiException and use instead the ApiException of core
+    public DefaultApi(CoreConfiguration config) throws IOException, InvalidKeySpecException, cloud.stackit.sdk.core.exception.ApiException {
         if (config.getCustomEndpoint() != null && !config.getCustomEndpoint().trim().isEmpty()) {
             localCustomBaseUrl = config.getCustomEndpoint();
         }

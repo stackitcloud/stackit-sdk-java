@@ -1,4 +1,4 @@
-package cloud.stackit.sdk.core;
+package cloud.stackit.sdk.core.exception;
 
 
 import java.util.List;

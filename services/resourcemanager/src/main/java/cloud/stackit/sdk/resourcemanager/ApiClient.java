@@ -118,7 +118,7 @@ public class ApiClient {
 		authentications = Collections.unmodifiableMap(authentications);
 	}
 
-	public ApiClient(CoreConfiguration config) throws IOException, InvalidKeySpecException, CredentialNotFoundException {
+	public ApiClient(CoreConfiguration config) throws IOException, InvalidKeySpecException, cloud.stackit.sdk.core.exception.ApiException {
         init();
 
         if (config.getCustomEndpoint() != null && !config.getCustomEndpoint().trim().isEmpty()) {

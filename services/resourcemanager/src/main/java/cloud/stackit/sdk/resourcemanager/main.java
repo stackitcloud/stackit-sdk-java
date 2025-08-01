@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.security.spec.InvalidKeySpecException;
 
 public class main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InvalidKeySpecException, ApiException, cloud.stackit.sdk.core.exception.ApiException {
         String SERVICE_ACCOUNT_KEY_PATH = "/path/to/your/sa/key.json";
         String SERIVCE_ACCOUNT_MAIL = "name-1234@sa.stackit.cloud";
 
