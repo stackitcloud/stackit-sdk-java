@@ -35,7 +35,9 @@ public enum LifecycleState {
   
   DELETING("DELETING"),
   
-  INACTIVE("INACTIVE");
+  INACTIVE("INACTIVE"),
+  
+  UNKNOWN_DEFAULT_OPEN_API("unknown_default_open_api");
 
   private String value;
 
@@ -58,7 +60,7 @@ public enum LifecycleState {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return UNKNOWN_DEFAULT_OPEN_API;
   }
 
   public static class Adapter extends TypeAdapter<LifecycleState> {
