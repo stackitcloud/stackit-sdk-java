@@ -178,7 +178,7 @@ public class KeyFlowAuthenticator {
 
         return JWT.create()
                 .withIssuer(saKey.getCredentials().getIss())
-                .withSubject(saKey.getCredentials().getSub().toString())
+                .withSubject(saKey.getCredentials().getSub())
                 .withJWTId(UUID.randomUUID().toString())
                 .withAudience(saKey.getCredentials().getAud())
                 .withIssuedAt(new Date())

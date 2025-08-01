@@ -36,11 +36,11 @@ public class SetupAuth {
      * Set up the KeyFlow Authentication and can be integrated in an OkHttp client, by adding `SetupAuth().getAuthHandler()` as interceptor.
      * This relies on the configuration methods via ENVs or the credentials file in `$HOME/.stackit/credentials.json`
      * @throws IOException when a file can be found
-     * @throws CredentialNotFoundException when no configuration is set or can be found
+     * @throws CredentialsInFileNotFoundException when no configuration is set or can be found
      * @throws InvalidKeySpecException when the private key can not be parsed
      * @throws ApiException when access token creation failed
      */
-    public SetupAuth() throws IOException, InvalidKeySpecException, CredentialNotFoundException, ApiException {
+    public SetupAuth() throws IOException, InvalidKeySpecException, CredentialsInFileNotFoundException, ApiException {
         this(new CoreConfiguration.Builder().build());
     }
 

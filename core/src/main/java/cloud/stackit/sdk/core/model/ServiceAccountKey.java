@@ -3,12 +3,6 @@ package cloud.stackit.sdk.core.model;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
-import java.security.KeyFactory;
-import java.security.NoSuchAlgorithmException;
-import java.security.interfaces.RSAPublicKey;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.X509EncodedKeySpec;
-import java.util.Base64;
 import java.util.Date;
 
 public class ServiceAccountKey {
@@ -68,17 +62,6 @@ public class ServiceAccountKey {
 
     public ServiceAccountCredentials getCredentials() {
         return credentials;
-    }
-
-    public RSAPublicKey getPublicKeyParsed() throws NoSuchAlgorithmException, InvalidKeySpecException {
-        String trimmedKey = publicKey.replaceFirst("-----BEGIN PUBLIC KEY-----", "");
-        trimmedKey = trimmedKey.replaceFirst("-----END PUBLIC KEY-----", "");
-        trimmedKey = trimmedKey.replaceAll("\n","");
-
-        byte[] publicBytes = Base64.getDecoder().decode(trimmedKey);
-        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        return (RSAPublicKey) keyFactory.generatePublic(keySpec);
     }
 
     public static ServiceAccountKey loadFromJson(String json) throws JsonSyntaxException {

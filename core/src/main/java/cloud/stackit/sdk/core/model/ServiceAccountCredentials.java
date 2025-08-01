@@ -13,9 +13,9 @@ public class ServiceAccountCredentials {
     private final String iss;
     private final String kid;
     private String privateKey;
-    private final UUID sub;
+    private final String sub;
 
-    public ServiceAccountCredentials(String aud, String iss, String kid, String privateKey, UUID sub) {
+    public ServiceAccountCredentials(String aud, String iss, String kid, String privateKey, String sub) {
         this.aud = aud;
         this.iss = iss;
         this.kid = kid;
@@ -47,7 +47,7 @@ public class ServiceAccountCredentials {
         return privateKey != null && !privateKey.trim().isEmpty();
     }
 
-    public UUID getSub() {
+    public String getSub() {
         return sub;
     }
 
