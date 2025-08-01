@@ -2,77 +2,86 @@ package cloud.stackit.sdk.core.model;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-
 import java.util.Date;
 
 public class ServiceAccountKey {
-    private final String id;
-    private final String publicKey;
-    private final Date created;
-    private final String keyType;
-    private final String keyOrigin;
-    private final String keyAlgorithm;
-    private final boolean active;
-    private final Date validUntil;
-    private final ServiceAccountCredentials credentials;
+	private final String id;
+	private final String publicKey;
+	private final Date created;
+	private final String keyType;
+	private final String keyOrigin;
+	private final String keyAlgorithm;
+	private final boolean active;
+	private final Date validUntil;
+	private final ServiceAccountCredentials credentials;
 
-    public ServiceAccountKey(String id, String publicKey, Date created, String keyType, String keyOrigin, String keyAlgorithm, boolean active, Date validUntil, ServiceAccountCredentials credentials) {
-        this.id = id;
-        this.publicKey = publicKey;
-        this.created = created;
-        this.keyType = keyType;
-        this.keyOrigin = keyOrigin;
-        this.keyAlgorithm = keyAlgorithm;
-        this.active = active;
-        this.validUntil = validUntil;
-        this.credentials = credentials;
-    }
+	public ServiceAccountKey(
+			String id,
+			String publicKey,
+			Date created,
+			String keyType,
+			String keyOrigin,
+			String keyAlgorithm,
+			boolean active,
+			Date validUntil,
+			ServiceAccountCredentials credentials) {
+		this.id = id;
+		this.publicKey = publicKey;
+		this.created = created;
+		this.keyType = keyType;
+		this.keyOrigin = keyOrigin;
+		this.keyAlgorithm = keyAlgorithm;
+		this.active = active;
+		this.validUntil = validUntil;
+		this.credentials = credentials;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public String getPublicKey() {
-        return publicKey;
-    }
+	public String getPublicKey() {
+		return publicKey;
+	}
 
-    public Date getCreated() {
-        return created;
-    }
+	public Date getCreated() {
+		return created;
+	}
 
-    public String getKeyType() {
-        return keyType;
-    }
+	public String getKeyType() {
+		return keyType;
+	}
 
-    public String getKeyOrigin() {
-        return keyOrigin;
-    }
+	public String getKeyOrigin() {
+		return keyOrigin;
+	}
 
-    public String getKeyAlgorithm() {
-        return keyAlgorithm;
-    }
+	public String getKeyAlgorithm() {
+		return keyAlgorithm;
+	}
 
-    public boolean isActive() {
-        return active;
-    }
+	public boolean isActive() {
+		return active;
+	}
 
-    public Date getValidUntil() {
-        return validUntil;
-    }
+	public Date getValidUntil() {
+		return validUntil;
+	}
 
-    public ServiceAccountCredentials getCredentials() {
-        return credentials;
-    }
+	public ServiceAccountCredentials getCredentials() {
+		return credentials;
+	}
 
-    public static ServiceAccountKey loadFromJson(String json) throws JsonSyntaxException {
-        ServiceAccountKey saKey = new Gson().fromJson(json, ServiceAccountKey.class);
-        if (!saKey.isCredentialsSet()) {
-            throw new JsonSyntaxException("required field `credentials` in service account key is missing.");
-        }
-        return saKey;
-    }
+	public static ServiceAccountKey loadFromJson(String json) throws JsonSyntaxException {
+		ServiceAccountKey saKey = new Gson().fromJson(json, ServiceAccountKey.class);
+		if (!saKey.isCredentialsSet()) {
+			throw new JsonSyntaxException(
+					"required field `credentials` in service account key is missing.");
+		}
+		return saKey;
+	}
 
-    private boolean isCredentialsSet() {
-        return credentials != null;
-    }
+	private boolean isCredentialsSet() {
+		return credentials != null;
+	}
 }

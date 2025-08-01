@@ -1,200 +1,186 @@
 package cloud.stackit.sdk.core.config;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class CoreConfigurationTest {
 
-    @Test
-    void getDefaultHeader() {
-        HashMap<String, String> map = new HashMap<String, String>();
-        map.put("key", "value");
-        CoreConfiguration cfg =
-                new CoreConfiguration.Builder().
-                        defaultHeader(map).
-                        build();
-        Map<String, String> cfgHeader = cfg.getDefaultHeader();
+	@Test
+	void getDefaultHeader() {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("key", "value");
+		CoreConfiguration cfg = new CoreConfiguration.Builder().defaultHeader(map).build();
+		Map<String, String> cfgHeader = cfg.getDefaultHeader();
 
-        assertEquals(map, cfgHeader);
-    }
+		assertEquals(map, cfgHeader);
+	}
 
-    @Test
-    void getServiceAccountKey() {
-        final String saKey = "<sa-key>";
+	@Test
+	void getServiceAccountKey() {
+		final String saKey = "<sa-key>";
 
-        CoreConfiguration cfg = new CoreConfiguration.Builder()
-                .serviceAccountKey(saKey)
-                .build();
+		CoreConfiguration cfg = new CoreConfiguration.Builder().serviceAccountKey(saKey).build();
 
-        String cfgSaKey = cfg.getServiceAccountKey();
+		String cfgSaKey = cfg.getServiceAccountKey();
 
-        assertEquals(saKey, cfgSaKey);
-    }
+		assertEquals(saKey, cfgSaKey);
+	}
 
-    @Test
-    void getServiceAccountKeyPath() {
-        final String saKeyPath = "<sa-key-path>";
+	@Test
+	void getServiceAccountKeyPath() {
+		final String saKeyPath = "<sa-key-path>";
 
-        CoreConfiguration cfg = new CoreConfiguration.Builder()
-                .serviceAccountKeyPath(saKeyPath)
-                .build();
+		CoreConfiguration cfg =
+				new CoreConfiguration.Builder().serviceAccountKeyPath(saKeyPath).build();
 
-        String cfgSaKeyPath = cfg.getServiceAccountKeyPath();
+		String cfgSaKeyPath = cfg.getServiceAccountKeyPath();
 
-        assertEquals(saKeyPath, cfgSaKeyPath);
-    }
+		assertEquals(saKeyPath, cfgSaKeyPath);
+	}
 
-    @Test
-    void getPrivateKeyPath() {
-        final String privateKeyPath = "<private-key-path>";
+	@Test
+	void getPrivateKeyPath() {
+		final String privateKeyPath = "<private-key-path>";
 
-        CoreConfiguration cfg = new CoreConfiguration.Builder()
-                .privateKeyPath(privateKeyPath)
-                .build();
+		CoreConfiguration cfg =
+				new CoreConfiguration.Builder().privateKeyPath(privateKeyPath).build();
 
-        String cfgPrivateKeyPath = cfg.getPrivateKeyPath();
+		String cfgPrivateKeyPath = cfg.getPrivateKeyPath();
 
-        assertEquals(privateKeyPath, cfgPrivateKeyPath);
-    }
+		assertEquals(privateKeyPath, cfgPrivateKeyPath);
+	}
 
-    @Test
-    void getPrivateKey() {
-        final String privateKey = "<private-key>";
+	@Test
+	void getPrivateKey() {
+		final String privateKey = "<private-key>";
 
-        CoreConfiguration cfg = new CoreConfiguration.Builder()
-                .privateKey(privateKey)
-                .build();
+		CoreConfiguration cfg = new CoreConfiguration.Builder().privateKey(privateKey).build();
 
-        String cfgPrivateKey = cfg.getPrivateKey();
+		String cfgPrivateKey = cfg.getPrivateKey();
 
-        assertEquals(privateKey, cfgPrivateKey);
-    }
+		assertEquals(privateKey, cfgPrivateKey);
+	}
 
-    @Test
-    void getCustomEndpoint() {
-        final String customEndpoint = "<custom-endpoint>";
+	@Test
+	void getCustomEndpoint() {
+		final String customEndpoint = "<custom-endpoint>";
 
-        CoreConfiguration cfg = new CoreConfiguration.Builder()
-                .customEndpoint(customEndpoint)
-                .build();
+		CoreConfiguration cfg =
+				new CoreConfiguration.Builder().customEndpoint(customEndpoint).build();
 
-        String cfgCustomEndpoint = cfg.getCustomEndpoint();
+		String cfgCustomEndpoint = cfg.getCustomEndpoint();
 
-        assertEquals(customEndpoint, cfgCustomEndpoint);
-    }
+		assertEquals(customEndpoint, cfgCustomEndpoint);
+	}
 
-    @Test
-    void getCredentialsFilePath() {
-        final String credFilePath = "<cred-file-path>";
+	@Test
+	void getCredentialsFilePath() {
+		final String credFilePath = "<cred-file-path>";
 
-        CoreConfiguration cfg = new CoreConfiguration.Builder()
-                .credentialsFilePath(credFilePath)
-                .build();
+		CoreConfiguration cfg =
+				new CoreConfiguration.Builder().credentialsFilePath(credFilePath).build();
 
-        String cfgCredentialsFilePath = cfg.getCredentialsFilePath();
+		String cfgCredentialsFilePath = cfg.getCredentialsFilePath();
 
-        assertEquals(credFilePath, cfgCredentialsFilePath);
-    }
+		assertEquals(credFilePath, cfgCredentialsFilePath);
+	}
 
-    @Test
-    void getTokenCustomUrl() {
-        final String tokenCustomUrl = "<token-custom-url>";
+	@Test
+	void getTokenCustomUrl() {
+		final String tokenCustomUrl = "<token-custom-url>";
 
-        CoreConfiguration cfg = new CoreConfiguration.Builder()
-                .tokenCustomUrl(tokenCustomUrl)
-                .build();
+		CoreConfiguration cfg =
+				new CoreConfiguration.Builder().tokenCustomUrl(tokenCustomUrl).build();
 
-        String cfgTokenUrl = cfg.getTokenCustomUrl();
+		String cfgTokenUrl = cfg.getTokenCustomUrl();
 
-        assertEquals(tokenCustomUrl, cfgTokenUrl);
-    }
+		assertEquals(tokenCustomUrl, cfgTokenUrl);
+	}
 
-    @Test
-    void getTokenExpirationLeeway() {
-        final long tokenExpireLeeway = 100;
+	@Test
+	void getTokenExpirationLeeway() {
+		final long tokenExpireLeeway = 100;
 
-        CoreConfiguration cfg = new CoreConfiguration.Builder()
-                .tokenExpirationLeeway(tokenExpireLeeway)
-                .build();
+		CoreConfiguration cfg =
+				new CoreConfiguration.Builder().tokenExpirationLeeway(tokenExpireLeeway).build();
 
-        Long cfgTokenExpirationLeeway = cfg.getTokenExpirationLeeway();
+		Long cfgTokenExpirationLeeway = cfg.getTokenExpirationLeeway();
 
-        assertEquals(tokenExpireLeeway, cfgTokenExpirationLeeway);
-    }
+		assertEquals(tokenExpireLeeway, cfgTokenExpirationLeeway);
+	}
 
-    @Test
-    void getDefaultHeader_not_set() {
-        CoreConfiguration cfg = new CoreConfiguration.Builder().build();
-        Map<String, String> defaultHeader = cfg.getDefaultHeader();
+	@Test
+	void getDefaultHeader_not_set() {
+		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		Map<String, String> defaultHeader = cfg.getDefaultHeader();
 
-        assertNull(defaultHeader);
-    }
+		assertNull(defaultHeader);
+	}
 
-    @Test
-    void getServiceAccountKey_not_set() {
-        CoreConfiguration cfg = new CoreConfiguration.Builder().build();
-        String serviceAccountKey = cfg.getServiceAccountKey();
+	@Test
+	void getServiceAccountKey_not_set() {
+		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		String serviceAccountKey = cfg.getServiceAccountKey();
 
-        assertNull(serviceAccountKey);
-    }
+		assertNull(serviceAccountKey);
+	}
 
-    @Test
-    void getServiceAccountKeyPath_not_set() {
-        CoreConfiguration cfg = new CoreConfiguration.Builder().build();
-        String serviceAccountKeyPath = cfg.getServiceAccountKeyPath();
+	@Test
+	void getServiceAccountKeyPath_not_set() {
+		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		String serviceAccountKeyPath = cfg.getServiceAccountKeyPath();
 
-        assertNull(serviceAccountKeyPath);
-    }
+		assertNull(serviceAccountKeyPath);
+	}
 
-    @Test
-    void getPrivateKeyPath_not_set() {
-        CoreConfiguration cfg = new CoreConfiguration.Builder().build();
-        String privateKeyPath = cfg.getPrivateKeyPath();
+	@Test
+	void getPrivateKeyPath_not_set() {
+		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		String privateKeyPath = cfg.getPrivateKeyPath();
 
-        assertNull(privateKeyPath);
-    }
+		assertNull(privateKeyPath);
+	}
 
-    @Test
-    void getPrivateKey_not_set() {
-        CoreConfiguration cfg = new CoreConfiguration.Builder().build();
-        String privateKey = cfg.getPrivateKey();
+	@Test
+	void getPrivateKey_not_set() {
+		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		String privateKey = cfg.getPrivateKey();
 
-        assertNull(privateKey);
-    }
+		assertNull(privateKey);
+	}
 
-    @Test
-    void getCustomEndpoint_not_set() {
-        CoreConfiguration cfg = new CoreConfiguration.Builder().build();
-        String customEndpoint = cfg.getCustomEndpoint();
+	@Test
+	void getCustomEndpoint_not_set() {
+		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		String customEndpoint = cfg.getCustomEndpoint();
 
-        assertNull(customEndpoint);
-    }
+		assertNull(customEndpoint);
+	}
 
-    @Test
-    void getCredentialsFilePath_not_set() {
-        CoreConfiguration cfg = new CoreConfiguration.Builder().build();
-        String credentialsFilePath = cfg.getCredentialsFilePath();
+	@Test
+	void getCredentialsFilePath_not_set() {
+		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		String credentialsFilePath = cfg.getCredentialsFilePath();
 
-        assertNull(credentialsFilePath);
-    }
+		assertNull(credentialsFilePath);
+	}
 
-    @Test
-    void getTokenCustomUrl_not_set() {
-        CoreConfiguration cfg = new CoreConfiguration.Builder().build();
-        String tokenCustomUrl = cfg.getTokenCustomUrl();
+	@Test
+	void getTokenCustomUrl_not_set() {
+		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		String tokenCustomUrl = cfg.getTokenCustomUrl();
 
-        assertNull(tokenCustomUrl);
-    }
+		assertNull(tokenCustomUrl);
+	}
 
-    @Test
-    void getTokenExpirationLeeway_not_set() {
-        CoreConfiguration cfg = new CoreConfiguration.Builder().build();
-        Long tokenExpirationLeeway = cfg.getTokenExpirationLeeway();
+	@Test
+	void getTokenExpirationLeeway_not_set() {
+		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		Long tokenExpirationLeeway = cfg.getTokenExpirationLeeway();
 
-        assertNull(tokenExpirationLeeway);
-    }
+		assertNull(tokenExpirationLeeway);
+	}
 }
