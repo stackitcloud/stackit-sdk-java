@@ -24,7 +24,7 @@ allprojects {
 	sourceCompatibility = JavaVersion.VERSION_1_8
 	targetCompatibility = JavaVersion.VERSION_1_8
 
-	tasks.withType(JavaCompile) {
+	tasks.withType(JavaCompile).configureEach {
 		options.encoding = 'UTF-8'
 	}
 
@@ -120,7 +120,7 @@ subprojects {
 		}
 	}
 
-	tasks.withType(Test) {
+	tasks.withType(Test).configureEach {
 		// Enable JUnit 5 (Gradle 4.6+).
 		useJUnitPlatform()
 
@@ -138,5 +138,8 @@ subprojects {
 			// prevent circular dependency
 			implementation project(':core')
 		}
+
+		testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.0'
+		testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.0'
 	}
 }
