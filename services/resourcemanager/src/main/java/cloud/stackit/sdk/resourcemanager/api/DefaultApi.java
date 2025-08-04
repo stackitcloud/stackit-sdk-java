@@ -41,7 +41,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DefaultApi {
+// Package-private access to enforce service-specific API usage (DefaultApi => <ServiceName>Api)
+class DefaultApi {
 	private ApiClient localVarApiClient;
 	private int localHostIndex;
 	private String localCustomBaseUrl;
