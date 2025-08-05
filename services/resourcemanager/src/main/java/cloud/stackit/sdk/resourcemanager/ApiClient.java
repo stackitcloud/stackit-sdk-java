@@ -135,6 +135,7 @@ public class ApiClient {
 		}
 		SetupAuth auth;
 		auth = new SetupAuth(config);
+		auth.init();
 		List<Interceptor> interceptors = new LinkedList<>();
 		interceptors.add(auth.getAuthHandler());
 		initHttpClient(interceptors);

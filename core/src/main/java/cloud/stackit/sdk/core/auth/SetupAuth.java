@@ -4,10 +4,10 @@ import cloud.stackit.sdk.core.KeyFlowAuthenticator;
 import cloud.stackit.sdk.core.KeyFlowInterceptor;
 import cloud.stackit.sdk.core.config.CoreConfiguration;
 import cloud.stackit.sdk.core.config.EnvironmentVariables;
-import cloud.stackit.sdk.core.exception.ApiException;
 import cloud.stackit.sdk.core.exception.CredentialsInFileNotFoundException;
 import cloud.stackit.sdk.core.exception.PrivateKeyNotFoundException;
 import cloud.stackit.sdk.core.model.ServiceAccountKey;
+import cloud.stackit.sdk.core.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.File;
@@ -16,13 +16,14 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.security.spec.InvalidKeySpecException;
 import java.util.Map;
 import javax.swing.filechooser.FileSystemView;
 import okhttp3.Interceptor;
 
 public class SetupAuth {
-	private final Interceptor authHandler;
+	private final EnvironmentVariables env;
+	private Interceptor authHandler;
+	private final CoreConfiguration cfg;
 	private final String defaultCredentialsFilePath =
 			FileSystemView.getFileSystemView().getHomeDirectory()
 					+ File.separator
@@ -35,17 +36,10 @@ public class SetupAuth {
 	 * `SetupAuth().getAuthHandler()` as interceptor. This relies on the configuration methods via
 	 * ENVs or the credentials file in `$HOME/.stackit/credentials.json`
 	 *
-	 * @throws IOException when a file can be found
 	 * @throws CredentialsInFileNotFoundException when no configuration is set or can be found
-	 * @throws InvalidKeySpecException when the private key can not be parsed
-	 * @throws ApiException when access token creation failed
 	 */
-	public SetupAuth()
-			throws IOException,
-					InvalidKeySpecException,
-					CredentialsInFileNotFoundException,
-					ApiException {
-		this(new CoreConfiguration.Builder().build());
+	public SetupAuth() throws CredentialsInFileNotFoundException {
+		this(new CoreConfiguration.Builder().build(), new EnvironmentVariables());
 	}
 
 	/**
@@ -56,23 +50,35 @@ public class SetupAuth {
 	 *     used
 	 * @throws IOException when a file can be found
 	 * @throws CredentialsInFileNotFoundException when no credentials are set or can be found
-	 * @throws InvalidKeySpecException when the private key can not be parsed
-	 * @throws ApiException when access token creation failed
 	 */
-	public SetupAuth(CoreConfiguration cfg)
-			throws IOException,
-					CredentialsInFileNotFoundException,
-					InvalidKeySpecException,
-					ApiException {
-		if (cfg == null) {
-			cfg = new CoreConfiguration.Builder().build();
-		}
+	public SetupAuth(CoreConfiguration cfg) throws IOException, CredentialsInFileNotFoundException {
+		this(cfg, new EnvironmentVariables());
+	}
 
+	/**
+	 * Set up the KeyFlow Authentication and can be integrated in an OkHttp client, by adding
+	 * `SetupAuth().getAuthHandler()` as interceptor.
+	 *
+	 * @param cfg Configuration which describes, which service account and token endpoint should be
+	 *     used
+	 * @throws CredentialsInFileNotFoundException when no credentials are set or can be found
+	 */
+	protected SetupAuth(CoreConfiguration cfg, EnvironmentVariables environmentVariables)
+			throws CredentialsInFileNotFoundException {
+
+		this.cfg = cfg != null ? cfg : new CoreConfiguration.Builder().build();
+		this.env = environmentVariables != null ? environmentVariables : new EnvironmentVariables();
+	}
+
+	public void init() throws IOException {
 		ServiceAccountKey saKey = setupKeyFlow(cfg);
 		authHandler = new KeyFlowInterceptor(new KeyFlowAuthenticator(cfg, saKey));
 	}
 
 	public Interceptor getAuthHandler() {
+		if (authHandler == null) {
+			throw new RuntimeException("init() has to be called first");
+		}
 		return authHandler;
 	}
 
@@ -108,17 +114,16 @@ public class SetupAuth {
 	 *     can be found
 	 * @throws IOException thrown when a file can not be found
 	 */
-	private ServiceAccountKey setupKeyFlow(CoreConfiguration cfg)
+	protected ServiceAccountKey setupKeyFlow(CoreConfiguration cfg)
 			throws CredentialsInFileNotFoundException, IOException {
 		// Explicit config in code
-		if (cfg.getServiceAccountKey() != null && !cfg.getServiceAccountKey().trim().isEmpty()) {
+		if (Utils.isStringSet(cfg.getServiceAccountKey())) {
 			ServiceAccountKey saKey = ServiceAccountKey.loadFromJson(cfg.getServiceAccountKey());
 			loadPrivateKey(cfg, saKey);
 			return saKey;
 		}
 
-		if (cfg.getServiceAccountKeyPath() != null
-				&& !cfg.getServiceAccountKeyPath().trim().isEmpty()) {
+		if (Utils.isStringSet(cfg.getServiceAccountKeyPath())) {
 			String fileContent =
 					new String(
 							Files.readAllBytes(Paths.get(cfg.getServiceAccountKeyPath())),
@@ -129,49 +134,41 @@ public class SetupAuth {
 		}
 
 		// Env config
-		if (EnvironmentVariables.STACKIT_SERVICE_ACCOUNT_KEY != null
-				&& !EnvironmentVariables.STACKIT_SERVICE_ACCOUNT_KEY.trim().isEmpty()) {
+		if (Utils.isStringSet(env.getStackitServiceAccountKey())) {
 			ServiceAccountKey saKey =
-					ServiceAccountKey.loadFromJson(
-							EnvironmentVariables.STACKIT_SERVICE_ACCOUNT_KEY.trim());
+					ServiceAccountKey.loadFromJson(env.getStackitServiceAccountKey().trim());
 			loadPrivateKey(cfg, saKey);
 			return saKey;
 		}
 
-		if (EnvironmentVariables.STACKIT_SERVICE_ACCOUNT_KEY_PATH != null
-				&& !EnvironmentVariables.STACKIT_SERVICE_ACCOUNT_KEY_PATH.trim().isEmpty()) {
+		if (Utils.isStringSet(env.getStackitServiceAccountKeyPath())) {
 			String fileContent =
 					new String(
-							Files.readAllBytes(Paths.get(cfg.getServiceAccountKeyPath())),
+							Files.readAllBytes(Paths.get(env.getStackitServiceAccountKeyPath())),
 							StandardCharsets.UTF_8);
 			ServiceAccountKey saKey = ServiceAccountKey.loadFromJson(fileContent);
 			loadPrivateKey(cfg, saKey);
 			return saKey;
 		}
 
-		if (EnvironmentVariables.STACKIT_CREDENTIALS_PATH != null
-				&& !EnvironmentVariables.STACKIT_CREDENTIALS_PATH.trim().isEmpty()) {
-			String saKeyJson =
-					readValueFromCredentialsFile(
-							EnvironmentVariables.STACKIT_CREDENTIALS_PATH,
-							EnvironmentVariables.ENV_STACKIT_SERVICE_ACCOUNT_KEY,
-							EnvironmentVariables.ENV_STACKIT_SERVICE_ACCOUNT_KEY_PATH);
-			ServiceAccountKey saKey = ServiceAccountKey.loadFromJson(saKeyJson);
-			loadPrivateKey(cfg, saKey);
-			return saKey;
-		} else {
-			String saKeyJson =
-					readValueFromCredentialsFile(
-							defaultCredentialsFilePath,
-							EnvironmentVariables.ENV_STACKIT_SERVICE_ACCOUNT_KEY,
-							EnvironmentVariables.ENV_STACKIT_SERVICE_ACCOUNT_KEY_PATH);
-			ServiceAccountKey saKey = ServiceAccountKey.loadFromJson(saKeyJson);
-			loadPrivateKey(cfg, saKey);
-			return saKey;
-		}
+		// Read from credentialsFile
+		String credentialsFilePath =
+				Utils.isStringSet(env.getStackitCredentialsPath())
+						? env.getStackitCredentialsPath()
+						: defaultCredentialsFilePath;
+
+		String saKeyJson =
+				readValueFromCredentialsFile(
+						credentialsFilePath,
+						EnvironmentVariables.ENV_STACKIT_SERVICE_ACCOUNT_KEY,
+						EnvironmentVariables.ENV_STACKIT_SERVICE_ACCOUNT_KEY_PATH);
+
+		ServiceAccountKey saKey = ServiceAccountKey.loadFromJson(saKeyJson);
+		loadPrivateKey(cfg, saKey);
+		return saKey;
 	}
 
-	private void loadPrivateKey(CoreConfiguration cfg, ServiceAccountKey saKey)
+	protected void loadPrivateKey(CoreConfiguration cfg, ServiceAccountKey saKey)
 			throws PrivateKeyNotFoundException {
 		if (!saKey.getCredentials().isPrivateKeySet()) {
 			try {
@@ -216,18 +213,17 @@ public class SetupAuth {
 			throws CredentialsInFileNotFoundException, IOException {
 		// Explicit code config
 		// Set private key
-		if (cfg.getPrivateKey() != null && !cfg.getPrivateKey().trim().isEmpty()) {
+		if (Utils.isStringSet(cfg.getPrivateKey())) {
 			return cfg.getPrivateKey();
 		}
 		// Set private key path
-		if (cfg.getPrivateKeyPath() != null && !cfg.getPrivateKeyPath().trim().isEmpty()) {
+		if (Utils.isStringSet(cfg.getPrivateKeyPath())) {
 			String privateKeyPath = cfg.getPrivateKeyPath();
 			return new String(
 					Files.readAllBytes(Paths.get(privateKeyPath)), StandardCharsets.UTF_8);
 		}
 		// Set credentials file
-		if (cfg.getCredentialsFilePath() != null
-				&& !cfg.getCredentialsFilePath().trim().isEmpty()) {
+		if (Utils.isStringSet(cfg.getCredentialsFilePath())) {
 			return readValueFromCredentialsFile(
 					cfg.getCredentialsFilePath(),
 					EnvironmentVariables.ENV_STACKIT_PRIVATE_KEY,
@@ -235,27 +231,22 @@ public class SetupAuth {
 		}
 
 		// ENVs config
-		if (EnvironmentVariables.STACKIT_PRIVATE_KEY != null
-				&& !EnvironmentVariables.STACKIT_PRIVATE_KEY.trim().isEmpty()) {
-			return EnvironmentVariables.STACKIT_PRIVATE_KEY.trim();
+		if (Utils.isStringSet(env.getStackitPrivateKey())) {
+			return env.getStackitPrivateKey().trim();
 		}
-		if (EnvironmentVariables.STACKIT_PRIVATE_KEY_PATH != null
-				&& !EnvironmentVariables.STACKIT_PRIVATE_KEY_PATH.trim().isEmpty()) {
+		if (Utils.isStringSet(env.getStackitPrivateKeyPath())) {
 			return new String(
-					Files.readAllBytes(Paths.get(EnvironmentVariables.STACKIT_PRIVATE_KEY_PATH)),
+					Files.readAllBytes(Paths.get(env.getStackitPrivateKeyPath())),
 					StandardCharsets.UTF_8);
 		}
-		if (EnvironmentVariables.STACKIT_CREDENTIALS_PATH != null
-				&& !EnvironmentVariables.STACKIT_CREDENTIALS_PATH.trim().isEmpty()) {
-			return readValueFromCredentialsFile(
-					EnvironmentVariables.STACKIT_CREDENTIALS_PATH,
-					EnvironmentVariables.ENV_STACKIT_PRIVATE_KEY,
-					EnvironmentVariables.ENV_STACKIT_PRIVATE_KEY_PATH);
-		}
 
-		// Read from credentials file in defaultCredentialsFilePath
+		String credentialsFilePath =
+				Utils.isStringSet(env.getStackitCredentialsPath())
+						? env.getStackitCredentialsPath()
+						: defaultCredentialsFilePath;
+
 		return readValueFromCredentialsFile(
-				defaultCredentialsFilePath,
+				credentialsFilePath,
 				EnvironmentVariables.ENV_STACKIT_PRIVATE_KEY,
 				EnvironmentVariables.ENV_STACKIT_PRIVATE_KEY_PATH);
 	}
@@ -272,7 +263,7 @@ public class SetupAuth {
 	 * @throws IOException throws if the provided path can not be found or the file within the
 	 *     pathKey can not be found
 	 */
-	private String readValueFromCredentialsFile(String path, String valueKey, String pathKey)
+	protected String readValueFromCredentialsFile(String path, String valueKey, String pathKey)
 			throws IOException, CredentialsInFileNotFoundException {
 		// Read credentials file
 		String fileContent =
@@ -286,7 +277,7 @@ public class SetupAuth {
 			key = (String) map.get(valueKey);
 		} catch (ClassCastException ignored) {
 		}
-		if (key != null && !key.trim().isEmpty()) {
+		if (Utils.isStringSet(key)) {
 			return key;
 		}
 
@@ -296,7 +287,7 @@ public class SetupAuth {
 			keyPath = (String) map.get(pathKey);
 		} catch (ClassCastException ignored) {
 		}
-		if (keyPath != null && !keyPath.trim().isEmpty()) {
+		if (Utils.isStringSet(keyPath)) {
 			return new String(Files.readAllBytes(Paths.get(keyPath)));
 		}
 		throw new CredentialsInFileNotFoundException(

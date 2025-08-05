@@ -1,11 +1,13 @@
 package cloud.stackit.sdk.core.model;
 
+import cloud.stackit.sdk.core.utils.Utils;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
+import java.util.Objects;
 
 public class ServiceAccountCredentials {
 	private final String aud;
@@ -44,7 +46,7 @@ public class ServiceAccountCredentials {
 	}
 
 	public boolean isPrivateKeySet() {
-		return privateKey != null && !privateKey.trim().isEmpty();
+		return Utils.isStringSet(privateKey);
 	}
 
 	public String getSub() {
@@ -61,5 +63,22 @@ public class ServiceAccountCredentials {
 		PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateBytes);
 		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 		return (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		ServiceAccountCredentials that = (ServiceAccountCredentials) o;
+		return Objects.equals(aud, that.aud)
+				&& Objects.equals(iss, that.iss)
+				&& Objects.equals(kid, that.kid)
+				&& Objects.equals(privateKey, that.privateKey)
+				&& Objects.equals(sub, that.sub);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(aud, iss, kid, privateKey, sub);
 	}
 }

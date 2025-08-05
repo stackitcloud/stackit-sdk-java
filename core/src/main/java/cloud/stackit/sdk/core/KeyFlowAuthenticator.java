@@ -1,8 +1,10 @@
 package cloud.stackit.sdk.core;
 
 import cloud.stackit.sdk.core.config.CoreConfiguration;
+import cloud.stackit.sdk.core.config.EnvironmentVariables;
 import cloud.stackit.sdk.core.exception.ApiException;
 import cloud.stackit.sdk.core.model.ServiceAccountKey;
+import cloud.stackit.sdk.core.utils.Utils;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.google.gson.Gson;
@@ -36,7 +38,7 @@ public class KeyFlowAuthenticator {
 	private final String tokenUrl;
 	private long tokenLeewayInSeconds = DEFAULT_TOKEN_LEEWAY;
 
-	private static class KeyFlowTokenResponse {
+	protected static class KeyFlowTokenResponse {
 		@SerializedName("access_token")
 		private String accessToken;
 
@@ -52,13 +54,30 @@ public class KeyFlowAuthenticator {
 		@SerializedName("token_type")
 		private String tokenType;
 
-		public boolean isExpired() {
+		public KeyFlowTokenResponse(
+				String accessToken,
+				String refreshToken,
+				long expiresIn,
+				String scope,
+				String tokenType) {
+			this.accessToken = accessToken;
+			this.refreshToken = refreshToken;
+			this.expiresIn = expiresIn;
+			this.scope = scope;
+			this.tokenType = tokenType;
+		}
+
+		protected boolean isExpired() {
 			return expiresIn < new Date().toInstant().getEpochSecond();
 		}
 
-		public String getAccessToken() {
+		protected String getAccessToken() {
 			return accessToken;
 		}
+	}
+
+	public KeyFlowAuthenticator(CoreConfiguration cfg, ServiceAccountKey saKey) {
+		this(cfg, saKey, null);
 	}
 
 	/**
@@ -66,13 +85,11 @@ public class KeyFlowAuthenticator {
 	 *
 	 * @param cfg Configuration to set a custom token endpoint and the token expiration leeway.
 	 * @param saKey Service Account Key, which should be used for the authentication
-	 * @throws InvalidKeySpecException thrown when the private key in the service account can not be
-	 *     parsed
-	 * @throws IOException thrown on unexpected responses from the key flow
-	 * @throws ApiException thrown on unexpected responses from the key flow
 	 */
-	public KeyFlowAuthenticator(CoreConfiguration cfg, ServiceAccountKey saKey)
-			throws InvalidKeySpecException, IOException, ApiException {
+	public KeyFlowAuthenticator(
+			CoreConfiguration cfg,
+			ServiceAccountKey saKey,
+			EnvironmentVariables environmentVariables) {
 		this.saKey = saKey;
 		this.gson = new Gson();
 		this.httpClient =
@@ -81,26 +98,36 @@ public class KeyFlowAuthenticator {
 						.writeTimeout(10, TimeUnit.SECONDS)
 						.readTimeout(30, TimeUnit.SECONDS)
 						.build();
-		if (cfg.getTokenCustomUrl() != null && !cfg.getTokenCustomUrl().trim().isEmpty()) {
+
+		if (environmentVariables == null) {
+			environmentVariables = new EnvironmentVariables();
+		}
+
+		if (Utils.isStringSet(cfg.getTokenCustomUrl())) {
 			this.tokenUrl = cfg.getTokenCustomUrl();
+		} else if (Utils.isStringSet(environmentVariables.getStackitTokenBaseurl())) {
+			this.tokenUrl = environmentVariables.getStackitTokenBaseurl();
 		} else {
 			this.tokenUrl = DEFAULT_TOKEN_ENDPOINT;
 		}
 		if (cfg.getTokenExpirationLeeway() != null && cfg.getTokenExpirationLeeway() > 0) {
 			this.tokenLeewayInSeconds = cfg.getTokenExpirationLeeway();
 		}
-
-		createAccessToken();
 	}
 
 	/**
 	 * Returns access token. If the token is expired it creates a new token.
 	 *
+	 * @throws InvalidKeySpecException thrown when the private key in the service account can not be
+	 *     parsed
 	 * @throws IOException request for new access token failed
 	 * @throws ApiException response for new access token with bad status code
 	 */
-	public synchronized String getAccessToken() throws IOException, ApiException {
-		if (token == null || token.isExpired()) {
+	public synchronized String getAccessToken()
+			throws IOException, ApiException, InvalidKeySpecException {
+		if (token == null) {
+			createAccessToken();
+		} else if (token.isExpired()) {
 			createAccessTokenWithRefreshToken();
 		}
 		return token.getAccessToken();
@@ -114,7 +141,7 @@ public class KeyFlowAuthenticator {
 	 * @throws ApiException response for new access token with bad status code
 	 * @throws JsonSyntaxException parsing of the created access token failed
 	 */
-	private void createAccessToken()
+	protected void createAccessToken()
 			throws InvalidKeySpecException, IOException, JsonSyntaxException, ApiException {
 		String grant = "urn:ietf:params:oauth:grant-type:jwt-bearer";
 		String assertion;
@@ -137,7 +164,7 @@ public class KeyFlowAuthenticator {
 	 * @throws ApiException response for new access token with bad status code
 	 * @throws JsonSyntaxException can not parse new access token
 	 */
-	private synchronized void createAccessTokenWithRefreshToken()
+	protected synchronized void createAccessTokenWithRefreshToken()
 			throws IOException, JsonSyntaxException, ApiException {
 		String refreshToken = token.refreshToken;
 		Response response = requestToken(REFRESH_TOKEN, refreshToken).execute();
@@ -146,7 +173,7 @@ public class KeyFlowAuthenticator {
 	}
 
 	private synchronized void parseTokenResponse(Response response)
-			throws ApiException, JsonSyntaxException {
+			throws ApiException, JsonSyntaxException, IOException {
 		if (response.code() != HttpURLConnection.HTTP_OK) {
 			String body = null;
 			if (response.body() != null) {
@@ -156,20 +183,15 @@ public class KeyFlowAuthenticator {
 			throw new ApiException(
 					response.message(), response.code(), response.headers().toMultimap(), body);
 		}
-		if (response.body() == null) {
+		if (response.body() == null || response.body().contentLength() == 0) {
 			throw new JsonSyntaxException("body from token creation is null");
 		}
 
-		token =
+		KeyFlowTokenResponse keyFlowTokenResponse =
 				gson.fromJson(
 						new InputStreamReader(response.body().byteStream(), StandardCharsets.UTF_8),
 						KeyFlowTokenResponse.class);
-		token.expiresIn =
-				JWT.decode(token.accessToken)
-						.getExpiresAt()
-						.toInstant()
-						.minusSeconds(tokenLeewayInSeconds)
-						.getEpochSecond();
+		setToken(keyFlowTokenResponse);
 		response.body().close();
 	}
 
@@ -187,6 +209,16 @@ public class KeyFlowAuthenticator {
 						.addHeader("Content-Type", "application/x-www-form-urlencoded")
 						.build();
 		return httpClient.newCall(request);
+	}
+
+	protected void setToken(KeyFlowTokenResponse response) {
+		token = response;
+		token.expiresIn =
+				JWT.decode(response.accessToken)
+						.getExpiresAt()
+						.toInstant()
+						.minusSeconds(tokenLeewayInSeconds)
+						.getEpochSecond();
 	}
 
 	private String generateSelfSignedJWT()

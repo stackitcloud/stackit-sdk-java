@@ -3,6 +3,7 @@ package cloud.stackit.sdk.core.model;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import java.util.Date;
+import java.util.Objects;
 
 public class ServiceAccountKey {
 	private final String id;
@@ -83,5 +84,35 @@ public class ServiceAccountKey {
 
 	private boolean isCredentialsSet() {
 		return credentials != null;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		ServiceAccountKey that = (ServiceAccountKey) o;
+		return active == that.active
+				&& Objects.equals(id, that.id)
+				&& Objects.equals(publicKey, that.publicKey)
+				&& Objects.equals(created, that.created)
+				&& Objects.equals(keyType, that.keyType)
+				&& Objects.equals(keyOrigin, that.keyOrigin)
+				&& Objects.equals(keyAlgorithm, that.keyAlgorithm)
+				&& Objects.equals(validUntil, that.validUntil)
+				&& Objects.equals(credentials, that.credentials);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(
+				id,
+				publicKey,
+				created,
+				keyType,
+				keyOrigin,
+				keyAlgorithm,
+				active,
+				validUntil,
+				credentials);
 	}
 }
