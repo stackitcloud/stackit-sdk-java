@@ -118,6 +118,14 @@ subprojects {
 				}
 			}
 		}
+
+		// only apply to example sub-projects
+		if (project.path.startsWith(':examples:')) {
+			task execute(type:JavaExec) {
+				main = System.getProperty('mainClass')
+				classpath = sourceSets.main.runtimeClasspath
+			}
+		}
 	}
 
 	tasks.withType(Test).configureEach {
