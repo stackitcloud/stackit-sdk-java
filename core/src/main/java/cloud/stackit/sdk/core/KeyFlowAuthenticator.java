@@ -24,7 +24,6 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import okhttp3.*;
 
-
 /** KeyFlowAuthenticator handles the Key Flow Authentication based on the Service Account Key. */
 public class KeyFlowAuthenticator {
 	private final String REFRESH_TOKEN = "refresh_token";
