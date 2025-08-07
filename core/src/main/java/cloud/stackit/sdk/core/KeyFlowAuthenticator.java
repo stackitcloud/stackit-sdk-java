@@ -24,12 +24,16 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import okhttp3.*;
 
+
 /** KeyFlowAuthenticator handles the Key Flow Authentication based on the Service Account Key. */
 public class KeyFlowAuthenticator {
 	private final String REFRESH_TOKEN = "refresh_token";
 	private final String ASSERTION = "assertion";
 	private final String DEFAULT_TOKEN_ENDPOINT = "https://service-account.api.stackit.cloud/token";
 	private final long DEFAULT_TOKEN_LEEWAY = 60;
+	private final int CONNECT_TIMEOUT = 10;
+	private final int WRITE_TIMEOUT = 10;
+	private final int READ_TIMEOUT = 10;
 
 	private final OkHttpClient httpClient;
 	private final ServiceAccountKey saKey;
@@ -94,9 +98,9 @@ public class KeyFlowAuthenticator {
 		this.gson = new Gson();
 		this.httpClient =
 				new OkHttpClient.Builder()
-						.connectTimeout(10, TimeUnit.SECONDS)
-						.writeTimeout(10, TimeUnit.SECONDS)
-						.readTimeout(30, TimeUnit.SECONDS)
+						.connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
+						.writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
+						.readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
 						.build();
 
 		if (environmentVariables == null) {

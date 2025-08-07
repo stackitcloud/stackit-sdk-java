@@ -212,17 +212,17 @@ public class SetupAuth {
 	private String getPrivateKey(CoreConfiguration cfg)
 			throws CredentialsInFileNotFoundException, IOException {
 		// Explicit code config
-		// Set private key
+		// Get private key
 		if (Utils.isStringSet(cfg.getPrivateKey())) {
 			return cfg.getPrivateKey();
 		}
-		// Set private key path
+		// Get private key path
 		if (Utils.isStringSet(cfg.getPrivateKeyPath())) {
 			String privateKeyPath = cfg.getPrivateKeyPath();
 			return new String(
 					Files.readAllBytes(Paths.get(privateKeyPath)), StandardCharsets.UTF_8);
 		}
-		// Set credentials file
+		// Get credentials file
 		if (Utils.isStringSet(cfg.getCredentialsFilePath())) {
 			return readValueFromCredentialsFile(
 					cfg.getCredentialsFilePath(),
@@ -231,15 +231,18 @@ public class SetupAuth {
 		}
 
 		// ENVs config
+		// Get private key
 		if (Utils.isStringSet(env.getStackitPrivateKey())) {
 			return env.getStackitPrivateKey().trim();
 		}
+		// Get private key path
 		if (Utils.isStringSet(env.getStackitPrivateKeyPath())) {
 			return new String(
 					Files.readAllBytes(Paths.get(env.getStackitPrivateKeyPath())),
 					StandardCharsets.UTF_8);
 		}
 
+		// Get credentialsFilePath
 		String credentialsFilePath =
 				Utils.isStringSet(env.getStackitCredentialsPath())
 						? env.getStackitCredentialsPath()
