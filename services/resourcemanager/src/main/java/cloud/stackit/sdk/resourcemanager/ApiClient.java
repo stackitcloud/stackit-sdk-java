@@ -12,6 +12,8 @@
 
 package cloud.stackit.sdk.resourcemanager;
 
+import cloud.stackit.sdk.core.auth.SetupAuth;
+import cloud.stackit.sdk.core.config.CoreConfiguration;
 import cloud.stackit.sdk.resourcemanager.auth.ApiKeyAuth;
 import cloud.stackit.sdk.resourcemanager.auth.Authentication;
 import cloud.stackit.sdk.resourcemanager.auth.HttpBasicAuth;
@@ -31,6 +33,7 @@ import java.security.SecureRandom;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
+import java.security.spec.InvalidKeySpecException;
 import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -116,6 +119,26 @@ public class ApiClient {
 		// Setup authentications (key: authentication name, value: authentication).
 		// Prevent the authentications from being modified.
 		authentications = Collections.unmodifiableMap(authentications);
+	}
+
+	public ApiClient(CoreConfiguration config)
+			throws IOException,
+					InvalidKeySpecException,
+					cloud.stackit.sdk.core.exception.ApiException {
+		init();
+
+		if (config.getCustomEndpoint() != null && !config.getCustomEndpoint().trim().isEmpty()) {
+			basePath = config.getCustomEndpoint();
+		}
+		if (config.getDefaultHeader() != null) {
+			defaultHeaderMap = config.getDefaultHeader();
+		}
+		SetupAuth auth;
+		auth = new SetupAuth(config);
+		auth.init();
+		List<Interceptor> interceptors = new LinkedList<>();
+		interceptors.add(auth.getAuthHandler());
+		initHttpClient(interceptors);
 	}
 
 	protected void initHttpClient() {

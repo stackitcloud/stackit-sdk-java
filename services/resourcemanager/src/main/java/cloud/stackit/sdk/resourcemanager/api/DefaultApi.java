@@ -12,6 +12,7 @@
 
 package cloud.stackit.sdk.resourcemanager.api;
 
+import cloud.stackit.sdk.core.config.CoreConfiguration;
 import cloud.stackit.sdk.resourcemanager.ApiCallback;
 import cloud.stackit.sdk.resourcemanager.ApiClient;
 import cloud.stackit.sdk.resourcemanager.ApiException;
@@ -32,8 +33,10 @@ import cloud.stackit.sdk.resourcemanager.model.PartialUpdateOrganizationPayload;
 import cloud.stackit.sdk.resourcemanager.model.PartialUpdateProjectPayload;
 import cloud.stackit.sdk.resourcemanager.model.Project;
 import com.google.gson.reflect.TypeToken;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
+import java.security.spec.InvalidKeySpecException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,6 +54,18 @@ public class DefaultApi {
 
 	public DefaultApi(ApiClient apiClient) {
 		this.localVarApiClient = apiClient;
+	}
+
+	// TODO: remove in follow up story the service specific ApiException and use instead the
+	// ApiException of core
+	public DefaultApi(CoreConfiguration config)
+			throws InvalidKeySpecException,
+					cloud.stackit.sdk.core.exception.ApiException,
+					IOException {
+		if (config.getCustomEndpoint() != null && !config.getCustomEndpoint().trim().isEmpty()) {
+			localCustomBaseUrl = config.getCustomEndpoint();
+		}
+		this.localVarApiClient = new ApiClient(config);
 	}
 
 	public ApiClient getApiClient() {
