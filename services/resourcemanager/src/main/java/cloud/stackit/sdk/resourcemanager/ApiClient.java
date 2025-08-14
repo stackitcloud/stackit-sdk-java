@@ -95,7 +95,7 @@ public class ApiClient {
 
 	/** Basic constructor for ApiClient */
 	public ApiClient() throws IOException {
-		this(new CoreConfiguration.Builder().build());
+		this(new CoreConfiguration());
 	}
 
 	/**
