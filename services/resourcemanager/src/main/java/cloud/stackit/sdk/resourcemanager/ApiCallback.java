@@ -12,6 +12,7 @@
 
 package cloud.stackit.sdk.resourcemanager;
 
+import cloud.stackit.sdk.core.exception.ApiException;
 import java.util.List;
 import java.util.Map;
 
