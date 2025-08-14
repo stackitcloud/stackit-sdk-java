@@ -39,7 +39,7 @@ public class SetupAuth {
 	 * @throws CredentialsInFileNotFoundException when no configuration is set or can be found
 	 */
 	public SetupAuth() throws CredentialsInFileNotFoundException {
-		this(new CoreConfiguration.Builder().build(), new EnvironmentVariables());
+		this(new CoreConfiguration(), new EnvironmentVariables());
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class SetupAuth {
 	protected SetupAuth(CoreConfiguration cfg, EnvironmentVariables environmentVariables)
 			throws CredentialsInFileNotFoundException {
 
-		this.cfg = cfg != null ? cfg : new CoreConfiguration.Builder().build();
+		this.cfg = cfg != null ? cfg : new CoreConfiguration();
 		this.env = environmentVariables != null ? environmentVariables : new EnvironmentVariables();
 	}
 
