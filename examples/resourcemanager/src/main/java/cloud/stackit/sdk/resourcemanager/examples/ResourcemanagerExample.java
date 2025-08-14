@@ -6,14 +6,14 @@ import cloud.stackit.sdk.resourcemanager.model.CreateFolderPayload;
 import cloud.stackit.sdk.resourcemanager.model.CreateProjectPayload;
 import cloud.stackit.sdk.resourcemanager.model.FolderResponse;
 import cloud.stackit.sdk.resourcemanager.model.Project;
-
 import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
 
 class ResourcemanagerExample {
 	public static void main(String[] args) throws IOException {
-		// Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env STACKIT_SERVICE_ACCOUNT_KEY_PATH / STACKIT_SERVICE_ACCOUNT_KEY
+		// Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env
+		// STACKIT_SERVICE_ACCOUNT_KEY_PATH / STACKIT_SERVICE_ACCOUNT_KEY
 		DefaultApi resourceManagerApi = new DefaultApi();
 
 		// replace this with something useful for real use
