@@ -76,8 +76,7 @@ class SetupAuthTest {
 		ServiceAccountKey saKey = createDummyServiceAccount("privateKey");
 		String initSaKeyJson = new Gson().toJson(saKey);
 
-		CoreConfiguration config =
-				new CoreConfiguration.Builder().serviceAccountKey(initSaKeyJson).build();
+		CoreConfiguration config = new CoreConfiguration().serviceAccountKey(initSaKeyJson);
 
 		SetupAuth setupAuth = new SetupAuth(config);
 		setupAuth.init();
@@ -96,9 +95,8 @@ class SetupAuthTest {
 
 		// Create config and read setup auth with the previous created saKey
 		CoreConfiguration cfg =
-				new CoreConfiguration.Builder()
-						.serviceAccountKeyPath(saKeyPath.toAbsolutePath().toString())
-						.build();
+				new CoreConfiguration()
+						.serviceAccountKeyPath(saKeyPath.toAbsolutePath().toString());
 		ServiceAccountKey parsedSaKey = new SetupAuth().setupKeyFlow(cfg);
 
 		assertEquals(initSaKey, parsedSaKey);
@@ -112,8 +110,7 @@ class SetupAuthTest {
 		String initSaKeyJson = new Gson().toJson(initSaKey);
 
 		// Create config and read setup auth with the previous created saKey
-		CoreConfiguration cfg =
-				new CoreConfiguration.Builder().serviceAccountKey(initSaKeyJson).build();
+		CoreConfiguration cfg = new CoreConfiguration().serviceAccountKey(initSaKeyJson);
 		ServiceAccountKey parsedSaKey = new SetupAuth().setupKeyFlow(cfg);
 
 		assertEquals(initSaKey, parsedSaKey);
@@ -129,7 +126,7 @@ class SetupAuthTest {
 		when(envs.getStackitServiceAccountKey()).thenReturn(initSaKeyJson);
 
 		// Create config and read setup auth with the previous created saKey
-		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		CoreConfiguration cfg = new CoreConfiguration();
 		ServiceAccountKey parsedSaKey = new SetupAuth(cfg, envs).setupKeyFlow(cfg);
 
 		assertEquals(initSaKey, parsedSaKey);
@@ -151,7 +148,7 @@ class SetupAuthTest {
 				.thenReturn(keyPathFile.toAbsolutePath().toString());
 
 		// Create config and read setup auth with the previous created saKey
-		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		CoreConfiguration cfg = new CoreConfiguration();
 		ServiceAccountKey parsedSaKey = new SetupAuth(cfg, envs).setupKeyFlow(cfg);
 
 		assertEquals(initSaKey, parsedSaKey);
@@ -169,12 +166,11 @@ class SetupAuthTest {
 
 		// Create config and read setup auth with the previous created saKey
 		CoreConfiguration cfg =
-				new CoreConfiguration.Builder()
+				new CoreConfiguration()
 						.serviceAccountKeyPath(saKeyPath.toAbsolutePath().toString())
 						.credentialsFilePath( // make sure that the defaultCredentialsFile is not
 								// used
-								invalidCredentialsFilePath)
-						.build();
+								invalidCredentialsFilePath);
 		SetupAuth auth = new SetupAuth();
 
 		assertThrows(PrivateKeyNotFoundException.class, () -> auth.setupKeyFlow(cfg));
@@ -189,12 +185,11 @@ class SetupAuthTest {
 
 		// Create config and read setup auth with the previous created saKey
 		CoreConfiguration cfg =
-				new CoreConfiguration.Builder()
+				new CoreConfiguration()
 						.serviceAccountKey(initSaKeyJson)
 						.credentialsFilePath( // make sure that the defaultCredentialsFile is not
 								// used
-								invalidCredentialsFilePath)
-						.build();
+								invalidCredentialsFilePath);
 		SetupAuth auth = new SetupAuth();
 
 		assertThrows(PrivateKeyNotFoundException.class, () -> auth.setupKeyFlow(cfg));
@@ -207,7 +202,7 @@ class SetupAuthTest {
 		ServiceAccountKey saKey = createDummyServiceAccount(null);
 		SetupAuth setupAuth = new SetupAuth();
 
-		CoreConfiguration cfg = new CoreConfiguration.Builder().privateKey(prvKey).build();
+		CoreConfiguration cfg = new CoreConfiguration().privateKey(prvKey);
 
 		assertNull(saKey.getCredentials().getPrivateKey());
 		assertDoesNotThrow(() -> setupAuth.loadPrivateKey(cfg, saKey));
@@ -223,7 +218,7 @@ class SetupAuthTest {
 		// Create Service Account
 		ServiceAccountKey saKey = createDummyServiceAccount(initialPrivateKey);
 		SetupAuth setupAuth = new SetupAuth();
-		CoreConfiguration cfg = new CoreConfiguration.Builder().privateKey(cfgPrivateKey).build();
+		CoreConfiguration cfg = new CoreConfiguration().privateKey(cfgPrivateKey);
 
 		assertEquals(initialPrivateKey, saKey.getCredentials().getPrivateKey());
 		assertDoesNotThrow(() -> setupAuth.loadPrivateKey(cfg, saKey));
@@ -243,9 +238,7 @@ class SetupAuthTest {
 		ServiceAccountKey saKey = createDummyServiceAccount(null);
 		SetupAuth setupAuth = new SetupAuth();
 		CoreConfiguration cfg =
-				new CoreConfiguration.Builder()
-						.privateKeyPath(tempPrvKeyFile.toAbsolutePath().toString())
-						.build();
+				new CoreConfiguration().privateKeyPath(tempPrvKeyFile.toAbsolutePath().toString());
 
 		assertNull(saKey.getCredentials().getPrivateKey());
 		assertDoesNotThrow(() -> setupAuth.loadPrivateKey(cfg, saKey));
@@ -280,9 +273,8 @@ class SetupAuthTest {
 		ServiceAccountKey saKey = createDummyServiceAccount(null);
 		SetupAuth setupAuth = new SetupAuth();
 		CoreConfiguration cfg =
-				new CoreConfiguration.Builder()
-						.credentialsFilePath(tempCredentialsFile.toAbsolutePath().toString())
-						.build();
+				new CoreConfiguration()
+						.credentialsFilePath(tempCredentialsFile.toAbsolutePath().toString());
 
 		assertNull(saKey.getCredentials().getPrivateKey());
 		assertDoesNotThrow(() -> setupAuth.loadPrivateKey(cfg, saKey));
@@ -310,9 +302,8 @@ class SetupAuthTest {
 		SetupAuth setupAuth = new SetupAuth();
 
 		CoreConfiguration cfg =
-				new CoreConfiguration.Builder()
-						.credentialsFilePath(tempCredentialsFile.toAbsolutePath().toString())
-						.build();
+				new CoreConfiguration()
+						.credentialsFilePath(tempCredentialsFile.toAbsolutePath().toString());
 
 		assertNull(saKey.getCredentials().getPrivateKey());
 		assertDoesNotThrow(() -> setupAuth.loadPrivateKey(cfg, saKey));
@@ -325,7 +316,7 @@ class SetupAuthTest {
 		ServiceAccountKey saKey = createDummyServiceAccount(null);
 		when(envs.getStackitPrivateKey()).thenReturn(prvKey);
 
-		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		CoreConfiguration cfg = new CoreConfiguration();
 		SetupAuth setupAuth = new SetupAuth(cfg, envs);
 
 		assertNull(saKey.getCredentials().getPrivateKey());
@@ -344,7 +335,7 @@ class SetupAuthTest {
 		when(envs.getStackitPrivateKeyPath())
 				.thenReturn(tempPrvKeyFile.toAbsolutePath().toString());
 
-		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		CoreConfiguration cfg = new CoreConfiguration();
 		SetupAuth setupAuth = new SetupAuth(cfg, envs);
 
 		assertNull(saKey.getCredentials().getPrivateKey());
@@ -370,7 +361,7 @@ class SetupAuthTest {
 
 		// Create dummy service account and config
 		ServiceAccountKey saKey = createDummyServiceAccount(null);
-		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		CoreConfiguration cfg = new CoreConfiguration();
 		SetupAuth setupAuth = new SetupAuth(cfg, envs);
 		when(envs.getStackitCredentialsPath())
 				.thenReturn(tempCredentialsFile.toAbsolutePath().toString());
@@ -396,7 +387,7 @@ class SetupAuthTest {
 		ServiceAccountKey saKey = createDummyServiceAccount(null);
 		SetupAuth setupAuth = new SetupAuth();
 
-		CoreConfiguration cfg = new CoreConfiguration.Builder().privateKeyPath(invalidPath).build();
+		CoreConfiguration cfg = new CoreConfiguration().privateKeyPath(invalidPath);
 
 		assertNull(saKey.getCredentials().getPrivateKey());
 		assertThrows(PrivateKeyNotFoundException.class, () -> setupAuth.loadPrivateKey(cfg, saKey));
