@@ -13,11 +13,10 @@
 package cloud.stackit.sdk.resourcemanager.api;
 
 import cloud.stackit.sdk.core.config.CoreConfiguration;
+import cloud.stackit.sdk.core.exception.ApiException;
 import cloud.stackit.sdk.resourcemanager.ApiCallback;
 import cloud.stackit.sdk.resourcemanager.ApiClient;
-import cloud.stackit.sdk.resourcemanager.ApiException;
 import cloud.stackit.sdk.resourcemanager.ApiResponse;
-import cloud.stackit.sdk.resourcemanager.Configuration;
 import cloud.stackit.sdk.resourcemanager.Pair;
 import cloud.stackit.sdk.resourcemanager.model.CreateFolderPayload;
 import cloud.stackit.sdk.resourcemanager.model.CreateProjectPayload;
@@ -36,7 +35,6 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
-import java.security.spec.InvalidKeySpecException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,20 +46,11 @@ public class DefaultApi {
 	private int localHostIndex;
 	private String localCustomBaseUrl;
 
-	public DefaultApi() {
-		this(Configuration.getDefaultApiClient());
+	public DefaultApi() throws IOException {
+		this(new CoreConfiguration());
 	}
 
-	public DefaultApi(ApiClient apiClient) {
-		this.localVarApiClient = apiClient;
-	}
-
-	// TODO: remove in follow up story the service specific ApiException and use instead the
-	// ApiException of core
-	public DefaultApi(CoreConfiguration config)
-			throws InvalidKeySpecException,
-					cloud.stackit.sdk.core.exception.ApiException,
-					IOException {
+	public DefaultApi(CoreConfiguration config) throws IOException {
 		if (config.getCustomEndpoint() != null && !config.getCustomEndpoint().trim().isEmpty()) {
 			localCustomBaseUrl = config.getCustomEndpoint();
 		}

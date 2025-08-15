@@ -3,27 +3,17 @@ package cloud.stackit.sdk.core.config;
 import java.util.Map;
 
 public class CoreConfiguration {
-	private final Map<String, String> defaultHeader;
-	private final String serviceAccountKey;
-	private final String serviceAccountKeyPath;
-	private final String privateKeyPath;
-	private final String privateKey;
-	private final String customEndpoint;
-	private final String credentialsFilePath;
-	private final String tokenCustomUrl;
-	private final Long tokenExpirationLeeway;
+	private Map<String, String> defaultHeader;
+	private String serviceAccountKey;
+	private String serviceAccountKeyPath;
+	private String privateKeyPath;
+	private String privateKey;
+	private String customEndpoint;
+	private String credentialsFilePath;
+	private String tokenCustomUrl;
+	private Long tokenExpirationLeeway;
 
-	CoreConfiguration(Builder builder) {
-		this.defaultHeader = builder.defaultHeader;
-		this.serviceAccountKey = builder.serviceAccountKey;
-		this.serviceAccountKeyPath = builder.serviceAccountKeyPath;
-		this.privateKeyPath = builder.privateKeyPath;
-		this.privateKey = builder.privateKey;
-		this.customEndpoint = builder.customEndpoint;
-		this.credentialsFilePath = builder.credentialsFilePath;
-		this.tokenCustomUrl = builder.tokenCustomUrl;
-		this.tokenExpirationLeeway = builder.tokenExpirationLeeway;
-	}
+	public CoreConfiguration() {}
 
 	public Map<String, String> getDefaultHeader() {
 		return defaultHeader;
@@ -61,64 +51,48 @@ public class CoreConfiguration {
 		return tokenExpirationLeeway;
 	}
 
-	public static class Builder {
-		private Map<String, String> defaultHeader;
-		private String serviceAccountKey;
-		private String serviceAccountKeyPath;
-		private String privateKeyPath;
-		private String privateKey;
-		private String customEndpoint;
-		private String credentialsFilePath;
-		private String tokenCustomUrl;
-		private Long tokenExpirationLeeway;
+	public CoreConfiguration defaultHeader(Map<String, String> defaultHeader) {
+		this.defaultHeader = defaultHeader;
+		return this;
+	}
 
-		public Builder defaultHeader(Map<String, String> defaultHeader) {
-			this.defaultHeader = defaultHeader;
-			return this;
-		}
+	public CoreConfiguration serviceAccountKey(String serviceAccountKey) {
+		this.serviceAccountKey = serviceAccountKey;
+		return this;
+	}
 
-		public Builder serviceAccountKey(String serviceAccountKey) {
-			this.serviceAccountKey = serviceAccountKey;
-			return this;
-		}
+	public CoreConfiguration serviceAccountKeyPath(String serviceAccountKeyPath) {
+		this.serviceAccountKeyPath = serviceAccountKeyPath;
+		return this;
+	}
 
-		public Builder serviceAccountKeyPath(String serviceAccountKeyPath) {
-			this.serviceAccountKeyPath = serviceAccountKeyPath;
-			return this;
-		}
+	public CoreConfiguration privateKeyPath(String privateKeyPath) {
+		this.privateKeyPath = privateKeyPath;
+		return this;
+	}
 
-		public Builder privateKeyPath(String privateKeyPath) {
-			this.privateKeyPath = privateKeyPath;
-			return this;
-		}
+	public CoreConfiguration privateKey(String privateKey) {
+		this.privateKey = privateKey;
+		return this;
+	}
 
-		public Builder privateKey(String privateKey) {
-			this.privateKey = privateKey;
-			return this;
-		}
+	public CoreConfiguration customEndpoint(String customEndpoint) {
+		this.customEndpoint = customEndpoint;
+		return this;
+	}
 
-		public Builder customEndpoint(String customEndpoint) {
-			this.customEndpoint = customEndpoint;
-			return this;
-		}
+	public CoreConfiguration credentialsFilePath(String credentialsFilePath) {
+		this.credentialsFilePath = credentialsFilePath;
+		return this;
+	}
 
-		public Builder credentialsFilePath(String credentialsFilePath) {
-			this.credentialsFilePath = credentialsFilePath;
-			return this;
-		}
+	public CoreConfiguration tokenCustomUrl(String tokenCustomUrl) {
+		this.tokenCustomUrl = tokenCustomUrl;
+		return this;
+	}
 
-		public Builder tokenCustomUrl(String tokenCustomUrl) {
-			this.tokenCustomUrl = tokenCustomUrl;
-			return this;
-		}
-
-		public Builder tokenExpirationLeeway(Long tokenExpirationLeeway) {
-			this.tokenExpirationLeeway = tokenExpirationLeeway;
-			return this;
-		}
-
-		public CoreConfiguration build() {
-			return new CoreConfiguration(this);
-		}
+	public CoreConfiguration tokenExpirationLeeway(Long tokenExpirationLeeway) {
+		this.tokenExpirationLeeway = tokenExpirationLeeway;
+		return this;
 	}
 }
