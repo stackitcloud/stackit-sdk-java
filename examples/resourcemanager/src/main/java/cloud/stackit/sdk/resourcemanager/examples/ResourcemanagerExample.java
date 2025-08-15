@@ -2,7 +2,7 @@ package cloud.stackit.sdk.resourcemanager.examples;
 
 import cloud.stackit.sdk.resourcemanager.ApiClient;
 import cloud.stackit.sdk.resourcemanager.ApiException;
-import cloud.stackit.sdk.resourcemanager.api.DefaultApi;
+import cloud.stackit.sdk.resourcemanager.api.ResourceManagerApi;
 import cloud.stackit.sdk.resourcemanager.model.CreateFolderPayload;
 import cloud.stackit.sdk.resourcemanager.model.CreateProjectPayload;
 import cloud.stackit.sdk.resourcemanager.model.FolderResponse;
@@ -13,7 +13,7 @@ import java.util.UUID;
 class ResourcemanagerExample {
 	public static void main(String[] args) {
 		ApiClient apiClient = new ApiClient();
-		DefaultApi resourceManagerApi = new DefaultApi(apiClient);
+		ResourceManagerApi resourceManagerApi = new ResourceManagerApi(apiClient);
 
 		// replace this with something useful for real use
 		UUID containerParentId = UUID.randomUUID();
