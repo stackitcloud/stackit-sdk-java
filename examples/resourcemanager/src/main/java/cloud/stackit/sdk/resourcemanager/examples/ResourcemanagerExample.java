@@ -1,7 +1,7 @@
 package cloud.stackit.sdk.resourcemanager.examples;
 
 import cloud.stackit.sdk.core.exception.ApiException;
-import cloud.stackit.sdk.resourcemanager.api.DefaultApi;
+import cloud.stackit.sdk.resourcemanager.api.ResourceManagerApi;
 import cloud.stackit.sdk.resourcemanager.model.CreateFolderPayload;
 import cloud.stackit.sdk.resourcemanager.model.CreateProjectPayload;
 import cloud.stackit.sdk.resourcemanager.model.FolderResponse;
@@ -14,7 +14,7 @@ class ResourcemanagerExample {
 	public static void main(String[] args) throws IOException {
 		// Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env
 		// STACKIT_SERVICE_ACCOUNT_KEY_PATH / STACKIT_SERVICE_ACCOUNT_KEY
-		DefaultApi resourceManagerApi = new DefaultApi();
+		ResourceManagerApi resourceManagerApi = new ResourceManagerApi();
 
 		// replace this with something useful for real use
 		UUID containerParentId = UUID.randomUUID();
