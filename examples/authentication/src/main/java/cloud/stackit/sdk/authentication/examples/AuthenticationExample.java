@@ -7,19 +7,17 @@ import cloud.stackit.sdk.resourcemanager.model.ListOrganizationsResponse;
 class AuthenticationExample {
 	public static void main(String[] args) {
 		String SERVICE_ACCOUNT_KEY_PATH = "/path/to/your/sa/key.json";
-		String SERIVCE_ACCOUNT_MAIL = "name-1234@sa.stackit.cloud";
+		String SERVICE_ACCOUNT_MAIL = "name-1234@sa.stackit.cloud";
 
 		CoreConfiguration config =
-				new CoreConfiguration.Builder()
-						.serviceAccountKeyPath(SERVICE_ACCOUNT_KEY_PATH)
-						.build();
+				new CoreConfiguration().serviceAccountKeyPath(SERVICE_ACCOUNT_KEY_PATH);
 
 		try {
 			DefaultApi api = new DefaultApi(config);
 
 			/* list all organizations */
 			ListOrganizationsResponse response =
-					api.listOrganizations(null, SERIVCE_ACCOUNT_MAIL, null, null, null);
+					api.listOrganizations(null, SERVICE_ACCOUNT_MAIL, null, null, null);
 
 			System.out.println(response);
 		} catch (Exception e) {

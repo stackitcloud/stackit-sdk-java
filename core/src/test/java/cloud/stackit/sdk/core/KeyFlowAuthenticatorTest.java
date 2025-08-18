@@ -116,9 +116,7 @@ class KeyFlowAuthenticatorTest {
 		// Config
 		HttpUrl url = mockWebServer.url("/token");
 		CoreConfiguration cfg =
-				new CoreConfiguration.Builder()
-						.tokenCustomUrl(url.toString()) // Use mockWebServer
-						.build();
+				new CoreConfiguration().tokenCustomUrl(url.toString()); // Use mockWebServer
 
 		KeyFlowAuthenticator keyFlowAuthenticator = new KeyFlowAuthenticator(cfg, defaultSaKey);
 
@@ -143,9 +141,7 @@ class KeyFlowAuthenticatorTest {
 		// Config
 		HttpUrl url = mockWebServer.url("/token");
 		CoreConfiguration cfg =
-				new CoreConfiguration.Builder()
-						.tokenCustomUrl(url.toString()) // Use mockWebServer
-						.build();
+				new CoreConfiguration().tokenCustomUrl(url.toString()); // Use mockWebServer
 
 		KeyFlowAuthenticator keyFlowAuthenticator = new KeyFlowAuthenticator(cfg, defaultSaKey);
 		keyFlowAuthenticator.setToken(expiredKey);
@@ -162,9 +158,7 @@ class KeyFlowAuthenticatorTest {
 
 		// Config
 		CoreConfiguration cfg =
-				new CoreConfiguration.Builder()
-						.tokenCustomUrl(url.toString()) // Use mockWebServer
-						.build();
+				new CoreConfiguration().tokenCustomUrl(url.toString()); // Use mockWebServer
 
 		// Init keyFlowAuthenticator
 		KeyFlowAuthenticator keyFlowAuthenticator =
@@ -182,9 +176,7 @@ class KeyFlowAuthenticatorTest {
 
 		// Config
 		CoreConfiguration cfg =
-				new CoreConfiguration.Builder()
-						.tokenCustomUrl(url.toString()) // Use mockWebServer
-						.build();
+				new CoreConfiguration().tokenCustomUrl(url.toString()); // Use mockWebServer
 
 		// Init keyFlowAuthenticator
 		KeyFlowAuthenticator keyFlowAuthenticator =
@@ -206,9 +198,7 @@ class KeyFlowAuthenticatorTest {
 		// Config
 		HttpUrl url = mockWebServer.url("/token");
 		CoreConfiguration cfg =
-				new CoreConfiguration.Builder()
-						.tokenCustomUrl(url.toString()) // Use mockWebServer
-						.build();
+				new CoreConfiguration().tokenCustomUrl(url.toString()); // Use mockWebServer
 
 		// Init keyFlowAuthenticator
 		KeyFlowAuthenticator keyFlowAuthenticator = new KeyFlowAuthenticator(cfg, defaultSaKey);
@@ -229,9 +219,7 @@ class KeyFlowAuthenticatorTest {
 		// Config
 		HttpUrl url = mockWebServer.url("/token");
 		CoreConfiguration cfg =
-				new CoreConfiguration.Builder()
-						.tokenCustomUrl(url.toString()) // Use mockWebServer
-						.build();
+				new CoreConfiguration().tokenCustomUrl(url.toString()); // Use mockWebServer
 
 		// Prepare keyFlowAuthenticator
 		KeyFlowAuthenticator keyFlowAuthenticator = new KeyFlowAuthenticator(cfg, defaultSaKey);
@@ -251,9 +239,7 @@ class KeyFlowAuthenticatorTest {
 
 		// Config
 		CoreConfiguration cfg =
-				new CoreConfiguration.Builder()
-						.tokenCustomUrl(url.toString()) // Use mockWebServer
-						.build();
+				new CoreConfiguration().tokenCustomUrl(url.toString()); // Use mockWebServer
 
 		// Prepare keyFlowAuthenticator
 		KeyFlowAuthenticator keyFlowAuthenticator =

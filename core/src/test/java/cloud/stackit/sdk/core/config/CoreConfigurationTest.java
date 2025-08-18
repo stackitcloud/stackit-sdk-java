@@ -12,7 +12,7 @@ class CoreConfigurationTest {
 	void getDefaultHeader() {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("key", "value");
-		CoreConfiguration cfg = new CoreConfiguration.Builder().defaultHeader(map).build();
+		CoreConfiguration cfg = new CoreConfiguration().defaultHeader(map);
 		Map<String, String> cfgHeader = cfg.getDefaultHeader();
 
 		assertEquals(map, cfgHeader);
@@ -22,7 +22,7 @@ class CoreConfigurationTest {
 	void getServiceAccountKey() {
 		final String saKey = "<sa-key>";
 
-		CoreConfiguration cfg = new CoreConfiguration.Builder().serviceAccountKey(saKey).build();
+		CoreConfiguration cfg = new CoreConfiguration().serviceAccountKey(saKey);
 
 		String cfgSaKey = cfg.getServiceAccountKey();
 
@@ -33,8 +33,7 @@ class CoreConfigurationTest {
 	void getServiceAccountKeyPath() {
 		final String saKeyPath = "<sa-key-path>";
 
-		CoreConfiguration cfg =
-				new CoreConfiguration.Builder().serviceAccountKeyPath(saKeyPath).build();
+		CoreConfiguration cfg = new CoreConfiguration().serviceAccountKeyPath(saKeyPath);
 
 		String cfgSaKeyPath = cfg.getServiceAccountKeyPath();
 
@@ -45,8 +44,7 @@ class CoreConfigurationTest {
 	void getPrivateKeyPath() {
 		final String privateKeyPath = "<private-key-path>";
 
-		CoreConfiguration cfg =
-				new CoreConfiguration.Builder().privateKeyPath(privateKeyPath).build();
+		CoreConfiguration cfg = new CoreConfiguration().privateKeyPath(privateKeyPath);
 
 		String cfgPrivateKeyPath = cfg.getPrivateKeyPath();
 
@@ -57,7 +55,7 @@ class CoreConfigurationTest {
 	void getPrivateKey() {
 		final String privateKey = "<private-key>";
 
-		CoreConfiguration cfg = new CoreConfiguration.Builder().privateKey(privateKey).build();
+		CoreConfiguration cfg = new CoreConfiguration().privateKey(privateKey);
 
 		String cfgPrivateKey = cfg.getPrivateKey();
 
@@ -68,8 +66,7 @@ class CoreConfigurationTest {
 	void getCustomEndpoint() {
 		final String customEndpoint = "<custom-endpoint>";
 
-		CoreConfiguration cfg =
-				new CoreConfiguration.Builder().customEndpoint(customEndpoint).build();
+		CoreConfiguration cfg = new CoreConfiguration().customEndpoint(customEndpoint);
 
 		String cfgCustomEndpoint = cfg.getCustomEndpoint();
 
@@ -80,8 +77,7 @@ class CoreConfigurationTest {
 	void getCredentialsFilePath() {
 		final String credFilePath = "<cred-file-path>";
 
-		CoreConfiguration cfg =
-				new CoreConfiguration.Builder().credentialsFilePath(credFilePath).build();
+		CoreConfiguration cfg = new CoreConfiguration().credentialsFilePath(credFilePath);
 
 		String cfgCredentialsFilePath = cfg.getCredentialsFilePath();
 
@@ -92,8 +88,7 @@ class CoreConfigurationTest {
 	void getTokenCustomUrl() {
 		final String tokenCustomUrl = "<token-custom-url>";
 
-		CoreConfiguration cfg =
-				new CoreConfiguration.Builder().tokenCustomUrl(tokenCustomUrl).build();
+		CoreConfiguration cfg = new CoreConfiguration().tokenCustomUrl(tokenCustomUrl);
 
 		String cfgTokenUrl = cfg.getTokenCustomUrl();
 
@@ -104,8 +99,7 @@ class CoreConfigurationTest {
 	void getTokenExpirationLeeway() {
 		final long tokenExpireLeeway = 100;
 
-		CoreConfiguration cfg =
-				new CoreConfiguration.Builder().tokenExpirationLeeway(tokenExpireLeeway).build();
+		CoreConfiguration cfg = new CoreConfiguration().tokenExpirationLeeway(tokenExpireLeeway);
 
 		Long cfgTokenExpirationLeeway = cfg.getTokenExpirationLeeway();
 
@@ -114,7 +108,7 @@ class CoreConfigurationTest {
 
 	@Test
 	void getDefaultHeader_not_set() {
-		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		CoreConfiguration cfg = new CoreConfiguration();
 		Map<String, String> defaultHeader = cfg.getDefaultHeader();
 
 		assertNull(defaultHeader);
@@ -122,7 +116,7 @@ class CoreConfigurationTest {
 
 	@Test
 	void getServiceAccountKey_not_set() {
-		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		CoreConfiguration cfg = new CoreConfiguration();
 		String serviceAccountKey = cfg.getServiceAccountKey();
 
 		assertNull(serviceAccountKey);
@@ -130,7 +124,7 @@ class CoreConfigurationTest {
 
 	@Test
 	void getServiceAccountKeyPath_not_set() {
-		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		CoreConfiguration cfg = new CoreConfiguration();
 		String serviceAccountKeyPath = cfg.getServiceAccountKeyPath();
 
 		assertNull(serviceAccountKeyPath);
@@ -138,7 +132,7 @@ class CoreConfigurationTest {
 
 	@Test
 	void getPrivateKeyPath_not_set() {
-		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		CoreConfiguration cfg = new CoreConfiguration();
 		String privateKeyPath = cfg.getPrivateKeyPath();
 
 		assertNull(privateKeyPath);
@@ -146,7 +140,7 @@ class CoreConfigurationTest {
 
 	@Test
 	void getPrivateKey_not_set() {
-		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		CoreConfiguration cfg = new CoreConfiguration();
 		String privateKey = cfg.getPrivateKey();
 
 		assertNull(privateKey);
@@ -154,7 +148,7 @@ class CoreConfigurationTest {
 
 	@Test
 	void getCustomEndpoint_not_set() {
-		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		CoreConfiguration cfg = new CoreConfiguration();
 		String customEndpoint = cfg.getCustomEndpoint();
 
 		assertNull(customEndpoint);
@@ -162,7 +156,7 @@ class CoreConfigurationTest {
 
 	@Test
 	void getCredentialsFilePath_not_set() {
-		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		CoreConfiguration cfg = new CoreConfiguration();
 		String credentialsFilePath = cfg.getCredentialsFilePath();
 
 		assertNull(credentialsFilePath);
@@ -170,7 +164,7 @@ class CoreConfigurationTest {
 
 	@Test
 	void getTokenCustomUrl_not_set() {
-		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		CoreConfiguration cfg = new CoreConfiguration();
 		String tokenCustomUrl = cfg.getTokenCustomUrl();
 
 		assertNull(tokenCustomUrl);
@@ -178,7 +172,7 @@ class CoreConfigurationTest {
 
 	@Test
 	void getTokenExpirationLeeway_not_set() {
-		CoreConfiguration cfg = new CoreConfiguration.Builder().build();
+		CoreConfiguration cfg = new CoreConfiguration();
 		Long tokenExpirationLeeway = cfg.getTokenExpirationLeeway();
 
 		assertNull(tokenExpirationLeeway);

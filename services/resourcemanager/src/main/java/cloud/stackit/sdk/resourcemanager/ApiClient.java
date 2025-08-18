@@ -14,15 +14,12 @@ package cloud.stackit.sdk.resourcemanager;
 
 import cloud.stackit.sdk.core.auth.SetupAuth;
 import cloud.stackit.sdk.core.config.CoreConfiguration;
-import cloud.stackit.sdk.resourcemanager.auth.ApiKeyAuth;
-import cloud.stackit.sdk.resourcemanager.auth.Authentication;
-import cloud.stackit.sdk.resourcemanager.auth.HttpBasicAuth;
+import cloud.stackit.sdk.core.exception.ApiException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
-import java.net.URI;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.file.Files;
@@ -33,7 +30,6 @@ import java.security.SecureRandom;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
-import java.security.spec.InvalidKeySpecException;
 import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -80,8 +76,6 @@ public class ApiClient {
 	protected Map<String, String> defaultCookieMap = new HashMap<String, String>();
 	protected String tempFolderPath = null;
 
-	protected Map<String, Authentication> authentications;
-
 	protected DateFormat dateFormat;
 	protected DateFormat datetimeFormat;
 	protected boolean lenientDatetimeFormat;
@@ -95,36 +89,22 @@ public class ApiClient {
 	protected JSON json;
 
 	protected HttpLoggingInterceptor loggingInterceptor;
+	protected SetupAuth authenticationInterceptor;
+
+	protected CoreConfiguration configuration;
 
 	/** Basic constructor for ApiClient */
-	public ApiClient() {
-		init();
-		initHttpClient();
-
-		// Setup authentications (key: authentication name, value: authentication).
-		// Prevent the authentications from being modified.
-		authentications = Collections.unmodifiableMap(authentications);
+	public ApiClient() throws IOException {
+		this(new CoreConfiguration());
 	}
 
 	/**
-	 * Basic constructor with custom OkHttpClient
+	 * Basic constructor with custom CoreConfiguration
 	 *
-	 * @param client a {@link okhttp3.OkHttpClient} object
+	 * @param config a {@link cloud.stackit.sdk.core.config} object
+	 * @throws IOException thrown when a file can not be found
 	 */
-	public ApiClient(OkHttpClient client) {
-		init();
-
-		httpClient = client;
-
-		// Setup authentications (key: authentication name, value: authentication).
-		// Prevent the authentications from being modified.
-		authentications = Collections.unmodifiableMap(authentications);
-	}
-
-	public ApiClient(CoreConfiguration config)
-			throws IOException,
-					InvalidKeySpecException,
-					cloud.stackit.sdk.core.exception.ApiException {
+	public ApiClient(CoreConfiguration config) throws IOException {
 		init();
 
 		if (config.getCustomEndpoint() != null && !config.getCustomEndpoint().trim().isEmpty()) {
@@ -133,12 +113,15 @@ public class ApiClient {
 		if (config.getDefaultHeader() != null) {
 			defaultHeaderMap = config.getDefaultHeader();
 		}
+		this.configuration = config;
+
+		// Setup AuthHandler
 		SetupAuth auth;
 		auth = new SetupAuth(config);
 		auth.init();
-		List<Interceptor> interceptors = new LinkedList<>();
-		interceptors.add(auth.getAuthHandler());
-		initHttpClient(interceptors);
+		authenticationInterceptor = auth;
+
+		initHttpClient();
 	}
 
 	protected void initHttpClient() {
@@ -151,6 +134,8 @@ public class ApiClient {
 		for (Interceptor interceptor : interceptors) {
 			builder.addInterceptor(interceptor);
 		}
+		// Adds the Authorization header to requests
+		builder.addInterceptor(authenticationInterceptor.getAuthHandler());
 
 		httpClient = builder.build();
 	}
@@ -162,8 +147,6 @@ public class ApiClient {
 
 		// Set default User-Agent.
 		setUserAgent("stackit-sdk-java/resourcemanager");
-
-		authentications = new HashMap<String, Authentication>();
 	}
 
 	/**
@@ -211,27 +194,6 @@ public class ApiClient {
 
 	public ApiClient setServerVariables(Map<String, String> serverVariables) {
 		this.serverVariables = serverVariables;
-		return this;
-	}
-
-	/**
-	 * Get HTTP client
-	 *
-	 * @return An instance of OkHttpClient
-	 */
-	public OkHttpClient getHttpClient() {
-		return httpClient;
-	}
-
-	/**
-	 * Set HTTP client, which must never be null.
-	 *
-	 * @param newHttpClient An instance of OkHttpClient
-	 * @return Api Client
-	 * @throws java.lang.NullPointerException when newHttpClient is null
-	 */
-	public ApiClient setHttpClient(OkHttpClient newHttpClient) {
-		this.httpClient = Objects.requireNonNull(newHttpClient, "HttpClient must not be null!");
 		return this;
 	}
 
@@ -384,125 +346,6 @@ public class ApiClient {
 	public ApiClient setLenientOnJson(boolean lenientOnJson) {
 		JSON.setLenientOnJson(lenientOnJson);
 		return this;
-	}
-
-	/**
-	 * Get authentications (key: authentication name, value: authentication).
-	 *
-	 * @return Map of authentication objects
-	 */
-	public Map<String, Authentication> getAuthentications() {
-		return authentications;
-	}
-
-	/**
-	 * Get authentication for the given name.
-	 *
-	 * @param authName The authentication name
-	 * @return The authentication, null if not found
-	 */
-	public Authentication getAuthentication(String authName) {
-		return authentications.get(authName);
-	}
-
-	/**
-	 * Helper method to set username for the first HTTP basic authentication.
-	 *
-	 * @param username Username
-	 */
-	public void setUsername(String username) {
-		for (Authentication auth : authentications.values()) {
-			if (auth instanceof HttpBasicAuth) {
-				((HttpBasicAuth) auth).setUsername(username);
-				return;
-			}
-		}
-		throw new RuntimeException("No HTTP basic authentication configured!");
-	}
-
-	/**
-	 * Helper method to set password for the first HTTP basic authentication.
-	 *
-	 * @param password Password
-	 */
-	public void setPassword(String password) {
-		for (Authentication auth : authentications.values()) {
-			if (auth instanceof HttpBasicAuth) {
-				((HttpBasicAuth) auth).setPassword(password);
-				return;
-			}
-		}
-		throw new RuntimeException("No HTTP basic authentication configured!");
-	}
-
-	/**
-	 * Helper method to set API key value for the first API key authentication.
-	 *
-	 * @param apiKey API key
-	 */
-	public void setApiKey(String apiKey) {
-		for (Authentication auth : authentications.values()) {
-			if (auth instanceof ApiKeyAuth) {
-				((ApiKeyAuth) auth).setApiKey(apiKey);
-				return;
-			}
-		}
-		throw new RuntimeException("No API key authentication configured!");
-	}
-
-	/**
-	 * Helper method to set API key prefix for the first API key authentication.
-	 *
-	 * @param apiKeyPrefix API key prefix
-	 */
-	public void setApiKeyPrefix(String apiKeyPrefix) {
-		for (Authentication auth : authentications.values()) {
-			if (auth instanceof ApiKeyAuth) {
-				((ApiKeyAuth) auth).setApiKeyPrefix(apiKeyPrefix);
-				return;
-			}
-		}
-		throw new RuntimeException("No API key authentication configured!");
-	}
-
-	/**
-	 * Helper method to set access token for the first OAuth2 authentication.
-	 *
-	 * @param accessToken Access token
-	 */
-	public void setAccessToken(String accessToken) {
-		throw new RuntimeException("No OAuth2 authentication configured!");
-	}
-
-	/**
-	 * Helper method to set credentials for AWSV4 Signature
-	 *
-	 * @param accessKey Access Key
-	 * @param secretKey Secret Key
-	 * @param region Region
-	 * @param service Service to access to
-	 */
-	public void setAWS4Configuration(
-			String accessKey, String secretKey, String region, String service) {
-		throw new RuntimeException("No AWS4 authentication configured!");
-	}
-
-	/**
-	 * Helper method to set credentials for AWSV4 Signature
-	 *
-	 * @param accessKey Access Key
-	 * @param secretKey Secret Key
-	 * @param sessionToken Session Token
-	 * @param region Region
-	 * @param service Service to access to
-	 */
-	public void setAWS4Configuration(
-			String accessKey,
-			String secretKey,
-			String sessionToken,
-			String region,
-			String service) {
-		throw new RuntimeException("No AWS4 authentication configured!");
 	}
 
 	/**
@@ -914,7 +757,7 @@ public class ApiClient {
 	 * @param response HTTP response
 	 * @param returnType The type of the Java object
 	 * @return The deserialized Java object
-	 * @throws cloud.stackit.sdk.resourcemanager.ApiException If fail to deserialize response body,
+	 * @throws cloud.stackit.sdk.core.exception.ApiException If fail to deserialize response body,
 	 *     i.e. cannot read response body or the Content-Type of the response is not supported.
 	 */
 	@SuppressWarnings("unchecked")
@@ -977,7 +820,7 @@ public class ApiClient {
 	 * @param obj The Java object
 	 * @param contentType The request Content-Type
 	 * @return The serialized request body
-	 * @throws cloud.stackit.sdk.resourcemanager.ApiException If fail to serialize the given object
+	 * @throws cloud.stackit.sdk.core.exception.ApiException If fail to serialize the given object
 	 */
 	public RequestBody serialize(Object obj, String contentType) throws ApiException {
 		if (obj instanceof byte[]) {
@@ -1007,7 +850,7 @@ public class ApiClient {
 	 * Download file from the given response.
 	 *
 	 * @param response An instance of the Response object
-	 * @throws cloud.stackit.sdk.resourcemanager.ApiException If fail to read file content from
+	 * @throws cloud.stackit.sdk.core.exception.ApiException If fail to read file content from
 	 *     response and write to disk
 	 * @return Downloaded file
 	 */
@@ -1069,7 +912,7 @@ public class ApiClient {
 	 * @param <T> Type
 	 * @param call An instance of the Call object
 	 * @return ApiResponse&lt;T&gt;
-	 * @throws cloud.stackit.sdk.resourcemanager.ApiException If fail to execute the call
+	 * @throws cloud.stackit.sdk.core.exception.ApiException If fail to execute the call
 	 */
 	public <T> ApiResponse<T> execute(Call call) throws ApiException {
 		return execute(call, null);
@@ -1083,7 +926,7 @@ public class ApiClient {
 	 * @param call Call
 	 * @return ApiResponse object containing response status, headers and data, which is a Java
 	 *     object deserialized from response body and would be null when returnType is null.
-	 * @throws cloud.stackit.sdk.resourcemanager.ApiException If fail to execute the call
+	 * @throws cloud.stackit.sdk.core.exception.ApiException If fail to execute the call
 	 */
 	public <T> ApiResponse<T> execute(Call call, Type returnType) throws ApiException {
 		try {
@@ -1152,7 +995,7 @@ public class ApiClient {
 	 * @param response Response
 	 * @param returnType Return type
 	 * @return Type
-	 * @throws cloud.stackit.sdk.resourcemanager.ApiException If the response has an unsuccessful
+	 * @throws cloud.stackit.sdk.core.exception.ApiException If the response has an unsuccessful
 	 *     status code or fail to deserialize the response body
 	 */
 	public <T> T handleResponse(Response response, Type returnType) throws ApiException {
@@ -1209,7 +1052,7 @@ public class ApiClient {
 	 * @param authNames The authentications to apply
 	 * @param callback Callback for upload/download progress
 	 * @return The HTTP call
-	 * @throws cloud.stackit.sdk.resourcemanager.ApiException If fail to serialize the request body
+	 * @throws cloud.stackit.sdk.core.exception.ApiException If fail to serialize the request body
 	 *     object
 	 */
 	public Call buildCall(
@@ -1258,7 +1101,7 @@ public class ApiClient {
 	 * @param authNames The authentications to apply
 	 * @param callback Callback for upload/download progress
 	 * @return The HTTP request
-	 * @throws cloud.stackit.sdk.resourcemanager.ApiException If fail to serialize the request body
+	 * @throws cloud.stackit.sdk.core.exception.ApiException If fail to serialize the request body
 	 *     object
 	 */
 	public Request buildRequest(
@@ -1304,16 +1147,6 @@ public class ApiClient {
 		}
 
 		List<Pair> updatedQueryParams = new ArrayList<>(queryParams);
-
-		// update parameters with authentication settings
-		updateParamsForAuth(
-				authNames,
-				updatedQueryParams,
-				headerParams,
-				cookieParams,
-				requestBodyToString(reqBody),
-				method,
-				URI.create(url));
 
 		final Request.Builder reqBuilder =
 				new Request.Builder()
@@ -1439,36 +1272,6 @@ public class ApiClient {
 				reqBuilder.addHeader(
 						"Cookie", String.format("%s=%s", param.getKey(), param.getValue()));
 			}
-		}
-	}
-
-	/**
-	 * Update query and header parameters based on authentication settings.
-	 *
-	 * @param authNames The authentications to apply
-	 * @param queryParams List of query parameters
-	 * @param headerParams Map of header parameters
-	 * @param cookieParams Map of cookie parameters
-	 * @param payload HTTP request body
-	 * @param method HTTP method
-	 * @param uri URI
-	 * @throws cloud.stackit.sdk.resourcemanager.ApiException If fails to update the parameters
-	 */
-	public void updateParamsForAuth(
-			String[] authNames,
-			List<Pair> queryParams,
-			Map<String, String> headerParams,
-			Map<String, String> cookieParams,
-			String payload,
-			String method,
-			URI uri)
-			throws ApiException {
-		for (String authName : authNames) {
-			Authentication auth = authentications.get(authName);
-			if (auth == null) {
-				throw new RuntimeException("Authentication undefined: " + authName);
-			}
-			auth.applyToParams(queryParams, headerParams, cookieParams, payload, method, uri);
 		}
 	}
 
@@ -1688,7 +1491,7 @@ public class ApiClient {
 	 *
 	 * @param requestBody The HTTP request object
 	 * @return The string representation of the HTTP request body
-	 * @throws cloud.stackit.sdk.resourcemanager.ApiException If fail to serialize the request body
+	 * @throws cloud.stackit.sdk.core.exception.ApiException If fail to serialize the request body
 	 *     object into a string
 	 */
 	protected String requestBodyToString(RequestBody requestBody) throws ApiException {
