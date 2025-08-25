@@ -34,7 +34,7 @@ import java.util.UUID;
 /** Object that represents a network range. */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.14.0")
+		comments = "Generator version: 7.15.0")
 public class NetworkRange {
 	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
 

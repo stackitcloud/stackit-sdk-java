@@ -37,7 +37,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 /** Object that represents a network. */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.14.0")
+		comments = "Generator version: 7.15.0")
 public class Network {
 	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
 

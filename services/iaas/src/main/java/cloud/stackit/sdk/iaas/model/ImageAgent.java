@@ -32,7 +32,7 @@ import java.util.Set;
 /** Support status and default provioning setting for the STACKIT server agent. */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.14.0")
+		comments = "Generator version: 7.15.0")
 public class ImageAgent {
 	public static final String SERIALIZED_NAME_PROVISION_BY_DEFAULT = "provisionByDefault";
 

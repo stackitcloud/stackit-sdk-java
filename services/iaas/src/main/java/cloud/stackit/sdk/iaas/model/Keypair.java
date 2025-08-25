@@ -33,7 +33,7 @@ import java.util.Set;
 /** Object that represents the public key of an SSH keypair and its name. */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.14.0")
+		comments = "Generator version: 7.15.0")
 public class Keypair {
 	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
 

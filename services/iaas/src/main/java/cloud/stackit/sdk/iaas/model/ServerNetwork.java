@@ -36,7 +36,7 @@ import java.util.UUID;
 /** Describes the object that matches servers to its networks. */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.14.0")
+		comments = "Generator version: 7.15.0")
 public class ServerNetwork {
 	public static final String SERIALIZED_NAME_ALLOWED_ADDRESSES = "allowedAddresses";
 

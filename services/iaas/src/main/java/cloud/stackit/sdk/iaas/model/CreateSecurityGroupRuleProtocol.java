@@ -32,7 +32,7 @@ import java.util.Set;
 /** The internet protocol which the rule should match. */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.14.0")
+		comments = "Generator version: 7.15.0")
 public class CreateSecurityGroupRuleProtocol {
 	public static final String SERIALIZED_NAME_PROTOCOL = "protocol";
 

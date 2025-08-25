@@ -32,7 +32,7 @@ import java.util.Set;
 /** The schema for a protocol of a security group rule. */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.14.0")
+		comments = "Generator version: 7.15.0")
 public class Protocol {
 	public static final String SERIALIZED_NAME_NAME = "name";
 

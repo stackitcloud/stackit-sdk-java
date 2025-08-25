@@ -33,7 +33,7 @@ import java.util.UUID;
 /** The source object of a boot volume. */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.14.0")
+		comments = "Generator version: 7.15.0")
 public class BootVolumeSource {
 	public static final String SERIALIZED_NAME_ID = "id";
 

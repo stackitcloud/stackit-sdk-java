@@ -33,7 +33,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 /** Properties to set hardware and scheduling settings for an Image. */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.14.0")
+		comments = "Generator version: 7.15.0")
 public class ImageConfig {
 	public static final String SERIALIZED_NAME_ARCHITECTURE = "architecture";
 

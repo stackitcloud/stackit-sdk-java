@@ -33,7 +33,7 @@ import java.util.UUID;
 /** Object that represents a Volume attachment to a server. */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.14.0")
+		comments = "Generator version: 7.15.0")
 public class VolumeAttachment {
 	public static final String SERIALIZED_NAME_DELETE_ON_TERMINATION = "deleteOnTermination";
 
