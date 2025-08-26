@@ -4,7 +4,7 @@ import cloud.stackit.sdk.core.exception.ApiException;
 import cloud.stackit.sdk.iaas.api.IaasApi;
 import cloud.stackit.sdk.iaas.model.*;
 import java.io.IOException;
-import java.util.Map;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -36,7 +36,7 @@ public class IaaSExample {
 									.name("java-sdk-example-network-01")
 									.dhcp(true)
 									.routed(false)
-									.labels(Map.ofEntries(Map.entry("foo", "bar")))
+									.labels(Collections.singletonMap("foo", "bar"))
 									.addressFamily(
 											new CreateNetworkAddressFamily()
 													.ipv4(
@@ -50,7 +50,7 @@ public class IaaSExample {
 					newNetwork.getNetworkId(),
 					new PartialUpdateNetworkPayload()
 							.dhcp(false)
-							.labels(Map.ofEntries(Map.entry("foo", "bar-updated"))));
+							.labels(Collections.singletonMap("foo", "bar-updated")));
 
 			/* fetch the network we just created */
 			Network fetchedNetwork = iaasApi.getNetwork(projectId, newNetwork.getNetworkId());
@@ -83,7 +83,7 @@ public class IaaSExample {
 			/* get an image */
 			UUID imageId =
 					images.getItems()
-							.getFirst()
+							.get(0)
 							.getId(); // we just use a random image id in our example
 			assert imageId != null;
 			Image fetchedImage = iaasApi.getImage(projectId, imageId);
@@ -119,7 +119,7 @@ public class IaaSExample {
 			assert newKeypair.getName() != null;
 			iaasApi.updateKeyPair(
 					newKeypair.getName(),
-					new UpdateKeyPairPayload().labels(Map.ofEntries(Map.entry("foo", "bar"))));
+					new UpdateKeyPairPayload().labels(Collections.singletonMap("foo", "bar")));
 
 			/* fetch the keypair we just created / updated */
 			Keypair fetchedKeypair = iaasApi.getKeyPair(newKeypair.getName());
@@ -144,7 +144,7 @@ public class IaaSExample {
 
 			/* fetch details about a machine type */
 			MachineType fetchedMachineType =
-					iaasApi.getMachineType(projectId, machineTypes.getItems().getFirst().getName());
+					iaasApi.getMachineType(projectId, machineTypes.getItems().get(0).getName());
 			System.out.println("\nFetched machine type: ");
 			System.out.println("* Name: " + fetchedMachineType.getName());
 			System.out.println("* Description: " + fetchedMachineType.getDescription());
@@ -163,7 +163,7 @@ public class IaaSExample {
 									.name("java-sdk-example-server-01")
 									.machineType("t2i.1")
 									.imageId(imageId)
-									.labels(Map.ofEntries(Map.entry("foo", "bar")))
+									.labels(Collections.singletonMap("foo", "bar"))
 									// add the keypair we created above
 									.keypairName(newKeypair.getName())
 									// add the server to the network we created above
@@ -188,7 +188,7 @@ public class IaaSExample {
 					projectId,
 					newServer.getId(),
 					new UpdateServerPayload()
-							.labels(Map.ofEntries(Map.entry("foo", "bar-updated"))));
+							.labels(Collections.singletonMap("foo", "bar-updated")));
 
 			/* list all servers */
 			ServerListResponse servers = iaasApi.listServers(projectId, false, null);

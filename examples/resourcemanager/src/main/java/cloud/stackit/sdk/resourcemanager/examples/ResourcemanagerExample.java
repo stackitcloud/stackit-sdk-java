@@ -7,7 +7,7 @@ import cloud.stackit.sdk.resourcemanager.model.CreateProjectPayload;
 import cloud.stackit.sdk.resourcemanager.model.FolderResponse;
 import cloud.stackit.sdk.resourcemanager.model.Project;
 import java.io.IOException;
-import java.util.Map;
+import java.util.Collections;
 import java.util.UUID;
 
 class ResourcemanagerExample {
@@ -25,14 +25,14 @@ class ResourcemanagerExample {
 					resourceManagerApi.createProject(
 							new CreateProjectPayload()
 									.containerParentId(containerParentId.toString())
-									.labels(Map.ofEntries(Map.entry("foo", "bar"))));
+									.labels(Collections.singletonMap("foo", "bar")));
 
 			/* create a folder */
 			FolderResponse folder =
 					resourceManagerApi.createFolder(
 							new CreateFolderPayload()
 									.containerParentId(containerParentId.toString())
-									.labels(Map.ofEntries(Map.entry("foo", "bar"))));
+									.labels(Collections.singletonMap("foo", "bar")));
 		} catch (ApiException e) {
 			throw new RuntimeException(e);
 		}
