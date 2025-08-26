@@ -11,4 +11,4 @@ public class ResourceManagerApi extends DefaultApi {
 	public ResourceManagerApi(CoreConfiguration configuration) throws IOException {
 		super(configuration);
 	}
-} 
+}
