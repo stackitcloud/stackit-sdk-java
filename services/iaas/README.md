@@ -76,38 +76,8 @@ Then manually install the following JARs:
 
 ## Getting Started
 
-Please follow the [installation](#installation) instruction and execute the following Java code:
+See the [iaas examples](https://github.com/stackitcloud/stackit-sdk-java/tree/main/examples/iaas/src/main/java/cloud/stackit/sdk/iaas/examples).
 
-```java
-
-import cloud.stackit.sdk.iaas.*;
-import cloud.stackit.sdk.iaas.auth.*;
-import cloud.stackit.sdk.iaas.model.*;
-import cloud.stackit.sdk.iaas.api.DefaultApi;
-
-public class DefaultApiExample {
-
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://iaas.api.eu01.stackit.cloud");
-        
-        DefaultApi apiInstance = new DefaultApi(defaultClient);
-        UUID projectId = UUID.randomUUID(); // UUID | The identifier (ID) of a STACKIT Project.
-        UUID serverId = UUID.randomUUID(); // UUID | The identifier (ID) of a STACKIT Server.
-        UUID networkId = UUID.randomUUID(); // UUID | The identifier (ID) of a STACKIT Network.
-        try {
-            apiInstance.addNetworkToServer(projectId, serverId, networkId);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#addNetworkToServer");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
-    }
-}
-
-```
 
 ## Recommendation
 
