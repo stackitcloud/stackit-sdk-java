@@ -1,7 +1,7 @@
 package cloud.stackit.sdk.authentication.examples;
 
 import cloud.stackit.sdk.core.config.CoreConfiguration;
-import cloud.stackit.sdk.resourcemanager.api.DefaultApi;
+import cloud.stackit.sdk.resourcemanager.api.ResourceManagerApi;
 import cloud.stackit.sdk.resourcemanager.model.ListOrganizationsResponse;
 
 class AuthenticationExample {
@@ -13,7 +13,7 @@ class AuthenticationExample {
 				new CoreConfiguration().serviceAccountKeyPath(SERVICE_ACCOUNT_KEY_PATH);
 
 		try {
-			DefaultApi api = new DefaultApi(config);
+			ResourceManagerApi api = new ResourceManagerApi(config);
 
 			/* list all organizations */
 			ListOrganizationsResponse response =
