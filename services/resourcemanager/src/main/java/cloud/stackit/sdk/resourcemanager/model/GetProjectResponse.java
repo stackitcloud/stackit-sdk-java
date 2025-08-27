@@ -38,7 +38,7 @@ import java.util.UUID;
 /** GetProjectResponse */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.14.0")
+		comments = "Generator version: 7.15.0")
 public class GetProjectResponse {
 	public static final String SERIALIZED_NAME_CONTAINER_ID = "containerId";
 
