@@ -1,0 +1,5 @@
+dependencies {
+	implementation project (':services:iaas')
+}
+
+ext.mainClassName = 'cloud.stackit.sdk.iaas.examples.IaaSExample'

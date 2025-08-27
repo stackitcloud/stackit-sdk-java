@@ -96,37 +96,8 @@ Then manually install the following JARs:
 
 ## Getting Started
 
-Please follow the [installation](#installation) instruction and execute the following Java code:
+See the [resourcemanager examples](https://github.com/stackitcloud/stackit-sdk-java/tree/main/examples/resourcemanager/src/main/java/cloud/stackit/sdk/resourcemanager/examples).
 
-```java
-
-import cloud.stackit.sdk.resourcemanager.*;
-import cloud.stackit.sdk.resourcemanager.auth.*;
-import cloud.stackit.sdk.resourcemanager.model.*;
-import cloud.stackit.sdk.resourcemanager.api.DefaultApi;
-
-public class DefaultApiExample {
-
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://resource-manager.api.stackit.cloud");
-        
-        DefaultApi apiInstance = new DefaultApi(defaultClient);
-        CreateFolderPayload createFolderPayload = new CreateFolderPayload(); // CreateFolderPayload | 
-        try {
-            FolderResponse result = apiInstance.createFolder(createFolderPayload);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#createFolder");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
-    }
-}
-
-```
 
 ## Recommendation
 

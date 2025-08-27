@@ -21,11 +21,18 @@ allprojects {
 		]
 	}
 
-	sourceCompatibility = JavaVersion.VERSION_1_8
-	targetCompatibility = JavaVersion.VERSION_1_8
+	java {
+		sourceCompatibility = JavaVersion.VERSION_1_8
+		targetCompatibility = JavaVersion.VERSION_1_8
+
+		toolchain {
+			languageVersion = JavaLanguageVersion.of(8)
+		}
+	}
 
 	tasks.withType(JavaCompile).configureEach {
 		options.encoding = 'UTF-8'
+		options.release = 8 // enforce java 8 compatibility
 	}
 
 	spotless {
@@ -63,22 +70,22 @@ subprojects {
 	apply plugin: 'eclipse'
 
 	group = 'cloud.stackit'
-	version = 'SNAPSHOT'
 
 	afterEvaluate { project ->
 		// only apply to service sub-projects and core
 		if (project.path.startsWith(':services:') || project.name == "core" ) {
-
 			// override the version of each service with the ones obtained from the VERSION files
 			def versionFile = project.file("VERSION")
 			if (versionFile.exists()) {
 				try {
 					version = versionFile.text.trim()
 				} catch (IOException e) {
-					logger.error("Could not read VERSION file for project '${project.name}': ${e.message}")
+					version = 'SNAPSHOT'
+					logger.error("Could not read VERSION file for project '${project.path}': ${e.message}")
 				}
 			} else {
-				logger.warn("VERSION file not found in project '${project.name}'. Skipping version setting.")
+				version = 'SNAPSHOT'
+				logger.warn("VERSION file not found in project '${project.path}'. Skipping version setting.")
 			}
 
 
@@ -121,8 +128,19 @@ subprojects {
 
 		// only apply to example sub-projects
 		if (project.path.startsWith(':examples:')) {
-			task execute(type:JavaExec) {
-				main = System.getProperty('mainClass')
+			if (!project.hasProperty('mainClassName')) {
+				logger.warn("'mainClassName' property not defined for subproject '${project.path}'. Skipping execution of this task.")
+			}
+
+			tasks.register('execute', JavaExec) {
+				if (!project.hasProperty('mainClassName')) {
+					doLast {
+						logger.warn("'mainClassName' property not defined for subproject '${project.path}'. Skipping execution of this task.")
+					}
+					enabled = false // Disable the task if no main class is specified
+					return
+				}
+				mainClass = project.mainClassName
 				classpath = sourceSets.main.runtimeClasspath
 			}
 		}
