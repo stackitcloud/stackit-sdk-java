@@ -7,6 +7,9 @@ We greatly value your feedback, feature requests, additions to the code, bug rep
 
 - [Developer Guide](#developer-guide)
   - [Repository structure](#repository-structure)
+  - [Implementing a module waiter](#implementing-a-module-waiter)
+    - [Waiter structure](#waiter-structure)
+    - [Notes](#notes)
 - [Code Contributions](#code-contributions)
 - [Bug Reports](#bug-reports)
 
@@ -38,6 +41,29 @@ The STACKIT Java SDK service submodules are located under `services`.
 The files located in `services/[service]` are automatically generated from the [REST API specs](https://github.com/stackitcloud/stackit-api-specifications), whereas the ones located in subfolders (like `wait`) are manually maintained. Therefore, changes to files located in `services/[service]` will not be accepted. Instead, consider proposing changes to the generation process in the [Generator repository](https://github.com/stackitcloud/stackit-sdk-generator).
 
 Inside the `core` submodule you can find several classes that are used by all service modules. Examples of usage of the SDK are located in the `examples` directory.
+
+### Implementing a service waiter
+
+Waiters are routines that wait for the completion of asynchronous operations. They are located in a package named `wait` inside each service project.
+
+Let's suppose you want to implement the waiters for the `Create`, `Update` and `Delete` operations of a resource `bar` of service `foo`:
+
+1. Start by creating a new Java package `cloud.stackit.sdk.<service>.wait` inside `services/foo/` project, if it doesn't exist yet
+2. Create a file `FooWait.java` inside your new Java package `cloud.stackit.sdk.resourcemanager.wait`, if it doesn't exist yet. The class should be named `FooWait`.
+3. Refer to the [Waiter structure](./CONTRIBUTION.md/#waiter-structure) section for details on the structure of the file and the methods
+4. Add unit tests to the wait functions
+
+#### Waiter structure
+
+You can find a typical waiter structure here: [Example](./services/resourcemanager/src/main/java/cloud/stackit/sdk/resourcemanager/wait/ResourcemanagerWait.java)
+
+#### Notes
+
+- The success condition may vary from service to service. In the example above we wait for the field `Status` to match a successful or failed message, but other services may have different fields and/or values to represent the state of the create, update or delete operations.
+- The `id` and the `state` might not be present on the root level of the API response, this also varies from service to service. You must always match the resource `id` and the resource `state` to what is expected.
+- The timeout values included above are just for reference, each resource takes different amounts of time to finish the create, update or delete operations. You should account for some buffer, e.g. 15 minutes, on top of normal execution times.
+- For some resources, after a successful delete operation the resource can't be found anymore, so a call to the `Get` method would result in an error. In those cases, the waiter can be implemented by calling the `List` method and check that the resource is not present.
+- The main objective of the waiter functions is to make sure that the operation was successful, which means any other special cases such as intermediate error states should also be handled.
 
 ## Code Contributions
 
