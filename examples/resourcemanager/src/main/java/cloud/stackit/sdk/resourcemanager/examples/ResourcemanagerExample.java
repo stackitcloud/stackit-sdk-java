@@ -12,13 +12,13 @@ import cloud.stackit.sdk.resourcemanager.model.OrganizationResponse;
 import cloud.stackit.sdk.resourcemanager.model.PartialUpdateFolderPayload;
 import cloud.stackit.sdk.resourcemanager.model.PartialUpdateProjectPayload;
 import cloud.stackit.sdk.resourcemanager.model.Project;
-import java.io.IOException;
+import cloud.stackit.sdk.resourcemanager.wait.Wait;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.UUID;
 
 class ResourcemanagerExample {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 		// Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env
 		// STACKIT_SERVICE_ACCOUNT_KEY_PATH / STACKIT_SERVICE_ACCOUNT_KEY
 		ResourceManagerApi resourceManagerApi = new ResourceManagerApi();
@@ -64,8 +64,12 @@ class ResourcemanagerExample {
 							new CreateFolderPayload()
 									.containerParentId(containerParentId.toString())
 									.name("java-testing-folder")
+									.addMembersItem(member)
 									.labels(Collections.singletonMap("foo", "bar")));
 			System.out.println("Folder: \n" + folder.toString());
+
+			Wait.createProjectWaitHandler(resourceManagerApi, project.getContainerId())
+					.waitWithContext();
 
 			/* list folders */
 			ListFoldersResponse responseListFolders =
@@ -90,6 +94,9 @@ class ResourcemanagerExample {
 					project.getContainerId(),
 					new PartialUpdateProjectPayload().containerParentId(folder.getContainerId()));
 
+			Wait.createProjectWaitHandler(resourceManagerApi, project.getContainerId())
+					.waitWithContext();
+
 			/* get organization details */
 			OrganizationResponse organizationResponse =
 					resourceManagerApi.getOrganization(organizationIdString);
@@ -102,6 +109,9 @@ class ResourcemanagerExample {
 
 			/* delete project */
 			resourceManagerApi.deleteProject(project.getContainerId());
+
+			Wait.deleteProjectWaitHandler(resourceManagerApi, project.getContainerId())
+					.waitWithContext();
 
 			/* delete folder */
 			resourceManagerApi.deleteFolder(folder.getContainerId(), true);
