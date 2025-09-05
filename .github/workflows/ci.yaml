@@ -41,10 +41,14 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.ref_name == 'main' }}
     needs: [ci]
+    permissions:
+      contents: write
+      actions: write
     steps:
       - name: Checkout
         uses: actions/checkout@v5
         with:
+          # we need to fetch all existing git tags
           fetch-depth: 0
 
       - name: Create git tags and publish to Maven Central
