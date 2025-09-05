@@ -1,12 +1,15 @@
 plugins {
 	id 'java'
-	id 'maven-publish'
+	id 'signing'
 	id 'idea'
 	id 'eclipse'
 
 	id 'com.diffplug.spotless' version '6.21.0'
-}
 
+	/* We have to use this 3rd party plugin for publishing to MavenCentral because as of AUG-2025 there is no official
+	 * plugin which supports publishing to MavenCentral Portal. */
+	id "com.vanniktech.maven.publish.base" version "0.34.0"
+}
 
 allprojects {
 	apply plugin: 'com.diffplug.spotless'
@@ -63,86 +66,118 @@ allprojects {
 	}
 }
 
+def configureMavenCentralPublishing(Project project) {
+	project.plugins.withId('com.vanniktech.maven.publish.base') {
+		project.mavenPublishing {
+			publishToMavenCentral(true) // publish automatically after upload to Maven Central
+		}
+	}
+}
+
 subprojects {
 	apply plugin: 'java'
-	apply plugin: 'maven-publish'
 	apply plugin: 'idea'
 	apply plugin: 'eclipse'
 
-	group = 'cloud.stackit'
+	group = 'cloud.stackit.sdk'
 
-	afterEvaluate { project ->
-		// only apply to service sub-projects and core
-		if (project.path.startsWith(':services:') || project.name == "core" ) {
-			// override the version of each service with the ones obtained from the VERSION files
-			def versionFile = project.file("VERSION")
-			if (versionFile.exists()) {
-				try {
-					version = versionFile.text.trim()
-				} catch (IOException e) {
-					version = 'SNAPSHOT'
-					logger.error("Could not read VERSION file for project '${project.path}': ${e.message}")
-				}
-			} else {
+	// only apply to service sub-projects and core
+	if (project.path.startsWith(':services:') || project.name == "core" ) {
+		apply plugin: 'signing'
+		apply plugin: 'com.vanniktech.maven.publish.base'
+
+		// override the version of each service with the ones obtained from the VERSION files
+		def versionFile = project.file("VERSION")
+		if (versionFile.exists()) {
+			try {
+				version = versionFile.text.trim()
+			} catch (IOException e) {
 				version = 'SNAPSHOT'
-				logger.warn("VERSION file not found in project '${project.path}'. Skipping version setting.")
+				logger.error("Could not read VERSION file for project '${project.path}': ${e.message}")
 			}
+		} else {
+			version = 'SNAPSHOT'
+			logger.warn("VERSION file not found in project '${project.path}'. Skipping version setting.")
+		}
 
+		java {
+			withSourcesJar()
+			withJavadocJar()
+		}
 
-			publishing {
-				publications {
-					maven(MavenPublication) {
-						artifactId = "stackit-sdk-${project.name}"
-						from components.java
+		// don't fail on missing javadoc strings
+		tasks.withType(Javadoc).configureEach {
+			options.addStringOption('Xdoclint:none', '-quiet')
+		}
 
-						pom {
-							name.set(project.name)
-							description.set("STACKIT Java SDK for the ${project.name} service")
-							url.set("https://github.com/stackitcloud/stackit-sdk-java/tree/main/services/${rootProject.name}")
-							licenses {
-								license {
-									name.set("Apache License, Version 2.0")
-									url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
-								}
+		publishing {
+			publications {
+				mavenJava(MavenPublication) {
+					artifactId = "${project.name}"
+					from components.java
+
+					pom {
+						name.set(project.name)
+						description.set("STACKIT Java SDK for the ${project.name} service")
+						url.set("https://github.com/stackitcloud/${rootProject.name}/tree/main/services/${project.name}")
+						licenses {
+							license {
+								name.set("Apache License, Version 2.0")
+								url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
 							}
-							developers {
-								developer {
-									id.set("stackitcloud") // TODO: not clear which value must be placed here, check this when setting up publishment to Maven Central
-									name.set("STACKIT Developer Tools")
-									email.set("developer-tools@stackit.cloud")
-								}
+						}
+						developers {
+							developer {
+								id.set("stackitcloud")
+								name.set("STACKIT Developer Tools")
+								email.set("developer-tools@stackit.cloud")
 							}
-							scm {
-								connection.set("scm:git:git://github.com/stackitcloud/${rootProject.name}.git")
-								developerConnection.set("scm:git:ssh://github.com/stackitcloud/${rootProject.name}.git")
-								url.set("https://github.com/stackitcloud/${rootProject.name}")
-							}
+						}
+						scm {
+							connection.set("scm:git:git://github.com/stackitcloud/${rootProject.name}.git")
+							developerConnection.set("scm:git:ssh://github.com/stackitcloud/${rootProject.name}.git")
+							url.set("https://github.com/stackitcloud/${rootProject.name}")
 						}
 					}
 				}
-				repositories {
-					mavenLocal()
-				}
+			}
+
+			repositories {
+				mavenLocal()
 			}
 		}
 
-		// only apply to example sub-projects
-		if (project.path.startsWith(':examples:')) {
-			if (!project.hasProperty('mainClassName')) {
-				logger.warn("'mainClassName' property not defined for subproject '${project.path}'. Skipping execution of this task.")
+		signing {
+			required {
+				// signing is only required if the artifacts are to be published to Maven Central
+				gradle.taskGraph.hasTask(":services:${project.name}:publishToMavenCentral") || gradle.taskGraph.hasTask(":${project.name}:publishToMavenCentral")
 			}
 
-			tasks.register('execute', JavaExec) {
-				if (!project.hasProperty('mainClassName')) {
-					doLast {
-						logger.warn("'mainClassName' property not defined for subproject '${project.path}'. Skipping execution of this task.")
-					}
-					enabled = false // Disable the task if no main class is specified
-					return
+			def signingKey = System.getenv("GPG_SIGNING_KEY") ?: findProperty("signingKey")
+			def signingPassword = System.getenv("GPG_SIGNING_PASSWORD") ?: findProperty("signingPassword")
+			useInMemoryPgpKeys(signingKey as String, signingPassword as String)
+			sign publishing.publications.mavenJava
+		}
+
+		configureMavenCentralPublishing(project)
+	}
+
+	// only apply to example sub-projects
+	if (project.path.startsWith(':examples:')) {
+		if (!project.hasProperty('mainClassName')) {
+			logger.warn("'mainClassName' property not defined for subproject '${project.path}'. Skipping execution of this task.")
+		}
+
+		tasks.register('execute', JavaExec) {
+			if (!project.hasProperty('mainClassName')) {
+				doLast {
+					logger.warn("'mainClassName' property not defined for subproject '${project.path}'. Skipping execution of this task.")
 				}
-				mainClass = project.mainClassName
-				classpath = sourceSets.main.runtimeClasspath
+				enabled = false // Disable the task if no main class is specified
+				return
 			}
+			mainClass = project.mainClassName
+			classpath = sourceSets.main.runtimeClasspath
 		}
 	}
 
