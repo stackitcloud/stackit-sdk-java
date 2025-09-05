@@ -9,7 +9,7 @@ set -e
 # in the following format e.g. 0.3.0
 
 # iterate over all services and core by their VERSION files
-for file in $(find . -printf '%P\n' | grep -E "(^services/[^/]+/VERSION$|^core/VERSION$)"); do
+for file in $(find . -print | sed 's|^./||' | grep -E "(^services/[^/]+/VERSION$|^core/VERSION$)"); do
 
     # Extract the current version and build the expected tag
     dirpath=$(dirname "$file")
