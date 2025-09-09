@@ -21,7 +21,7 @@ See below how to use them in your Java project.
 
 ### Maven
 
-Add the dependencies for the services you want to interact with to your project's POM, e.g. `iaas` and `resourcemanager`:
+Add the dependencies for the services you want to interact with to your project's POM, e.g. `iaas` and `resourcemanager` (replace `<SDK_VERSION>` with the latest version of each SDK submdoule): 
 
 ```xml
 <dependency>
@@ -40,7 +40,7 @@ Add the dependencies for the services you want to interact with to your project'
 
 ### Gradle
 
-Add the dependencies to your project's build file:
+Add the dependencies to your project's build file (replace `<SDK_VERSION>` with the latest version of each SDK submdoule):
 
 ```groovy
   repositories {
