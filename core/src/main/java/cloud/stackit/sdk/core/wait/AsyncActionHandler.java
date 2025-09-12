@@ -1,13 +1,14 @@
 package cloud.stackit.sdk.core.wait;
 
 import cloud.stackit.sdk.core.exception.ApiException;
-import cloud.stackit.sdk.core.oapierror.GenericOpenAPIError;
+import cloud.stackit.sdk.core.oapierror.GenericOpenAPIException;
 import java.net.HttpURLConnection;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class AsyncActionHandler<T> {
 	public static final Set<Integer> RetryHttpErrorStatusCodes =
@@ -111,7 +112,7 @@ public class AsyncActionHandler<T> {
 		while (System.currentTimeMillis() - startTime < timeoutMillis) {
 			AsyncActionResult<T> result = checkFn.call();
 			if (result.error != null) { // error present
-				ErrorResult errorResult = handleError(retryTempErrorCounter, result.error);
+				ErrorResult errorResult = handleException(retryTempErrorCounter, result.error);
 				retryTempErrorCounter = errorResult.retryTempErrorCounter;
 				if (retryTempErrorCounter == tempErrRetryLimit) {
 					throw errorResult.getError();
@@ -130,13 +131,13 @@ public class AsyncActionHandler<T> {
 				throw new InterruptedException("Wait operation was interrupted.");
 			}
 		}
-		throw new Exception(TimoutErrorMessage);
+		throw new TimeoutException(TimoutErrorMessage);
 	}
 
-	private ErrorResult handleError(int retryTempErrorCounter, Exception err) {
-		if (err instanceof ApiException) {
-			ApiException apiException = (ApiException) err;
-			GenericOpenAPIError oapiErr = new GenericOpenAPIError(apiException);
+	private ErrorResult handleException(int retryTempErrorCounter, Exception exception) {
+		if (exception instanceof ApiException) {
+			ApiException apiException = (ApiException) exception;
+			GenericOpenAPIException oapiErr = new GenericOpenAPIException(apiException);
 			// Some APIs may return temporary errors and the request should be retried
 			if (!RetryHttpErrorStatusCodes.contains(oapiErr.getStatusCode())) {
 				return new ErrorResult(retryTempErrorCounter, oapiErr);
@@ -151,7 +152,7 @@ public class AsyncActionHandler<T> {
 			retryTempErrorCounter++;
 			// If it's not a GenericOpenAPIError, handle it differently
 			return new ErrorResult(
-					retryTempErrorCounter, new Exception(NonGenericAPIErrorMessage, err));
+					retryTempErrorCounter, new Exception(NonGenericAPIErrorMessage, exception));
 		}
 	}
 

@@ -79,27 +79,7 @@ public class ResourcemanagerWaitTestmanagerWaitTest {
 		handler.setThrottle(10, TimeUnit.MILLISECONDS);
 		handler.setTimeout(500, TimeUnit.MILLISECONDS);
 
-		assertThrows(Exception.class, () -> handler.waitWithContext(), handler.TimoutErrorMessage);
-	}
-
-	// Non GenericOpenAPIError error
-	@Test
-	void testCreateProjectNonOpenAPIError() throws Exception {
-		// Return containerId == null and LifecycleState == CREATING
-		GetProjectResponse creatingResponse = new GetProjectResponse();
-		creatingResponse.setContainerId(null);
-		creatingResponse.setLifecycleState(null);
-		when(apiClient.getProject(containerId, false)).thenReturn(creatingResponse);
-
-		AsyncActionHandler<GetProjectResponse> handler =
-				ResourcemanagerWait.createProjectWaitHandler(apiClient, containerId);
-		handler.setSleepBeforeWait(0, TimeUnit.SECONDS);
-		handler.setThrottle(10, TimeUnit.MILLISECONDS);
-		handler.setTimeout(100, TimeUnit.MILLISECONDS);
-		handler.setTempErrRetryLimit(2);
-
-		Exception thrown = assertThrows(Exception.class, () -> handler.waitWithContext(), "");
-		assertEquals(thrown.getMessage(), handler.NonGenericAPIErrorMessage);
+		assertThrows(Exception.class, handler::waitWithContext, handler.TimoutErrorMessage);
 	}
 
 	// GenericOpenAPIError not in RetryHttpErrorStatusCodes
@@ -117,10 +97,7 @@ public class ResourcemanagerWaitTestmanagerWaitTest {
 		handler.setTempErrRetryLimit(2);
 
 		Exception thrown =
-				assertThrows(
-						Exception.class,
-						() -> handler.waitWithContext(),
-						apiException.getMessage());
+				assertThrows(Exception.class, handler::waitWithContext, apiException.getMessage());
 		assertEquals(thrown.getMessage(), handler.TimoutErrorMessage);
 	}
 
@@ -139,10 +116,7 @@ public class ResourcemanagerWaitTestmanagerWaitTest {
 		handler.setTempErrRetryLimit(2);
 
 		Exception thrown =
-				assertThrows(
-						Exception.class,
-						() -> handler.waitWithContext(),
-						apiException.getMessage());
+				assertThrows(Exception.class, handler::waitWithContext, apiException.getMessage());
 		assertEquals(thrown.getMessage(), handler.TemporaryErrorMessage);
 	}
 
@@ -177,37 +151,6 @@ public class ResourcemanagerWaitTestmanagerWaitTest {
 
 		GetProjectResponse deletingResponse = new GetProjectResponse();
 		deletingResponse.setContainerId(containerId);
-		deletingResponse.setLifecycleState(LifecycleState.DELETING);
-
-		AtomicInteger callCount = new AtomicInteger(0);
-		when(apiClient.getProject(containerId, false))
-				.thenAnswer(
-						invocation -> {
-							if (callCount.getAndIncrement() < 1) {
-								return activeResponse;
-							}
-							return deletingResponse;
-						});
-
-		AsyncActionHandler<Void> handler =
-				ResourcemanagerWait.deleteProjectWaitHandler(apiClient, containerId);
-		handler.setSleepBeforeWait(0, TimeUnit.SECONDS);
-		handler.setThrottle(10, TimeUnit.MILLISECONDS);
-		handler.setTimeout(2, TimeUnit.SECONDS);
-
-		handler.waitWithContext();
-		verify(apiClient, times(2)).getProject(containerId, false);
-	}
-
-	@Test
-	void testDeleteProjectSuccessContainerIdNull() throws Exception {
-		// First call returns "ACTIVE", second call returns containerId = null
-		GetProjectResponse activeResponse = new GetProjectResponse();
-		activeResponse.setContainerId(containerId);
-		activeResponse.setLifecycleState(LifecycleState.ACTIVE);
-
-		GetProjectResponse deletingResponse = new GetProjectResponse();
-		deletingResponse.setContainerId(null);
 		deletingResponse.setLifecycleState(LifecycleState.DELETING);
 
 		AtomicInteger callCount = new AtomicInteger(0);

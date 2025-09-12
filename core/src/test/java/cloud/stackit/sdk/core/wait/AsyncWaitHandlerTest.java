@@ -17,7 +17,7 @@ import org.mockito.MockitoAnnotations;
 public class AsyncWaitHandlerTest {
 
 	// Helper class for testing
-	public class ApiHelper {
+	public static class ApiHelper {
 
 		private final String response = "APIResponse";
 
@@ -61,7 +61,7 @@ public class AsyncWaitHandlerTest {
 		handler.setTimeout(40, TimeUnit.MILLISECONDS);
 		handler.setTempErrRetryLimit(2);
 
-		Exception thrown = assertThrows(Exception.class, () -> handler.waitWithContext(), "");
+		Exception thrown = assertThrows(Exception.class, handler::waitWithContext, "");
 		assertEquals(thrown.getMessage(), handler.NonGenericAPIErrorMessage);
 	}
 
@@ -77,7 +77,7 @@ public class AsyncWaitHandlerTest {
 		handler.setTimeout(40, TimeUnit.MILLISECONDS);
 		handler.setTempErrRetryLimit(2);
 
-		Exception thrown = assertThrows(Exception.class, () -> handler.waitWithContext(), "");
+		Exception thrown = assertThrows(Exception.class, handler::waitWithContext, "");
 		assertEquals(thrown.getMessage(), handler.TimoutErrorMessage);
 	}
 
@@ -95,10 +95,7 @@ public class AsyncWaitHandlerTest {
 		handler.setTempErrRetryLimit(2);
 
 		Exception thrown =
-				assertThrows(
-						Exception.class,
-						() -> handler.waitWithContext(),
-						apiException.getMessage());
+				assertThrows(Exception.class, handler::waitWithContext, apiException.getMessage());
 		assertEquals(thrown.getMessage(), handler.TemporaryErrorMessage);
 	}
 
@@ -116,10 +113,7 @@ public class AsyncWaitHandlerTest {
 		handler.setTempErrRetryLimit(2);
 
 		Exception thrown =
-				assertThrows(
-						Exception.class,
-						() -> handler.waitWithContext(),
-						apiException.getMessage());
+				assertThrows(Exception.class, handler::waitWithContext, apiException.getMessage());
 		assertEquals(thrown.getMessage(), handler.TemporaryErrorMessage);
 	}
 }

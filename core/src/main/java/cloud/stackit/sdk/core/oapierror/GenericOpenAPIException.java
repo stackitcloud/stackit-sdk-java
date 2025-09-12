@@ -4,27 +4,27 @@ import cloud.stackit.sdk.core.exception.ApiException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
-public class GenericOpenAPIError extends ApiException {
+public class GenericOpenAPIException extends ApiException {
 
 	// When a response has a bad status, this limits the number of characters that are shown from
 	// the response Body
 	public static int ApiErrorMaxCharacterLimit = 500;
 
-	private int statusCode;
+	private final int statusCode;
 	private byte[] body;
-	private String errorMessage;
+	private final String errorMessage;
 	private Object model;
 
-	public GenericOpenAPIError(ApiException e) {
+	public GenericOpenAPIException(ApiException e) {
 		this.statusCode = e.getCode();
 		this.errorMessage = e.getMessage();
 	}
 
-	public GenericOpenAPIError(int statusCode, String errorMessage) {
+	public GenericOpenAPIException(int statusCode, String errorMessage) {
 		this(statusCode, errorMessage, null, new HashMap<>());
 	}
 
-	public GenericOpenAPIError(int statusCode, String errorMessage, byte[] body, Object model) {
+	public GenericOpenAPIException(int statusCode, String errorMessage, byte[] body, Object model) {
 		this.statusCode = statusCode;
 		this.errorMessage = errorMessage;
 		this.body = body;
