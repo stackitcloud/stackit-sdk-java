@@ -1,6 +1,6 @@
 package cloud.stackit.sdk.core.wait;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
@@ -61,8 +61,9 @@ public class AsyncWaitHandlerTest {
 		handler.setTimeout(40, TimeUnit.MILLISECONDS);
 		handler.setTempErrRetryLimit(2);
 
-		Exception thrown = assertThrows(Exception.class, handler::waitWithContext, "");
-		assertEquals(thrown.getMessage(), handler.NonGenericAPIErrorMessage);
+		Exception thrown =
+				assertThrows(Exception.class, () -> handler.waitWithContextAsync().get(), "");
+		assertTrue(thrown.getMessage().contains(handler.NonGenericAPIErrorMessage));
 	}
 
 	// GenericOpenAPIError(ApiException) not in RetryHttpErrorStatusCodes
@@ -77,8 +78,9 @@ public class AsyncWaitHandlerTest {
 		handler.setTimeout(40, TimeUnit.MILLISECONDS);
 		handler.setTempErrRetryLimit(2);
 
-		Exception thrown = assertThrows(Exception.class, handler::waitWithContext, "");
-		assertEquals(thrown.getMessage(), handler.TimoutErrorMessage);
+		Exception thrown =
+				assertThrows(Exception.class, () -> handler.waitWithContextAsync().get(), "");
+		assertTrue(thrown.getMessage().contains("Timeout occurred"));
 	}
 
 	// GenericOpenAPIError(ApiException) in RetryHttpErrorStatusCodes -> max retries reached
@@ -95,8 +97,11 @@ public class AsyncWaitHandlerTest {
 		handler.setTempErrRetryLimit(2);
 
 		Exception thrown =
-				assertThrows(Exception.class, handler::waitWithContext, apiException.getMessage());
-		assertEquals(thrown.getMessage(), handler.TemporaryErrorMessage);
+				assertThrows(
+						Exception.class,
+						() -> handler.waitWithContextAsync().get(),
+						apiException.getMessage());
+		assertTrue(thrown.getMessage().contains(handler.TemporaryErrorMessage));
 	}
 
 	// GenericOpenAPIError(ApiException) in RetryHttpErrorStatusCodes -> max retries reached
@@ -113,7 +118,10 @@ public class AsyncWaitHandlerTest {
 		handler.setTempErrRetryLimit(2);
 
 		Exception thrown =
-				assertThrows(Exception.class, handler::waitWithContext, apiException.getMessage());
-		assertEquals(thrown.getMessage(), handler.TemporaryErrorMessage);
+				assertThrows(
+						Exception.class,
+						() -> handler.waitWithContextAsync().get(),
+						apiException.getMessage());
+		assertTrue(thrown.getMessage().contains(handler.TemporaryErrorMessage));
 	}
 }

@@ -1,8 +1,8 @@
 package cloud.stackit.sdk.resourcemanager;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -59,7 +59,7 @@ public class ResourcemanagerWaitTestmanagerWaitTest {
 		handler.setThrottle(10, TimeUnit.MILLISECONDS);
 		handler.setTimeout(2, TimeUnit.SECONDS);
 
-		GetProjectResponse result = handler.waitWithContext();
+		GetProjectResponse result = handler.waitWithContextAsync().get();
 
 		assertNotNull(result);
 		verify(apiClient, times(2)).getProject(containerId, false);
@@ -79,7 +79,9 @@ public class ResourcemanagerWaitTestmanagerWaitTest {
 		handler.setThrottle(10, TimeUnit.MILLISECONDS);
 		handler.setTimeout(500, TimeUnit.MILLISECONDS);
 
-		assertThrows(Exception.class, handler::waitWithContext, handler.TimoutErrorMessage);
+		Exception thrown =
+				assertThrows(Exception.class, () -> handler.waitWithContextAsync().get(), "");
+		assertTrue(thrown.getMessage().contains("Timeout occurred"));
 	}
 
 	// GenericOpenAPIError not in RetryHttpErrorStatusCodes
@@ -97,8 +99,11 @@ public class ResourcemanagerWaitTestmanagerWaitTest {
 		handler.setTempErrRetryLimit(2);
 
 		Exception thrown =
-				assertThrows(Exception.class, handler::waitWithContext, apiException.getMessage());
-		assertEquals(thrown.getMessage(), handler.TimoutErrorMessage);
+				assertThrows(
+						Exception.class,
+						() -> handler.waitWithContextAsync().get(),
+						apiException.getMessage());
+		assertTrue(thrown.getMessage().contains("Timeout occurred"));
 	}
 
 	// GenericOpenAPIError in RetryHttpErrorStatusCodes -> max retries reached
@@ -116,8 +121,11 @@ public class ResourcemanagerWaitTestmanagerWaitTest {
 		handler.setTempErrRetryLimit(2);
 
 		Exception thrown =
-				assertThrows(Exception.class, handler::waitWithContext, apiException.getMessage());
-		assertEquals(thrown.getMessage(), handler.TemporaryErrorMessage);
+				assertThrows(
+						Exception.class,
+						() -> handler.waitWithContextAsync().get(),
+						apiException.getMessage());
+		assertTrue(thrown.getMessage().contains(handler.TemporaryErrorMessage));
 	}
 
 	// GenericOpenAPIError in RetryHttpErrorStatusCodes -> max retries reached
@@ -137,9 +145,9 @@ public class ResourcemanagerWaitTestmanagerWaitTest {
 		Exception thrown =
 				assertThrows(
 						Exception.class,
-						() -> handler.waitWithContext(),
+						() -> handler.waitWithContextAsync().get(),
 						apiException.getMessage());
-		assertEquals(thrown.getMessage(), handler.TemporaryErrorMessage);
+		assertTrue(thrown.getMessage().contains(handler.TemporaryErrorMessage));
 	}
 
 	@Test
@@ -169,7 +177,7 @@ public class ResourcemanagerWaitTestmanagerWaitTest {
 		handler.setThrottle(10, TimeUnit.MILLISECONDS);
 		handler.setTimeout(2, TimeUnit.SECONDS);
 
-		handler.waitWithContext();
+		handler.waitWithContextAsync().get();
 		verify(apiClient, times(2)).getProject(containerId, false);
 	}
 
@@ -184,7 +192,7 @@ public class ResourcemanagerWaitTestmanagerWaitTest {
 		handler.setSleepBeforeWait(0, TimeUnit.SECONDS);
 		handler.setThrottle(10, TimeUnit.MILLISECONDS);
 		handler.setTimeout(2, TimeUnit.SECONDS);
-		handler.waitWithContext();
+		handler.waitWithContextAsync().get();
 		// Only one invocation since the project is gone (HTTP_NOT_FOUND)
 		verify(apiClient, times(1)).getProject(containerId, false);
 	}
@@ -200,7 +208,7 @@ public class ResourcemanagerWaitTestmanagerWaitTest {
 		handler.setSleepBeforeWait(0, TimeUnit.SECONDS);
 		handler.setThrottle(10, TimeUnit.MILLISECONDS);
 		handler.setTimeout(2, TimeUnit.SECONDS);
-		handler.waitWithContext();
+		handler.waitWithContextAsync().get();
 		// Only one invocation since the project is gone (HTTP_FORBIDDEN)
 		verify(apiClient, times(1)).getProject(containerId, false);
 	}
@@ -220,9 +228,9 @@ public class ResourcemanagerWaitTestmanagerWaitTest {
 		Exception thrown =
 				assertThrows(
 						Exception.class,
-						() -> handler.waitWithContext(),
+						() -> handler.waitWithContextAsync().get(),
 						apiException.getMessage());
-		assertEquals(thrown.getMessage(), handler.TimoutErrorMessage);
+		assertTrue(thrown.getMessage().contains("Timeout occurred"));
 	}
 
 	@Test
@@ -241,8 +249,8 @@ public class ResourcemanagerWaitTestmanagerWaitTest {
 		Exception thrown =
 				assertThrows(
 						Exception.class,
-						() -> handler.waitWithContext(),
+						() -> handler.waitWithContextAsync().get(),
 						apiException.getMessage());
-		assertEquals(thrown.getMessage(), handler.TemporaryErrorMessage);
+		assertTrue(thrown.getMessage().contains(handler.TemporaryErrorMessage));
 	}
 }

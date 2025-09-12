@@ -70,7 +70,8 @@ class ResourcemanagerExample {
 
 			ResourcemanagerWait.createProjectWaitHandler(
 							resourceManagerApi, project.getContainerId())
-					.waitWithContext();
+					.waitWithContextAsync()
+					.get();
 
 			/* list folders */
 			ListFoldersResponse responseListFolders =
@@ -97,7 +98,8 @@ class ResourcemanagerExample {
 
 			ResourcemanagerWait.createProjectWaitHandler(
 							resourceManagerApi, project.getContainerId())
-					.waitWithContext();
+					.waitWithContextAsync()
+					.get();
 
 			/* get organization details */
 			OrganizationResponse organizationResponse =
@@ -114,7 +116,8 @@ class ResourcemanagerExample {
 
 			ResourcemanagerWait.deleteProjectWaitHandler(
 							resourceManagerApi, project.getContainerId())
-					.waitWithContext();
+					.waitWithContextAsync()
+					.get();
 
 			/* delete folder */
 			resourceManagerApi.deleteFolder(folder.getContainerId(), true);

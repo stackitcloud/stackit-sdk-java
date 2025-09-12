@@ -7,8 +7,13 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class AsyncActionHandler<T> {
 	public static final Set<Integer> RetryHttpErrorStatusCodes =
@@ -19,7 +24,7 @@ public class AsyncActionHandler<T> {
 
 	public final String TemporaryErrorMessage =
 			"Temporary error was found and the retry limit was reached.";
-	public final String TimoutErrorMessage = "WaitWithContext() has timed out.";
+	// public final String TimoutErrorMessage = "WaitWithContext() has timed out.";
 	public final String NonGenericAPIErrorMessage = "Found non-GenericOpenAPIError.";
 
 	private final Callable<AsyncActionResult<T>> checkFn;
@@ -28,6 +33,10 @@ public class AsyncActionHandler<T> {
 	private long throttleMillis;
 	private long timeoutMillis;
 	private int tempErrRetryLimit;
+
+	private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+	// private final WaitHandler waitHandler;
 
 	public AsyncActionHandler(Callable<AsyncActionResult<T>> checkFn) {
 		this.checkFn = checkFn;
@@ -86,52 +95,61 @@ public class AsyncActionHandler<T> {
 	}
 
 	/**
-	 * WaitWithContext starts the wait until there's an error or wait is done
+	 * WaitWithContextAsync starts the wait until there's an error or wait is done
 	 *
 	 * @return
-	 * @throws Exception
 	 */
-	public T waitWithContext() throws Exception {
+	public CompletableFuture<T> waitWithContextAsync() {
 		if (throttleMillis <= 0) {
 			throw new IllegalArgumentException("Throttle can't be 0 or less");
 		}
 
+		CompletableFuture<T> future = new CompletableFuture<>();
 		long startTime = System.currentTimeMillis();
+		AtomicInteger retryTempErrorCounter = new AtomicInteger(0);
 
-		// Wait some seconds for the API to process the request
-		if (sleepBeforeWaitMillis > 0) {
-			try {
-				Thread.sleep(sleepBeforeWaitMillis);
-			} catch (InterruptedException e) {
-				Thread.currentThread().interrupt();
-				throw new InterruptedException("Wait operation was interrupted before starting.");
-			}
-		}
+		// This runnable is called periodically.
+		Runnable checkTask =
+				new Runnable() {
+					@Override
+					public void run() {
+						if (System.currentTimeMillis() - startTime >= timeoutMillis) {
+							future.completeExceptionally(new TimeoutException("Timeout occurred."));
+						}
 
-		int retryTempErrorCounter = 0;
-		while (System.currentTimeMillis() - startTime < timeoutMillis) {
-			AsyncActionResult<T> result = checkFn.call();
-			if (result.error != null) { // error present
-				ErrorResult errorResult = handleException(retryTempErrorCounter, result.error);
-				retryTempErrorCounter = errorResult.retryTempErrorCounter;
-				if (retryTempErrorCounter == tempErrRetryLimit) {
-					throw errorResult.getError();
-				}
-				result = null;
-			}
+						try {
+							AsyncActionResult<T> result = checkFn.call();
+							if (result.error != null) {
+								ErrorResult errorResult =
+										handleException(retryTempErrorCounter.get(), result.error);
+								retryTempErrorCounter.set(errorResult.retryTempErrorCounter);
 
-			if (result != null && result.isFinished()) {
-				return result.getResponse();
-			}
+								if (retryTempErrorCounter.get() == tempErrRetryLimit) {
+									future.completeExceptionally(errorResult.getError());
+								}
+							}
 
-			try {
-				Thread.sleep(throttleMillis);
-			} catch (InterruptedException e) {
-				Thread.currentThread().interrupt();
-				throw new InterruptedException("Wait operation was interrupted.");
-			}
-		}
-		throw new TimeoutException(TimoutErrorMessage);
+							if (result != null && result.isFinished()) {
+								future.complete(result.getResponse());
+							}
+						} catch (Exception e) {
+							future.completeExceptionally(e);
+						}
+					}
+				};
+
+		// start the periodic execution
+		ScheduledFuture<?> scheduledFuture =
+				scheduler.scheduleAtFixedRate(
+						checkTask, sleepBeforeWaitMillis, throttleMillis, TimeUnit.MILLISECONDS);
+
+		// stop task when future is completed
+		future.whenComplete(
+				(result, error) -> {
+					scheduledFuture.cancel(true);
+				});
+
+		return future;
 	}
 
 	private ErrorResult handleException(int retryTempErrorCounter, Exception exception) {
