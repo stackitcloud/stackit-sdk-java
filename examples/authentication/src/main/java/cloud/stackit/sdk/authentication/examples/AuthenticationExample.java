@@ -13,9 +13,9 @@ class AuthenticationExample {
 		///////////////////////////////////////////////////////
 		// Option 1: setting the paths to service account key (and private key) as configuration
 		///////////////////////////////////////////////////////
-		String SERVICE_ACCOUNT_KEY_PATH = "/path/to/sa_key.json";
-		String PRIVATE_KEY_PATH = "/path/to/private_key.pem";
-		String SERVICE_ACCOUNT_MAIL = "name-1234@sa.stackit.cloud";
+		final String SERVICE_ACCOUNT_KEY_PATH = "/path/to/sa_key.json";
+		final String PRIVATE_KEY_PATH = "/path/to/private_key.pem";
+		final String SERVICE_ACCOUNT_MAIL = "name-1234@sa.stackit.cloud";
 
 		try {
 			ResourceManagerApi api =
@@ -64,16 +64,16 @@ class AuthenticationExample {
 			throw new RuntimeException(e);
 		}
 
-		String SERVICE_ACCOUNT_KEY = serviceAccountKeyContent.toString();
-		String PRIVATE_KEY = privateKeyContent.toString();
+		String serviceAccountKey = serviceAccountKeyContent.toString();
+		String privateKey = privateKeyContent.toString();
 
 		try {
 			ResourceManagerApi api =
 					new ResourceManagerApi(
 							new CoreConfiguration()
-									.serviceAccountKey(SERVICE_ACCOUNT_KEY)
+									.serviceAccountKey(serviceAccountKey)
 									// Optional: if private key not included in service account key
-									.privateKey(PRIVATE_KEY));
+									.privateKey(privateKey));
 
 			/* list all organizations */
 			ListOrganizationsResponse response =
