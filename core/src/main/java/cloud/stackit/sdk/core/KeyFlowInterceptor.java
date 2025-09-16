@@ -8,14 +8,26 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
 
+@Deprecated
+/*
+ * @deprecated use KeyFlowAuthenticator instead. Will be removed in April 2026.
+ * */
 public class KeyFlowInterceptor implements Interceptor {
 	private final KeyFlowAuthenticator authenticator;
 
+	@Deprecated
+	/*
+	 * @deprecated use KeyFlowAuthenticator instead. Will be removed in April 2026.
+	 * */
 	public KeyFlowInterceptor(KeyFlowAuthenticator authenticator) {
 		this.authenticator = authenticator;
 	}
 
 	@NotNull @Override
+	@Deprecated
+	/*
+	 * @deprecated use KeyFlowAuthenticator instead. Will be removed in April 2026.
+	 * */
 	public Response intercept(Chain chain) throws IOException {
 
 		Request originalRequest = chain.request();

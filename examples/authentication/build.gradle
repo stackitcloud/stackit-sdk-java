@@ -1,5 +1,6 @@
 dependencies {
 	implementation project (':services:resourcemanager')
+	implementation 'com.squareup.okhttp3:okhttp:4.12.0'
 }
 
 ext.mainClassName = 'cloud.stackit.sdk.authentication.examples.AuthenticationExample'
