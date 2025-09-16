@@ -1,3 +1,5 @@
 dependencies {
 	implementation project (':services:resourcemanager')
 }
+
+ext.mainClassName = 'cloud.stackit.sdk.authentication.examples.AuthenticationExample'
