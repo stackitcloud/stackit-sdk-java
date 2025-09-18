@@ -108,6 +108,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import okhttp3.OkHttpClient;
 
 // Package-private access to enforce service-specific API usage (DefaultApi => <ServiceName>Api)
 class DefaultApi {
@@ -115,15 +116,51 @@ class DefaultApi {
 	private int localHostIndex;
 	private String localCustomBaseUrl;
 
+	/**
+	 * Basic constructor for DefaultApi
+	 *
+	 * <p>For production use consider using the constructor with the OkHttpClient parameter.
+	 *
+	 * @throws IOException
+	 */
 	public DefaultApi() throws IOException {
-		this(new CoreConfiguration());
+		this(null, new CoreConfiguration());
 	}
 
+	/**
+	 * Basic Constructor for DefaultApi
+	 *
+	 * <p>For production use consider using the constructor with the OkHttpClient parameter.
+	 *
+	 * @param config your STACKIT SDK CoreConfiguration
+	 * @throws IOException
+	 */
 	public DefaultApi(CoreConfiguration config) throws IOException {
+		this(null, config);
+	}
+
+	/**
+	 * Constructor for DefaultApi
+	 *
+	 * @param httpClient OkHttpClient object
+	 * @throws IOException
+	 */
+	public DefaultApi(OkHttpClient httpClient) throws IOException {
+		this(httpClient, new CoreConfiguration());
+	}
+
+	/**
+	 * Constructor for DefaultApi
+	 *
+	 * @param httpClient OkHttpClient object
+	 * @param config your STACKIT SDK CoreConfiguration
+	 * @throws IOException
+	 */
+	public DefaultApi(OkHttpClient httpClient, CoreConfiguration config) throws IOException {
 		if (config.getCustomEndpoint() != null && !config.getCustomEndpoint().trim().isEmpty()) {
 			localCustomBaseUrl = config.getCustomEndpoint();
 		}
-		this.localVarApiClient = new ApiClient(config);
+		this.localVarApiClient = new ApiClient(httpClient, config);
 	}
 
 	public ApiClient getApiClient() {

@@ -21,65 +21,71 @@ import javax.swing.filechooser.FileSystemView;
 import okhttp3.Interceptor;
 
 public class SetupAuth {
-	private final EnvironmentVariables env;
-	private Interceptor authHandler;
-	private final CoreConfiguration cfg;
-	private final String defaultCredentialsFilePath =
-			FileSystemView.getFileSystemView().getHomeDirectory()
-					+ File.separator
-					+ ".stackit"
-					+ File.separator
-					+ "credentials.json";
+	/*
+	 * @deprecated Will be removed in April 2026.
+	 */
+	@Deprecated private CoreConfiguration cfg;
+
+	/*
+	 * @deprecated Will be removed in April 2026.
+	 */
+	@Deprecated private Interceptor authHandler;
 
 	/**
 	 * Set up the KeyFlow Authentication and can be integrated in an OkHttp client, by adding
 	 * `SetupAuth().getAuthHandler()` as interceptor. This relies on the configuration methods via
 	 * ENVs or the credentials file in `$HOME/.stackit/credentials.json`
 	 *
-	 * @throws CredentialsInFileNotFoundException when no configuration is set or can be found
+	 * @deprecated Use static methods of SetupAuth instead or just use the KeyFlowAuthenticator and
+	 *     let it handle the rest. Will be removed in April 2026.
 	 */
-	public SetupAuth() throws CredentialsInFileNotFoundException {
-		this(new CoreConfiguration(), new EnvironmentVariables());
-	}
+	@Deprecated
+	// TODO: constructor of SetupAuth should be private after deprecated constructors/methods are
+	// removed (only static methods should remain)
+	public SetupAuth() {}
 
 	/**
 	 * Set up the KeyFlow Authentication and can be integrated in an OkHttp client, by adding
 	 * `SetupAuth().getAuthHandler()` as interceptor.
 	 *
+	 * @deprecated Use static methods of SetupAuth instead or just use the KeyFlowAuthenticator and
+	 *     let it handle the rest. Will be removed in April 2026.
 	 * @param cfg Configuration which describes, which service account and token endpoint should be
 	 *     used
-	 * @throws IOException when a file can be found
-	 * @throws CredentialsInFileNotFoundException when no credentials are set or can be found
 	 */
-	public SetupAuth(CoreConfiguration cfg) throws IOException, CredentialsInFileNotFoundException {
-		this(cfg, new EnvironmentVariables());
+	@Deprecated
+	// TODO: constructor of SetupAuth should be private after deprecated constructors/methods are
+	// removed (only static methods should remain)
+	public SetupAuth(CoreConfiguration cfg) {
+		this.cfg = cfg;
 	}
 
-	/**
-	 * Set up the KeyFlow Authentication and can be integrated in an OkHttp client, by adding
-	 * `SetupAuth().getAuthHandler()` as interceptor.
-	 *
-	 * @param cfg Configuration which describes, which service account and token endpoint should be
-	 *     used
-	 * @throws CredentialsInFileNotFoundException when no credentials are set or can be found
+	/*
+	 * @deprecated Use static methods of SetupAuth instead or just use the KeyFlowAuthenticator and let it handle the rest. Will be removed in April 2026.
 	 */
-	protected SetupAuth(CoreConfiguration cfg, EnvironmentVariables environmentVariables)
-			throws CredentialsInFileNotFoundException {
-
-		this.cfg = cfg != null ? cfg : new CoreConfiguration();
-		this.env = environmentVariables != null ? environmentVariables : new EnvironmentVariables();
-	}
-
+	@Deprecated
 	public void init() throws IOException {
 		ServiceAccountKey saKey = setupKeyFlow(cfg);
 		authHandler = new KeyFlowInterceptor(new KeyFlowAuthenticator(cfg, saKey));
 	}
 
+	/*
+	 * @deprecated Use static methods of SetupAuth instead or just use the KeyFlowAuthenticator and let it handle the rest. Will be removed in April 2026.
+	 */
+	@Deprecated
 	public Interceptor getAuthHandler() {
 		if (authHandler == null) {
 			throw new RuntimeException("init() has to be called first");
 		}
 		return authHandler;
+	}
+
+	private static String getDefaultCredentialsFilePath() {
+		return FileSystemView.getFileSystemView().getHomeDirectory()
+				+ File.separator
+				+ ".stackit"
+				+ File.separator
+				+ "credentials.json";
 	}
 
 	/**
@@ -114,12 +120,17 @@ public class SetupAuth {
 	 *     can be found
 	 * @throws IOException thrown when a file can not be found
 	 */
-	protected ServiceAccountKey setupKeyFlow(CoreConfiguration cfg)
+	public static ServiceAccountKey setupKeyFlow(CoreConfiguration cfg)
+			throws CredentialsInFileNotFoundException, IOException {
+		return setupKeyFlow(cfg, new EnvironmentVariables());
+	}
+
+	protected static ServiceAccountKey setupKeyFlow(CoreConfiguration cfg, EnvironmentVariables env)
 			throws CredentialsInFileNotFoundException, IOException {
 		// Explicit config in code
 		if (Utils.isStringSet(cfg.getServiceAccountKey())) {
 			ServiceAccountKey saKey = ServiceAccountKey.loadFromJson(cfg.getServiceAccountKey());
-			loadPrivateKey(cfg, saKey);
+			loadPrivateKey(cfg, env, saKey);
 			return saKey;
 		}
 
@@ -129,7 +140,7 @@ public class SetupAuth {
 							Files.readAllBytes(Paths.get(cfg.getServiceAccountKeyPath())),
 							StandardCharsets.UTF_8);
 			ServiceAccountKey saKey = ServiceAccountKey.loadFromJson(fileContent);
-			loadPrivateKey(cfg, saKey);
+			loadPrivateKey(cfg, env, saKey);
 			return saKey;
 		}
 
@@ -137,7 +148,7 @@ public class SetupAuth {
 		if (Utils.isStringSet(env.getStackitServiceAccountKey())) {
 			ServiceAccountKey saKey =
 					ServiceAccountKey.loadFromJson(env.getStackitServiceAccountKey().trim());
-			loadPrivateKey(cfg, saKey);
+			loadPrivateKey(cfg, env, saKey);
 			return saKey;
 		}
 
@@ -147,7 +158,7 @@ public class SetupAuth {
 							Files.readAllBytes(Paths.get(env.getStackitServiceAccountKeyPath())),
 							StandardCharsets.UTF_8);
 			ServiceAccountKey saKey = ServiceAccountKey.loadFromJson(fileContent);
-			loadPrivateKey(cfg, saKey);
+			loadPrivateKey(cfg, env, saKey);
 			return saKey;
 		}
 
@@ -155,7 +166,7 @@ public class SetupAuth {
 		String credentialsFilePath =
 				Utils.isStringSet(env.getStackitCredentialsPath())
 						? env.getStackitCredentialsPath()
-						: defaultCredentialsFilePath;
+						: getDefaultCredentialsFilePath();
 
 		String saKeyJson =
 				readValueFromCredentialsFile(
@@ -164,15 +175,16 @@ public class SetupAuth {
 						EnvironmentVariables.ENV_STACKIT_SERVICE_ACCOUNT_KEY_PATH);
 
 		ServiceAccountKey saKey = ServiceAccountKey.loadFromJson(saKeyJson);
-		loadPrivateKey(cfg, saKey);
+		loadPrivateKey(cfg, env, saKey);
 		return saKey;
 	}
 
-	protected void loadPrivateKey(CoreConfiguration cfg, ServiceAccountKey saKey)
+	protected static void loadPrivateKey(
+			CoreConfiguration cfg, EnvironmentVariables env, ServiceAccountKey saKey)
 			throws PrivateKeyNotFoundException {
 		if (!saKey.getCredentials().isPrivateKeySet()) {
 			try {
-				String privateKey = getPrivateKey(cfg);
+				String privateKey = getPrivateKey(cfg, env);
 				saKey.getCredentials().setPrivateKey(privateKey);
 			} catch (Exception e) {
 				throw new PrivateKeyNotFoundException("could not find private key", e);
@@ -209,7 +221,7 @@ public class SetupAuth {
 	 * @throws IOException throws if the provided path can not be found or the file within the
 	 *     pathKey can not be found
 	 */
-	private String getPrivateKey(CoreConfiguration cfg)
+	private static String getPrivateKey(CoreConfiguration cfg, EnvironmentVariables env)
 			throws CredentialsInFileNotFoundException, IOException {
 		// Explicit code config
 		// Get private key
@@ -246,7 +258,7 @@ public class SetupAuth {
 		String credentialsFilePath =
 				Utils.isStringSet(env.getStackitCredentialsPath())
 						? env.getStackitCredentialsPath()
-						: defaultCredentialsFilePath;
+						: getDefaultCredentialsFilePath();
 
 		return readValueFromCredentialsFile(
 				credentialsFilePath,
@@ -266,7 +278,8 @@ public class SetupAuth {
 	 * @throws IOException throws if the provided path can not be found or the file within the
 	 *     pathKey can not be found
 	 */
-	protected String readValueFromCredentialsFile(String path, String valueKey, String pathKey)
+	protected static String readValueFromCredentialsFile(
+			String path, String valueKey, String pathKey)
 			throws IOException, CredentialsInFileNotFoundException {
 		// Read credentials file
 		String fileContent =

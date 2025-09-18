@@ -12,53 +12,56 @@
 
 package cloud.stackit.sdk.resourcemanager.api;
 
+import cloud.stackit.sdk.core.KeyFlowAuthenticator;
+import cloud.stackit.sdk.core.auth.SetupAuth;
 import cloud.stackit.sdk.core.config.CoreConfiguration;
+import cloud.stackit.sdk.core.utils.TestUtils;
 import java.io.IOException;
+import okhttp3.Authenticator;
 import okhttp3.OkHttpClient;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class ResourceManagerApi extends DefaultApi {
-	/**
-	 * Basic constructor for ResourceManagerApi
-	 *
-	 * <p>For production use consider using the constructor with the OkHttpClient parameter.
-	 *
-	 * @throws IOException
-	 */
-	public ResourceManagerApi() throws IOException {
-		super();
+/** API tests for ResourceManagerApi */
+public class ResourceManagerApiTest {
+	@Test
+	public void TestCustomHttpClient() throws IOException {
+		// before
+		CoreConfiguration conf =
+				new CoreConfiguration().serviceAccountKey(TestUtils.MOCK_SERVICE_ACCOUNT_KEY);
+
+		// when
+		OkHttpClient httpClient = new OkHttpClient();
+		ResourceManagerApi api = new ResourceManagerApi(httpClient);
+
+		// then
+		Assertions.assertEquals(httpClient, api.getApiClient().getHttpClient());
+		// make sure the http client object is exactly the same object
+		Assertions.assertSame(httpClient, api.getApiClient().getHttpClient());
 	}
 
-	/**
-	 * Basic Constructor for ResourceManagerApi
-	 *
-	 * <p>For production use consider using the constructor with the OkHttpClient parameter.
-	 *
-	 * @param config your STACKIT SDK CoreConfiguration
-	 * @throws IOException
-	 */
-	public ResourceManagerApi(CoreConfiguration configuration) throws IOException {
-		super(configuration);
-	}
+	@Test
+	public void TestNoCustomHttpClient() throws IOException {
+		// before
+		CoreConfiguration conf =
+				new CoreConfiguration().serviceAccountKey(TestUtils.MOCK_SERVICE_ACCOUNT_KEY);
 
-	/**
-	 * Constructor for ResourceManagerApi
-	 *
-	 * @param httpClient OkHttpClient object
-	 * @throws IOException
-	 */
-	public ResourceManagerApi(OkHttpClient httpClient) throws IOException {
-		super(httpClient);
-	}
+		// when
+		ResourceManagerApi api = new ResourceManagerApi(conf);
 
-	/**
-	 * Constructor for ResourceManagerApi
-	 *
-	 * @param httpClient OkHttpClient object
-	 * @param configuraction your STACKIT SDK CoreConfiguration
-	 * @throws IOException
-	 */
-	public ResourceManagerApi(OkHttpClient httpClient, CoreConfiguration configuration)
-			throws IOException {
-		super(httpClient, configuration);
+		// then
+		/*
+		 * verify a fresh OkHttpClient got created which will have the auth header set
+		 * by the {@link cloud.stackit.sdk.core.KeyFlowAuthenticator}
+		 */
+		OkHttpClient httpClient = new OkHttpClient();
+		Authenticator authenticator =
+				new KeyFlowAuthenticator(httpClient, conf, SetupAuth.setupKeyFlow(conf));
+		httpClient = httpClient.newBuilder().authenticator(authenticator).build();
+
+		Assertions.assertNotNull(api.getApiClient().getHttpClient());
+		Assertions.assertEquals(
+				httpClient.authenticator().getClass(),
+				api.getApiClient().getHttpClient().authenticator().getClass());
 	}
 }

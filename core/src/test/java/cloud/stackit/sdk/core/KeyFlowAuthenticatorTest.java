@@ -17,6 +17,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.junit.jupiter.api.AfterEach;
@@ -26,7 +27,8 @@ import org.junit.jupiter.api.Test;
 class KeyFlowAuthenticatorTest {
 	private static MockWebServer mockWebServer;
 	private ServiceAccountKey defaultSaKey;
-	private final String privateKey =
+	private OkHttpClient httpClient;
+	private static final String PRIVATE_KEY =
 			"-----BEGIN PRIVATE KEY-----\n"
 					+ "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC0jVPq7ACbkwW6\n"
 					+ "ojf6akoAlqkSLpAaTESOKEw6Hi2chr6gV4I1jtVLJM5K1e+vR+bKFBAzBVk9NCKS\n"
@@ -58,7 +60,7 @@ class KeyFlowAuthenticatorTest {
 
 	ServiceAccountKey createDummyServiceAccount() {
 		ServiceAccountCredentials credentials =
-				new ServiceAccountCredentials("aud", "iss", "kid", privateKey, "sub");
+				new ServiceAccountCredentials("aud", "iss", "kid", PRIVATE_KEY, "sub");
 		return new ServiceAccountKey(
 				"id",
 				"publicKey",
@@ -95,6 +97,7 @@ class KeyFlowAuthenticatorTest {
 		mockWebServer = new MockWebServer();
 		mockWebServer.start();
 		defaultSaKey = createDummyServiceAccount();
+		httpClient = new OkHttpClient();
 	}
 
 	@AfterEach
@@ -118,7 +121,8 @@ class KeyFlowAuthenticatorTest {
 		CoreConfiguration cfg =
 				new CoreConfiguration().tokenCustomUrl(url.toString()); // Use mockWebServer
 
-		KeyFlowAuthenticator keyFlowAuthenticator = new KeyFlowAuthenticator(cfg, defaultSaKey);
+		KeyFlowAuthenticator keyFlowAuthenticator =
+				new KeyFlowAuthenticator(httpClient, cfg, defaultSaKey);
 
 		assertDoesNotThrow(keyFlowAuthenticator::getAccessToken);
 		assertEquals(responseBody.getAccessToken(), keyFlowAuthenticator.getAccessToken());
@@ -143,7 +147,8 @@ class KeyFlowAuthenticatorTest {
 		CoreConfiguration cfg =
 				new CoreConfiguration().tokenCustomUrl(url.toString()); // Use mockWebServer
 
-		KeyFlowAuthenticator keyFlowAuthenticator = new KeyFlowAuthenticator(cfg, defaultSaKey);
+		KeyFlowAuthenticator keyFlowAuthenticator =
+				new KeyFlowAuthenticator(httpClient, cfg, defaultSaKey);
 		keyFlowAuthenticator.setToken(expiredKey);
 
 		assertEquals(newToken.getAccessToken(), keyFlowAuthenticator.getAccessToken());
@@ -162,7 +167,7 @@ class KeyFlowAuthenticatorTest {
 
 		// Init keyFlowAuthenticator
 		KeyFlowAuthenticator keyFlowAuthenticator =
-				new KeyFlowAuthenticator(cfg, createDummyServiceAccount());
+				new KeyFlowAuthenticator(httpClient, cfg, createDummyServiceAccount());
 
 		assertThrows(JsonSyntaxException.class, keyFlowAuthenticator::createAccessToken);
 	}
@@ -180,7 +185,7 @@ class KeyFlowAuthenticatorTest {
 
 		// Init keyFlowAuthenticator
 		KeyFlowAuthenticator keyFlowAuthenticator =
-				new KeyFlowAuthenticator(cfg, createDummyServiceAccount());
+				new KeyFlowAuthenticator(httpClient, cfg, createDummyServiceAccount());
 
 		assertThrows(ApiException.class, keyFlowAuthenticator::createAccessToken);
 	}
@@ -201,7 +206,8 @@ class KeyFlowAuthenticatorTest {
 				new CoreConfiguration().tokenCustomUrl(url.toString()); // Use mockWebServer
 
 		// Init keyFlowAuthenticator
-		KeyFlowAuthenticator keyFlowAuthenticator = new KeyFlowAuthenticator(cfg, defaultSaKey);
+		KeyFlowAuthenticator keyFlowAuthenticator =
+				new KeyFlowAuthenticator(httpClient, cfg, defaultSaKey);
 
 		assertDoesNotThrow(keyFlowAuthenticator::createAccessToken);
 	}
@@ -222,7 +228,8 @@ class KeyFlowAuthenticatorTest {
 				new CoreConfiguration().tokenCustomUrl(url.toString()); // Use mockWebServer
 
 		// Prepare keyFlowAuthenticator
-		KeyFlowAuthenticator keyFlowAuthenticator = new KeyFlowAuthenticator(cfg, defaultSaKey);
+		KeyFlowAuthenticator keyFlowAuthenticator =
+				new KeyFlowAuthenticator(httpClient, cfg, defaultSaKey);
 		keyFlowAuthenticator.setToken(mockedBody);
 
 		assertDoesNotThrow(keyFlowAuthenticator::createAccessTokenWithRefreshToken);
@@ -243,7 +250,7 @@ class KeyFlowAuthenticatorTest {
 
 		// Prepare keyFlowAuthenticator
 		KeyFlowAuthenticator keyFlowAuthenticator =
-				new KeyFlowAuthenticator(cfg, createDummyServiceAccount());
+				new KeyFlowAuthenticator(httpClient, cfg, createDummyServiceAccount());
 		keyFlowAuthenticator.setToken(mockResponse);
 
 		// Refresh token
