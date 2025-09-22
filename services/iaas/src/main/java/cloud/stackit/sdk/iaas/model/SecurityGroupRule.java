@@ -23,6 +23,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
@@ -35,6 +36,11 @@ import java.util.UUID;
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
 		comments = "Generator version: 7.15.0")
 public class SecurityGroupRule {
+	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
+
+	@SerializedName(SERIALIZED_NAME_CREATED_AT)
+	@javax.annotation.Nullable private OffsetDateTime createdAt;
+
 	public static final String SERIALIZED_NAME_DESCRIPTION = "description";
 
 	@SerializedName(SERIALIZED_NAME_DESCRIPTION)
@@ -81,6 +87,11 @@ public class SecurityGroupRule {
 	@SerializedName(SERIALIZED_NAME_SECURITY_GROUP_ID)
 	@javax.annotation.Nullable private UUID securityGroupId;
 
+	public static final String SERIALIZED_NAME_UPDATED_AT = "updatedAt";
+
+	@SerializedName(SERIALIZED_NAME_UPDATED_AT)
+	@javax.annotation.Nullable private OffsetDateTime updatedAt;
+
 	public static final String SERIALIZED_NAME_PROTOCOL = "protocol";
 
 	@SerializedName(SERIALIZED_NAME_PROTOCOL)
@@ -88,10 +99,22 @@ public class SecurityGroupRule {
 
 	public SecurityGroupRule() {}
 
-	public SecurityGroupRule(UUID id, UUID securityGroupId) {
+	public SecurityGroupRule(
+			OffsetDateTime createdAt, UUID id, UUID securityGroupId, OffsetDateTime updatedAt) {
 		this();
+		this.createdAt = createdAt;
 		this.id = id;
 		this.securityGroupId = securityGroupId;
+		this.updatedAt = updatedAt;
+	}
+
+	/**
+	 * Date-time when resource was created.
+	 *
+	 * @return createdAt
+	 */
+	@javax.annotation.Nullable public OffsetDateTime getCreatedAt() {
+		return createdAt;
 	}
 
 	public SecurityGroupRule description(@javax.annotation.Nullable String description) {
@@ -243,6 +266,15 @@ public class SecurityGroupRule {
 		return securityGroupId;
 	}
 
+	/**
+	 * Date-time when resource was last updated.
+	 *
+	 * @return updatedAt
+	 */
+	@javax.annotation.Nullable public OffsetDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
 	public SecurityGroupRule protocol(@javax.annotation.Nullable Protocol protocol) {
 		this.protocol = protocol;
 		return this;
@@ -270,7 +302,8 @@ public class SecurityGroupRule {
 			return false;
 		}
 		SecurityGroupRule securityGroupRule = (SecurityGroupRule) o;
-		return Objects.equals(this.description, securityGroupRule.description)
+		return Objects.equals(this.createdAt, securityGroupRule.createdAt)
+				&& Objects.equals(this.description, securityGroupRule.description)
 				&& Objects.equals(this.direction, securityGroupRule.direction)
 				&& Objects.equals(this.ethertype, securityGroupRule.ethertype)
 				&& Objects.equals(this.icmpParameters, securityGroupRule.icmpParameters)
@@ -280,12 +313,14 @@ public class SecurityGroupRule {
 				&& Objects.equals(
 						this.remoteSecurityGroupId, securityGroupRule.remoteSecurityGroupId)
 				&& Objects.equals(this.securityGroupId, securityGroupRule.securityGroupId)
+				&& Objects.equals(this.updatedAt, securityGroupRule.updatedAt)
 				&& Objects.equals(this.protocol, securityGroupRule.protocol);
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(
+				createdAt,
 				description,
 				direction,
 				ethertype,
@@ -295,6 +330,7 @@ public class SecurityGroupRule {
 				portRange,
 				remoteSecurityGroupId,
 				securityGroupId,
+				updatedAt,
 				protocol);
 	}
 
@@ -302,6 +338,7 @@ public class SecurityGroupRule {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class SecurityGroupRule {\n");
+		sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
 		sb.append("    description: ").append(toIndentedString(description)).append("\n");
 		sb.append("    direction: ").append(toIndentedString(direction)).append("\n");
 		sb.append("    ethertype: ").append(toIndentedString(ethertype)).append("\n");
@@ -313,6 +350,7 @@ public class SecurityGroupRule {
 				.append(toIndentedString(remoteSecurityGroupId))
 				.append("\n");
 		sb.append("    securityGroupId: ").append(toIndentedString(securityGroupId)).append("\n");
+		sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
 		sb.append("    protocol: ").append(toIndentedString(protocol)).append("\n");
 		sb.append("}");
 		return sb.toString();
@@ -337,6 +375,7 @@ public class SecurityGroupRule {
 		openapiFields =
 				new HashSet<String>(
 						Arrays.asList(
+								"createdAt",
 								"description",
 								"direction",
 								"ethertype",
@@ -346,6 +385,7 @@ public class SecurityGroupRule {
 								"portRange",
 								"remoteSecurityGroupId",
 								"securityGroupId",
+								"updatedAt",
 								"protocol"));
 
 		// a set of required properties/fields (JSON key names)
