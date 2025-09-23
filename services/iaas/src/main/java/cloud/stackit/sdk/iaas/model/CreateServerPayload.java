@@ -44,6 +44,11 @@ public class CreateServerPayload {
 	@SerializedName(SERIALIZED_NAME_AFFINITY_GROUP)
 	@javax.annotation.Nullable private UUID affinityGroup;
 
+	public static final String SERIALIZED_NAME_AGENT = "agent";
+
+	@SerializedName(SERIALIZED_NAME_AGENT)
+	@javax.annotation.Nullable private ServerAgent agent;
+
 	public static final String SERIALIZED_NAME_AVAILABILITY_ZONE = "availabilityZone";
 
 	@SerializedName(SERIALIZED_NAME_AVAILABILITY_ZONE)
@@ -198,6 +203,24 @@ public class CreateServerPayload {
 		this.affinityGroup = affinityGroup;
 	}
 
+	public CreateServerPayload agent(@javax.annotation.Nullable ServerAgent agent) {
+		this.agent = agent;
+		return this;
+	}
+
+	/**
+	 * Get agent
+	 *
+	 * @return agent
+	 */
+	@javax.annotation.Nullable public ServerAgent getAgent() {
+		return agent;
+	}
+
+	public void setAgent(@javax.annotation.Nullable ServerAgent agent) {
+		this.agent = agent;
+	}
+
 	public CreateServerPayload availabilityZone(
 			@javax.annotation.Nullable String availabilityZone) {
 		this.availabilityZone = availabilityZone;
@@ -308,9 +331,9 @@ public class CreateServerPayload {
 
 	/**
 	 * Object that represents the labels of an object. Regex for keys:
-	 * &#x60;^[a-z]((-|_|[a-z0-9])){0,62}$&#x60;. Regex for values:
-	 * &#x60;^(-|_|[a-z0-9]){0,63}$&#x60;. Providing a &#x60;null&#x60; value for a key will remove
-	 * that key.
+	 * &#x60;^(?&#x3D;.{1,63}$)([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$&#x60;. Regex for values:
+	 * &#x60;^(?&#x3D;.{0,63}$)(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])*$&#x60;. Providing a
+	 * &#x60;null&#x60; value for a key will remove that key.
 	 *
 	 * @return labels
 	 */
@@ -571,6 +594,7 @@ public class CreateServerPayload {
 		}
 		CreateServerPayload createServerPayload = (CreateServerPayload) o;
 		return Objects.equals(this.affinityGroup, createServerPayload.affinityGroup)
+				&& Objects.equals(this.agent, createServerPayload.agent)
 				&& Objects.equals(this.availabilityZone, createServerPayload.availabilityZone)
 				&& Objects.equals(this.bootVolume, createServerPayload.bootVolume)
 				&& Objects.equals(this.createdAt, createServerPayload.createdAt)
@@ -599,6 +623,7 @@ public class CreateServerPayload {
 	public int hashCode() {
 		return Objects.hash(
 				affinityGroup,
+				agent,
 				availabilityZone,
 				bootVolume,
 				createdAt,
@@ -628,6 +653,7 @@ public class CreateServerPayload {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class CreateServerPayload {\n");
 		sb.append("    affinityGroup: ").append(toIndentedString(affinityGroup)).append("\n");
+		sb.append("    agent: ").append(toIndentedString(agent)).append("\n");
 		sb.append("    availabilityZone: ").append(toIndentedString(availabilityZone)).append("\n");
 		sb.append("    bootVolume: ").append(toIndentedString(bootVolume)).append("\n");
 		sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
@@ -678,6 +704,7 @@ public class CreateServerPayload {
 				new HashSet<String>(
 						Arrays.asList(
 								"affinityGroup",
+								"agent",
 								"availabilityZone",
 								"bootVolume",
 								"createdAt",
@@ -749,6 +776,10 @@ public class CreateServerPayload {
 					String.format(
 							"Expected the field `affinityGroup` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("affinityGroup").toString()));
+		}
+		// validate the optional field `agent`
+		if (jsonObj.get("agent") != null && !jsonObj.get("agent").isJsonNull()) {
+			ServerAgent.validateJsonElement(jsonObj.get("agent"));
 		}
 		if ((jsonObj.get("availabilityZone") != null
 						&& !jsonObj.get("availabilityZone").isJsonNull())
