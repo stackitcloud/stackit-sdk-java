@@ -2,15 +2,16 @@ package cloud.stackit.sdk.core.config;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import org.junit.jupiter.api.Test;
 
+@SuppressWarnings("PMD.TooManyMethods")
 class CoreConfigurationTest {
 
 	@Test
-	void getDefaultHeader() {
-		HashMap<String, String> map = new HashMap<String, String>();
+	void testGetDefaultHeader() {
+		Map<String, String> map = new ConcurrentHashMap<>();
 		map.put("key", "value");
 		CoreConfiguration cfg = new CoreConfiguration().defaultHeader(map);
 		Map<String, String> cfgHeader = cfg.getDefaultHeader();
@@ -19,7 +20,7 @@ class CoreConfigurationTest {
 	}
 
 	@Test
-	void getServiceAccountKey() {
+	void testGetServiceAccountKey() {
 		final String saKey = "<sa-key>";
 
 		CoreConfiguration cfg = new CoreConfiguration().serviceAccountKey(saKey);
@@ -30,7 +31,7 @@ class CoreConfigurationTest {
 	}
 
 	@Test
-	void getServiceAccountKeyPath() {
+	void testGetServiceAccountKeyPath() {
 		final String saKeyPath = "<sa-key-path>";
 
 		CoreConfiguration cfg = new CoreConfiguration().serviceAccountKeyPath(saKeyPath);
@@ -41,7 +42,7 @@ class CoreConfigurationTest {
 	}
 
 	@Test
-	void getPrivateKeyPath() {
+	void testGetPrivateKeyPath() {
 		final String privateKeyPath = "<private-key-path>";
 
 		CoreConfiguration cfg = new CoreConfiguration().privateKeyPath(privateKeyPath);
@@ -52,7 +53,7 @@ class CoreConfigurationTest {
 	}
 
 	@Test
-	void getPrivateKey() {
+	void testGetPrivateKey() {
 		final String privateKey = "<private-key>";
 
 		CoreConfiguration cfg = new CoreConfiguration().privateKey(privateKey);
@@ -63,7 +64,7 @@ class CoreConfigurationTest {
 	}
 
 	@Test
-	void getCustomEndpoint() {
+	void testGetCustomEndpoint() {
 		final String customEndpoint = "<custom-endpoint>";
 
 		CoreConfiguration cfg = new CoreConfiguration().customEndpoint(customEndpoint);
@@ -74,7 +75,7 @@ class CoreConfigurationTest {
 	}
 
 	@Test
-	void getCredentialsFilePath() {
+	void testGetCredentialsFilePath() {
 		final String credFilePath = "<cred-file-path>";
 
 		CoreConfiguration cfg = new CoreConfiguration().credentialsFilePath(credFilePath);
@@ -85,7 +86,7 @@ class CoreConfigurationTest {
 	}
 
 	@Test
-	void getTokenCustomUrl() {
+	void testGetTokenCustomUrl() {
 		final String tokenCustomUrl = "<token-custom-url>";
 
 		CoreConfiguration cfg = new CoreConfiguration().tokenCustomUrl(tokenCustomUrl);
@@ -96,7 +97,7 @@ class CoreConfigurationTest {
 	}
 
 	@Test
-	void getTokenExpirationLeeway() {
+	void testGetTokenExpirationLeeway() {
 		final long tokenExpireLeeway = 100;
 
 		CoreConfiguration cfg = new CoreConfiguration().tokenExpirationLeeway(tokenExpireLeeway);
@@ -107,7 +108,7 @@ class CoreConfigurationTest {
 	}
 
 	@Test
-	void getDefaultHeader_not_set() {
+	void testGetDefaultHeaderNotSet() {
 		CoreConfiguration cfg = new CoreConfiguration();
 		Map<String, String> defaultHeader = cfg.getDefaultHeader();
 
@@ -115,7 +116,7 @@ class CoreConfigurationTest {
 	}
 
 	@Test
-	void getServiceAccountKey_not_set() {
+	void testGetServiceAccountKeyNotSet() {
 		CoreConfiguration cfg = new CoreConfiguration();
 		String serviceAccountKey = cfg.getServiceAccountKey();
 
@@ -123,7 +124,7 @@ class CoreConfigurationTest {
 	}
 
 	@Test
-	void getServiceAccountKeyPath_not_set() {
+	void testGetServiceAccountKeyPathNotSet() {
 		CoreConfiguration cfg = new CoreConfiguration();
 		String serviceAccountKeyPath = cfg.getServiceAccountKeyPath();
 
@@ -131,7 +132,7 @@ class CoreConfigurationTest {
 	}
 
 	@Test
-	void getPrivateKeyPath_not_set() {
+	void testGetPrivateKeyPathNotSet() {
 		CoreConfiguration cfg = new CoreConfiguration();
 		String privateKeyPath = cfg.getPrivateKeyPath();
 
@@ -139,7 +140,7 @@ class CoreConfigurationTest {
 	}
 
 	@Test
-	void getPrivateKey_not_set() {
+	void testGetPrivateKeyNotSet() {
 		CoreConfiguration cfg = new CoreConfiguration();
 		String privateKey = cfg.getPrivateKey();
 
@@ -147,7 +148,7 @@ class CoreConfigurationTest {
 	}
 
 	@Test
-	void getCustomEndpoint_not_set() {
+	void testGetCustomEndpointNotSet() {
 		CoreConfiguration cfg = new CoreConfiguration();
 		String customEndpoint = cfg.getCustomEndpoint();
 
@@ -155,7 +156,7 @@ class CoreConfigurationTest {
 	}
 
 	@Test
-	void getCredentialsFilePath_not_set() {
+	void testGetCredentialsFilePathNotSet() {
 		CoreConfiguration cfg = new CoreConfiguration();
 		String credentialsFilePath = cfg.getCredentialsFilePath();
 
@@ -163,7 +164,7 @@ class CoreConfigurationTest {
 	}
 
 	@Test
-	void getTokenCustomUrl_not_set() {
+	void testGetTokenCustomUrlNotSet() {
 		CoreConfiguration cfg = new CoreConfiguration();
 		String tokenCustomUrl = cfg.getTokenCustomUrl();
 
@@ -171,7 +172,7 @@ class CoreConfigurationTest {
 	}
 
 	@Test
-	void getTokenExpirationLeeway_not_set() {
+	void testGetTokenExpirationLeewayNotSet() {
 		CoreConfiguration cfg = new CoreConfiguration();
 		Long tokenExpirationLeeway = cfg.getTokenExpirationLeeway();
 

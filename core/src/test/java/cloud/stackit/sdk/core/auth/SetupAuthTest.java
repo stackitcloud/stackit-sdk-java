@@ -9,6 +9,7 @@ import cloud.stackit.sdk.core.exception.ApiException;
 import cloud.stackit.sdk.core.exception.PrivateKeyNotFoundException;
 import cloud.stackit.sdk.core.model.ServiceAccountCredentials;
 import cloud.stackit.sdk.core.model.ServiceAccountKey;
+import cloud.stackit.sdk.core.utils.TestUtils;
 import com.google.gson.Gson;
 import java.io.File;
 import java.io.IOException;
@@ -18,16 +19,21 @@ import java.nio.file.Path;
 import java.security.spec.InvalidKeySpecException;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import javax.swing.filechooser.FileSystemView;
+import okhttp3.Interceptor;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+@SuppressWarnings("PMD.TooManyMethods")
 @ExtendWith(MockitoExtension.class)
 class SetupAuthTest {
+	private static final String JSON_FILE_EXTENSION = ".json";
+
 	@Mock private EnvironmentVariables envs;
 	private final String invalidCredentialsFilePath =
 			FileSystemView.getFileSystemView().getHomeDirectory()
@@ -38,7 +44,8 @@ class SetupAuthTest {
 					+ File.separator
 					+ "file.json";
 
-	ServiceAccountKey createDummyServiceAccount(String privateKey) {
+
+	private ServiceAccountKey createDummyServiceAccount(String privateKey) {
 		ServiceAccountCredentials credentials =
 				new ServiceAccountCredentials("aud", "iss", "kid", privateKey, "sub");
 		return new ServiceAccountKey(
@@ -55,9 +62,9 @@ class SetupAuthTest {
 				credentials);
 	}
 
-	Path createJsonFile(Map<String, String> content) throws IOException {
+	private Path createJsonFile(Map<String, String> content) throws IOException {
 		String contentJson = new Gson().toJson(content);
-		Path file = Files.createTempFile("credentials", ".json");
+		Path file = Files.createTempFile("credentials", JSON_FILE_EXTENSION);
 		file.toFile().deleteOnExit();
 
 		Files.write(file, contentJson.getBytes(StandardCharsets.UTF_8));
@@ -65,12 +72,32 @@ class SetupAuthTest {
 	}
 
 	@Test
-	void setupKeyFlow_readServiceAccountFromPath()
-			throws IOException, InvalidKeySpecException, ApiException {
+	@DisplayName("get access token - without running init - throws exception")
+	void testGetAccessTokenWithoutRunningInitThrowsException() throws IOException {
+		SetupAuth setupAuth = new SetupAuth();
+		assertThrows(RuntimeException.class, setupAuth::getAuthHandler);
+	}
+
+	@Test
+	@DisplayName("get access token - with running init - returns interceptor")
+	void testGetAccessTokenWithRunningInitReturnsInterceptor() throws IOException {
+		ServiceAccountKey saKey = createDummyServiceAccount(TestUtils.MOCK_SERVICE_ACCOUNT_PRIVATE_KEY);
+		String initSaKeyJson = new Gson().toJson(saKey);
+
+		CoreConfiguration config = new CoreConfiguration().serviceAccountKey(initSaKeyJson);
+
+		SetupAuth setupAuth = new SetupAuth(config);
+		setupAuth.init();
+		assertInstanceOf(Interceptor.class, setupAuth.getAuthHandler());
+	}
+
+	@Test
+	@DisplayName("setup key flow - read service account from path")
+	void setupKeyFlowReadServiceAccountFromPath() throws IOException {
 		// Create service account key file
-		ServiceAccountKey initSaKey = createDummyServiceAccount("privateKey");
+		ServiceAccountKey initSaKey = createDummyServiceAccount(TestUtils.MOCK_SERVICE_ACCOUNT_PRIVATE_KEY);
 		String initSaKeyJson = new Gson().toJson(initSaKey);
-		Path saKeyPath = Files.createTempFile("serviceAccountKey", ".json");
+		Path saKeyPath = Files.createTempFile("serviceAccountKey", JSON_FILE_EXTENSION);
 		saKeyPath.toFile().deleteOnExit();
 		Files.write(saKeyPath, initSaKeyJson.getBytes(StandardCharsets.UTF_8));
 
@@ -84,10 +111,10 @@ class SetupAuthTest {
 	}
 
 	@Test
-	void setupKeyFlow_readServiceAccountFromConfig()
-			throws IOException, InvalidKeySpecException, ApiException {
+	@DisplayName("setup key flow - read service account from config")
+	void setupKeyFlowReadServiceAccountFromConfig() throws IOException {
 		// Create service account key
-		ServiceAccountKey initSaKey = createDummyServiceAccount("privateKey");
+		ServiceAccountKey initSaKey = createDummyServiceAccount(TestUtils.MOCK_SERVICE_ACCOUNT_PRIVATE_KEY);
 		String initSaKeyJson = new Gson().toJson(initSaKey);
 
 		// Create config and read setup auth with the previous created saKey
@@ -98,9 +125,10 @@ class SetupAuthTest {
 	}
 
 	@Test
-	void setupKeyFlow_readServiceAccountFromKeyEnv() throws IOException {
+	@DisplayName("setup key flow - read service account from key env")
+	void setupKeyFlowReadServiceAccountFromKeyEnv() throws IOException {
 		// Create service account key
-		ServiceAccountKey initSaKey = createDummyServiceAccount("privateKey");
+		ServiceAccountKey initSaKey = createDummyServiceAccount(TestUtils.MOCK_SERVICE_ACCOUNT_PRIVATE_KEY);
 		String initSaKeyJson = new Gson().toJson(initSaKey);
 
 		// Mock env STACKIT_SERVICE_ACCOUNT_KEY
@@ -114,13 +142,14 @@ class SetupAuthTest {
 	}
 
 	@Test
-	void setupKeyFlow_readServiceAccountFromKeyPathEnv() throws IOException {
+	@DisplayName("setup key flow - read service account from key path env")
+	void setupKeyFlowReadServiceAccountFromKeyPathEnv() throws IOException {
 		// Create service account key
 		ServiceAccountKey initSaKey = createDummyServiceAccount("privateKey");
 		String keyPathContent = new Gson().toJson(initSaKey);
 
 		// Create dummy keyPathFile
-		Path keyPathFile = Files.createTempFile("serviceAccountKey", ".json");
+		Path keyPathFile = Files.createTempFile("serviceAccountKey", JSON_FILE_EXTENSION);
 		keyPathFile.toFile().deleteOnExit();
 		Files.write(keyPathFile, keyPathContent.getBytes(StandardCharsets.UTF_8));
 
@@ -136,12 +165,14 @@ class SetupAuthTest {
 	}
 
 	@Test
-	void setupKeyFlow_readServiceAccountFromPathWithoutPrivateKey_throwsException()
+	@DisplayName(
+			"setup key flow - read service account from path without private key - throws exception")
+	void setupKeyFlowReadServiceAccountFromPathWithoutPrivateKeyThrowsException()
 			throws IOException, InvalidKeySpecException, ApiException {
 		// Create service account key file
 		ServiceAccountKey initSaKey = createDummyServiceAccount(null);
 		String initSaKeyJson = new Gson().toJson(initSaKey);
-		Path saKeyPath = Files.createTempFile("serviceAccountKey", ".json");
+		Path saKeyPath = Files.createTempFile("serviceAccountKey", JSON_FILE_EXTENSION);
 		saKeyPath.toFile().deleteOnExit();
 		Files.write(saKeyPath, initSaKeyJson.getBytes(StandardCharsets.UTF_8));
 
@@ -157,8 +188,9 @@ class SetupAuthTest {
 	}
 
 	@Test
-	void setupKeyFlow_readServiceAccountFromConfigWithoutPrivateKey_throwsException()
-			throws IOException, InvalidKeySpecException, ApiException {
+	@DisplayName(
+			"setup key flow - read service account from config without private key - throws exception")
+	void setupKeyFlowReadServiceAccountFromConfigWithoutPrivateKeyThrowsException() {
 		// Create service account key
 		ServiceAccountKey initSaKey = createDummyServiceAccount(null);
 		String initSaKeyJson = new Gson().toJson(initSaKey);
@@ -175,8 +207,8 @@ class SetupAuthTest {
 	}
 
 	@Test
-	void loadPrivateKey_setPrivateKeyFromConfig()
-			throws IOException, InvalidKeySpecException, ApiException {
+	@DisplayName("load private key - set private key from config")
+	void loadPrivateKeySetPrivateKeyFromConfig() {
 		final String prvKey = "prvKey";
 		ServiceAccountKey saKey = createDummyServiceAccount(null);
 
@@ -188,8 +220,8 @@ class SetupAuthTest {
 	}
 
 	@Test
-	void loadPrivateKey_doesNotOverwriteExistingPrivateKey()
-			throws IOException, InvalidKeySpecException, ApiException {
+	@DisplayName("load private key - does not overwrite existing private key")
+	void loadPrivateKeyDoesNotOverwriteExistingPrivateKey() {
 		final String initialPrivateKey = "prvKey";
 		final String cfgPrivateKey = "prvKey-updated";
 
@@ -203,8 +235,8 @@ class SetupAuthTest {
 	}
 
 	@Test
-	void loadPrivateKey_setPrivateKeyPath()
-			throws IOException, InvalidKeySpecException, ApiException {
+	@DisplayName("load private key - set private key path")
+	void loadPrivateKeySetPrivateKeyPath() throws IOException{
 		Path tempPrvKeyFile = Files.createTempFile("privateKey", ".pem");
 		tempPrvKeyFile.toFile().deleteOnExit();
 
@@ -222,8 +254,8 @@ class SetupAuthTest {
 	}
 
 	@Test
-	void loadPrivateKey_setPrivateKeyPathViaCredentialsFile()
-			throws IOException, InvalidKeySpecException, ApiException {
+	@DisplayName("load private key - set private key path via credentials file")
+	void loadPrivateKeySetPrivateKeyPathViaCredentialsFile() throws IOException {
 		// Create privateKeyFile
 		Path tempPrvKeyFile = Files.createTempFile("privateKey", ".pem");
 		tempPrvKeyFile.toFile().deleteOnExit();
@@ -233,10 +265,10 @@ class SetupAuthTest {
 		Files.write(tempPrvKeyFile, privateKeyContent.getBytes(StandardCharsets.UTF_8));
 
 		// Create credentialsFile
-		Path tempCredentialsFile = Files.createTempFile("credentialsFile", ".json");
+		Path tempCredentialsFile = Files.createTempFile("credentialsFile", JSON_FILE_EXTENSION);
 		tempCredentialsFile.toFile().deleteOnExit();
 
-		Map<String, String> credFileContent = new HashMap<>();
+		Map<String, String> credFileContent = new ConcurrentHashMap<>();
 		credFileContent.put(
 				EnvironmentVariables.ENV_STACKIT_PRIVATE_KEY_PATH,
 				tempPrvKeyFile.toAbsolutePath().toString());
@@ -257,16 +289,16 @@ class SetupAuthTest {
 	}
 
 	@Test
-	void loadPrivateKey_setPrivateKeyViaCredentialsFile()
-			throws IOException, InvalidKeySpecException, ApiException {
+	@DisplayName("load private key - set private key via credentials file")
+	void loadPrivateKeySetPrivateKeyViaCredentialsFile() throws IOException {
 		final String privateKeyContent = "<my-private-key>";
 
 		// Create credentialsFile
-		Path tempCredentialsFile = Files.createTempFile("credentialsFile", ".json");
+		Path tempCredentialsFile = Files.createTempFile("credentialsFile", JSON_FILE_EXTENSION);
 		tempCredentialsFile.toFile().deleteOnExit();
 
 		// Create dummy credentialsFile
-		Map<String, String> credFileContent = new HashMap<>();
+		Map<String, String> credFileContent = new ConcurrentHashMap<>();
 		credFileContent.put(EnvironmentVariables.ENV_STACKIT_PRIVATE_KEY, privateKeyContent);
 		String credFileContentJson = new Gson().toJson(credFileContent);
 
@@ -285,7 +317,8 @@ class SetupAuthTest {
 	}
 
 	@Test
-	void loadPrivateKey_setPrivateKeyViaEnv() throws IOException {
+	@DisplayName("load private key - set private key via env")
+	void loadPrivateKeySetPrivateKeyViaEnv() {
 		final String prvKey = "prvKey";
 		ServiceAccountKey saKey = createDummyServiceAccount(null);
 		when(envs.getStackitPrivateKey()).thenReturn(prvKey);
@@ -298,7 +331,8 @@ class SetupAuthTest {
 	}
 
 	@Test
-	void loadPrivateKey_setPrivateKeyPathViaEnv() throws IOException {
+	@DisplayName("load private key - set private key path via env")
+	void loadPrivateKeySetPrivateKeyPathViaEnv() throws IOException {
 		final String prvKey = "prvKey";
 		ServiceAccountKey saKey = createDummyServiceAccount(null);
 		Path tempPrvKeyFile = Files.createTempFile("privateKey", ".pem");
@@ -316,16 +350,16 @@ class SetupAuthTest {
 	}
 
 	@Test
-	void loadPrivateKey_setPrivateKeyViaCredentialsFileInEnv()
-			throws IOException, InvalidKeySpecException, ApiException {
+	@DisplayName("load private key - set private key via credentials file in Env")
+	void loadPrivateKeySetPrivateKeyViaCredentialsFileInEnv() throws IOException {
 		final String privateKeyContent = "<my-private-key>";
 
 		// Create credentialsFile
-		Path tempCredentialsFile = Files.createTempFile("credentialsFile", ".json");
+		Path tempCredentialsFile = Files.createTempFile("credentialsFile", JSON_FILE_EXTENSION);
 		tempCredentialsFile.toFile().deleteOnExit();
 
 		// Create dummy credentialsFile
-		Map<String, String> credFileContent = new HashMap<>();
+		Map<String, String> credFileContent = new ConcurrentHashMap<>();
 		credFileContent.put(EnvironmentVariables.ENV_STACKIT_PRIVATE_KEY, privateKeyContent);
 		String credFileContentJson = new Gson().toJson(credFileContent);
 
@@ -343,7 +377,8 @@ class SetupAuthTest {
 	}
 
 	@Test
-	void loadPrivateKey_invalidPrivateKeyPath_throwsException()
+	@DisplayName("load private key - invalid private key path - throws exception")
+	void loadPrivateKeyInvalidPrivateKeyPathThrowsException()
 			throws IOException, InvalidKeySpecException, ApiException {
 
 		String invalidPath =
@@ -366,18 +401,18 @@ class SetupAuthTest {
 	}
 
 	@Test
-	void readValueFromCredentialsFile_keyAndKeyPathSet_returnsKeyValue()
-			throws IOException, InvalidKeySpecException, ApiException {
+	@DisplayName("read value from credentials file - key and key path set - returns key value")
+	void readValueFromCredentialsFileKeyAndKeyPathSetReturnsKeyValue() throws IOException {
 		String keyContent = "key";
 		String keyPathContent = "keyPath";
 
 		// Create dummy keyPathFile
-		Path keyPathFile = Files.createTempFile("serviceAccountKey", ".json");
+		Path keyPathFile = Files.createTempFile("serviceAccountKey", JSON_FILE_EXTENSION);
 		keyPathFile.toFile().deleteOnExit();
 		Files.write(keyPathFile, keyPathContent.getBytes(StandardCharsets.UTF_8));
 
 		// Create dummy credentialsFile
-		Map<String, String> credentialsFileContent = new HashMap<>();
+		Map<String, String> credentialsFileContent = new ConcurrentHashMap<>();
 		credentialsFileContent.put(
 				EnvironmentVariables.ENV_STACKIT_SERVICE_ACCOUNT_KEY, keyContent);
 		credentialsFileContent.put(
@@ -395,12 +430,12 @@ class SetupAuthTest {
 	}
 
 	@Test
-	void readValueFromCredentialsFile_keySet_returnsKeyValue()
-			throws IOException, InvalidKeySpecException, ApiException {
+	@DisplayName("read value from credentials file - key set - returns key value")
+	void readValueFromCredentialsFileKeySetReturnsKeyValue() throws IOException {
 		String keyContent = "key";
 
 		// Create dummy credentialsFile
-		Map<String, String> credentialsFileContent = new HashMap<>();
+		Map<String, String> credentialsFileContent = new ConcurrentHashMap<>();
 		credentialsFileContent.put(
 				EnvironmentVariables.ENV_STACKIT_SERVICE_ACCOUNT_KEY, keyContent);
 		Path credentialsFile = createJsonFile(credentialsFileContent);
@@ -415,16 +450,16 @@ class SetupAuthTest {
 	}
 
 	@Test
-	void readValueFromCredentialsFile_KeyPathSet_returnsKeyValue()
-			throws IOException, InvalidKeySpecException, ApiException {
+	@DisplayName("read value from credentials file - key path set - returns key value")
+	void readValueFromCredentialsFileKeyPathSetReturnsKeyValue() throws IOException {
 		// Create dummy keyPathFile
 		String keyPathContent = "keyPath";
-		Path keyPathFile = Files.createTempFile("serviceAccountKey", ".json");
+		Path keyPathFile = Files.createTempFile("serviceAccountKey", JSON_FILE_EXTENSION);
 		keyPathFile.toFile().deleteOnExit();
 		Files.write(keyPathFile, keyPathContent.getBytes(StandardCharsets.UTF_8));
 
 		// Create dummy credentialsFile
-		Map<String, String> credentialsFileContent = new HashMap<>();
+		Map<String, String> credentialsFileContent = new ConcurrentHashMap<>();
 		credentialsFileContent.put(
 				EnvironmentVariables.ENV_STACKIT_SERVICE_ACCOUNT_KEY_PATH,
 				keyPathFile.toAbsolutePath().toString());

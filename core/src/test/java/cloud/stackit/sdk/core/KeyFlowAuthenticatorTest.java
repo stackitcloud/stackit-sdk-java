@@ -22,12 +22,16 @@ import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@SuppressWarnings("PMD.TooManyMethods")
 class KeyFlowAuthenticatorTest {
-	private static MockWebServer mockWebServer;
+	private MockWebServer mockWebServer;
 	private ServiceAccountKey defaultSaKey;
 	private OkHttpClient httpClient;
+
+	private static final String MOCK_WEBSERVER_PATH = "/token";
 	private static final String PRIVATE_KEY =
 			"-----BEGIN PRIVATE KEY-----\n"
 					+ "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC0jVPq7ACbkwW6\n"
@@ -58,7 +62,7 @@ class KeyFlowAuthenticatorTest {
 					+ "h/9afEtu5aUE/m+1vGBoH8z1\n"
 					+ "-----END PRIVATE KEY-----\n";
 
-	ServiceAccountKey createDummyServiceAccount() {
+	private ServiceAccountKey createDummyServiceAccount() {
 		ServiceAccountCredentials credentials =
 				new ServiceAccountCredentials("aud", "iss", "kid", PRIVATE_KEY, "sub");
 		return new ServiceAccountKey(
@@ -75,7 +79,7 @@ class KeyFlowAuthenticatorTest {
 				credentials);
 	}
 
-	KeyFlowAuthenticator.KeyFlowTokenResponse mockResponseBody(boolean expired)
+	private KeyFlowAuthenticator.KeyFlowTokenResponse mockResponseBody(boolean expired)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		Date issuedAt = new Date();
 		Date expiredAt = Date.from(new Date().toInstant().plusSeconds(60 * 10));
@@ -106,7 +110,8 @@ class KeyFlowAuthenticatorTest {
 	}
 
 	@Test
-	void getAccessToken_response200_noException()
+	@DisplayName("get access token - Response 200 - No exception")
+	void testGetAccessTokenResponse200NoException()
 			throws NoSuchAlgorithmException, InvalidKeySpecException, IOException, ApiException {
 
 		// Setup mockServer
@@ -117,7 +122,7 @@ class KeyFlowAuthenticatorTest {
 		mockWebServer.enqueue(mockedResponse);
 
 		// Config
-		HttpUrl url = mockWebServer.url("/token");
+		HttpUrl url = mockWebServer.url(MOCK_WEBSERVER_PATH);
 		CoreConfiguration cfg =
 				new CoreConfiguration().tokenCustomUrl(url.toString()); // Use mockWebServer
 
@@ -129,7 +134,8 @@ class KeyFlowAuthenticatorTest {
 	}
 
 	@Test
-	void getAccessToken_expiredToken_noException()
+	@DisplayName("get access token - expired token - no exception")
+	void testGetAccessTokenExpiredTokenNoException()
 			throws NoSuchAlgorithmException, InvalidKeySpecException, IOException, ApiException {
 		// Setup expiredToken and newToken
 		KeyFlowAuthenticator.KeyFlowTokenResponse expiredKey = mockResponseBody(true);
@@ -143,7 +149,7 @@ class KeyFlowAuthenticatorTest {
 		mockWebServer.enqueue(mockedResponse);
 
 		// Config
-		HttpUrl url = mockWebServer.url("/token");
+		HttpUrl url = mockWebServer.url(MOCK_WEBSERVER_PATH);
 		CoreConfiguration cfg =
 				new CoreConfiguration().tokenCustomUrl(url.toString()); // Use mockWebServer
 
@@ -155,11 +161,12 @@ class KeyFlowAuthenticatorTest {
 	}
 
 	@Test
-	void createAccessToken_response200WithEmptyBody_throwsException() {
+	@DisplayName("create access token - response 200 with empty body - throws exception")
+	void createAccessTokenResponse200WithEmptyBodyThrowsException() {
 		// Setup mockServer
 		MockResponse mockedResponse = new MockResponse().setResponseCode(200);
 		mockWebServer.enqueue(mockedResponse);
-		HttpUrl url = mockWebServer.url("/token");
+		HttpUrl url = mockWebServer.url(MOCK_WEBSERVER_PATH);
 
 		// Config
 		CoreConfiguration cfg =
@@ -173,11 +180,12 @@ class KeyFlowAuthenticatorTest {
 	}
 
 	@Test
-	void createAccessToken_response400_throwsApiException() {
+	@DisplayName("create access token - response 400 - throws ApiException")
+	void createAccessTokenResponse400ThrowsApiException() {
 		// Setup mockServer
 		MockResponse mockedResponse = new MockResponse().setResponseCode(400);
 		mockWebServer.enqueue(mockedResponse);
-		HttpUrl url = mockWebServer.url("/token");
+		HttpUrl url = mockWebServer.url(MOCK_WEBSERVER_PATH);
 
 		// Config
 		CoreConfiguration cfg =
@@ -191,7 +199,8 @@ class KeyFlowAuthenticatorTest {
 	}
 
 	@Test
-	void createAccessToken_response200WithValidResponse_noException()
+	@DisplayName("create access token - response 200 with valid response - no exception")
+	void createAccessTokenResponse200WithValidResponseNoException()
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		// Setup mockServer
 		KeyFlowAuthenticator.KeyFlowTokenResponse responseBody = mockResponseBody(false);
@@ -201,7 +210,7 @@ class KeyFlowAuthenticatorTest {
 		mockWebServer.enqueue(mockedResponse);
 
 		// Config
-		HttpUrl url = mockWebServer.url("/token");
+		HttpUrl url = mockWebServer.url(MOCK_WEBSERVER_PATH);
 		CoreConfiguration cfg =
 				new CoreConfiguration().tokenCustomUrl(url.toString()); // Use mockWebServer
 
@@ -213,7 +222,9 @@ class KeyFlowAuthenticatorTest {
 	}
 
 	@Test
-	void createAccessTokenWithRefreshToken_response200WithValidResponse_noException()
+	@DisplayName(
+			"create access token with refresh token - response 200 with valid response - no exception")
+	void createAccessTokenWithRefreshTokenResponse200WithValidResponseNoException()
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		// Setup mockServer
 		KeyFlowAuthenticator.KeyFlowTokenResponse mockedBody = mockResponseBody(false);
@@ -223,7 +234,7 @@ class KeyFlowAuthenticatorTest {
 		mockWebServer.enqueue(mockedResponse);
 
 		// Config
-		HttpUrl url = mockWebServer.url("/token");
+		HttpUrl url = mockWebServer.url(MOCK_WEBSERVER_PATH);
 		CoreConfiguration cfg =
 				new CoreConfiguration().tokenCustomUrl(url.toString()); // Use mockWebServer
 
@@ -236,13 +247,15 @@ class KeyFlowAuthenticatorTest {
 	}
 
 	@Test
-	void createAccessTokenWithRefreshToken_response200WithEmptyBody_throwsException()
+	@DisplayName(
+			"create access token with refresh token - response 200 with empty body - throws exception")
+	void createAccessTokenWithRefreshTokenResponse200WithEmptyBodyThrowsException()
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
 		// Setup mockServer
 		KeyFlowAuthenticator.KeyFlowTokenResponse mockResponse = mockResponseBody(false);
 		MockResponse mockedResponse = new MockResponse().setResponseCode(200);
 		mockWebServer.enqueue(mockedResponse);
-		HttpUrl url = mockWebServer.url("/token");
+		HttpUrl url = mockWebServer.url(MOCK_WEBSERVER_PATH);
 
 		// Config
 		CoreConfiguration cfg =

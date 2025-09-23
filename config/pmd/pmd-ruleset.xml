@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<ruleset name="Custom Ruleset"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+
+    <description>
+        Custom ruleset that excludes generated code from PMD analysis.
+    </description>
+
+    <exclude-pattern>.*/cloud/stackit/sdk/.*/model/.*</exclude-pattern>
+    <exclude-pattern>.*/cloud/stackit/sdk/.*/api/.*</exclude-pattern>
+    <exclude-pattern>.*/cloud/stackit/sdk/.*/ApiCallback.java</exclude-pattern>
+    <exclude-pattern>.*/cloud/stackit/sdk/.*/ApiClient.java</exclude-pattern>
+    <exclude-pattern>.*/cloud/stackit/sdk/.*/ApiResponse.java</exclude-pattern>
+    <exclude-pattern>.*/cloud/stackit/sdk/.*/GzipRequestInterceptor.java</exclude-pattern>
+    <exclude-pattern>.*/cloud/stackit/sdk/.*/JSON.java</exclude-pattern>
+    <exclude-pattern>.*/cloud/stackit/sdk/.*/Pair.java</exclude-pattern>
+    <exclude-pattern>.*/cloud/stackit/sdk/.*/ProgressRequestBody.java</exclude-pattern>
+    <exclude-pattern>.*/cloud/stackit/sdk/.*/ProgressResponseBody.java</exclude-pattern>
+    <exclude-pattern>.*/cloud/stackit/sdk/.*/ServerConfiguration.java</exclude-pattern>
+    <exclude-pattern>.*/cloud/stackit/sdk/.*/ServerVariable.java</exclude-pattern>
+    <exclude-pattern>.*/cloud/stackit/sdk/.*/StringUtil.java</exclude-pattern>
+
+    <rule ref="category/java/bestpractices.xml">
+        <exclude name="UnitTestContainsTooManyAsserts"/>
+        <exclude name="UnitTestAssertionsShouldIncludeMessage"/>
+    </rule>
+    
+    <rule ref="category/java/codestyle.xml">
+        <exclude name="LocalVariableCouldBeFinal"/>
+        <exclude name="MethodArgumentCouldBeFinal"/>
+        <exclude name="AtLeastOneConstructor"/>
+        <exclude name="LongVariable"/>
+        <exclude name="OnlyOneReturn"/>
+    </rule>
+    
+    <rule ref="category/java/design.xml">
+    </rule>
+    
+    <rule ref="category/java/documentation.xml">
+        <exclude name="CommentRequired"/>
+    </rule>
+    
+    <rule ref="category/java/errorprone.xml">
+        <exclude name="AvoidFieldNameMatchingMethodName"/>
+    </rule>
+    
+    <rule ref="category/java/multithreading.xml">
+    </rule>
+    
+    <rule ref="category/java/performance.xml">
+    </rule>
+    
+    <rule ref="category/java/security.xml">
+    </rule>
+
+</ruleset>

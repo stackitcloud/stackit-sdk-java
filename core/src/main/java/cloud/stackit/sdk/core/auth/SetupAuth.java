@@ -18,6 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
 import javax.swing.filechooser.FileSystemView;
+
 import okhttp3.Interceptor;
 
 public class SetupAuth {
@@ -40,9 +41,11 @@ public class SetupAuth {
 	 *     let it handle the rest. Will be removed in April 2026.
 	 */
 	@Deprecated
+	public SetupAuth() {
+		// deprecated
+	}
 	// TODO: constructor of SetupAuth should be private after deprecated constructors/methods are
 	// removed (only static methods should remain)
-	public SetupAuth() {}
 
 	/**
 	 * Set up the KeyFlow Authentication and can be integrated in an OkHttp client, by adding
@@ -186,7 +189,7 @@ public class SetupAuth {
 			try {
 				String privateKey = getPrivateKey(cfg, env);
 				saKey.getCredentials().setPrivateKey(privateKey);
-			} catch (Exception e) {
+			} catch (CredentialsInFileNotFoundException | IOException e) {
 				throw new PrivateKeyNotFoundException("could not find private key", e);
 			}
 		}
@@ -216,6 +219,7 @@ public class SetupAuth {
 	 * </ol>
 	 *
 	 * @param cfg
+	 * @param env
 	 * @return found private key
 	 * @throws CredentialsInFileNotFoundException throws if no private key could be found
 	 * @throws IOException throws if the provided path can not be found or the file within the

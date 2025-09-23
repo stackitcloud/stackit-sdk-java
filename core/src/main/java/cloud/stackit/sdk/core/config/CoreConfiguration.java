@@ -13,8 +13,6 @@ public class CoreConfiguration {
 	private String tokenCustomUrl;
 	private Long tokenExpirationLeeway;
 
-	public CoreConfiguration() {}
-
 	public Map<String, String> getDefaultHeader() {
 		return defaultHeader;
 	}
