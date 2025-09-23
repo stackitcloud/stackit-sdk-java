@@ -43,6 +43,11 @@ public class CreateNicPayload {
 	@SerializedName(SERIALIZED_NAME_ALLOWED_ADDRESSES)
 	@javax.annotation.Nullable private List<AllowedAddressesInner> allowedAddresses = new ArrayList<>();
 
+	public static final String SERIALIZED_NAME_DESCRIPTION = "description";
+
+	@SerializedName(SERIALIZED_NAME_DESCRIPTION)
+	@javax.annotation.Nullable private String description;
+
 	public static final String SERIALIZED_NAME_DEVICE = "device";
 
 	@SerializedName(SERIALIZED_NAME_DEVICE)
@@ -144,6 +149,24 @@ public class CreateNicPayload {
 		this.allowedAddresses = allowedAddresses;
 	}
 
+	public CreateNicPayload description(@javax.annotation.Nullable String description) {
+		this.description = description;
+		return this;
+	}
+
+	/**
+	 * Description Object. Allows string up to 255 Characters.
+	 *
+	 * @return description
+	 */
+	@javax.annotation.Nullable public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(@javax.annotation.Nullable String description) {
+		this.description = description;
+	}
+
 	/**
 	 * Universally Unique Identifier (UUID).
 	 *
@@ -205,9 +228,9 @@ public class CreateNicPayload {
 
 	/**
 	 * Object that represents the labels of an object. Regex for keys:
-	 * &#x60;^[a-z]((-|_|[a-z0-9])){0,62}$&#x60;. Regex for values:
-	 * &#x60;^(-|_|[a-z0-9]){0,63}$&#x60;. Providing a &#x60;null&#x60; value for a key will remove
-	 * that key.
+	 * &#x60;^(?&#x3D;.{1,63}$)([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$&#x60;. Regex for values:
+	 * &#x60;^(?&#x3D;.{0,63}$)(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])*$&#x60;. Providing a
+	 * &#x60;null&#x60; value for a key will remove that key.
 	 *
 	 * @return labels
 	 */
@@ -328,6 +351,7 @@ public class CreateNicPayload {
 		}
 		CreateNicPayload createNicPayload = (CreateNicPayload) o;
 		return Objects.equals(this.allowedAddresses, createNicPayload.allowedAddresses)
+				&& Objects.equals(this.description, createNicPayload.description)
 				&& Objects.equals(this.device, createNicPayload.device)
 				&& Objects.equals(this.id, createNicPayload.id)
 				&& Objects.equals(this.ipv4, createNicPayload.ipv4)
@@ -346,6 +370,7 @@ public class CreateNicPayload {
 	public int hashCode() {
 		return Objects.hash(
 				allowedAddresses,
+				description,
 				device,
 				id,
 				ipv4,
@@ -365,6 +390,7 @@ public class CreateNicPayload {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class CreateNicPayload {\n");
 		sb.append("    allowedAddresses: ").append(toIndentedString(allowedAddresses)).append("\n");
+		sb.append("    description: ").append(toIndentedString(description)).append("\n");
 		sb.append("    device: ").append(toIndentedString(device)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    ipv4: ").append(toIndentedString(ipv4)).append("\n");
@@ -401,6 +427,7 @@ public class CreateNicPayload {
 				new HashSet<String>(
 						Arrays.asList(
 								"allowedAddresses",
+								"description",
 								"device",
 								"id",
 								"ipv4",
@@ -464,6 +491,13 @@ public class CreateNicPayload {
 				}
 				;
 			}
+		}
+		if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull())
+				&& !jsonObj.get("description").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							"Expected the field `description` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("description").toString()));
 		}
 		if ((jsonObj.get("device") != null && !jsonObj.get("device").isJsonNull())
 				&& !jsonObj.get("device").isJsonPrimitive()) {

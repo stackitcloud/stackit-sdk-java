@@ -29,37 +29,37 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/** Object that represents the request body for a route update. */
+/** STACKIT server agent options for a server. */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
 		comments = "Generator version: 7.15.0")
-public class UpdateNetworkAreaRoutePayload {
-	public static final String SERIALIZED_NAME_LABELS = "labels";
+public class ServerAgent {
+	public static final String SERIALIZED_NAME_PROVISIONED = "provisioned";
 
-	@SerializedName(SERIALIZED_NAME_LABELS)
-	@javax.annotation.Nullable private Object labels;
+	@SerializedName(SERIALIZED_NAME_PROVISIONED)
+	@javax.annotation.Nullable private Boolean provisioned;
 
-	public UpdateNetworkAreaRoutePayload() {}
+	public ServerAgent() {}
 
-	public UpdateNetworkAreaRoutePayload labels(@javax.annotation.Nullable Object labels) {
-		this.labels = labels;
+	public ServerAgent provisioned(@javax.annotation.Nullable Boolean provisioned) {
+		this.provisioned = provisioned;
 		return this;
 	}
 
 	/**
-	 * Object that represents the labels of an object. Regex for keys:
-	 * &#x60;^(?&#x3D;.{1,63}$)([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$&#x60;. Regex for values:
-	 * &#x60;^(?&#x3D;.{0,63}$)(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])*$&#x60;. Providing a
-	 * &#x60;null&#x60; value for a key will remove that key.
+	 * Configure the STACKIT server agent provisioning during the first boot of the server. Only
+	 * works when booting from an images that supports the STACKIT server agent. When
+	 * &#x60;false&#x60; the agent IS NOT installed. When &#x60;true&#x60; the agent IS installed.
+	 * When its not set the result depend on the used image and its default provisioning setting.
 	 *
-	 * @return labels
+	 * @return provisioned
 	 */
-	@javax.annotation.Nullable public Object getLabels() {
-		return labels;
+	@javax.annotation.Nullable public Boolean getProvisioned() {
+		return provisioned;
 	}
 
-	public void setLabels(@javax.annotation.Nullable Object labels) {
-		this.labels = labels;
+	public void setProvisioned(@javax.annotation.Nullable Boolean provisioned) {
+		this.provisioned = provisioned;
 	}
 
 	@Override
@@ -70,21 +70,20 @@ public class UpdateNetworkAreaRoutePayload {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		UpdateNetworkAreaRoutePayload updateNetworkAreaRoutePayload =
-				(UpdateNetworkAreaRoutePayload) o;
-		return Objects.equals(this.labels, updateNetworkAreaRoutePayload.labels);
+		ServerAgent serverAgent = (ServerAgent) o;
+		return Objects.equals(this.provisioned, serverAgent.provisioned);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(labels);
+		return Objects.hash(provisioned);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class UpdateNetworkAreaRoutePayload {\n");
-		sb.append("    labels: ").append(toIndentedString(labels)).append("\n");
+		sb.append("class ServerAgent {\n");
+		sb.append("    provisioned: ").append(toIndentedString(provisioned)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}
@@ -105,7 +104,7 @@ public class UpdateNetworkAreaRoutePayload {
 
 	static {
 		// a set of all properties/fields (JSON key names)
-		openapiFields = new HashSet<String>(Arrays.asList("labels"));
+		openapiFields = new HashSet<String>(Arrays.asList("provisioned"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(0);
@@ -115,27 +114,26 @@ public class UpdateNetworkAreaRoutePayload {
 	 * Validates the JSON Element and throws an exception if issues found
 	 *
 	 * @param jsonElement JSON Element
-	 * @throws IOException if the JSON Element is invalid with respect to
-	 *     UpdateNetworkAreaRoutePayload
+	 * @throws IOException if the JSON Element is invalid with respect to ServerAgent
 	 */
 	public static void validateJsonElement(JsonElement jsonElement) throws IOException {
 		if (jsonElement == null) {
-			if (!UpdateNetworkAreaRoutePayload.openapiRequiredFields
+			if (!ServerAgent.openapiRequiredFields
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
-								"The required field(s) %s in UpdateNetworkAreaRoutePayload is not found in the empty JSON string",
-								UpdateNetworkAreaRoutePayload.openapiRequiredFields.toString()));
+								"The required field(s) %s in ServerAgent is not found in the empty JSON string",
+								ServerAgent.openapiRequiredFields.toString()));
 			}
 		}
 
 		Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
 		// check to see if the JSON string contains additional fields
 		for (Map.Entry<String, JsonElement> entry : entries) {
-			if (!UpdateNetworkAreaRoutePayload.openapiFields.contains(entry.getKey())) {
+			if (!ServerAgent.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
-								"The field `%s` in the JSON string is not defined in the `UpdateNetworkAreaRoutePayload` properties. JSON: %s",
+								"The field `%s` in the JSON string is not defined in the `ServerAgent` properties. JSON: %s",
 								entry.getKey(), jsonElement.toString()));
 			}
 		}
@@ -146,27 +144,23 @@ public class UpdateNetworkAreaRoutePayload {
 		@SuppressWarnings("unchecked")
 		@Override
 		public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-			if (!UpdateNetworkAreaRoutePayload.class.isAssignableFrom(type.getRawType())) {
-				return null; // this class only serializes 'UpdateNetworkAreaRoutePayload' and its
-				// subtypes
+			if (!ServerAgent.class.isAssignableFrom(type.getRawType())) {
+				return null; // this class only serializes 'ServerAgent' and its subtypes
 			}
 			final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-			final TypeAdapter<UpdateNetworkAreaRoutePayload> thisAdapter =
-					gson.getDelegateAdapter(
-							this, TypeToken.get(UpdateNetworkAreaRoutePayload.class));
+			final TypeAdapter<ServerAgent> thisAdapter =
+					gson.getDelegateAdapter(this, TypeToken.get(ServerAgent.class));
 
 			return (TypeAdapter<T>)
-					new TypeAdapter<UpdateNetworkAreaRoutePayload>() {
+					new TypeAdapter<ServerAgent>() {
 						@Override
-						public void write(JsonWriter out, UpdateNetworkAreaRoutePayload value)
-								throws IOException {
+						public void write(JsonWriter out, ServerAgent value) throws IOException {
 							JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
 							elementAdapter.write(out, obj);
 						}
 
 						@Override
-						public UpdateNetworkAreaRoutePayload read(JsonReader in)
-								throws IOException {
+						public ServerAgent read(JsonReader in) throws IOException {
 							JsonElement jsonElement = elementAdapter.read(in);
 							validateJsonElement(jsonElement);
 							return thisAdapter.fromJsonTree(jsonElement);
@@ -176,19 +170,18 @@ public class UpdateNetworkAreaRoutePayload {
 	}
 
 	/**
-	 * Create an instance of UpdateNetworkAreaRoutePayload given an JSON string
+	 * Create an instance of ServerAgent given an JSON string
 	 *
 	 * @param jsonString JSON string
-	 * @return An instance of UpdateNetworkAreaRoutePayload
-	 * @throws IOException if the JSON string is invalid with respect to
-	 *     UpdateNetworkAreaRoutePayload
+	 * @return An instance of ServerAgent
+	 * @throws IOException if the JSON string is invalid with respect to ServerAgent
 	 */
-	public static UpdateNetworkAreaRoutePayload fromJson(String jsonString) throws IOException {
-		return JSON.getGson().fromJson(jsonString, UpdateNetworkAreaRoutePayload.class);
+	public static ServerAgent fromJson(String jsonString) throws IOException {
+		return JSON.getGson().fromJson(jsonString, ServerAgent.class);
 	}
 
 	/**
-	 * Convert an instance of UpdateNetworkAreaRoutePayload to an JSON string
+	 * Convert an instance of ServerAgent to an JSON string
 	 *
 	 * @return JSON string
 	 */
