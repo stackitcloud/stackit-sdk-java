@@ -54,7 +54,7 @@ public class ResourceManagerApi extends DefaultApi {
 	 * Constructor for ResourceManagerApi
 	 *
 	 * @param httpClient OkHttpClient object
-	 * @param configuraction your STACKIT SDK CoreConfiguration
+	 * @param configuration your STACKIT SDK CoreConfiguration
 	 * @throws IOException
 	 */
 	public ResourceManagerApi(OkHttpClient httpClient, CoreConfiguration configuration)
