@@ -257,9 +257,9 @@ public class Volume {
 
 	/**
 	 * Object that represents the labels of an object. Regex for keys:
-	 * &#x60;^[a-z]((-|_|[a-z0-9])){0,62}$&#x60;. Regex for values:
-	 * &#x60;^(-|_|[a-z0-9]){0,63}$&#x60;. Providing a &#x60;null&#x60; value for a key will remove
-	 * that key.
+	 * &#x60;^(?&#x3D;.{1,63}$)([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$&#x60;. Regex for values:
+	 * &#x60;^(?&#x3D;.{0,63}$)(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])*$&#x60;. Providing a
+	 * &#x60;null&#x60; value for a key will remove that key.
 	 *
 	 * @return labels
 	 */
