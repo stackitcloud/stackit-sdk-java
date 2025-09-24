@@ -1,5 +1,6 @@
 package cloud.stackit.sdk.core;
 
+import cloud.stackit.sdk.core.auth.SetupAuth;
 import cloud.stackit.sdk.core.config.CoreConfiguration;
 import cloud.stackit.sdk.core.config.EnvironmentVariables;
 import cloud.stackit.sdk.core.exception.ApiException;
@@ -23,16 +24,18 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import okhttp3.*;
+import org.jetbrains.annotations.NotNull;
 
-/** KeyFlowAuthenticator handles the Key Flow Authentication based on the Service Account Key. */
-public class KeyFlowAuthenticator {
-	private final String REFRESH_TOKEN = "refresh_token";
-	private final String ASSERTION = "assertion";
-	private final String DEFAULT_TOKEN_ENDPOINT = "https://service-account.api.stackit.cloud/token";
-	private final long DEFAULT_TOKEN_LEEWAY = 60;
-	private final int CONNECT_TIMEOUT = 10;
-	private final int WRITE_TIMEOUT = 10;
-	private final int READ_TIMEOUT = 10;
+/* KeyFlowAuthenticator handles the Key Flow Authentication based on the Service Account Key. */
+public class KeyFlowAuthenticator implements Authenticator {
+	private static final String REFRESH_TOKEN = "refresh_token";
+	private static final String ASSERTION = "assertion";
+	private static final String DEFAULT_TOKEN_ENDPOINT =
+			"https://service-account.api.stackit.cloud/token";
+	private static final long DEFAULT_TOKEN_LEEWAY = 60;
+	private static final int CONNECT_TIMEOUT = 10;
+	private static final int WRITE_TIMEOUT = 10;
+	private static final int READ_TIMEOUT = 10;
 
 	private final OkHttpClient httpClient;
 	private final ServiceAccountKey saKey;
@@ -40,6 +43,100 @@ public class KeyFlowAuthenticator {
 	private final Gson gson;
 	private final String tokenUrl;
 	private long tokenLeewayInSeconds = DEFAULT_TOKEN_LEEWAY;
+
+	/**
+	 * Creates the initial service account and refreshes expired access token.
+	 *
+	 * @deprecated use constructor with OkHttpClient instead to prevent resource leaks. Will be
+	 *     removed in April 2026.
+	 * @param cfg Configuration to set a custom token endpoint and the token expiration leeway.
+	 * @param saKey Service Account Key, which should be used for the authentication
+	 */
+	@Deprecated
+	public KeyFlowAuthenticator(CoreConfiguration cfg, ServiceAccountKey saKey) {
+		this(new OkHttpClient(), cfg, saKey, new EnvironmentVariables());
+	}
+
+	/**
+	 * Creates the initial service account and refreshes expired access token.
+	 *
+	 * @deprecated use constructor with OkHttpClient instead to prevent resource leaks. Will be
+	 *     removed in April 2026.
+	 * @param cfg Configuration to set a custom token endpoint and the token expiration leeway.
+	 * @param saKey Service Account Key, which should be used for the authentication
+	 */
+	@Deprecated
+	public KeyFlowAuthenticator(
+			CoreConfiguration cfg,
+			ServiceAccountKey saKey,
+			EnvironmentVariables environmentVariables) {
+		this(new OkHttpClient(), cfg, saKey, environmentVariables);
+	}
+
+	/**
+	 * Creates the initial service account and refreshes expired access token.
+	 *
+	 * @param httpClient OkHttpClient object
+	 * @param cfg Configuration to set a custom token endpoint and the token expiration leeway.
+	 */
+	public KeyFlowAuthenticator(OkHttpClient httpClient, CoreConfiguration cfg) throws IOException {
+		this(httpClient, cfg, SetupAuth.setupKeyFlow(cfg), new EnvironmentVariables());
+	}
+
+	/**
+	 * Creates the initial service account and refreshes expired access token.
+	 *
+	 * @param httpClient OkHttpClient object
+	 * @param cfg Configuration to set a custom token endpoint and the token expiration leeway.
+	 * @param saKey Service Account Key, which should be used for the authentication
+	 */
+	public KeyFlowAuthenticator(
+			OkHttpClient httpClient, CoreConfiguration cfg, ServiceAccountKey saKey) {
+		this(httpClient, cfg, saKey, new EnvironmentVariables());
+	}
+
+	protected KeyFlowAuthenticator(
+			OkHttpClient httpClient,
+			CoreConfiguration cfg,
+			ServiceAccountKey saKey,
+			EnvironmentVariables environmentVariables) {
+		this.saKey = saKey;
+		this.gson = new Gson();
+		this.httpClient =
+				httpClient
+						.newBuilder()
+						.connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
+						.writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
+						.readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+						.build();
+
+		if (Utils.isStringSet(cfg.getTokenCustomUrl())) {
+			this.tokenUrl = cfg.getTokenCustomUrl();
+		} else if (Utils.isStringSet(environmentVariables.getStackitTokenBaseurl())) {
+			this.tokenUrl = environmentVariables.getStackitTokenBaseurl();
+		} else {
+			this.tokenUrl = DEFAULT_TOKEN_ENDPOINT;
+		}
+		if (cfg.getTokenExpirationLeeway() != null && cfg.getTokenExpirationLeeway() > 0) {
+			this.tokenLeewayInSeconds = cfg.getTokenExpirationLeeway();
+		}
+	}
+
+	@Override
+	public Request authenticate(Route route, @NotNull Response response) throws IOException {
+		String accessToken;
+		try {
+			accessToken = getAccessToken();
+		} catch (ApiException | InvalidKeySpecException e) {
+			throw new RuntimeException(e);
+		}
+
+		// Return a new request with the refreshed token
+		return response.request()
+				.newBuilder()
+				.header("Authorization", "Bearer " + accessToken)
+				.build();
+	}
 
 	protected static class KeyFlowTokenResponse {
 		@SerializedName("access_token")
@@ -76,45 +173,6 @@ public class KeyFlowAuthenticator {
 
 		protected String getAccessToken() {
 			return accessToken;
-		}
-	}
-
-	public KeyFlowAuthenticator(CoreConfiguration cfg, ServiceAccountKey saKey) {
-		this(cfg, saKey, null);
-	}
-
-	/**
-	 * Creates the initial service account and refreshes expired access token.
-	 *
-	 * @param cfg Configuration to set a custom token endpoint and the token expiration leeway.
-	 * @param saKey Service Account Key, which should be used for the authentication
-	 */
-	public KeyFlowAuthenticator(
-			CoreConfiguration cfg,
-			ServiceAccountKey saKey,
-			EnvironmentVariables environmentVariables) {
-		this.saKey = saKey;
-		this.gson = new Gson();
-		this.httpClient =
-				new OkHttpClient.Builder()
-						.connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
-						.writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
-						.readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-						.build();
-
-		if (environmentVariables == null) {
-			environmentVariables = new EnvironmentVariables();
-		}
-
-		if (Utils.isStringSet(cfg.getTokenCustomUrl())) {
-			this.tokenUrl = cfg.getTokenCustomUrl();
-		} else if (Utils.isStringSet(environmentVariables.getStackitTokenBaseurl())) {
-			this.tokenUrl = environmentVariables.getStackitTokenBaseurl();
-		} else {
-			this.tokenUrl = DEFAULT_TOKEN_ENDPOINT;
-		}
-		if (cfg.getTokenExpirationLeeway() != null && cfg.getTokenExpirationLeeway() > 0) {
-			this.tokenLeewayInSeconds = cfg.getTokenExpirationLeeway();
 		}
 	}
 

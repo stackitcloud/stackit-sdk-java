@@ -12,7 +12,7 @@
 
 package cloud.stackit.sdk.resourcemanager;
 
-import cloud.stackit.sdk.core.auth.SetupAuth;
+import cloud.stackit.sdk.core.KeyFlowAuthenticator;
 import cloud.stackit.sdk.core.config.CoreConfiguration;
 import cloud.stackit.sdk.core.exception.ApiException;
 import java.io.File;
@@ -89,22 +89,50 @@ public class ApiClient {
 	protected JSON json;
 
 	protected HttpLoggingInterceptor loggingInterceptor;
-	protected SetupAuth authenticationInterceptor;
 
 	protected CoreConfiguration configuration;
 
-	/** Basic constructor for ApiClient */
+	/**
+	 * Basic constructor for ApiClient.
+	 *
+	 * <p>Not recommended for production use, use the one with the OkHttpClient parameter instead.
+	 *
+	 * @throws IOException thrown when a file can not be found
+	 */
 	public ApiClient() throws IOException {
-		this(new CoreConfiguration());
+		this(null, new CoreConfiguration());
 	}
 
 	/**
-	 * Basic constructor with custom CoreConfiguration
+	 * Basic constructor for ApiClient
 	 *
-	 * @param config a {@link cloud.stackit.sdk.core.config} object
+	 * <p>Not recommended for production use, use the one with the OkHttpClient parameter instead.
+	 *
+	 * @param config a {@link cloud.stackit.sdk.core.config.CoreConfiguration} object
 	 * @throws IOException thrown when a file can not be found
 	 */
 	public ApiClient(CoreConfiguration config) throws IOException {
+		this(null, config);
+	}
+
+	/**
+	 * Constructor for ApiClient with OkHttpClient parameter. Recommended for production use.
+	 *
+	 * @param httpClient a OkHttpClient object
+	 * @throws IOException thrown when a file can not be found
+	 */
+	public ApiClient(OkHttpClient httpClient) throws IOException {
+		this(httpClient, new CoreConfiguration());
+	}
+
+	/**
+	 * Constructor for ApiClient with OkHttpClient parameter. Recommended for production use.
+	 *
+	 * @param httpClient a OkHttpClient object
+	 * @param config a {@link cloud.stackit.sdk.core.config.CoreConfiguration} object
+	 * @throws IOException thrown when a file can not be found
+	 */
+	public ApiClient(OkHttpClient httpClient, CoreConfiguration config) throws IOException {
 		init();
 
 		if (config.getCustomEndpoint() != null && !config.getCustomEndpoint().trim().isEmpty()) {
@@ -115,13 +143,15 @@ public class ApiClient {
 		}
 		this.configuration = config;
 
-		// Setup AuthHandler
-		SetupAuth auth;
-		auth = new SetupAuth(config);
-		auth.init();
-		authenticationInterceptor = auth;
-
-		initHttpClient();
+		if (httpClient == null) {
+			initHttpClient();
+			KeyFlowAuthenticator authenticator = new KeyFlowAuthenticator(this.httpClient, config);
+			this.httpClient = this.httpClient.newBuilder().authenticator(authenticator).build();
+		} else {
+			// Authorization has to be configured manually in case a custom http client object is
+			// passed
+			this.httpClient = httpClient;
+		}
 	}
 
 	protected void initHttpClient() {
@@ -134,8 +164,6 @@ public class ApiClient {
 		for (Interceptor interceptor : interceptors) {
 			builder.addInterceptor(interceptor);
 		}
-		// Adds the Authorization header to requests
-		builder.addInterceptor(authenticationInterceptor.getAuthHandler());
 
 		httpClient = builder.build();
 	}
@@ -195,6 +223,15 @@ public class ApiClient {
 	public ApiClient setServerVariables(Map<String, String> serverVariables) {
 		this.serverVariables = serverVariables;
 		return this;
+	}
+
+	/**
+	 * Get HTTP client
+	 *
+	 * @return An instance of OkHttpClient
+	 */
+	public OkHttpClient getHttpClient() {
+		return httpClient;
 	}
 
 	/**

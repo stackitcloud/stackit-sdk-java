@@ -57,7 +57,12 @@ Add the dependencies to your project's build file (replace `<SDK_VERSION>` with 
 
 ## Examples
 
-Examples on services, configuration and authentication possibilities can be found in the [examples folder](https://github.com/stackitcloud/stackit-sdk-java/tree/main/examples).
+Examples on services, configuration and authentication possibilities can be found in the [examples folder](/examples).
+
+> [!WARNING]
+> For production usage, especially when working with multiple STACKIT SDK modules, consider passing your own `OkHttpClient` 
+> object (as recommended in the [OkHttpClient lib docs](https://square.github.io/okhttp/3.x/okhttp/index.html?okhttp3/OkHttpClient.html)).
+> See our [custom HTTP client example](/examples/custom-http-client/src/main/java/cloud/stackit/sdk/customhttpclient/examples/CustomHttpClientExample.java) for reference.
 
 ## Authorization
 

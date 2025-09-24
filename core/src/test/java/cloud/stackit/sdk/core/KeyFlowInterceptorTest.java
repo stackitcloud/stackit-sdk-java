@@ -18,7 +18,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+/*
+ * @deprecated use KeyFlowAuthenticator instead. Will be removed in April 2026.
+ * */
 @ExtendWith(MockitoExtension.class)
+@Deprecated
 class KeyFlowInterceptorTest {
 
 	@Mock private KeyFlowAuthenticator authenticator;
