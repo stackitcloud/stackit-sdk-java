@@ -8,14 +8,14 @@
     - Marked `KeyFlowInterceptor` class as deprecated, use `KeyFlowAuthenticator` instead
     - Marked `SetupAuth` constructors and methods `SetupAuth.init()` and `SetupAuth.getAuthHandler()` as deprecated
       - all other methods of `SetupAuth` are marked as `static` now, only these will remain in the future
-- `iaas`: [v0.2.0](iaas/CHANGELOG.md#v020)
+- `iaas`: [v0.2.0](services/iaas/CHANGELOG.md#v020)
   - **Feature:** Support for passing custom OkHttpClient objects
     - `ApiClient`
       - Added constructors with `OkHttpClient` param (recommended for production use)
       - Use new `KeyFlowAuthenticator` `okhttp3.Authenticator` implementation instead of request interceptor for authentication
     - `DefaultApi`: Added constructors with `OkHttpClient` param (recommended for production use)
     - `IaasApi`: Added constructors with `OkHttpClient` param (recommended for production use)
-- `resourcemanager`: [v0.2.0](resourcemanager/CHANGELOG.md#v020)
+- `resourcemanager`: [v0.2.0](services/resourcemanager/CHANGELOG.md#v020)
   - **Feature:** Support for passing custom OkHttpClient objects
     - `ApiClient`
       - Added constructors with `OkHttpClient` param (recommended for production use)
