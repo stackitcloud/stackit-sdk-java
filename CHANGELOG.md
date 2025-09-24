@@ -8,13 +8,19 @@
     - Marked `KeyFlowInterceptor` class as deprecated, use `KeyFlowAuthenticator` instead
     - Marked `SetupAuth` constructors and methods `SetupAuth.init()` and `SetupAuth.getAuthHandler()` as deprecated
       - all other methods of `SetupAuth` are marked as `static` now, only these will remain in the future
-- `iaas`: [v0.2.0](services/iaas/CHANGELOG.md#v020)
-  - **Feature:** Support for passing custom OkHttpClient objects
-    - `ApiClient`
-      - Added constructors with `OkHttpClient` param (recommended for production use)
-      - Use new `KeyFlowAuthenticator` `okhttp3.Authenticator` implementation instead of request interceptor for authentication
-    - `DefaultApi`: Added constructors with `OkHttpClient` param (recommended for production use)
-    - `IaasApi`: Added constructors with `OkHttpClient` param (recommended for production use)
+- `iaas`: 
+  - [v0.3.0](services/iaas/CHANGELOG.md#v030)
+    - **Feature:** Add `createdAt` and `updatedAt` attributes to `SecurityGroupRule`, `BaseSecurityGroupRule`, `CreateSecurityGroupRulePayload` model classes
+    - **Feature:** Add `description` attribute to `CreateNicPayload`, `NIC`, `UpdateNicPayload` model classes
+    - **Feature:** New model class `ServerAgent`
+    - **Feature:** Add `agent` attribute to `Server`, `CreateServerPayload` model classes
+  - [v0.2.0](services/iaas/CHANGELOG.md#v020)
+    - **Feature:** Support for passing custom OkHttpClient objects
+      - `ApiClient`
+        - Added constructors with `OkHttpClient` param (recommended for production use)
+        - Use new `KeyFlowAuthenticator` `okhttp3.Authenticator` implementation instead of request interceptor for authentication
+      - `DefaultApi`: Added constructors with `OkHttpClient` param (recommended for production use)
+      - `IaasApi`: Added constructors with `OkHttpClient` param (recommended for production use)
 - `resourcemanager`: [v0.2.0](services/resourcemanager/CHANGELOG.md#v020)
   - **Feature:** Support for passing custom OkHttpClient objects
     - `ApiClient`

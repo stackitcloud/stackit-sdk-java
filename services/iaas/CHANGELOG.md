@@ -1,3 +1,9 @@
+## v0.3.0
+- **Feature:** Add `createdAt` and `updatedAt` attributes to `SecurityGroupRule`, `BaseSecurityGroupRule`, `CreateSecurityGroupRulePayload` model classes
+- **Feature:** Add `description` attribute to `CreateNicPayload`, `NIC`, `UpdateNicPayload` model classes
+- **Feature:** New model class `ServerAgent`
+- **Feature:** Add `agent` attribute to `Server`, `CreateServerPayload` model classes
+
 ## v0.2.0
 - **Feature:** Support for passing custom OkHttpClient objects
   - `ApiClient`
