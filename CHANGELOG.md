@@ -1,4 +1,4 @@
-## Release (2025-XX-XX)
+## Release (2025-09-30)
 - `core`: [v0.2.0](core/CHANGELOG.md#v020)
   - **Feature:** Support for passing custom OkHttpClient objects
     - `KeyFlowAuthenticator`: Add new constructors with an `OkHttpClientParam`
