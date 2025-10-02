@@ -5,14 +5,16 @@ import java.util.Map;
 
 /** ApiException class. */
 public class ApiException extends Exception {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 8115526329759018011L;
 
-	private int code = 0;
-	private Map<String, List<String>> responseHeaders = null;
-	private String responseBody = null;
+	private int code;
+	private Map<String, List<String>> responseHeaders;
+	private String responseBody;
 
 	/** Constructor for ApiException. */
-	public ApiException() {}
+	public ApiException() {
+		super();
+	}
 
 	/**
 	 * Constructor for ApiException.
@@ -162,6 +164,7 @@ public class ApiException extends Exception {
 	 *
 	 * @return The exception message
 	 */
+	@Override
 	public String getMessage() {
 		return String.format(
 				"Message: %s%nHTTP response code: %s%nHTTP response body: %s%nHTTP response headers: %s",

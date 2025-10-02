@@ -13,6 +13,7 @@ import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -47,7 +48,8 @@ class KeyFlowInterceptorTest {
 	}
 
 	@Test
-	void intercept_addsAuthHeader()
+	@DisplayName("intercept adds auth header")
+	void interceptAddsAuthHeader()
 			throws IOException, InvalidKeySpecException, ApiException, InterruptedException {
 		final String accessToken = "my-access-token";
 		when(authenticator.getAccessToken()).thenReturn(accessToken);

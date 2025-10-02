@@ -7,36 +7,36 @@ import org.junit.jupiter.api.Test;
 class UtilsTest {
 
 	@Test
-	void isStringSet_null_returnsFalse() {
+	void isStringSetNull() {
 		assertFalse(Utils.isStringSet(null));
 	}
 
 	@Test
-	void isStringSet_nullString_returnsFalse() {
+	void isStringSetNullString() {
 		String nullString = null;
 		assertFalse(Utils.isStringSet(nullString));
 	}
 
 	@Test
-	void isStringSet_emptyString_returnsFalse() {
+	void isStringSetEmptyString() {
 		String nullString = "";
 		assertFalse(Utils.isStringSet(nullString));
 	}
 
 	@Test
-	void isStringSet_stringWithWhitespaces_returnsFalse() {
+	void isStringSetStringWithWhitespaces() {
 		String nullString = "    ";
 		assertFalse(Utils.isStringSet(nullString));
 	}
 
 	@Test
-	void isStringSet_stringWithText_returnsTrue() {
+	void isStringSetStringWithText() {
 		String nullString = "text";
 		assertTrue(Utils.isStringSet(nullString));
 	}
 
 	@Test
-	void isStringSet_stringWithTextAndWhitespaces_returnsTrue() {
+	void isStringSetStringWithTextAndWhitespaces() {
 		String nullString = " text ";
 		assertTrue(Utils.isStringSet(nullString));
 	}

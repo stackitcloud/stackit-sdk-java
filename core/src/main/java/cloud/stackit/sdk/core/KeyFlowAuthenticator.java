@@ -19,14 +19,19 @@ import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
 
-/* KeyFlowAuthenticator handles the Key Flow Authentication based on the Service Account Key. */
+/*
+ * KeyFlowAuthenticator handles the Key Flow Authentication based on the Service Account Key.
+ */
 public class KeyFlowAuthenticator implements Authenticator {
 	private static final String REFRESH_TOKEN = "refresh_token";
 	private static final String ASSERTION = "assertion";
@@ -43,6 +48,8 @@ public class KeyFlowAuthenticator implements Authenticator {
 	private final Gson gson;
 	private final String tokenUrl;
 	private long tokenLeewayInSeconds = DEFAULT_TOKEN_LEEWAY;
+
+	Lock tokenRefreshLock = new ReentrantLock();
 
 	/**
 	 * Creates the initial service account and refreshes expired access token.
@@ -140,19 +147,19 @@ public class KeyFlowAuthenticator implements Authenticator {
 
 	protected static class KeyFlowTokenResponse {
 		@SerializedName("access_token")
-		private String accessToken;
+		private final String accessToken;
 
 		@SerializedName("refresh_token")
-		private String refreshToken;
+		private final String refreshToken;
 
 		@SerializedName("expires_in")
 		private long expiresIn;
 
 		@SerializedName("scope")
-		private String scope;
+		private final String scope;
 
 		@SerializedName("token_type")
-		private String tokenType;
+		private final String tokenType;
 
 		public KeyFlowTokenResponse(
 				String accessToken,
@@ -184,13 +191,21 @@ public class KeyFlowAuthenticator implements Authenticator {
 	 * @throws IOException request for new access token failed
 	 * @throws ApiException response for new access token with bad status code
 	 */
-	public synchronized String getAccessToken()
+	public String getAccessToken()
 			throws IOException, ApiException, InvalidKeySpecException {
-		if (token == null) {
-			createAccessToken();
-		} else if (token.isExpired()) {
-			createAccessTokenWithRefreshToken();
+		try {
+			tokenRefreshLock.lock();
+
+			if (token == null) {
+				createAccessToken();
+			} else if (token.isExpired()) {
+				createAccessTokenWithRefreshToken();
+			}
 		}
+		finally {
+			tokenRefreshLock.unlock();
+		}
+
 		return token.getAccessToken();
 	}
 
@@ -204,7 +219,6 @@ public class KeyFlowAuthenticator implements Authenticator {
 	 */
 	protected void createAccessToken()
 			throws InvalidKeySpecException, IOException, JsonSyntaxException, ApiException {
-		String grant = "urn:ietf:params:oauth:grant-type:jwt-bearer";
 		String assertion;
 		try {
 			assertion = generateSelfSignedJWT();
@@ -213,9 +227,11 @@ public class KeyFlowAuthenticator implements Authenticator {
 					"could not find required algorithm for jwt signing. This should not happen and should be reported on https://github.com/stackitcloud/stackit-sdk-java/issues",
 					e);
 		}
-		Response response = requestToken(grant, assertion).execute();
-		parseTokenResponse(response);
-		response.close();
+
+		String grant = "urn:ietf:params:oauth:grant-type:jwt-bearer";
+		try (Response response = requestToken(grant, assertion).execute()) {
+			parseTokenResponse(response);
+		}
 	}
 
 	/**
@@ -228,13 +244,13 @@ public class KeyFlowAuthenticator implements Authenticator {
 	protected synchronized void createAccessTokenWithRefreshToken()
 			throws IOException, JsonSyntaxException, ApiException {
 		String refreshToken = token.refreshToken;
-		Response response = requestToken(REFRESH_TOKEN, refreshToken).execute();
-		parseTokenResponse(response);
-		response.close();
+		try (Response response = requestToken(REFRESH_TOKEN, refreshToken).execute()) {
+			parseTokenResponse(response);
+		}
 	}
 
 	private synchronized void parseTokenResponse(Response response)
-			throws ApiException, JsonSyntaxException, IOException {
+			throws ApiException, JsonSyntaxException {
 		if (response.code() != HttpURLConnection.HTTP_OK) {
 			String body = null;
 			if (response.body() != null) {
@@ -256,10 +272,10 @@ public class KeyFlowAuthenticator implements Authenticator {
 		response.body().close();
 	}
 
-	private Call requestToken(String grant, String assertionValue) throws IOException {
+	private Call requestToken(String grant, String assertionValue) {
 		FormBody.Builder bodyBuilder = new FormBody.Builder();
 		bodyBuilder.addEncoded("grant_type", grant);
-		String assertionKey = grant.equals(REFRESH_TOKEN) ? REFRESH_TOKEN : ASSERTION;
+		String assertionKey = REFRESH_TOKEN.equals(grant) ? REFRESH_TOKEN : ASSERTION;
 		bodyBuilder.addEncoded(assertionKey, assertionValue);
 		FormBody body = bodyBuilder.build();
 
@@ -289,7 +305,7 @@ public class KeyFlowAuthenticator implements Authenticator {
 		prvKey = saKey.getCredentials().getPrivateKeyParsed();
 		Algorithm algorithm = Algorithm.RSA512(prvKey);
 
-		Map<String, Object> jwtHeader = new HashMap<>();
+		Map<String, Object> jwtHeader = new ConcurrentHashMap<>();
 		jwtHeader.put("kid", saKey.getCredentials().getKid());
 
 		return JWT.create()
