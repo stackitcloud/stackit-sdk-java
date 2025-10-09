@@ -37,7 +37,7 @@ public class KeyFlowInterceptor implements Interceptor {
 		} catch (InvalidKeySpecException | ApiException e) {
 			// try-catch required, because ApiException can not be thrown in the implementation
 			// of Interceptor.intercept(Chain chain)
-			throw new RuntimeException(e);
+			throw new IllegalStateException(e);
 		}
 
 		Request authenticatedRequest =

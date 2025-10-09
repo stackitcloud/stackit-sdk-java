@@ -80,7 +80,7 @@ public class SetupAuth {
 	@Deprecated
 	public Interceptor getAuthHandler() {
 		if (authHandler == null) {
-			throw new RuntimeException("init() has to be called first");
+			throw new IllegalStateException("init() has to be called first");
 		}
 		return authHandler;
 	}

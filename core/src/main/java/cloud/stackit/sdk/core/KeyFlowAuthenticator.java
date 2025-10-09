@@ -134,7 +134,7 @@ public class KeyFlowAuthenticator implements Authenticator {
 		try {
 			accessToken = getAccessToken();
 		} catch (ApiException | InvalidKeySpecException e) {
-			throw new RuntimeException(e);
+			throw new IllegalStateException(e);
 		}
 
 		// Return a new request with the refreshed token
@@ -220,7 +220,7 @@ public class KeyFlowAuthenticator implements Authenticator {
 		try {
 			assertion = generateSelfSignedJWT();
 		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(
+			throw new IllegalStateException(
 					"could not find required algorithm for jwt signing. This should not happen and should be reported on https://github.com/stackitcloud/stackit-sdk-java/issues",
 					e);
 		}
