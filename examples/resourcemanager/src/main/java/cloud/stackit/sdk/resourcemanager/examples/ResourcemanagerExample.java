@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.UUID;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 final class ResourcemanagerExample {
@@ -55,13 +56,17 @@ final class ResourcemanagerExample {
 									.labels(
 											Collections.singletonMap(
 													"some-project-label", "foo-bar")));
-			LOGGER.info("Project:\n" + project.toString());
+			if (LOGGER.isLoggable(Level.INFO)) {
+				LOGGER.info("Project:\n" + project.toString());
+			}
 
 			/* list projects */
 			ListProjectsResponse responseListProject =
 					resourceManagerApi.listProjects(
 							organizationIdString, null, null, null, null, null);
-			LOGGER.info("Project List:\n" + responseListProject.toString());
+			if (LOGGER.isLoggable(Level.INFO)) {
+				LOGGER.info("Project List:\n" + responseListProject.toString());
+			}
 
 			/* create a folder */
 			FolderResponse folder =
@@ -70,13 +75,17 @@ final class ResourcemanagerExample {
 									.containerParentId(containerParentId.toString())
 									.name("java-testing-folder")
 									.labels(Collections.singletonMap("foo", "bar")));
-			LOGGER.info("Folder: \n" + folder.toString());
+			if (LOGGER.isLoggable(Level.INFO)) {
+				LOGGER.info("Folder: \n" + folder.toString());
+			}
 
 			/* list folders */
 			ListFoldersResponse responseListFolders =
 					resourceManagerApi.listFolders(
 							organizationIdString, null, null, null, null, null);
-			LOGGER.info("Folder List:\n" + responseListFolders.toString());
+			if (LOGGER.isLoggable(Level.INFO)) {
+				LOGGER.info("Folder List:\n" + responseListFolders.toString());
+			}
 
 			/* delete a project label */
 			resourceManagerApi.deleteProjectLabels(project.getContainerId(), Arrays.asList("foo"));
@@ -98,7 +107,9 @@ final class ResourcemanagerExample {
 			/* get organization details */
 			OrganizationResponse organizationResponse =
 					resourceManagerApi.getOrganization(organizationIdString);
-			LOGGER.info("Organization List:\n" + organizationResponse.toString());
+			if (LOGGER.isLoggable(Level.INFO)) {
+				LOGGER.info("Organization List:\n" + organizationResponse.toString());
+			}
 
 			/* since you cannot delete a folder when a project is present we need to move the project out again */
 			resourceManagerApi.partialUpdateProject(

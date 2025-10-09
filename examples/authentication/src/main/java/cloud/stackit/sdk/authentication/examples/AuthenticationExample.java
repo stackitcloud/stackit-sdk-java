@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 final class AuthenticationExample {
@@ -32,7 +33,9 @@ final class AuthenticationExample {
 			ListOrganizationsResponse response =
 					api.listOrganizations(null, SERVICE_ACCOUNT_MAIL, null, null, null);
 
-			LOGGER.info(response.toString());
+			if (LOGGER.isLoggable(Level.INFO)) {
+				LOGGER.info(response.toString());
+			}
 		} catch (ApiException | IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -84,7 +87,9 @@ final class AuthenticationExample {
 			ListOrganizationsResponse response =
 					api.listOrganizations(null, SERVICE_ACCOUNT_MAIL, null, null, null);
 
-			LOGGER.info(response.toString());
+			if (LOGGER.isLoggable(Level.INFO)) {
+				LOGGER.info(response.toString());
+			}
 		} catch (ApiException | IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -121,7 +126,9 @@ final class AuthenticationExample {
 			ListOrganizationsResponse response =
 					api.listOrganizations(null, SERVICE_ACCOUNT_MAIL, null, null, null);
 
-			LOGGER.info(response.toString());
+			if (LOGGER.isLoggable(Level.INFO)) {
+				LOGGER.info(response.toString());
+			}
 		} catch (ApiException | IOException e) {
 			throw new RuntimeException(e);
 		}
