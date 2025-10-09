@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 final class ResourcemanagerExample {
 	private static final Logger LOGGER = Logger.getLogger(ResourcemanagerExample.class.getName());
 
+	@SuppressWarnings("PMD.NPathComplexity")
 	public static void main(String[] args) throws IOException {
 		// Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env
 		// STACKIT_SERVICE_ACCOUNT_KEY_PATH / STACKIT_SERVICE_ACCOUNT_KEY
