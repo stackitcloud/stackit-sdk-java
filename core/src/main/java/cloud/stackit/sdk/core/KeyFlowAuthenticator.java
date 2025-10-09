@@ -23,8 +23,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -48,7 +46,7 @@ public class KeyFlowAuthenticator implements Authenticator {
 	private final String tokenUrl;
 	private long tokenLeewayInSeconds = DEFAULT_TOKEN_LEEWAY;
 
-	private final Lock tokenRefreshLock = new ReentrantLock();
+	private final Object tokenRefreshMonitor = new Object();
 
 	/**
 	 * Creates the initial service account and refreshes expired access token.
@@ -190,20 +188,16 @@ public class KeyFlowAuthenticator implements Authenticator {
 	 * @throws IOException request for new access token failed
 	 * @throws ApiException response for new access token with bad status code
 	 */
+	@SuppressWarnings("PMD.AvoidSynchronizedStatement")
 	public String getAccessToken() throws IOException, ApiException, InvalidKeySpecException {
-		try {
-			tokenRefreshLock.lock();
-
+		synchronized (tokenRefreshMonitor) {
 			if (token == null) {
 				createAccessToken();
 			} else if (token.isExpired()) {
 				createAccessTokenWithRefreshToken();
 			}
-		} finally {
-			tokenRefreshLock.unlock();
+			return token.getAccessToken();
 		}
-
-		return token.getAccessToken();
 	}
 
 	/**
@@ -214,20 +208,23 @@ public class KeyFlowAuthenticator implements Authenticator {
 	 * @throws ApiException response for new access token with bad status code
 	 * @throws JsonSyntaxException parsing of the created access token failed
 	 */
+	@SuppressWarnings("PMD.AvoidSynchronizedStatement")
 	protected void createAccessToken()
 			throws InvalidKeySpecException, IOException, ApiException {
-		String assertion;
-		try {
-			assertion = generateSelfSignedJWT();
-		} catch (NoSuchAlgorithmException e) {
-			throw new IllegalStateException(
-					"could not find required algorithm for jwt signing. This should not happen and should be reported on https://github.com/stackitcloud/stackit-sdk-java/issues",
-					e);
-		}
+		synchronized (tokenRefreshMonitor) {
+			String assertion;
+			try {
+				assertion = generateSelfSignedJWT();
+			} catch (NoSuchAlgorithmException e) {
+				throw new IllegalStateException(
+						"could not find required algorithm for jwt signing. This should not happen and should be reported on https://github.com/stackitcloud/stackit-sdk-java/issues",
+						e);
+			}
 
-		String grant = "urn:ietf:params:oauth:grant-type:jwt-bearer";
-		try (Response response = requestToken(grant, assertion).execute()) {
-			parseTokenResponse(response);
+			String grant = "urn:ietf:params:oauth:grant-type:jwt-bearer";
+			try (Response response = requestToken(grant, assertion).execute()) {
+				parseTokenResponse(response);
+			}
 		}
 	}
 
@@ -238,11 +235,14 @@ public class KeyFlowAuthenticator implements Authenticator {
 	 * @throws ApiException response for new access token with bad status code
 	 * @throws JsonSyntaxException can not parse new access token
 	 */
-	protected synchronized void createAccessTokenWithRefreshToken()
+	@SuppressWarnings("PMD.AvoidSynchronizedStatement")
+	protected void createAccessTokenWithRefreshToken()
 			throws IOException, ApiException {
-		String refreshToken = token.refreshToken;
-		try (Response response = requestToken(REFRESH_TOKEN, refreshToken).execute()) {
-			parseTokenResponse(response);
+		synchronized (tokenRefreshMonitor) {
+			String refreshToken = token.refreshToken;
+			try (Response response = requestToken(REFRESH_TOKEN, refreshToken).execute()) {
+				parseTokenResponse(response);
+			}
 		}
 	}
 
@@ -253,7 +253,7 @@ public class KeyFlowAuthenticator implements Authenticator {
 	 * @throws ApiException if the response has a bad status code
 	 * @throws JsonSyntaxException if the response body cannot be parsed
 	 */
-	private synchronized void parseTokenResponse(Response response)
+	private void parseTokenResponse(Response response)
 			throws ApiException {
 		if (response.code() != HttpURLConnection.HTTP_OK) {
 			String body = null;
