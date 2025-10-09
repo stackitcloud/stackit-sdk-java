@@ -21,9 +21,10 @@ import okhttp3.OkHttpClient;
  * for everything to take advantage of the shared connection pool and to prevent resource leaks.
  *
  * */
+@SuppressWarnings("PMD.UseUtilityClass")
 final class CustomHttpClientExample {
 
-	@SuppressWarnings({"PMD.SystemPrintln", "PMD.UseUtilityClass"})
+	@SuppressWarnings("PMD.SystemPrintln")
 	public static void main(String[] args) throws IOException {
 		// Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env
 		// STACKIT_SERVICE_ACCOUNT_KEY_PATH / STACKIT_SERVICE_ACCOUNT_KEY

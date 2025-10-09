@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+@SuppressWarnings("PMD.UseUtilityClass")
 final class IaaSExample {
 
 	@SuppressWarnings({
@@ -17,8 +18,7 @@ final class IaaSExample {
 		"PMD.CognitiveComplexity",
 		"PMD.NPathComplexity",
 		"PMD.NcssCount",
-		"PMD.SystemPrintln",
-		"PMD.UseUtilityClass"
+		"PMD.SystemPrintln"
 	})
 	public static void main(String[] args) throws IOException {
 		/*
