@@ -56,7 +56,7 @@ public class CustomHttpClientExample {
 				}
 			}
 		} catch (ApiException e) {
-			throw new RuntimeException(e);
+			throw new IllegalStateException(e);
 		}
 	}
 }

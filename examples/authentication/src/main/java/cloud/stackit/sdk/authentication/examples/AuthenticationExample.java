@@ -37,7 +37,7 @@ final class AuthenticationExample {
 				LOGGER.info(response.toString());
 			}
 		} catch (ApiException | IOException e) {
-			throw new RuntimeException(e);
+			throw new IllegalStateException(e);
 		}
 
 		/*
@@ -97,7 +97,7 @@ final class AuthenticationExample {
 				LOGGER.info(response.toString());
 			}
 		} catch (ApiException | IOException e) {
-			throw new RuntimeException(e);
+			throw new IllegalStateException(e);
 		}
 
 		/*
@@ -136,7 +136,7 @@ final class AuthenticationExample {
 				LOGGER.info(response.toString());
 			}
 		} catch (ApiException | IOException e) {
-			throw new RuntimeException(e);
+			throw new IllegalStateException(e);
 		}
 	}
 

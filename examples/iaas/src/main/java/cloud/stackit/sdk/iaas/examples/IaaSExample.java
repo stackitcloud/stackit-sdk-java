@@ -323,7 +323,7 @@ final class IaaSExample {
 			}
 
 		} catch (ApiException | InterruptedException e) {
-			throw new RuntimeException(e);
+			throw new IllegalStateException(e);
 		}
 	}
 
