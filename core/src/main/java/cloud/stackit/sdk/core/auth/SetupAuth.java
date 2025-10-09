@@ -126,12 +126,22 @@ public class SetupAuth {
 	 * @throws IOException thrown when a file can not be found
 	 */
 	public static ServiceAccountKey setupKeyFlow(CoreConfiguration cfg)
-			throws CredentialsInFileNotFoundException, IOException {
+			throws IOException {
 		return setupKeyFlow(cfg, new EnvironmentVariables());
 	}
 
+	/**
+	 * Sets up the KeyFlow Authentication
+	 *
+	 * @param cfg Configuration
+	 * @param env Environment variables
+	 * @return Service account key
+	 * @throws CredentialsInFileNotFoundException thrown when no service account key or private key
+	 *     can be found
+	 * @throws IOException thrown when a file can not be found
+	 */
 	protected static ServiceAccountKey setupKeyFlow(CoreConfiguration cfg, EnvironmentVariables env)
-			throws CredentialsInFileNotFoundException, IOException {
+			throws IOException {
 		// Explicit config in code
 		if (Utils.isStringSet(cfg.getServiceAccountKey())) {
 			ServiceAccountKey saKey = ServiceAccountKey.loadFromJson(cfg.getServiceAccountKey());
@@ -184,13 +194,21 @@ public class SetupAuth {
 		return saKey;
 	}
 
+	/**
+	 * Loads the private key into the service account key
+	 *
+	 * @param cfg Configuration
+	 * @param env Environment variables
+	 * @param saKey Service account key
+	 * @throws PrivateKeyNotFoundException if the private key could not be found
+	 */
 	protected static void loadPrivateKey(
-			CoreConfiguration cfg, EnvironmentVariables env, ServiceAccountKey saKey)
-			throws PrivateKeyNotFoundException {
-		if (!saKey.getCredentials().isPrivateKeySet()) {
+			CoreConfiguration cfg, EnvironmentVariables env, ServiceAccountKey saKey) {
+		ServiceAccountCredentials credentials = saKey.getCredentials();
+		if (!credentials.isPrivateKeySet()) {
 			try {
 				String privateKey = getPrivateKey(cfg, env);
-				saKey.getCredentials().setPrivateKey(privateKey);
+				credentials.setPrivateKey(privateKey);
 			} catch (CredentialsInFileNotFoundException | IOException e) {
 				throw new PrivateKeyNotFoundException("could not find private key", e);
 			}
@@ -228,7 +246,7 @@ public class SetupAuth {
 	 *     pathKey can not be found
 	 */
 	private static String getPrivateKey(CoreConfiguration cfg, EnvironmentVariables env)
-			throws CredentialsInFileNotFoundException, IOException {
+			throws IOException {
 		// Explicit code config
 		// Get private key
 		if (Utils.isStringSet(cfg.getPrivateKey())) {
@@ -286,7 +304,7 @@ public class SetupAuth {
 	 */
 	protected static String readValueFromCredentialsFile(
 			String path, String valueKey, String pathKey)
-			throws IOException, CredentialsInFileNotFoundException {
+			throws IOException {
 		// Read credentials file
 		String fileContent =
 				new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);

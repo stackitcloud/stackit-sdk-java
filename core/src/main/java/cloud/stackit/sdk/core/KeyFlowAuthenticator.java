@@ -215,7 +215,7 @@ public class KeyFlowAuthenticator implements Authenticator {
 	 * @throws JsonSyntaxException parsing of the created access token failed
 	 */
 	protected void createAccessToken()
-			throws InvalidKeySpecException, IOException, JsonSyntaxException, ApiException {
+			throws InvalidKeySpecException, IOException, ApiException {
 		String assertion;
 		try {
 			assertion = generateSelfSignedJWT();
@@ -239,15 +239,22 @@ public class KeyFlowAuthenticator implements Authenticator {
 	 * @throws JsonSyntaxException can not parse new access token
 	 */
 	protected synchronized void createAccessTokenWithRefreshToken()
-			throws IOException, JsonSyntaxException, ApiException {
+			throws IOException, ApiException {
 		String refreshToken = token.refreshToken;
 		try (Response response = requestToken(REFRESH_TOKEN, refreshToken).execute()) {
 			parseTokenResponse(response);
 		}
 	}
 
+	/**
+	 * Parses the token response from the server
+	 *
+	 * @param response HTTP response containing the token
+	 * @throws ApiException if the response has a bad status code
+	 * @throws JsonSyntaxException if the response body cannot be parsed
+	 */
 	private synchronized void parseTokenResponse(Response response)
-			throws ApiException, JsonSyntaxException {
+			throws ApiException {
 		if (response.code() != HttpURLConnection.HTTP_OK) {
 			String body = null;
 			if (response.body() != null) {
