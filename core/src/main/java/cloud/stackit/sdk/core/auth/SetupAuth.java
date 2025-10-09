@@ -18,7 +18,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
 import javax.swing.filechooser.FileSystemView;
-
 import okhttp3.Interceptor;
 
 public class SetupAuth {
@@ -44,6 +43,7 @@ public class SetupAuth {
 	public SetupAuth() {
 		// deprecated
 	}
+
 	// TODO: constructor of SetupAuth should be private after deprecated constructors/methods are
 	// removed (only static methods should remain)
 

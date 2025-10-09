@@ -44,7 +44,6 @@ class SetupAuthTest {
 					+ File.separator
 					+ "file.json";
 
-
 	private ServiceAccountKey createDummyServiceAccount(String privateKey) {
 		ServiceAccountCredentials credentials =
 				new ServiceAccountCredentials("aud", "iss", "kid", privateKey, "sub");
@@ -81,7 +80,8 @@ class SetupAuthTest {
 	@Test
 	@DisplayName("get access token - with running init - returns interceptor")
 	void testGetAccessTokenWithRunningInitReturnsInterceptor() throws IOException {
-		ServiceAccountKey saKey = createDummyServiceAccount(TestUtils.MOCK_SERVICE_ACCOUNT_PRIVATE_KEY);
+		ServiceAccountKey saKey =
+				createDummyServiceAccount(TestUtils.MOCK_SERVICE_ACCOUNT_PRIVATE_KEY);
 		String initSaKeyJson = new Gson().toJson(saKey);
 
 		CoreConfiguration config = new CoreConfiguration().serviceAccountKey(initSaKeyJson);
@@ -95,7 +95,8 @@ class SetupAuthTest {
 	@DisplayName("setup key flow - read service account from path")
 	void setupKeyFlowReadServiceAccountFromPath() throws IOException {
 		// Create service account key file
-		ServiceAccountKey initSaKey = createDummyServiceAccount(TestUtils.MOCK_SERVICE_ACCOUNT_PRIVATE_KEY);
+		ServiceAccountKey initSaKey =
+				createDummyServiceAccount(TestUtils.MOCK_SERVICE_ACCOUNT_PRIVATE_KEY);
 		String initSaKeyJson = new Gson().toJson(initSaKey);
 		Path saKeyPath = Files.createTempFile("serviceAccountKey", JSON_FILE_EXTENSION);
 		saKeyPath.toFile().deleteOnExit();
@@ -114,7 +115,8 @@ class SetupAuthTest {
 	@DisplayName("setup key flow - read service account from config")
 	void setupKeyFlowReadServiceAccountFromConfig() throws IOException {
 		// Create service account key
-		ServiceAccountKey initSaKey = createDummyServiceAccount(TestUtils.MOCK_SERVICE_ACCOUNT_PRIVATE_KEY);
+		ServiceAccountKey initSaKey =
+				createDummyServiceAccount(TestUtils.MOCK_SERVICE_ACCOUNT_PRIVATE_KEY);
 		String initSaKeyJson = new Gson().toJson(initSaKey);
 
 		// Create config and read setup auth with the previous created saKey
@@ -128,7 +130,8 @@ class SetupAuthTest {
 	@DisplayName("setup key flow - read service account from key env")
 	void setupKeyFlowReadServiceAccountFromKeyEnv() throws IOException {
 		// Create service account key
-		ServiceAccountKey initSaKey = createDummyServiceAccount(TestUtils.MOCK_SERVICE_ACCOUNT_PRIVATE_KEY);
+		ServiceAccountKey initSaKey =
+				createDummyServiceAccount(TestUtils.MOCK_SERVICE_ACCOUNT_PRIVATE_KEY);
 		String initSaKeyJson = new Gson().toJson(initSaKey);
 
 		// Mock env STACKIT_SERVICE_ACCOUNT_KEY
@@ -236,7 +239,7 @@ class SetupAuthTest {
 
 	@Test
 	@DisplayName("load private key - set private key path")
-	void loadPrivateKeySetPrivateKeyPath() throws IOException{
+	void loadPrivateKeySetPrivateKeyPath() throws IOException {
 		Path tempPrvKeyFile = Files.createTempFile("privateKey", ".pem");
 		tempPrvKeyFile.toFile().deleteOnExit();
 

@@ -25,7 +25,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -191,8 +190,7 @@ public class KeyFlowAuthenticator implements Authenticator {
 	 * @throws IOException request for new access token failed
 	 * @throws ApiException response for new access token with bad status code
 	 */
-	public String getAccessToken()
-			throws IOException, ApiException, InvalidKeySpecException {
+	public String getAccessToken() throws IOException, ApiException, InvalidKeySpecException {
 		try {
 			tokenRefreshLock.lock();
 
@@ -201,8 +199,7 @@ public class KeyFlowAuthenticator implements Authenticator {
 			} else if (token.isExpired()) {
 				createAccessTokenWithRefreshToken();
 			}
-		}
-		finally {
+		} finally {
 			tokenRefreshLock.unlock();
 		}
 
