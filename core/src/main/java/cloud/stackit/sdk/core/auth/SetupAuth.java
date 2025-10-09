@@ -64,7 +64,8 @@ public class SetupAuth {
 	}
 
 	/*
-	 * @deprecated Use static methods of SetupAuth instead or just use the KeyFlowAuthenticator and let it handle the rest. Will be removed in April 2026.
+	 * @deprecated Use static methods of SetupAuth instead or just use the KeyFlowAuthenticator
+	 * and let it handle the rest. Will be removed in April 2026.
 	 */
 	@Deprecated
 	public void init() throws IOException {
@@ -73,7 +74,8 @@ public class SetupAuth {
 	}
 
 	/*
-	 * @deprecated Use static methods of SetupAuth instead or just use the KeyFlowAuthenticator and let it handle the rest. Will be removed in April 2026.
+	 * @deprecated Use static methods of SetupAuth instead or just use the KeyFlowAuthenticator
+	 * and let it handle the rest. Will be removed in April 2026.
 	 */
 	@Deprecated
 	public Interceptor getAuthHandler() {
