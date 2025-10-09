@@ -196,7 +196,8 @@ final class IaaSExample {
 			/*
 			 * create a server
 			 *
-			 * NOTE: see https://docs.stackit.cloud/stackit/en/virtual-machine-flavors-75137231.html for available machine types
+			 * NOTE: https://docs.stackit.cloud/stackit/en/virtual-machine-flavors-75137231.html 
+			 * for available machine types
 			 * */
 			Server newServer =
 					iaasApi.createServer(
