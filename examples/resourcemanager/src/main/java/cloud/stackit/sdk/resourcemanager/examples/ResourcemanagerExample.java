@@ -19,7 +19,7 @@ import java.util.UUID;
 
 final class ResourcemanagerExample {
 
-	@SuppressWarnings({"PMD.NPathComplexity", "PMD.SystemPrintln"})
+	@SuppressWarnings({"PMD.NPathComplexity", "PMD.SystemPrintln", "PMD.UseUtilityClass"})
 	public static void main(String[] args) throws IOException {
 		// Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env
 		// STACKIT_SERVICE_ACCOUNT_KEY_PATH / STACKIT_SERVICE_ACCOUNT_KEY
@@ -113,6 +113,4 @@ final class ResourcemanagerExample {
 			throw new IllegalStateException(e);
 		}
 	}
-
-	private ResourcemanagerExample() {}
 }

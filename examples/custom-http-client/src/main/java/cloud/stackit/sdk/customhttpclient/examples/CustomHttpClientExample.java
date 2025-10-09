@@ -23,7 +23,7 @@ import okhttp3.OkHttpClient;
  * */
 final class CustomHttpClientExample {
 
-	@SuppressWarnings("PMD.SystemPrintln")
+	@SuppressWarnings({"PMD.SystemPrintln", "PMD.UseUtilityClass"})
 	public static void main(String[] args) throws IOException {
 		// Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env
 		// STACKIT_SERVICE_ACCOUNT_KEY_PATH / STACKIT_SERVICE_ACCOUNT_KEY

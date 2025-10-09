@@ -15,8 +15,8 @@ final class AuthenticationExample {
 	private static final String PRIVATE_KEY_PATH = "/path/to/private_key.pem";
 	private static final String SERVICE_ACCOUNT_MAIL = "name-1234@sa.stackit.cloud";
 
-	@SuppressWarnings({"PMD.CyclomaticComplexity", "PMD.NPathComplexity", "PMD.SystemPrintln"})
-	public static void main(String[] args) {
+	@SuppressWarnings({"PMD.CyclomaticComplexity", "PMD.NPathComplexity", "PMD.SystemPrintln", "PMD.UseUtilityClass"})
+	public static void main(String[] args) throws IOException {
 		/* OPTION 1: setting the paths to service account key (and private key) as configuration */
 		try {
 			ResourceManagerApi api =
@@ -126,6 +126,4 @@ final class AuthenticationExample {
 			throw new IllegalStateException(e);
 		}
 	}
-
-	private AuthenticationExample() {}
 }

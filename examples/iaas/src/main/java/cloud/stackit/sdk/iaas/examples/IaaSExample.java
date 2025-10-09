@@ -17,7 +17,8 @@ final class IaaSExample {
 		"PMD.CognitiveComplexity",
 		"PMD.NPathComplexity",
 		"PMD.NcssCount",
-		"PMD.SystemPrintln"
+		"PMD.SystemPrintln",
+		"PMD.UseUtilityClass"
 	})
 	public static void main(String[] args) throws IOException {
 		/*
@@ -290,6 +291,4 @@ final class IaaSExample {
 			throw new IllegalStateException(e);
 		}
 	}
-
-	private IaaSExample() {}
 }
