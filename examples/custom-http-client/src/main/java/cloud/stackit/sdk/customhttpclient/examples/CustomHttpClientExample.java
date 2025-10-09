@@ -7,8 +7,6 @@ import cloud.stackit.sdk.iaas.api.IaasApi;
 import cloud.stackit.sdk.iaas.model.*;
 import java.io.IOException;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import okhttp3.OkHttpClient;
 
 /*
@@ -24,8 +22,8 @@ import okhttp3.OkHttpClient;
  *
  * */
 public class CustomHttpClientExample {
-	private static final Logger LOGGER = Logger.getLogger(CustomHttpClientExample.class.getName());
 
+	@SuppressWarnings("PMD.SystemPrintln")
 	public static void main(String[] args) throws IOException {
 		// Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env
 		// STACKIT_SERVICE_ACCOUNT_KEY_PATH / STACKIT_SERVICE_ACCOUNT_KEY
@@ -41,7 +39,7 @@ public class CustomHttpClientExample {
 		// the id of your STACKIT project, read from env var for this example
 		String projectIdString = System.getenv("STACKIT_PROJECT_ID");
 		if (projectIdString == null || projectIdString.isEmpty()) {
-			LOGGER.severe("Environment variable 'STACKIT_PROJECT_ID' not found.");
+			System.err.println("Environment variable 'STACKIT_PROJECT_ID' not found.");
 			return;
 		}
 		UUID projectId = UUID.fromString(projectIdString);
@@ -49,11 +47,9 @@ public class CustomHttpClientExample {
 		try {
 			/* list all servers */
 			ServerListResponse servers = iaasApi.listServers(projectId, false, null);
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("\nAvailable servers: ");
-				for (Server server : servers.getItems()) {
-					LOGGER.info("* " + server.getId() + " | " + server.getName());
-				}
+			System.out.println("\nAvailable servers: ");
+			for (Server server : servers.getItems()) {
+				System.out.println("* " + server.getId() + " | " + server.getName());
 			}
 		} catch (ApiException e) {
 			throw new IllegalStateException(e);

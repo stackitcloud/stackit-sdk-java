@@ -8,17 +8,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 final class AuthenticationExample {
-	private static final Logger LOGGER = Logger.getLogger(AuthenticationExample.class.getName());
 
 	private static final String SERVICE_ACCOUNT_KEY_PATH = "/path/to/sa_key.json";
 	private static final String PRIVATE_KEY_PATH = "/path/to/private_key.pem";
 	private static final String SERVICE_ACCOUNT_MAIL = "name-1234@sa.stackit.cloud";
 
-	@SuppressWarnings({"PMD.CyclomaticComplexity", "PMD.NPathComplexity"})
+	@SuppressWarnings({"PMD.CyclomaticComplexity", "PMD.NPathComplexity", "PMD.SystemPrintln"})
 	public static void main(String[] args) {
 		/* OPTION 1: setting the paths to service account key (and private key) as configuration */
 		try {
@@ -33,9 +30,7 @@ final class AuthenticationExample {
 			ListOrganizationsResponse response =
 					api.listOrganizations(null, SERVICE_ACCOUNT_MAIL, null, null, null);
 
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info(response.toString());
-			}
+			System.out.println(response.toString());
 		} catch (ApiException | IOException e) {
 			throw new IllegalStateException(e);
 		}
@@ -57,9 +52,7 @@ final class AuthenticationExample {
 				serviceAccountKeyContent.append(myReader.nextLine());
 			}
 		} catch (FileNotFoundException e) {
-			if (LOGGER.isLoggable(Level.SEVERE)) {	
-				LOGGER.severe("File not found: " + serviceAccountKeyPath);
-			}
+			System.err.println("File not found: " + serviceAccountKeyPath);
 			return;
 		}
 
@@ -72,9 +65,7 @@ final class AuthenticationExample {
 				privateKeyContent.append(myReader.nextLine());
 			}
 		} catch (FileNotFoundException e) {
-			if (LOGGER.isLoggable(Level.SEVERE)) {
-				LOGGER.severe("File not found: " + privateKeyPath);
-			}
+			System.err.println("File not found: " + privateKeyPath);
 			return;
 		}
 
@@ -93,9 +84,7 @@ final class AuthenticationExample {
 			ListOrganizationsResponse response =
 					api.listOrganizations(null, SERVICE_ACCOUNT_MAIL, null, null, null);
 
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info(response.toString());
-			}
+			System.out.println(response.toString());
 		} catch (ApiException | IOException e) {
 			throw new IllegalStateException(e);
 		}
@@ -132,9 +121,7 @@ final class AuthenticationExample {
 			ListOrganizationsResponse response =
 					api.listOrganizations(null, SERVICE_ACCOUNT_MAIL, null, null, null);
 
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info(response.toString());
-			}
+			System.out.println(response.toString());
 		} catch (ApiException | IOException e) {
 			throw new IllegalStateException(e);
 		}

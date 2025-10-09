@@ -9,17 +9,15 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 final class IaaSExample {
-	private static final Logger LOGGER = Logger.getLogger(IaaSExample.class.getName());
 
 	@SuppressWarnings({
 		"PMD.CyclomaticComplexity",
 		"PMD.CognitiveComplexity",
 		"PMD.NPathComplexity",
-		"PMD.NcssCount"
+		"PMD.NcssCount",
+		"PMD.SystemPrintln"
 	})
 	public static void main(String[] args) throws IOException {
 		/*
@@ -31,7 +29,7 @@ final class IaaSExample {
 		// the id of your STACKIT project, read from env var for this example
 		String projectIdString = System.getenv("STACKIT_PROJECT_ID");
 		if (projectIdString == null || projectIdString.isEmpty()) {
-			LOGGER.severe("Environment variable 'STACKIT_PROJECT_ID' not found.");
+			System.err.println("Environment variable 'STACKIT_PROJECT_ID' not found.");
 			return;
 		}
 		UUID projectId = UUID.fromString(projectIdString);
@@ -70,22 +68,18 @@ final class IaaSExample {
 
 			/* fetch the network we just created */
 			Network fetchedNetwork = iaasApi.getNetwork(projectId, newNetwork.getNetworkId());
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("\nFetched network: ");
-				LOGGER.info("* Network name: " + fetchedNetwork.getName());
-				LOGGER.info("* Id: " + fetchedNetwork.getNetworkId());
-				LOGGER.info("* DHCP: " + (Boolean.TRUE.equals(fetchedNetwork.getDhcp()) ? "YES" : "NO"));
-				LOGGER.info("* Gateway: " + fetchedNetwork.getGateway());
-				LOGGER.info("* Public IP: " + fetchedNetwork.getPublicIp());
-			}
+			System.out.println("\nFetched network: ");
+			System.out.println("* Network name: " + fetchedNetwork.getName());
+			System.out.println("* Id: " + fetchedNetwork.getNetworkId());
+			System.out.println("* DHCP: " + (Boolean.TRUE.equals(fetchedNetwork.getDhcp()) ? "YES" : "NO"));
+			System.out.println("* Gateway: " + fetchedNetwork.getGateway());
+			System.out.println("* Public IP: " + fetchedNetwork.getPublicIp());
 
 			/* list all available networks in the project */
 			NetworkListResponse networks = iaasApi.listNetworks(projectId, null);
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("\nAvailable networks: ");
-				for (Network network : networks.getItems()) {
-					LOGGER.info("* " + network.getName());
-				}
+			System.out.println("\nAvailable networks: ");
+			for (Network network : networks.getItems()) {
+				System.out.println("* " + network.getName());
 			}
 
 			/*
@@ -96,11 +90,9 @@ final class IaaSExample {
 
 			/* list all available images */
 			ImageListResponse images = iaasApi.listImages(projectId, false, null);
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("\nAvailable images: ");
-				for (Image image : images.getItems()) {
-					LOGGER.info(image.getId() + " | " + image.getName());
-				}
+			System.out.println("\nAvailable images: ");
+			for (Image image : images.getItems()) {
+				System.out.println(image.getId() + " | " + image.getName());
 			}
 
 			/* get an image */
@@ -110,14 +102,12 @@ final class IaaSExample {
 							.getId(); // we just use a random image id in our example
 			assert imageId != null;
 			Image fetchedImage = iaasApi.getImage(projectId, imageId);
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("\nFetched image:");
-				LOGGER.info("* Image name: " + fetchedImage.getName());
-				LOGGER.info("* Image id: " + fetchedImage.getId());
-				LOGGER.info("* Checksum: " + fetchedImage.getChecksum());
-				LOGGER.info("* Created at: " + fetchedImage.getCreatedAt());
-				LOGGER.info("* Updated at: " + fetchedImage.getUpdatedAt());
-			}
+			System.out.println("\nFetched image:");
+			System.out.println("* Image name: " + fetchedImage.getName());
+			System.out.println("* Image id: " + fetchedImage.getId());
+			System.out.println("* Checksum: " + fetchedImage.getChecksum());
+			System.out.println("* Created at: " + fetchedImage.getCreatedAt());
+			System.out.println("* Updated at: " + fetchedImage.getUpdatedAt());
 
 			/*
 			 * ///////////////////////////////////////////////////////
@@ -127,11 +117,9 @@ final class IaaSExample {
 
 			/* list all available keypairs */
 			KeyPairListResponse keypairs = iaasApi.listKeyPairs(null);
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("\nAvailable keypairs: ");
-				for (Keypair keypair : keypairs.getItems()) {
-					LOGGER.info("* " + keypair.getName());
-				}
+			System.out.println("\nAvailable keypairs: ");
+			for (Keypair keypair : keypairs.getItems()) {
+				System.out.println("* " + keypair.getName());
 			}
 
 			/* create a keypair */
@@ -142,9 +130,7 @@ final class IaaSExample {
 							new CreateKeyPairPayload()
 									.name("java-sdk-example-keypair-01")
 									.publicKey(publicKey));
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("\nKeypair created: " + newKeypair.getName());
-			}
+			System.out.println("\nKeypair created: " + newKeypair.getName());
 
 			/* update the keypair */
 			assert newKeypair.getName() != null;
@@ -155,15 +141,13 @@ final class IaaSExample {
 
 			/* fetch the keypair we just created / updated */
 			Keypair fetchedKeypair = iaasApi.getKeyPair(newKeypair.getName());
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("\nFetched key pair: ");
-				LOGGER.info("* Name: " + fetchedKeypair.getName());
-				if (fetchedKeypair.getLabels() != null) {
-					LOGGER.info("* Labels: " + fetchedKeypair.getLabels().toString()); // NOPMD GuardLogStatement
-				}
-				LOGGER.info("* Fingerprint: " + fetchedKeypair.getFingerprint());
-				LOGGER.info("* Public key: " + fetchedKeypair.getPublicKey());
+			System.out.println("\nFetched key pair: ");
+			System.out.println("* Name: " + fetchedKeypair.getName());
+			if (fetchedKeypair.getLabels() != null) {
+				System.out.println("* Labels: " + fetchedKeypair.getLabels().toString());
 			}
+			System.out.println("* Fingerprint: " + fetchedKeypair.getFingerprint());
+			System.out.println("* Public key: " + fetchedKeypair.getPublicKey());
 
 			/*
 			 * ///////////////////////////////////////////////////////
@@ -173,25 +157,21 @@ final class IaaSExample {
 
 			/* list all available machine types */
 			MachineTypeListResponse machineTypes = iaasApi.listMachineTypes(projectId, null);
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("\nAvailable machine types: ");
-				for (MachineType machineType : machineTypes.getItems()) {
-					LOGGER.info("* " + machineType.getName());
-				}
+			System.out.println("\nAvailable machine types: ");
+			for (MachineType machineType : machineTypes.getItems()) {
+				System.out.println("* " + machineType.getName());
 			}
 
 			/* fetch details about a machine type */
 			MachineType fetchedMachineType =
 					iaasApi.getMachineType(projectId, machineTypes.getItems().get(0).getName());
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("\nFetched machine type: ");
-				LOGGER.info("* Machine type name: " + fetchedMachineType.getName());
-				LOGGER.info("* Description: " + fetchedMachineType.getDescription());
-				LOGGER.info("* Disk size: " + fetchedMachineType.getDisk());
-				LOGGER.info("* RAM: " + fetchedMachineType.getRam());
-				LOGGER.info("* vCPUs: " + fetchedMachineType.getVcpus());
-				LOGGER.info("* Extra specs: " + fetchedMachineType.getExtraSpecs());
-			}
+			System.out.println("\nFetched machine type: ");
+			System.out.println("* Machine type name: " + fetchedMachineType.getName());
+			System.out.println("* Description: " + fetchedMachineType.getDescription());
+			System.out.println("* Disk size: " + fetchedMachineType.getDisk());
+			System.out.println("* RAM: " + fetchedMachineType.getRam());
+			System.out.println("* vCPUs: " + fetchedMachineType.getVcpus());
+			System.out.println("* Extra specs: " + fetchedMachineType.getExtraSpecs());
 
 			/*
 			 * create a server
@@ -223,7 +203,7 @@ final class IaaSExample {
 			assert serverId != null;
 			while (Objects.equals(
 					iaasApi.getServer(projectId, serverId, false).getStatus(), "CREATING")) {
-				LOGGER.info("Waiting for server creation to complete ...");
+				System.out.println("Waiting for server creation to complete ...");
 				TimeUnit.SECONDS.sleep(5);
 			}
 
@@ -236,36 +216,30 @@ final class IaaSExample {
 
 			/* list all servers */
 			ServerListResponse servers = iaasApi.listServers(projectId, false, null);
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("\nAvailable servers: ");
-				for (Server server : servers.getItems()) {
-					LOGGER.info("* " + server.getId() + " | " + server.getName());
-				}
+			System.out.println("\nAvailable servers: ");
+			for (Server server : servers.getItems()) {
+				System.out.println("* " + server.getId() + " | " + server.getName());
 			}
 
 			/* fetch the server we just created */
 			Server fetchedServer = iaasApi.getServer(projectId, serverId, false);
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("\nFetched server:");
-				LOGGER.info("* Name: " + fetchedServer.getName());
-				LOGGER.info("* Id: " + fetchedServer.getId());
-				if (fetchedServer.getLabels() != null) {
-					LOGGER.info("* Labels: " + fetchedServer.getLabels().toString()); // NOPMD GuardLogStatement
-				}
-				LOGGER.info("* Machine type: " + fetchedServer.getMachineType());
-				LOGGER.info("* Created at: " + fetchedServer.getCreatedAt());
-				LOGGER.info("* Updated at: " + fetchedServer.getUpdatedAt());
-				LOGGER.info("* Launched at: " + fetchedServer.getLaunchedAt());
+			System.out.println("\nFetched server:");
+			System.out.println("* Name: " + fetchedServer.getName());
+			System.out.println("* Id: " + fetchedServer.getId());
+			if (fetchedServer.getLabels() != null) {
+				System.out.println("* Labels: " + fetchedServer.getLabels().toString());
 			}
+			System.out.println("* Machine type: " + fetchedServer.getMachineType());
+			System.out.println("* Created at: " + fetchedServer.getCreatedAt());
+			System.out.println("* Updated at: " + fetchedServer.getUpdatedAt());
+			System.out.println("* Launched at: " + fetchedServer.getLaunchedAt());
 
 			/* stop the server we just created */
 			iaasApi.stopServer(projectId, serverId);
 			/* wait for the server to stop */
 			while (!Objects.equals(
 					iaasApi.getServer(projectId, serverId, false).getPowerStatus(), "STOPPED")) {
-				if (LOGGER.isLoggable(Level.INFO)) {
-					LOGGER.info("Waiting for server " + serverId + " to stop...");
-				}
+				System.out.println("Waiting for server " + serverId + " to stop...");
 				TimeUnit.SECONDS.sleep(5);
 			}
 
@@ -274,9 +248,7 @@ final class IaaSExample {
 			/* wait for the server to boot */
 			while (!Objects.equals(
 					iaasApi.getServer(projectId, serverId, false).getPowerStatus(), "RUNNING")) {
-				if (LOGGER.isLoggable(Level.INFO)) {
-					LOGGER.info("Waiting for server " + serverId + " to boot...");
-				}
+				System.out.println("Waiting for server " + serverId + " to boot...");
 				TimeUnit.SECONDS.sleep(5);
 			}
 
@@ -291,17 +263,13 @@ final class IaaSExample {
 
 			/* delete the server we just created */
 			iaasApi.deleteServer(projectId, serverId);
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("Deleted server: " + serverId);
-			}
+			System.out.println("Deleted server: " + serverId);
 
 			/* wait for server deletion to complete */
 			while (true) {
 				try {
 					iaasApi.getServer(projectId, serverId, false);
-					if (LOGGER.isLoggable(Level.INFO)) {
-						LOGGER.info("Waiting for server deletion to complete...");
-					}
+					System.out.println("Waiting for server deletion to complete...");
 					TimeUnit.SECONDS.sleep(5);
 				} catch (ApiException e) {
 					if (e.getCode() == HttpURLConnection.HTTP_NOT_FOUND) {
@@ -312,15 +280,11 @@ final class IaaSExample {
 
 			/* delete the keypair we just created */
 			iaasApi.deleteKeyPair(newKeypair.getName());
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("Deleted key pair: " + newKeypair.getName());
-			}
+			System.out.println("Deleted key pair: " + newKeypair.getName());
 
 			/* delete the network we just created */
 			iaasApi.deleteNetwork(projectId, newNetwork.getNetworkId());
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("Deleted network: " + newNetwork.getNetworkId());
-			}
+			System.out.println("Deleted network: " + newNetwork.getNetworkId());
 
 		} catch (ApiException | InterruptedException e) {
 			throw new IllegalStateException(e);

@@ -16,13 +16,10 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 final class ResourcemanagerExample {
-	private static final Logger LOGGER = Logger.getLogger(ResourcemanagerExample.class.getName());
 
-	@SuppressWarnings("PMD.NPathComplexity")
+	@SuppressWarnings({"PMD.NPathComplexity", "PMD.SystemPrintln"})
 	public static void main(String[] args) throws IOException {
 		// Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env
 		// STACKIT_SERVICE_ACCOUNT_KEY_PATH / STACKIT_SERVICE_ACCOUNT_KEY
@@ -32,11 +29,11 @@ final class ResourcemanagerExample {
 		String organizationIdString = System.getenv("STACKIT_ORGANIZATION_ID");
 		String memberSubjectString = System.getenv("STACKIT_MEMBER_SUBJECT");
 		if (organizationIdString == null || organizationIdString.isEmpty()) {
-			LOGGER.severe("Environment variable 'STACKIT_ORGANIZATION_ID' not found.");
+			System.err.println("Environment variable 'STACKIT_ORGANIZATION_ID' not found.");
 			return;
 		}
 		if (memberSubjectString == null || memberSubjectString.isEmpty()) {
-			LOGGER.severe("Environment variable 'STACKIT_MEMBER_SUBJECT' not found.");
+			System.err.println("Environment variable 'STACKIT_MEMBER_SUBJECT' not found.");
 			return;
 		}
 		UUID containerParentId = UUID.fromString(organizationIdString);
@@ -57,17 +54,13 @@ final class ResourcemanagerExample {
 									.labels(
 											Collections.singletonMap(
 													"some-project-label", "foo-bar")));
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("Project:\n" + project.toString());
-			}
+			System.out.println("Project:\n" + project.toString());
 
 			/* list projects */
 			ListProjectsResponse responseListProject =
 					resourceManagerApi.listProjects(
 							organizationIdString, null, null, null, null, null);
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("Project List:\n" + responseListProject.toString());
-			}
+			System.out.println("Project List:\n" + responseListProject.toString());
 
 			/* create a folder */
 			FolderResponse folder =
@@ -76,17 +69,13 @@ final class ResourcemanagerExample {
 									.containerParentId(containerParentId.toString())
 									.name("java-testing-folder")
 									.labels(Collections.singletonMap("foo", "bar")));
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("Folder: \n" + folder.toString());
-			}
+			System.out.println("Folder: \n" + folder.toString());
 
 			/* list folders */
 			ListFoldersResponse responseListFolders =
 					resourceManagerApi.listFolders(
 							organizationIdString, null, null, null, null, null);
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("Folder List:\n" + responseListFolders.toString());
-			}
+			System.out.println("Folder List:\n" + responseListFolders.toString());
 
 			/* delete a project label */
 			resourceManagerApi.deleteProjectLabels(project.getContainerId(), Arrays.asList("foo"));
@@ -108,9 +97,7 @@ final class ResourcemanagerExample {
 			/* get organization details */
 			OrganizationResponse organizationResponse =
 					resourceManagerApi.getOrganization(organizationIdString);
-			if (LOGGER.isLoggable(Level.INFO)) {
-				LOGGER.info("Organization List:\n" + organizationResponse.toString());
-			}
+			System.out.println("Organization List:\n" + organizationResponse.toString());
 
 			/* since you cannot delete a folder when a project is present we need to move the project out again */
 			resourceManagerApi.partialUpdateProject(
