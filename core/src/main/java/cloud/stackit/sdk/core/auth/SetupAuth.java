@@ -6,6 +6,7 @@ import cloud.stackit.sdk.core.config.CoreConfiguration;
 import cloud.stackit.sdk.core.config.EnvironmentVariables;
 import cloud.stackit.sdk.core.exception.CredentialsInFileNotFoundException;
 import cloud.stackit.sdk.core.exception.PrivateKeyNotFoundException;
+import cloud.stackit.sdk.core.model.ServiceAccountCredentials;
 import cloud.stackit.sdk.core.model.ServiceAccountKey;
 import cloud.stackit.sdk.core.utils.Utils;
 import com.google.gson.Gson;

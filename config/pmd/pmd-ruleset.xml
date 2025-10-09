@@ -35,7 +35,10 @@
         <exclude name="OnlyOneReturn"/>
     </rule>
     
+    <!-- Excluded this rule to allow simple behaviour like parameter.method() 
+    or chained getter calls (transversing dtos) -->
     <rule ref="category/java/design.xml">
+        <exclude name="LawOfDemeter"/>
     </rule>
     
     <rule ref="category/java/documentation.xml">
