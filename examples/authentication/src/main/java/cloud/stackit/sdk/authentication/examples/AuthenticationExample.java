@@ -41,8 +41,8 @@ final class AuthenticationExample {
 		 *
 		 * */
 
-		/* read key content from a file, in production you can also read it 
-		 * e.g. from STACKIT secrets manager, so it's only kept in-memory 
+		/* read key content from a file, in production you can also read it
+		 * e.g. from STACKIT secrets manager, so it's only kept in-memory
 		 * */
 		String serviceAccountKeyPath = // replace it with the path to your service account key
 				"examples/authentication/src/main/java/cloud/stackit/sdk/authentication/examples/dummy_credentials/dummy-service-account-key.json";

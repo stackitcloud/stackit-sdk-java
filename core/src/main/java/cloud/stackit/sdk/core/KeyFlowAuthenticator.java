@@ -209,8 +209,7 @@ public class KeyFlowAuthenticator implements Authenticator {
 	 * @throws JsonSyntaxException parsing of the created access token failed
 	 */
 	@SuppressWarnings("PMD.AvoidSynchronizedStatement")
-	protected void createAccessToken()
-			throws InvalidKeySpecException, IOException, ApiException {
+	protected void createAccessToken() throws InvalidKeySpecException, IOException, ApiException {
 		synchronized (tokenRefreshMonitor) {
 			String assertion;
 			try {
@@ -236,8 +235,7 @@ public class KeyFlowAuthenticator implements Authenticator {
 	 * @throws JsonSyntaxException can not parse new access token
 	 */
 	@SuppressWarnings("PMD.AvoidSynchronizedStatement")
-	protected void createAccessTokenWithRefreshToken()
-			throws IOException, ApiException {
+	protected void createAccessTokenWithRefreshToken() throws IOException, ApiException {
 		synchronized (tokenRefreshMonitor) {
 			String refreshToken = token.refreshToken;
 			try (Response response = requestToken(REFRESH_TOKEN, refreshToken).execute()) {
@@ -253,8 +251,7 @@ public class KeyFlowAuthenticator implements Authenticator {
 	 * @throws ApiException if the response has a bad status code
 	 * @throws JsonSyntaxException if the response body cannot be parsed
 	 */
-	private void parseTokenResponse(Response response)
-			throws ApiException {
+	private void parseTokenResponse(Response response) throws ApiException {
 		if (response.code() != HttpURLConnection.HTTP_OK) {
 			String body = null;
 			if (response.body() != null) {

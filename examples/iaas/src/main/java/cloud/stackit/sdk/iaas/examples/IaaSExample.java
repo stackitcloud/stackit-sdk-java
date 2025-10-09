@@ -72,7 +72,8 @@ final class IaaSExample {
 			System.out.println("\nFetched network: ");
 			System.out.println("* Network name: " + fetchedNetwork.getName());
 			System.out.println("* Id: " + fetchedNetwork.getNetworkId());
-			System.out.println("* DHCP: " + (Boolean.TRUE.equals(fetchedNetwork.getDhcp()) ? "YES" : "NO"));
+			System.out.println(
+					"* DHCP: " + (Boolean.TRUE.equals(fetchedNetwork.getDhcp()) ? "YES" : "NO"));
 			System.out.println("* Gateway: " + fetchedNetwork.getGateway());
 			System.out.println("* Public IP: " + fetchedNetwork.getPublicIp());
 
@@ -178,8 +179,8 @@ final class IaaSExample {
 			 * create a server
 			 *
 			 * NOTE: see the following link for available machine types
-			 * https://docs.stackit.cloud/stackit/en/virtual-machine-flavors-75137231.html 
-			 * 
+			 * https://docs.stackit.cloud/stackit/en/virtual-machine-flavors-75137231.html
+			 *
 			 * */
 			Server newServer =
 					iaasApi.createServer(

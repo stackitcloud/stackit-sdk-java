@@ -126,8 +126,7 @@ public class SetupAuth {
 	 *     can be found
 	 * @throws IOException thrown when a file can not be found
 	 */
-	public static ServiceAccountKey setupKeyFlow(CoreConfiguration cfg)
-			throws IOException {
+	public static ServiceAccountKey setupKeyFlow(CoreConfiguration cfg) throws IOException {
 		return setupKeyFlow(cfg, new EnvironmentVariables());
 	}
 
@@ -304,8 +303,7 @@ public class SetupAuth {
 	 *     pathKey can not be found
 	 */
 	protected static String readValueFromCredentialsFile(
-			String path, String valueKey, String pathKey)
-			throws IOException {
+			String path, String valueKey, String pathKey) throws IOException {
 		// Read credentials file
 		String fileContent =
 				new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
