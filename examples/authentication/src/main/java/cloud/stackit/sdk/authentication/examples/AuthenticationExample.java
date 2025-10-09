@@ -57,7 +57,9 @@ final class AuthenticationExample {
 				serviceAccountKeyContent.append(myReader.nextLine());
 			}
 		} catch (FileNotFoundException e) {
-			System.err.println("File not found: " + serviceAccountKeyPath);
+			if (LOGGER.isLoggable(Level.SEVERE)) {	
+				LOGGER.severe("File not found: " + serviceAccountKeyPath);
+			}
 			return;
 		}
 
@@ -70,7 +72,9 @@ final class AuthenticationExample {
 				privateKeyContent.append(myReader.nextLine());
 			}
 		} catch (FileNotFoundException e) {
-			System.err.println("File not found: " + privateKeyPath);
+			if (LOGGER.isLoggable(Level.SEVERE)) {
+				LOGGER.severe("File not found: " + privateKeyPath);
+			}
 			return;
 		}
 
