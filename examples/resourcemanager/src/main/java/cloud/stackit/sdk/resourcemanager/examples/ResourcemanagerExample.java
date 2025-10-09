@@ -110,7 +110,7 @@ final class ResourcemanagerExample {
 			/* delete folder */
 			resourceManagerApi.deleteFolder(folder.getContainerId(), true);
 		} catch (ApiException e) {
-			throw new RuntimeException(e);
+			throw new IllegalStateException(e);
 		}
 	}
 
