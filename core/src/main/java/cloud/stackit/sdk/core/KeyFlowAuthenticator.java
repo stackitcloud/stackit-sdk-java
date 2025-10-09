@@ -48,7 +48,7 @@ public class KeyFlowAuthenticator implements Authenticator {
 	private final String tokenUrl;
 	private long tokenLeewayInSeconds = DEFAULT_TOKEN_LEEWAY;
 
-	private Lock tokenRefreshLock = new ReentrantLock();
+	private final Lock tokenRefreshLock = new ReentrantLock();
 
 	/**
 	 * Creates the initial service account and refreshes expired access token.
