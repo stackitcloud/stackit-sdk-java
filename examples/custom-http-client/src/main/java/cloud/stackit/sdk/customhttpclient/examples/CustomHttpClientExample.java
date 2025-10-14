@@ -21,8 +21,9 @@ import okhttp3.OkHttpClient;
  * for everything to take advantage of the shared connection pool and to prevent resource leaks.
  *
  * */
-@SuppressWarnings("PMD.UseUtilityClass")
 final class CustomHttpClientExample {
+
+	private CustomHttpClientExample() {}
 
 	@SuppressWarnings("PMD.SystemPrintln")
 	public static void main(String[] args) throws IOException {

@@ -9,12 +9,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-@SuppressWarnings("PMD.UseUtilityClass")
 final class AuthenticationExample {
 
 	private static final String SERVICE_ACCOUNT_KEY_PATH = "/path/to/sa_key.json";
 	private static final String PRIVATE_KEY_PATH = "/path/to/private_key.pem";
 	private static final String SERVICE_ACCOUNT_MAIL = "name-1234@sa.stackit.cloud";
+
+	private AuthenticationExample() {}
 
 	@SuppressWarnings({"PMD.CyclomaticComplexity", "PMD.NPathComplexity", "PMD.SystemPrintln"})
 	public static void main(String[] args) throws IOException {

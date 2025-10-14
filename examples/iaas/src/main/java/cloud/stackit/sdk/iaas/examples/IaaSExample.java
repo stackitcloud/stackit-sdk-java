@@ -10,8 +10,9 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-@SuppressWarnings("PMD.UseUtilityClass")
 final class IaaSExample {
+
+	private IaaSExample() {}
 
 	@SuppressWarnings({
 		"PMD.CyclomaticComplexity",

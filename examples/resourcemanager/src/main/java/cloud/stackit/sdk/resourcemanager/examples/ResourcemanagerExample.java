@@ -17,8 +17,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.UUID;
 
-@SuppressWarnings("PMD.UseUtilityClass")
 final class ResourcemanagerExample {
+	
+	private ResourcemanagerExample() {}
 
 	@SuppressWarnings({"PMD.NPathComplexity", "PMD.SystemPrintln"})
 	public static void main(String[] args) throws IOException {
