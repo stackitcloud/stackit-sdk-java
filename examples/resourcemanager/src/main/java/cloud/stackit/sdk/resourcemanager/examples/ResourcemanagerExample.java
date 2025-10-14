@@ -18,10 +18,10 @@ import java.util.Collections;
 import java.util.UUID;
 
 final class ResourcemanagerExample {
-	
+
 	private ResourcemanagerExample() {}
 
-	@SuppressWarnings({"PMD.NPathComplexity", "PMD.SystemPrintln"})
+	@SuppressWarnings({"PMD.SystemPrintln"})
 	public static void main(String[] args) throws IOException {
 		// Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env
 		// STACKIT_SERVICE_ACCOUNT_KEY_PATH / STACKIT_SERVICE_ACCOUNT_KEY
