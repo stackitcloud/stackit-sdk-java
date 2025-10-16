@@ -49,7 +49,7 @@ Waiters are routines that wait for the completion of asynchronous operations. Th
 Let's suppose you want to implement the waiters for the `Create`, `Update` and `Delete` operations of a resource `bar` of service `foo`:
 
 1. Start by creating a new Java package `cloud.stackit.sdk.<service>.wait` inside `services/foo/` project, if it doesn't exist yet
-2. Create a file `FooWait.java` inside your new Java package `cloud.stackit.sdk.resourcemanager.wait`, if it doesn't exist yet. The class should be named `FooWait`.
+2. Create a file `FooWait.java` inside your new Java package `cloud.stackit.sdk.<service>.wait`, if it doesn't exist yet. The class should be named `FooWait`.
 3. Refer to the [Waiter structure](./CONTRIBUTION.md/#waiter-structure) section for details on the structure of the file and the methods
 4. Add unit tests to the wait functions
 

@@ -1,3 +1,6 @@
+## v0.4.0
+- **Feature:** Added waiter for project creation and project deletion
+
 ## v0.3.0
 - **Feature:** Add `ContainerSearchResult` model class for container search functionality
 
