@@ -2,6 +2,7 @@ package cloud.stackit.sdk.authentication.examples;
 
 import cloud.stackit.sdk.core.config.CoreConfiguration;
 import cloud.stackit.sdk.core.exception.ApiException;
+import cloud.stackit.sdk.core.exception.SdkException;
 import cloud.stackit.sdk.resourcemanager.api.ResourceManagerApi;
 import cloud.stackit.sdk.resourcemanager.model.ListOrganizationsResponse;
 import java.io.File;
@@ -34,7 +35,7 @@ final class AuthenticationExample {
 
 			System.out.println(response.toString());
 		} catch (ApiException | IOException e) {
-			throw new IllegalStateException(e);
+			throw new SdkException(e);
 		}
 
 		/*
@@ -88,7 +89,7 @@ final class AuthenticationExample {
 
 			System.out.println(response.toString());
 		} catch (ApiException | IOException e) {
-			throw new IllegalStateException(e);
+			throw new SdkException(e);
 		}
 
 		/*
@@ -125,7 +126,7 @@ final class AuthenticationExample {
 
 			System.out.println(response.toString());
 		} catch (ApiException | IOException e) {
-			throw new IllegalStateException(e);
+			throw new SdkException(e);
 		}
 	}
 }

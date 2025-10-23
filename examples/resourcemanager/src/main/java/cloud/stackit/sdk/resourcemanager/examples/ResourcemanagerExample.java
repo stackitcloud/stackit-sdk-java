@@ -1,6 +1,7 @@
 package cloud.stackit.sdk.resourcemanager.examples;
 
 import cloud.stackit.sdk.core.exception.ApiException;
+import cloud.stackit.sdk.core.exception.SdkException;
 import cloud.stackit.sdk.resourcemanager.api.ResourceManagerApi;
 import cloud.stackit.sdk.resourcemanager.model.CreateFolderPayload;
 import cloud.stackit.sdk.resourcemanager.model.CreateProjectPayload;
@@ -112,7 +113,7 @@ final class ResourcemanagerExample {
 			/* delete folder */
 			resourceManagerApi.deleteFolder(folder.getContainerId(), true);
 		} catch (ApiException e) {
-			throw new IllegalStateException(e);
+			throw new SdkException(e);
 		}
 	}
 }

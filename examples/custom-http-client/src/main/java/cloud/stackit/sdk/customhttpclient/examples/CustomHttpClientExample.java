@@ -3,6 +3,7 @@ package cloud.stackit.sdk.customhttpclient.examples;
 import cloud.stackit.sdk.core.KeyFlowAuthenticator;
 import cloud.stackit.sdk.core.config.CoreConfiguration;
 import cloud.stackit.sdk.core.exception.ApiException;
+import cloud.stackit.sdk.core.exception.SdkException;
 import cloud.stackit.sdk.iaas.api.IaasApi;
 import cloud.stackit.sdk.iaas.model.*;
 import java.io.IOException;
@@ -54,7 +55,7 @@ final class CustomHttpClientExample {
 				System.out.println("* " + server.getId() + " | " + server.getName());
 			}
 		} catch (ApiException e) {
-			throw new IllegalStateException(e);
+			throw new SdkException(e);
 		}
 	}
 }

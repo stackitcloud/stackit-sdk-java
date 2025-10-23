@@ -1,6 +1,7 @@
 package cloud.stackit.sdk.iaas.examples;
 
 import cloud.stackit.sdk.core.exception.ApiException;
+import cloud.stackit.sdk.core.exception.SdkException;
 import cloud.stackit.sdk.iaas.api.IaasApi;
 import cloud.stackit.sdk.iaas.model.*;
 import java.io.IOException;
@@ -290,7 +291,7 @@ final class IaaSExample {
 			System.out.println("Deleted network: " + newNetwork.getNetworkId());
 
 		} catch (ApiException | InterruptedException e) {
-			throw new IllegalStateException(e);
+			throw new SdkException(e);
 		}
 	}
 }
