@@ -5,7 +5,7 @@ package cloud.stackit.sdk.core.exception;
  * and validation failures.
  */
 public class AuthenticationException extends RuntimeException {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -7728708330906023941L;
 
 	/**
 	 * Constructs a new AuthenticationException with the specified detail message.

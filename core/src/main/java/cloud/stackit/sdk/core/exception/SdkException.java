@@ -5,7 +5,7 @@ package cloud.stackit.sdk.core.exception;
  * SDK-related failures.
  */
 public class SdkException extends RuntimeException {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4349442434992445252L;
 
 	/**
 	 * Constructs a new SdkException with the specified detail message.
