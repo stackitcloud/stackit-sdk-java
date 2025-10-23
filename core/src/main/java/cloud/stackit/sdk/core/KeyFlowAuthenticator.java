@@ -4,6 +4,7 @@ import cloud.stackit.sdk.core.auth.SetupAuth;
 import cloud.stackit.sdk.core.config.CoreConfiguration;
 import cloud.stackit.sdk.core.config.EnvironmentVariables;
 import cloud.stackit.sdk.core.exception.ApiException;
+import cloud.stackit.sdk.core.exception.AuthenticationException;
 import cloud.stackit.sdk.core.model.ServiceAccountKey;
 import cloud.stackit.sdk.core.utils.Utils;
 import com.auth0.jwt.JWT;
@@ -132,7 +133,7 @@ public class KeyFlowAuthenticator implements Authenticator {
 		try {
 			accessToken = getAccessToken();
 		} catch (ApiException | InvalidKeySpecException e) {
-			throw new IllegalStateException(e);
+			throw new AuthenticationException("Failed to obtain access token", e);
 		}
 
 		// Return a new request with the refreshed token
@@ -215,7 +216,7 @@ public class KeyFlowAuthenticator implements Authenticator {
 			try {
 				assertion = generateSelfSignedJWT();
 			} catch (NoSuchAlgorithmException e) {
-				throw new IllegalStateException(
+				throw new AuthenticationException(
 						"could not find required algorithm for jwt signing. This should not happen and should be reported on https://github.com/stackitcloud/stackit-sdk-java/issues",
 						e);
 			}
