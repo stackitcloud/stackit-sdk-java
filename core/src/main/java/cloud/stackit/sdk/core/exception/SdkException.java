@@ -1,8 +1,8 @@
 package cloud.stackit.sdk.core.exception;
 
 /**
- * Exception thrown when SDK operations fail.
- * This includes API calls, network issues, and other SDK-related failures.
+ * Exception thrown when SDK operations fail. This includes API calls, network issues, and other
+ * SDK-related failures.
  */
 public class SdkException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

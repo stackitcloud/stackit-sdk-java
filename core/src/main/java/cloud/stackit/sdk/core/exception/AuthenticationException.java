@@ -1,8 +1,8 @@
 package cloud.stackit.sdk.core.exception;
 
 /**
- * Exception thrown when authentication operations fail.
- * This includes token generation, refresh, and validation failures.
+ * Exception thrown when authentication operations fail. This includes token generation, refresh,
+ * and validation failures.
  */
 public class AuthenticationException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
