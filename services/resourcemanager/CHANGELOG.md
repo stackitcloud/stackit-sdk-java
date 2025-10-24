@@ -1,3 +1,6 @@
+## v0.3.0
+- **Feature:** Add `ContainerSearchResult` model class for container search functionality
+
 ## v0.2.0
 - **Feature:** Support for passing custom OkHttpClient objects
   - `ApiClient`
