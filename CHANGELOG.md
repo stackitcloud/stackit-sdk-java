@@ -1,3 +1,8 @@
+## Release (2025-xx-xx)
+- `core`: [v0.3.0](core/CHANGELOG.md#v030)
+  - **Feature:** New exception types for better error handling
+    - `AuthenticationException`: New exception for authentication-related failures (token generation, refresh, validation)
+
 ## Release (2025-09-30)
 - `core`: [v0.2.0](core/CHANGELOG.md#v020)
   - **Feature:** Support for passing custom OkHttpClient objects

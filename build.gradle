@@ -3,6 +3,7 @@ plugins {
 	id 'signing'
 	id 'idea'
 	id 'eclipse'
+	id 'pmd'
 
 	id 'com.diffplug.spotless' version '6.21.0'
 
@@ -13,6 +14,7 @@ plugins {
 
 allprojects {
 	apply plugin: 'com.diffplug.spotless'
+	apply plugin: 'pmd'
 
 	repositories {
 		mavenCentral()
@@ -63,6 +65,17 @@ allprojects {
 			indentWithTabs()
 			endWithNewline()
 		}
+	}
+
+	pmd {
+		consoleOutput = true
+		toolVersion = "7.12.0"
+
+		// This tells PMD to use your custom ruleset file.
+		ruleSetFiles = rootProject.files("config/pmd/pmd-ruleset.xml")
+
+		// This is important: it prevents PMD from using its default rules.
+		ruleSets = []
 	}
 }
 

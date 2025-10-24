@@ -5,7 +5,7 @@ fmt:
 	@./gradlew spotlessApply
 
 lint:
-	@echo "linting not ready yet"
+	@./gradlew pmdMain
 
 test:
 	@./gradlew test

@@ -1,3 +1,7 @@
+## v0.3.0
+- **Feature:** New exception types for better error handling
+  - `AuthenticationException`: New exception for authentication-related failures (token generation, refresh, validation)
+
 ## v0.2.0
 - **Feature:** Support for passing custom OkHttpClient objects
   - `KeyFlowAuthenticator`: Add new constructors with an `OkHttpClientParam`

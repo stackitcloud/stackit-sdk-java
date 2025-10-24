@@ -14,13 +14,18 @@ import okhttp3.OkHttpClient;
  *
  * The example shows how to set the authorization header in the OkHttpClient object (required!).
  *
- * NOTE: Passing the http client is optional, see our other examples where no OkHttpClient object is passed.
+ * NOTE: Passing the http client is optional, see our other examples
+ * where no OkHttpClient object is passed.
  * In this case the STACKIT SDK ApiClients will just create their own OkHttpClient objects.
- * Nevertheless, for production usage try to use one single OkHttpClient object for everything to take advantage of the
- * shared connection pool and to prevent resource leaks.
+ * Nevertheless, for production usage try to use one single OkHttpClient object
+ * for everything to take advantage of the shared connection pool and to prevent resource leaks.
  *
  * */
-public class CustomHttpClientExample {
+final class CustomHttpClientExample {
+
+	private CustomHttpClientExample() {}
+
+	@SuppressWarnings({"PMD.SystemPrintln", "PMD.AvoidThrowingRawExceptionTypes"})
 	public static void main(String[] args) throws IOException {
 		// Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env
 		// STACKIT_SERVICE_ACCOUNT_KEY_PATH / STACKIT_SERVICE_ACCOUNT_KEY

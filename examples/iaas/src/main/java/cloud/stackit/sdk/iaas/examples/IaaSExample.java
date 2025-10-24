@@ -4,15 +4,29 @@ import cloud.stackit.sdk.core.exception.ApiException;
 import cloud.stackit.sdk.iaas.api.IaasApi;
 import cloud.stackit.sdk.iaas.model.*;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-public class IaaSExample {
+final class IaaSExample {
+
+	private IaaSExample() {}
+
+	@SuppressWarnings({
+		"PMD.CyclomaticComplexity",
+		"PMD.CognitiveComplexity",
+		"PMD.NPathComplexity",
+		"PMD.NcssCount",
+		"PMD.SystemPrintln",
+		"PMD.AvoidThrowingRawExceptionTypes"
+	})
 	public static void main(String[] args) throws IOException {
-		// Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env
-		// STACKIT_SERVICE_ACCOUNT_KEY_PATH / STACKIT_SERVICE_ACCOUNT_KEY
+		/*
+		 * Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env
+		 * STACKIT_SERVICE_ACCOUNT_KEY_PATH / STACKIT_SERVICE_ACCOUNT_KEY
+		 * */
 		IaasApi iaasApi = new IaasApi();
 
 		// the id of your STACKIT project, read from env var for this example
@@ -24,11 +38,14 @@ public class IaaSExample {
 		UUID projectId = UUID.fromString(projectIdString);
 
 		try {
-			///////////////////////////////////////////////////////
-			//              N E T W O R K S                      //
-			///////////////////////////////////////////////////////
+			/*
+			 * ///////////////////////////////////////////////////////
+			 * //              N E T W O R K S                      //
+			 * ///////////////////////////////////////////////////////
+			 * */
 
 			/* create a network in the project */
+			@SuppressWarnings("PMD.AvoidUsingHardCodedIP")
 			Network newNetwork =
 					iaasApi.createNetwork(
 							projectId,
@@ -36,7 +53,7 @@ public class IaaSExample {
 									.name("java-sdk-example-network-01")
 									.dhcp(true)
 									.routed(false)
-									.labels(Collections.singletonMap("foo", "bar"))
+									.labels(Collections.singletonMap("some-network-label", "bar"))
 									.addressFamily(
 											new CreateNetworkAddressFamily()
 													.ipv4(
@@ -50,12 +67,12 @@ public class IaaSExample {
 					newNetwork.getNetworkId(),
 					new PartialUpdateNetworkPayload()
 							.dhcp(false)
-							.labels(Collections.singletonMap("foo", "bar-updated")));
+							.labels(Collections.singletonMap("some-network-label", "bar-updated")));
 
 			/* fetch the network we just created */
 			Network fetchedNetwork = iaasApi.getNetwork(projectId, newNetwork.getNetworkId());
 			System.out.println("\nFetched network: ");
-			System.out.println("* Name: " + fetchedNetwork.getName());
+			System.out.println("* Network name: " + fetchedNetwork.getName());
 			System.out.println("* Id: " + fetchedNetwork.getNetworkId());
 			System.out.println(
 					"* DHCP: " + (Boolean.TRUE.equals(fetchedNetwork.getDhcp()) ? "YES" : "NO"));
@@ -69,9 +86,11 @@ public class IaaSExample {
 				System.out.println("* " + network.getName());
 			}
 
-			///////////////////////////////////////////////////////
-			//              I M A G E S                          //
-			///////////////////////////////////////////////////////
+			/*
+			 * ///////////////////////////////////////////////////////
+			 * //              I M A G E S                          //
+			 * ///////////////////////////////////////////////////////
+			 * */
 
 			/* list all available images */
 			ImageListResponse images = iaasApi.listImages(projectId, false, null);
@@ -88,15 +107,17 @@ public class IaaSExample {
 			assert imageId != null;
 			Image fetchedImage = iaasApi.getImage(projectId, imageId);
 			System.out.println("\nFetched image:");
-			System.out.println("* Name: " + fetchedImage.getName());
-			System.out.println("* Id: " + fetchedImage.getId());
+			System.out.println("* Image name: " + fetchedImage.getName());
+			System.out.println("* Image id: " + fetchedImage.getId());
 			System.out.println("* Checksum: " + fetchedImage.getChecksum());
 			System.out.println("* Created at: " + fetchedImage.getCreatedAt());
 			System.out.println("* Updated at: " + fetchedImage.getUpdatedAt());
 
-			///////////////////////////////////////////////////////
-			//              K E Y P A I R S                      //
-			///////////////////////////////////////////////////////
+			/*
+			 * ///////////////////////////////////////////////////////
+			 * //              K E Y P A I R S                      //
+			 * ///////////////////////////////////////////////////////
+			 * */
 
 			/* list all available keypairs */
 			KeyPairListResponse keypairs = iaasApi.listKeyPairs(null);
@@ -119,7 +140,8 @@ public class IaaSExample {
 			assert newKeypair.getName() != null;
 			iaasApi.updateKeyPair(
 					newKeypair.getName(),
-					new UpdateKeyPairPayload().labels(Collections.singletonMap("foo", "bar")));
+					new UpdateKeyPairPayload()
+							.labels(Collections.singletonMap("some-keypair-label", "bar")));
 
 			/* fetch the keypair we just created / updated */
 			Keypair fetchedKeypair = iaasApi.getKeyPair(newKeypair.getName());
@@ -131,9 +153,11 @@ public class IaaSExample {
 			System.out.println("* Fingerprint: " + fetchedKeypair.getFingerprint());
 			System.out.println("* Public key: " + fetchedKeypair.getPublicKey());
 
-			///////////////////////////////////////////////////////
-			//              S E R V E R S                        //
-			///////////////////////////////////////////////////////
+			/*
+			 * ///////////////////////////////////////////////////////
+			 * //              S E R V E R S                        //
+			 * ///////////////////////////////////////////////////////
+			 * */
 
 			/* list all available machine types */
 			MachineTypeListResponse machineTypes = iaasApi.listMachineTypes(projectId, null);
@@ -146,16 +170,20 @@ public class IaaSExample {
 			MachineType fetchedMachineType =
 					iaasApi.getMachineType(projectId, machineTypes.getItems().get(0).getName());
 			System.out.println("\nFetched machine type: ");
-			System.out.println("* Name: " + fetchedMachineType.getName());
+			System.out.println("* Machine type name: " + fetchedMachineType.getName());
 			System.out.println("* Description: " + fetchedMachineType.getDescription());
 			System.out.println("* Disk size: " + fetchedMachineType.getDisk());
 			System.out.println("* RAM: " + fetchedMachineType.getRam());
 			System.out.println("* vCPUs: " + fetchedMachineType.getVcpus());
 			System.out.println("* Extra specs: " + fetchedMachineType.getExtraSpecs());
 
-			/* create a server */
-			// NOTE: see https://docs.stackit.cloud/stackit/en/virtual-machine-flavors-75137231.html
-			// for available machine types
+			/*
+			 * create a server
+			 *
+			 * NOTE: see the following link for available machine types
+			 * https://docs.stackit.cloud/stackit/en/virtual-machine-flavors-75137231.html
+			 *
+			 * */
 			Server newServer =
 					iaasApi.createServer(
 							projectId,
@@ -231,9 +259,11 @@ public class IaaSExample {
 			/* reboot the server we just created */
 			iaasApi.rebootServer(projectId, serverId, null);
 
-			///////////////////////////////////////////////////////
-			//              D E L E T I O N                      //
-			///////////////////////////////////////////////////////
+			/*
+			 * ///////////////////////////////////////////////////////
+			 * //              D E L E T I O N                      //
+			 * ///////////////////////////////////////////////////////
+			 * */
 
 			/* delete the server we just created */
 			iaasApi.deleteServer(projectId, serverId);
@@ -246,7 +276,7 @@ public class IaaSExample {
 					System.out.println("Waiting for server deletion to complete...");
 					TimeUnit.SECONDS.sleep(5);
 				} catch (ApiException e) {
-					if (e.getCode() == 404) {
+					if (e.getCode() == HttpURLConnection.HTTP_NOT_FOUND) {
 						break;
 					}
 				}

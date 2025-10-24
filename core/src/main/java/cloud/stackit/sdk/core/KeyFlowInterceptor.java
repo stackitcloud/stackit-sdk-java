@@ -1,6 +1,7 @@
 package cloud.stackit.sdk.core;
 
 import cloud.stackit.sdk.core.exception.ApiException;
+import cloud.stackit.sdk.core.exception.AuthenticationException;
 import java.io.IOException;
 import java.security.spec.InvalidKeySpecException;
 import okhttp3.Interceptor;
@@ -37,7 +38,8 @@ public class KeyFlowInterceptor implements Interceptor {
 		} catch (InvalidKeySpecException | ApiException e) {
 			// try-catch required, because ApiException can not be thrown in the implementation
 			// of Interceptor.intercept(Chain chain)
-			throw new RuntimeException(e);
+			throw new AuthenticationException(
+					"Failed to obtain access token for request authentication", e);
 		}
 
 		Request authenticatedRequest =

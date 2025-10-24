@@ -6,6 +6,7 @@ import cloud.stackit.sdk.core.config.CoreConfiguration;
 import cloud.stackit.sdk.core.config.EnvironmentVariables;
 import cloud.stackit.sdk.core.exception.CredentialsInFileNotFoundException;
 import cloud.stackit.sdk.core.exception.PrivateKeyNotFoundException;
+import cloud.stackit.sdk.core.model.ServiceAccountCredentials;
 import cloud.stackit.sdk.core.model.ServiceAccountKey;
 import cloud.stackit.sdk.core.utils.Utils;
 import com.google.gson.Gson;
@@ -40,9 +41,12 @@ public class SetupAuth {
 	 *     let it handle the rest. Will be removed in April 2026.
 	 */
 	@Deprecated
+	public SetupAuth() {
+		// deprecated
+	}
+
 	// TODO: constructor of SetupAuth should be private after deprecated constructors/methods are
 	// removed (only static methods should remain)
-	public SetupAuth() {}
 
 	/**
 	 * Set up the KeyFlow Authentication and can be integrated in an OkHttp client, by adding
@@ -61,7 +65,8 @@ public class SetupAuth {
 	}
 
 	/*
-	 * @deprecated Use static methods of SetupAuth instead or just use the KeyFlowAuthenticator and let it handle the rest. Will be removed in April 2026.
+	 * @deprecated Use static methods of SetupAuth instead or just use the KeyFlowAuthenticator
+	 * and let it handle the rest. Will be removed in April 2026.
 	 */
 	@Deprecated
 	public void init() throws IOException {
@@ -70,12 +75,13 @@ public class SetupAuth {
 	}
 
 	/*
-	 * @deprecated Use static methods of SetupAuth instead or just use the KeyFlowAuthenticator and let it handle the rest. Will be removed in April 2026.
+	 * @deprecated Use static methods of SetupAuth instead or just use the KeyFlowAuthenticator
+	 * and let it handle the rest. Will be removed in April 2026.
 	 */
 	@Deprecated
 	public Interceptor getAuthHandler() {
 		if (authHandler == null) {
-			throw new RuntimeException("init() has to be called first");
+			throw new IllegalStateException("init() has to be called first");
 		}
 		return authHandler;
 	}
@@ -120,13 +126,22 @@ public class SetupAuth {
 	 *     can be found
 	 * @throws IOException thrown when a file can not be found
 	 */
-	public static ServiceAccountKey setupKeyFlow(CoreConfiguration cfg)
-			throws CredentialsInFileNotFoundException, IOException {
+	public static ServiceAccountKey setupKeyFlow(CoreConfiguration cfg) throws IOException {
 		return setupKeyFlow(cfg, new EnvironmentVariables());
 	}
 
+	/**
+	 * Sets up the KeyFlow Authentication
+	 *
+	 * @param cfg Configuration
+	 * @param env Environment variables
+	 * @return Service account key
+	 * @throws CredentialsInFileNotFoundException thrown when no service account key or private key
+	 *     can be found
+	 * @throws IOException thrown when a file can not be found
+	 */
 	protected static ServiceAccountKey setupKeyFlow(CoreConfiguration cfg, EnvironmentVariables env)
-			throws CredentialsInFileNotFoundException, IOException {
+			throws IOException {
 		// Explicit config in code
 		if (Utils.isStringSet(cfg.getServiceAccountKey())) {
 			ServiceAccountKey saKey = ServiceAccountKey.loadFromJson(cfg.getServiceAccountKey());
@@ -179,14 +194,22 @@ public class SetupAuth {
 		return saKey;
 	}
 
+	/**
+	 * Loads the private key into the service account key
+	 *
+	 * @param cfg Configuration
+	 * @param env Environment variables
+	 * @param saKey Service account key
+	 * @throws PrivateKeyNotFoundException if the private key could not be found
+	 */
 	protected static void loadPrivateKey(
-			CoreConfiguration cfg, EnvironmentVariables env, ServiceAccountKey saKey)
-			throws PrivateKeyNotFoundException {
-		if (!saKey.getCredentials().isPrivateKeySet()) {
+			CoreConfiguration cfg, EnvironmentVariables env, ServiceAccountKey saKey) {
+		ServiceAccountCredentials credentials = saKey.getCredentials();
+		if (!credentials.isPrivateKeySet()) {
 			try {
 				String privateKey = getPrivateKey(cfg, env);
-				saKey.getCredentials().setPrivateKey(privateKey);
-			} catch (Exception e) {
+				credentials.setPrivateKey(privateKey);
+			} catch (CredentialsInFileNotFoundException | IOException e) {
 				throw new PrivateKeyNotFoundException("could not find private key", e);
 			}
 		}
@@ -216,13 +239,14 @@ public class SetupAuth {
 	 * </ol>
 	 *
 	 * @param cfg
+	 * @param env
 	 * @return found private key
 	 * @throws CredentialsInFileNotFoundException throws if no private key could be found
 	 * @throws IOException throws if the provided path can not be found or the file within the
 	 *     pathKey can not be found
 	 */
 	private static String getPrivateKey(CoreConfiguration cfg, EnvironmentVariables env)
-			throws CredentialsInFileNotFoundException, IOException {
+			throws IOException {
 		// Explicit code config
 		// Get private key
 		if (Utils.isStringSet(cfg.getPrivateKey())) {
@@ -279,8 +303,7 @@ public class SetupAuth {
 	 *     pathKey can not be found
 	 */
 	protected static String readValueFromCredentialsFile(
-			String path, String valueKey, String pathKey)
-			throws IOException, CredentialsInFileNotFoundException {
+			String path, String valueKey, String pathKey) throws IOException {
 		// Read credentials file
 		String fileContent =
 				new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);

@@ -17,7 +17,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.UUID;
 
-class ResourcemanagerExample {
+final class ResourcemanagerExample {
+
+	private ResourcemanagerExample() {}
+
+	@SuppressWarnings({"PMD.SystemPrintln", "PMD.AvoidThrowingRawExceptionTypes"})
 	public static void main(String[] args) throws IOException {
 		// Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env
 		// STACKIT_SERVICE_ACCOUNT_KEY_PATH / STACKIT_SERVICE_ACCOUNT_KEY
@@ -49,7 +53,9 @@ class ResourcemanagerExample {
 									.containerParentId(containerParentId.toString())
 									.name("java-test-project")
 									.addMembersItem(member)
-									.labels(Collections.singletonMap("foo", "bar")));
+									.labels(
+											Collections.singletonMap(
+													"some-project-label", "foo-bar")));
 			System.out.println("Project:\n" + project.toString());
 
 			/* list projects */
