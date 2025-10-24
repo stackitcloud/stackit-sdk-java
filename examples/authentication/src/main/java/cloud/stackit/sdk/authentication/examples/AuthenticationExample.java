@@ -17,7 +17,11 @@ final class AuthenticationExample {
 
 	private AuthenticationExample() {}
 
-	@SuppressWarnings({"PMD.CyclomaticComplexity", "PMD.SystemPrintln", "PMD.AvoidThrowingRawExceptionTypes"})
+	@SuppressWarnings({
+		"PMD.CyclomaticComplexity",
+		"PMD.SystemPrintln",
+		"PMD.AvoidThrowingRawExceptionTypes"
+	})
 	public static void main(String[] args) throws IOException {
 		/* OPTION 1: setting the paths to service account key (and private key) as configuration */
 		try {
