@@ -2,6 +2,8 @@
 - `core`: [v0.3.0](core/CHANGELOG.md#v030)
   - **Feature:** New exception types for better error handling
     - `AuthenticationException`: New exception for authentication-related failures (token generation, refresh, validation)
+- `resourcemanager`: [v0.3.0](services/resourcemanager/CHANGELOG.md#v030)
+  - **Feature:** Add `ContainerSearchResult` model class for container search functionality
 
 ## Release (2025-09-30)
 - `core`: [v0.2.0](core/CHANGELOG.md#v020)
