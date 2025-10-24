@@ -33,7 +33,7 @@ public class IaasApi extends DefaultApi {
 	 *
 	 * <p>For production use consider using the constructor with the OkHttpClient parameter.
 	 *
-	 * @param config your STACKIT SDK CoreConfiguration
+	 * @param configuration your STACKIT SDK CoreConfiguration
 	 * @throws IOException
 	 */
 	public IaasApi(CoreConfiguration configuration) throws IOException {
