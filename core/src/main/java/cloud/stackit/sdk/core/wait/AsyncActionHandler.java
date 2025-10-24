@@ -31,11 +31,6 @@ public class AsyncActionHandler<T> {
 	private long timeoutMillis;
 	private int tempErrRetryLimit;
 
-	// The linter is complaining about this but since we are using Java 8 the
-	// possibilities are restricted.
-	// @SuppressWarnings("PMD.DoNotUseThreads")
-	// private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
 	public AsyncActionHandler(CheckFunction<AsyncActionResult<T>> checkFn) {
 		this.checkFn = checkFn;
 		this.sleepBeforeWaitMillis = 0;
@@ -140,7 +135,7 @@ public class AsyncActionHandler<T> {
 		ScheduledFuture<?> scheduledFuture =
 				ScheduleExecutorSingleton.getInstance()
 						.getScheduler()
-						.scheduleAtFixedRate(
+						.scheduleWithFixedDelay(
 								checkTask,
 								sleepBeforeWaitMillis,
 								throttleMillis,
@@ -150,7 +145,6 @@ public class AsyncActionHandler<T> {
 		future.whenComplete(
 				(result, error) -> {
 					scheduledFuture.cancel(true);
-					// scheduler.shutdown();
 				});
 
 		return future;
@@ -178,7 +172,7 @@ public class AsyncActionHandler<T> {
 	/**
 	 * Helper function to check http status codes during deletion of a resource.
 	 *
-	 * @param e ApiException to check
+	 * @param apiException ApiException to check
 	 * @return true if resource is gone otherwise false
 	 */
 	public static boolean checkResourceGoneStatusCodes(ApiException apiException) {
