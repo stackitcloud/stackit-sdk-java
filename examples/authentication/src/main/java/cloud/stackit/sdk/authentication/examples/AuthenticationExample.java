@@ -2,7 +2,6 @@ package cloud.stackit.sdk.authentication.examples;
 
 import cloud.stackit.sdk.core.config.CoreConfiguration;
 import cloud.stackit.sdk.core.exception.ApiException;
-import cloud.stackit.sdk.core.exception.SdkException;
 import cloud.stackit.sdk.resourcemanager.api.ResourceManagerApi;
 import cloud.stackit.sdk.resourcemanager.model.ListOrganizationsResponse;
 import java.io.File;
@@ -18,7 +17,7 @@ final class AuthenticationExample {
 
 	private AuthenticationExample() {}
 
-	@SuppressWarnings({"PMD.CyclomaticComplexity", "PMD.SystemPrintln"})
+	@SuppressWarnings({"PMD.CyclomaticComplexity", "PMD.SystemPrintln", "PMD.AvoidThrowingRawExceptionTypes"})
 	public static void main(String[] args) throws IOException {
 		/* OPTION 1: setting the paths to service account key (and private key) as configuration */
 		try {
@@ -35,7 +34,7 @@ final class AuthenticationExample {
 
 			System.out.println(response.toString());
 		} catch (ApiException | IOException e) {
-			throw new SdkException(e);
+			throw new RuntimeException(e);
 		}
 
 		/*
@@ -89,7 +88,7 @@ final class AuthenticationExample {
 
 			System.out.println(response.toString());
 		} catch (ApiException | IOException e) {
-			throw new SdkException(e);
+			throw new RuntimeException(e);
 		}
 
 		/*
@@ -126,7 +125,7 @@ final class AuthenticationExample {
 
 			System.out.println(response.toString());
 		} catch (ApiException | IOException e) {
-			throw new SdkException(e);
+			throw new RuntimeException(e);
 		}
 	}
 }

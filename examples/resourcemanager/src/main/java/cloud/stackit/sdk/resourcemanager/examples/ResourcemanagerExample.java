@@ -1,7 +1,6 @@
 package cloud.stackit.sdk.resourcemanager.examples;
 
 import cloud.stackit.sdk.core.exception.ApiException;
-import cloud.stackit.sdk.core.exception.SdkException;
 import cloud.stackit.sdk.resourcemanager.api.ResourceManagerApi;
 import cloud.stackit.sdk.resourcemanager.model.CreateFolderPayload;
 import cloud.stackit.sdk.resourcemanager.model.CreateProjectPayload;
@@ -22,7 +21,7 @@ final class ResourcemanagerExample {
 
 	private ResourcemanagerExample() {}
 
-	@SuppressWarnings({"PMD.SystemPrintln"})
+	@SuppressWarnings({"PMD.SystemPrintln", "PMD.AvoidThrowingRawExceptionTypes"})
 	public static void main(String[] args) throws IOException {
 		// Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env
 		// STACKIT_SERVICE_ACCOUNT_KEY_PATH / STACKIT_SERVICE_ACCOUNT_KEY
@@ -113,7 +112,7 @@ final class ResourcemanagerExample {
 			/* delete folder */
 			resourceManagerApi.deleteFolder(folder.getContainerId(), true);
 		} catch (ApiException e) {
-			throw new SdkException(e);
+			throw new RuntimeException(e);
 		}
 	}
 }

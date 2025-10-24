@@ -1,7 +1,6 @@
 ## v0.3.0
 - **Feature:** New exception types for better error handling
   - `AuthenticationException`: New exception for authentication-related failures (token generation, refresh, validation)
-  - `SdkException`: New exception for general SDK operation failures (API calls, network issues)
 
 ## v0.2.0
 - **Feature:** Support for passing custom OkHttpClient objects

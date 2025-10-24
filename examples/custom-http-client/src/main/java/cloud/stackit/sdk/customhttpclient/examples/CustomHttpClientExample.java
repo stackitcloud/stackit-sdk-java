@@ -3,7 +3,6 @@ package cloud.stackit.sdk.customhttpclient.examples;
 import cloud.stackit.sdk.core.KeyFlowAuthenticator;
 import cloud.stackit.sdk.core.config.CoreConfiguration;
 import cloud.stackit.sdk.core.exception.ApiException;
-import cloud.stackit.sdk.core.exception.SdkException;
 import cloud.stackit.sdk.iaas.api.IaasApi;
 import cloud.stackit.sdk.iaas.model.*;
 import java.io.IOException;
@@ -26,7 +25,7 @@ final class CustomHttpClientExample {
 
 	private CustomHttpClientExample() {}
 
-	@SuppressWarnings("PMD.SystemPrintln")
+	@SuppressWarnings({"PMD.SystemPrintln", "PMD.AvoidThrowingRawExceptionTypes"})
 	public static void main(String[] args) throws IOException {
 		// Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env
 		// STACKIT_SERVICE_ACCOUNT_KEY_PATH / STACKIT_SERVICE_ACCOUNT_KEY
@@ -55,7 +54,7 @@ final class CustomHttpClientExample {
 				System.out.println("* " + server.getId() + " | " + server.getName());
 			}
 		} catch (ApiException e) {
-			throw new SdkException(e);
+			throw new RuntimeException(e);
 		}
 	}
 }

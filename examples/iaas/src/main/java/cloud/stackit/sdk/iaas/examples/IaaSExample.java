@@ -1,7 +1,6 @@
 package cloud.stackit.sdk.iaas.examples;
 
 import cloud.stackit.sdk.core.exception.ApiException;
-import cloud.stackit.sdk.core.exception.SdkException;
 import cloud.stackit.sdk.iaas.api.IaasApi;
 import cloud.stackit.sdk.iaas.model.*;
 import java.io.IOException;
@@ -20,7 +19,8 @@ final class IaaSExample {
 		"PMD.CognitiveComplexity",
 		"PMD.NPathComplexity",
 		"PMD.NcssCount",
-		"PMD.SystemPrintln"
+		"PMD.SystemPrintln",
+		"PMD.AvoidThrowingRawExceptionTypes"
 	})
 	public static void main(String[] args) throws IOException {
 		/*
@@ -291,7 +291,7 @@ final class IaaSExample {
 			System.out.println("Deleted network: " + newNetwork.getNetworkId());
 
 		} catch (ApiException | InterruptedException e) {
-			throw new SdkException(e);
+			throw new RuntimeException(e);
 		}
 	}
 }
