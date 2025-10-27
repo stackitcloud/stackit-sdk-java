@@ -1,3 +1,6 @@
+## v0.4.0
+- **Feature:** Added core wait handler structure which can be used by every service waiter implementation.
+
 ## v0.3.0
 - **Feature:** New exception types for better error handling
   - `AuthenticationException`: New exception for authentication-related failures (token generation, refresh, validation)
