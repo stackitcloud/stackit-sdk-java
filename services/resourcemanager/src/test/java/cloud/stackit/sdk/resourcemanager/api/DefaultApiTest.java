@@ -10,13 +10,12 @@
  * Do not edit the class manually.
  */
 
-package cloud.stackit.sdk.resourcemanager.api;
+package cloud.stackit.sdk.resourcemanager;
 
 import cloud.stackit.sdk.core.KeyFlowAuthenticator;
 import cloud.stackit.sdk.core.auth.SetupAuth;
 import cloud.stackit.sdk.core.config.CoreConfiguration;
 import cloud.stackit.sdk.core.utils.TestUtils;
-import cloud.stackit.sdk.resourcemanager.ApiClient;
 import java.io.IOException;
 import okhttp3.Authenticator;
 import okhttp3.OkHttpClient;
