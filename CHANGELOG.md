@@ -1,4 +1,4 @@
-## Release (2025-xx-xx)
+## Release (2025-10-29)
 - `core`:
   - [v0.4.0](core/CHANGELOG.md#v040)
     - **Feature:** Added core wait handler structure which can be used by every service waiter implementation.
