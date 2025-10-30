@@ -1,4 +1,4 @@
-package cloud.stackit.sdk.resourcemanager;
+package cloud.stackit.sdk.resourcemanager.wait;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -8,7 +8,6 @@ import cloud.stackit.sdk.core.wait.AsyncActionHandler;
 import cloud.stackit.sdk.resourcemanager.api.ResourceManagerApi;
 import cloud.stackit.sdk.resourcemanager.model.GetProjectResponse;
 import cloud.stackit.sdk.resourcemanager.model.LifecycleState;
-import cloud.stackit.sdk.resourcemanager.wait.ResourcemanagerWait;
 import java.net.HttpURLConnection;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -22,7 +21,7 @@ import org.mockito.MockitoAnnotations;
  * an intentional testing class with many tests.
  */
 @SuppressWarnings("PMD.TooManyMethods")
-class ResourcemanagerWaitTestmanagerWaitTest {
+class ResourcemanagerWaitTest {
 
 	@Mock private ResourceManagerApi apiClient;
 
