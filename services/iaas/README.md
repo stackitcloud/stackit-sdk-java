@@ -1,6 +1,6 @@
 # STACKIT Java SDK for IaaS-API
 
-- API version: 1
+- API version: 2
 
 This API allows you to create and modify IaaS resources.
 
