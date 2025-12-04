@@ -1,4 +1,4 @@
-# STACKIT Java SDK for Resource Manager API
+# STACKIT Java SDK for STACKIT Resource Manager API
 
 - API version: 2.0
 
