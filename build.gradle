@@ -113,6 +113,8 @@ subprojects {
 			logger.warn("VERSION file not found in project '${project.path}'. Skipping version setting.")
 		}
 
+		tasks.register('lintProjectVersion', VersionCheckTask) {}
+
 		java {
 			withSourcesJar()
 			withJavadocJar()

@@ -6,6 +6,7 @@ fmt:
 
 lint:
 	@./gradlew pmdMain
+	@./gradlew lintProjectVersion
 
 test:
 	@./gradlew test
