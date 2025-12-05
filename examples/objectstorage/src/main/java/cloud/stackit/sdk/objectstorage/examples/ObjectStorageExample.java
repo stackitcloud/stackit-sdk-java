@@ -36,6 +36,8 @@ final class ObjectStorageExample {
 				httpClient
 						.newBuilder()
 						.authenticator(authenticator)
+						// The object storage requests are sychronous and may take a few seconds.
+						// To prevent an timeout, we increase the read timeout to 15 seconds
 						.readTimeout(Duration.ofSeconds(15))
 						.build();
 
@@ -48,13 +50,8 @@ final class ObjectStorageExample {
 			return;
 		}
 
-		// the region which should be used to interact with objectstorage, read from env var for
-		// this example
-		String region = System.getenv("STACKIT_REGION");
-		if (region == null || region.isEmpty()) {
-			System.err.println("Environment variable 'STACKIT_REGION' not found.");
-			return;
-		}
+		// the region which should be used to interact with objectstorage
+		String region = "eu01";
 
 		try {
 			/*
@@ -206,7 +203,7 @@ final class ObjectStorageExample {
 							newCredentialGroup.getCredentialsGroup().getCredentialsGroupId());
 			System.out.println(
 					"* Group ID: " + deleteCredentialsGroupResponse.getCredentialsGroupId());
-			System.out.println("* Bucket successfully deleted");
+			System.out.println("* Credentials group successfully deleted");
 		} catch (ApiException e) {
 			throw new RuntimeException(e);
 		}
