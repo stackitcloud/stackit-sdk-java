@@ -1,3 +1,7 @@
+## Release (2025-MM-DD)
+- `objectstorage`: [v0.1.0](services/objectstorage/CHANGELOG.md#v010)
+  - Initial onboarding of STACKIT Java SDK for Object storage service
+
 ## Release (2025-10-29)
 - `core`:
   - [v0.4.0](core/CHANGELOG.md#v040)
