@@ -71,7 +71,7 @@ final class ServerUpdateExample {
 			System.out.println("List all available update policies:");
 			GetUpdatePoliciesResponse listUpdatePolicies =
 					serverUpdateApi.listUpdatePolicies(projectId);
-			assert listUpdatePolicies.getItems() != null;
+			Objects.requireNonNull(listUpdatePolicies.getItems());
 			for (UpdatePolicy policy : listUpdatePolicies.getItems()) {
 				System.out.println("*************************");
 				System.out.println("* Policy name: " + policy.getName());
