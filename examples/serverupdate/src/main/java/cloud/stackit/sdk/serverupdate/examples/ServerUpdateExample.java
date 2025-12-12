@@ -92,7 +92,7 @@ final class ServerUpdateExample {
 			try {
 				GetUpdateServiceResponse updateServiceStatus =
 						serverUpdateApi.getServiceResource(projectId, serverId, region);
-				assert updateServiceStatus.getEnabled() != null;
+				Objects.requireNonNull(updateServiceStatus.getEnabled());
 				System.out.println("* Update service enabled: " + updateServiceStatus.getEnabled());
 			} catch (ApiException e) {
 				// If response status is not found, update service is not enabled for the server
@@ -100,7 +100,7 @@ final class ServerUpdateExample {
 					System.out.println("* Update service is not enabled for the server");
 					System.out.println("* Enabling update service...");
 					String policyIdString = listUpdatePolicies.getItems().get(0).getId();
-					assert policyIdString != null;
+					Objects.requireNonNull(policyIdString);
 					UUID policyId = UUID.fromString(policyIdString);
 					serverUpdateApi.enableServiceResource(
 							projectId,
@@ -159,7 +159,7 @@ final class ServerUpdateExample {
 			System.out.println("\nList all update schedules");
 			GetUpdateSchedulesResponse listUpdateSchedules =
 					serverUpdateApi.listUpdateSchedules(projectId, serverId, region);
-			assert listUpdateSchedules.getItems() != null;
+			Objects.requireNonNull(listUpdateSchedules.getItems());
 			for (UpdateSchedule schedule : listUpdateSchedules.getItems()) {
 				System.out.println("*************************");
 				System.out.println("* Schedule ID: " + schedule.getId());
@@ -222,7 +222,7 @@ final class ServerUpdateExample {
 			System.out.println("\nList updates:");
 			GetUpdatesListResponse listUpdates =
 					serverUpdateApi.listUpdates(projectId, serverId, region);
-			assert listUpdates.getItems() != null;
+			Objects.requireNonNull(listUpdates.getItems());
 			for (Update update : listUpdates.getItems()) {
 				System.out.println("*************************");
 				System.out.println("* ID: " + update.getId());
