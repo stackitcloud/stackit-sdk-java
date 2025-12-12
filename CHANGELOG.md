@@ -1,4 +1,6 @@
 ## Release (2025-MM-DD)
+- `alb`: [v0.1.0](services/alb/CHANGELOG.md#v010)
+  - Initial onboarding of STACKIT Java SDK for Application load balancer service
 - `objectstorage`: [v0.1.0](services/objectstorage/CHANGELOG.md#v010)
   - Initial onboarding of STACKIT Java SDK for Object storage service
 - `serverupdate`: [v0.1.0](services/serverupdate/CHANGELOG.md#v010)
