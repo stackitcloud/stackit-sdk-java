@@ -1,4 +1,6 @@
 ## Release (2025-MM-DD)
+- `core`: [v0.4.1](core/CHANGELOG.md/#v041)
+  - **Bugfix:** Add check in `KeyFlowAuthenticator` to prevent endless loops
 - `objectstorage`: [v0.1.0](services/objectstorage/CHANGELOG.md#v010)
   - Initial onboarding of STACKIT Java SDK for Object storage service
 
