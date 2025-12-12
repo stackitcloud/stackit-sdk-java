@@ -1,0 +1,6 @@
+dependencies {
+	implementation project (':services:serverupdate')
+	implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+}
+
+ext.mainClassName = 'cloud.stackit.sdk.serverupdate.examples.ServerUpdateExample'
