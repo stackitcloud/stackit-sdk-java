@@ -52,6 +52,12 @@ public class KeyFlowAuthenticator implements Authenticator {
 	/**
 	 * Creates the initial service account and refreshes expired access token.
 	 *
+	 * <p>NOTE: It's normal that 2 requests are sent, it's regular OkHttp Authenticator behavior.
+	 * The first request is always attempted without the authenticator and in case the response is
+	 * Unauthorized(=401), OkHttp reattempt the request with the authenticator. See <a
+	 * href="https://square.github.io/okhttp/recipes/#handling-authentication-kt-java">OkHttp
+	 * Docs</a>
+	 *
 	 * @deprecated use constructor with OkHttpClient instead to prevent resource leaks. Will be
 	 *     removed in April 2026.
 	 * @param cfg Configuration to set a custom token endpoint and the token expiration leeway.
@@ -64,6 +70,12 @@ public class KeyFlowAuthenticator implements Authenticator {
 
 	/**
 	 * Creates the initial service account and refreshes expired access token.
+	 *
+	 * <p>NOTE: It's normal that 2 requests are sent, it's regular OkHttp Authenticator behavior.
+	 * The first request is always attempted without the authenticator and in case the response is
+	 * Unauthorized(=401), OkHttp reattempt the request with the authenticator. See <a
+	 * href="https://square.github.io/okhttp/recipes/#handling-authentication-kt-java">OkHttp
+	 * Docs</a>
 	 *
 	 * @deprecated use constructor with OkHttpClient instead to prevent resource leaks. Will be
 	 *     removed in April 2026.
@@ -81,6 +93,12 @@ public class KeyFlowAuthenticator implements Authenticator {
 	/**
 	 * Creates the initial service account and refreshes expired access token.
 	 *
+	 * <p>NOTE: It's normal that 2 requests are sent, it's regular OkHttp Authenticator behavior.
+	 * The first request is always attempted without the authenticator and in case the response is
+	 * Unauthorized(=401), OkHttp reattempt the request with the authenticator. See <a
+	 * href="https://square.github.io/okhttp/recipes/#handling-authentication-kt-java">OkHttp
+	 * Docs</a>
+	 *
 	 * @param httpClient OkHttpClient object
 	 * @param cfg Configuration to set a custom token endpoint and the token expiration leeway.
 	 */
@@ -90,6 +108,12 @@ public class KeyFlowAuthenticator implements Authenticator {
 
 	/**
 	 * Creates the initial service account and refreshes expired access token.
+	 *
+	 * <p>NOTE: It's normal that 2 requests are sent, it's regular OkHttp Authenticator behavior.
+	 * The first request is always attempted without the authenticator and in case the response is
+	 * Unauthorized(=401), OkHttp reattempt the request with the authenticator. See <a
+	 * href="https://square.github.io/okhttp/recipes/#handling-authentication-kt-java">OkHttp
+	 * Docs</a>
 	 *
 	 * @param httpClient OkHttpClient object
 	 * @param cfg Configuration to set a custom token endpoint and the token expiration leeway.
@@ -129,6 +153,9 @@ public class KeyFlowAuthenticator implements Authenticator {
 
 	@Override
 	public Request authenticate(Route route, @NotNull Response response) throws IOException {
+		if (response.request().header("Authorization") != null) {
+			return null; // Give up, we've already attempted to authenticate.
+		}
 		String accessToken;
 		try {
 			accessToken = getAccessToken();

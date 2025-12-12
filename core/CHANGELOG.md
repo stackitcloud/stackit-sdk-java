@@ -1,3 +1,6 @@
+## v0.4.1
+- **Bugfix:** Add check in `KeyFlowAuthenticator` to prevent endless loops
+
 ## v0.4.0
 - **Feature:** Added core wait handler structure which can be used by every service waiter implementation.
 
