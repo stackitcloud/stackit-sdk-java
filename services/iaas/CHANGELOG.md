@@ -1,3 +1,6 @@
+## v0.3.1
+- Bump dependency `cloud.stackit.sdk.core` to v0.4.1
+
 ## v0.3.0
 - **Feature:** Add `createdAt` and `updatedAt` attributes to `SecurityGroupRule`, `BaseSecurityGroupRule`, `CreateSecurityGroupRulePayload` model classes
 - **Feature:** Add `description` attribute to `CreateNicPayload`, `NIC`, `UpdateNicPayload` model classes
