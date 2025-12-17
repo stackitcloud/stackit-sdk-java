@@ -1,14 +1,30 @@
 ## Release (2025-MM-DD)
 - `core`: [v0.4.1](core/CHANGELOG.md/#v041)
   - **Bugfix:** Add check in `KeyFlowAuthenticator` to prevent endless loops
-- `loadbalancer`: [v0.1.0](services/loadbalancer/CHANGELOG.md#v010)
-  - Initial onboarding of STACKIT Java SDK for Load balancer service
-- `alb`: [v0.1.0](services/alb/CHANGELOG.md#v010)
-  - Initial onboarding of STACKIT Java SDK for Application load balancer service
-- `objectstorage`: [v0.1.0](services/objectstorage/CHANGELOG.md#v010)
-  - Initial onboarding of STACKIT Java SDK for Object storage service
-- `serverupdate`: [v0.1.0](services/serverupdate/CHANGELOG.md#v010)
-  - Initial onboarding of STACKIT Java SDK for Server Update service
+- `iaas`: [v0.3.1](services/iaas/CHANGELOG.md#v031)
+  - Bump dependency `cloud.stackit.sdk.core` to v0.4.1
+- `resourcemanager`: [v0.4.1](services/resourcemanager/CHANGELOG.md#v041)
+  - Bump dependency `cloud.stackit.sdk.core` to v0.4.1
+- `loadbalancer`:
+  - [v0.1.1](services/loadbalancer/CHANGELOG.md#v011)
+    - Bump dependency `cloud.stackit.sdk.core` to v0.4.1 
+  - [v0.1.0](services/loadbalancer/CHANGELOG.md#v010)
+    - Initial onboarding of STACKIT Java SDK for Load balancer service
+- `alb`:
+  - [v0.1.1](services/alb/CHANGELOG.md#v011)
+    - Bump dependency `cloud.stackit.sdk.core` to v0.4.1
+  - [v0.1.0](services/alb/CHANGELOG.md#v010)
+    - Initial onboarding of STACKIT Java SDK for Application load balancer service
+- `objectstorage`:
+  - [v0.1.1](services/objectstorage/CHANGELOG.md#v011)
+    - Bump dependency `cloud.stackit.sdk.core` to v0.4.1
+  - [v0.1.0](services/objectstorage/CHANGELOG.md#v010)
+    - Initial onboarding of STACKIT Java SDK for Object storage service
+- `serverupdate`:
+  - [v0.1.1](services/serverupdate/CHANGELOG.md#v011)
+    - Bump dependency `cloud.stackit.sdk.core` to v0.4.1
+  - [v0.1.0](services/serverupdate/CHANGELOG.md#v010)
+    - Initial onboarding of STACKIT Java SDK for Server Update service
 
 ## Release (2025-10-29)
 - `core`:

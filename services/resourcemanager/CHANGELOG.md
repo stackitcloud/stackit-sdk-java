@@ -1,3 +1,6 @@
+## v0.4.1
+- Bump dependency `cloud.stackit.sdk.core` to v0.4.1
+
 ## v0.4.0
 - **Feature:** Added waiter for project creation and project deletion
 
