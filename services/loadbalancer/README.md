@@ -1,4 +1,4 @@
-# STACKIT Java SDK for STACKIT Load Balancer API
+# STACKIT Java SDK for STACKIT Network Load Balancer API
 
 - API version: 2.0.0
 
