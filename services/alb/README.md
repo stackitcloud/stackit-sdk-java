@@ -1,10 +1,10 @@
 # STACKIT Java SDK for STACKIT Application Load Balancer API
 
-- API version: 2beta2.0.0
+- API version: 2.0.0
 
-This API offers an interface to provision and manage load balancing servers in your STACKIT project. It also has the possibility of pooling target servers for load balancing purposes.
+This API offers an interface to provision and manage Application Load Balancers in your STACKIT project.This solution offers modern L7 load balancing. Current features include TLS, path and prefix based routing aswell as routing based on headers, query parameters and keeping connections persistent with cookies and web sockets.
 
-For each application load balancer provided, two VMs are deployed in your OpenStack project subject to a fee.
+For each Application Load Balancer provided, two VMs are deployed in your STACKIT project and are subject to fees.
 
 
 This package is part of the STACKIT Java SDK. For additional information, please visit the [GitHub repository](https://github.com/stackitcloud/stackit-sdk-java) of the SDK.
