@@ -1,4 +1,4 @@
-## Release (2025-MM-DD)
+## Release (2026-MM-DD)
 - `core`: [v0.4.1](core/CHANGELOG.md/#v041)
   - **Bugfix:** Add check in `KeyFlowAuthenticator` to prevent endless loops
 - `iaas`: [v0.3.1](services/iaas/CHANGELOG.md#v031)
@@ -11,6 +11,12 @@
   - [v0.1.0](services/loadbalancer/CHANGELOG.md#v010)
     - Initial onboarding of STACKIT Java SDK for Load balancer service
 - `alb`:
+  - [v0.2.0](services/alb/CHANGELOG.md#v020)
+    - **Feature:** Switch from `v2beta` API version to `v2` version.
+    - **Feature:** `MaxCredentials` field added to `GetQuotaResponse`
+    - **Breaking change:** added `version` to LoadBalancer constructor
+    - **Breaking change:** renamed `exact` to `exactMatch` in Path model
+    - **Breaking change:** removed `pathPrefix` from Rule model
   - [v0.1.1](services/alb/CHANGELOG.md#v011)
     - Bump dependency `cloud.stackit.sdk.core` to v0.4.1
   - [v0.1.0](services/alb/CHANGELOG.md#v010)
