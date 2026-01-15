@@ -10,16 +10,6 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    groups:
-      internal-deps:
-        patterns:
-            - "cloud.stackit*"
-      external-deps:
-        patterns:
-            - "*"
-        exclude-patterns:
-            # should be covered by listing internal-deps first (https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference#groups--)
-            # but listing it here to be explicit
-            - "cloud.stackit*"
-        cooldown:
-          default-days: 7
+    cooldown:
+        default-days: 7
+        exclude: ["cloud.stackit*"]
