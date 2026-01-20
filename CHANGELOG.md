@@ -31,6 +31,8 @@
     - Bump dependency `cloud.stackit.sdk.core` to v0.4.1
   - [v0.1.0](services/serverupdate/CHANGELOG.md#v010)
     - Initial onboarding of STACKIT Java SDK for Server Update service
+- `serverbackup`: [v0.1.0](services/serverbackup/CHANGELOG.md#v010)
+  - Initial onboarding of STACKIT Java SDK for serverbackup service
 
 ## Release (2025-10-29)
 - `core`:
