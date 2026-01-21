@@ -32,7 +32,7 @@ import java.util.Set;
 /** Bucket */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class Bucket {
 	public static final String SERIALIZED_NAME_NAME = "name";
 
@@ -208,6 +208,7 @@ public class Bucket {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in Bucket is not found in the empty JSON string",
 								Bucket.openapiRequiredFields.toString()));
 			}
@@ -219,8 +220,10 @@ public class Bucket {
 			if (!Bucket.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The field `%s` in the JSON string is not defined in the `Bucket` properties. JSON: %s",
-								entry.getKey(), jsonElement.toString()));
+								entry.getKey(),
+								jsonElement.toString()));
 			}
 		}
 
@@ -229,32 +232,38 @@ public class Bucket {
 			if (jsonElement.getAsJsonObject().get(requiredField) == null) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field `%s` is not found in the JSON string: %s",
-								requiredField, jsonElement.toString()));
+								requiredField,
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
 		if (!jsonObj.get("name").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `name` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("name").toString()));
 		}
 		if (!jsonObj.get("region").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `region` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("region").toString()));
 		}
 		if (!jsonObj.get("urlPathStyle").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `urlPathStyle` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("urlPathStyle").toString()));
 		}
 		if (!jsonObj.get("urlVirtualHostedStyle").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `urlVirtualHostedStyle` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("urlVirtualHostedStyle").toString()));
 		}

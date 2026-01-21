@@ -32,7 +32,7 @@ import java.util.Set;
 /** CreateCredentialsGroupResponse */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class CreateCredentialsGroupResponse {
 	public static final String SERIALIZED_NAME_CREDENTIALS_GROUP = "credentialsGroup";
 
@@ -152,6 +152,7 @@ public class CreateCredentialsGroupResponse {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in CreateCredentialsGroupResponse is not found in the empty JSON string",
 								CreateCredentialsGroupResponse.openapiRequiredFields.toString()));
 			}
@@ -163,8 +164,10 @@ public class CreateCredentialsGroupResponse {
 			if (!CreateCredentialsGroupResponse.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The field `%s` in the JSON string is not defined in the `CreateCredentialsGroupResponse` properties. JSON: %s",
-								entry.getKey(), jsonElement.toString()));
+								entry.getKey(),
+								jsonElement.toString()));
 			}
 		}
 
@@ -173,8 +176,10 @@ public class CreateCredentialsGroupResponse {
 			if (jsonElement.getAsJsonObject().get(requiredField) == null) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field `%s` is not found in the JSON string: %s",
-								requiredField, jsonElement.toString()));
+								requiredField,
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -183,6 +188,7 @@ public class CreateCredentialsGroupResponse {
 		if (!jsonObj.get("project").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `project` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("project").toString()));
 		}
