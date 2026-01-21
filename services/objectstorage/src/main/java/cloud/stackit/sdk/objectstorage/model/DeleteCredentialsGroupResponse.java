@@ -32,7 +32,7 @@ import java.util.Set;
 /** DeleteCredentialsGroupResponse */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class DeleteCredentialsGroupResponse {
 	public static final String SERIALIZED_NAME_CREDENTIALS_GROUP_ID = "credentialsGroupId";
 
@@ -154,6 +154,7 @@ public class DeleteCredentialsGroupResponse {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in DeleteCredentialsGroupResponse is not found in the empty JSON string",
 								DeleteCredentialsGroupResponse.openapiRequiredFields.toString()));
 			}
@@ -165,8 +166,10 @@ public class DeleteCredentialsGroupResponse {
 			if (!DeleteCredentialsGroupResponse.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The field `%s` in the JSON string is not defined in the `DeleteCredentialsGroupResponse` properties. JSON: %s",
-								entry.getKey(), jsonElement.toString()));
+								entry.getKey(),
+								jsonElement.toString()));
 			}
 		}
 
@@ -175,20 +178,24 @@ public class DeleteCredentialsGroupResponse {
 			if (jsonElement.getAsJsonObject().get(requiredField) == null) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field `%s` is not found in the JSON string: %s",
-								requiredField, jsonElement.toString()));
+								requiredField,
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
 		if (!jsonObj.get("credentialsGroupId").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `credentialsGroupId` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("credentialsGroupId").toString()));
 		}
 		if (!jsonObj.get("project").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `project` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("project").toString()));
 		}

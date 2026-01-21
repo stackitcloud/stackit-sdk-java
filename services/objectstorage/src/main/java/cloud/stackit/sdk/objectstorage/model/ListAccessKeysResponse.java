@@ -35,7 +35,7 @@ import java.util.Set;
 /** ListAccessKeysResponse */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class ListAccessKeysResponse {
 	public static final String SERIALIZED_NAME_ACCESS_KEYS = "accessKeys";
 
@@ -159,6 +159,7 @@ public class ListAccessKeysResponse {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in ListAccessKeysResponse is not found in the empty JSON string",
 								ListAccessKeysResponse.openapiRequiredFields.toString()));
 			}
@@ -170,8 +171,10 @@ public class ListAccessKeysResponse {
 			if (!ListAccessKeysResponse.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The field `%s` in the JSON string is not defined in the `ListAccessKeysResponse` properties. JSON: %s",
-								entry.getKey(), jsonElement.toString()));
+								entry.getKey(),
+								jsonElement.toString()));
 			}
 		}
 
@@ -180,8 +183,10 @@ public class ListAccessKeysResponse {
 			if (jsonElement.getAsJsonObject().get(requiredField) == null) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field `%s` is not found in the JSON string: %s",
-								requiredField, jsonElement.toString()));
+								requiredField,
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -189,6 +194,7 @@ public class ListAccessKeysResponse {
 		if (!jsonObj.get("accessKeys").isJsonArray()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `accessKeys` to be an array in the JSON string but got `%s`",
 							jsonObj.get("accessKeys").toString()));
 		}
@@ -202,6 +208,7 @@ public class ListAccessKeysResponse {
 		if (!jsonObj.get("project").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `project` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("project").toString()));
 		}
