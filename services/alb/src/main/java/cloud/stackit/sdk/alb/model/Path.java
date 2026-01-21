@@ -36,7 +36,7 @@ import java.util.Set;
  */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class Path {
 	public static final String SERIALIZED_NAME_EXACT_MATCH = "exactMatch";
 
@@ -150,6 +150,7 @@ public class Path {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in Path is not found in the empty JSON string",
 								Path.openapiRequiredFields.toString()));
 			}
@@ -161,8 +162,10 @@ public class Path {
 			if (!Path.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The field `%s` in the JSON string is not defined in the `Path` properties. JSON: %s",
-								entry.getKey(), jsonElement.toString()));
+								entry.getKey(),
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -170,6 +173,7 @@ public class Path {
 				&& !jsonObj.get("exactMatch").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `exactMatch` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("exactMatch").toString()));
 		}
@@ -177,6 +181,7 @@ public class Path {
 				&& !jsonObj.get("prefix").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `prefix` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("prefix").toString()));
 		}
