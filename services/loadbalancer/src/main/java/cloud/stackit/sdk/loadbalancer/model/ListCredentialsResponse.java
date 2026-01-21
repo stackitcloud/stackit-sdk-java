@@ -35,7 +35,7 @@ import java.util.Set;
 /** ListCredentialsResponse */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class ListCredentialsResponse {
 	public static final String SERIALIZED_NAME_CREDENTIALS = "credentials";
 
@@ -131,6 +131,7 @@ public class ListCredentialsResponse {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in ListCredentialsResponse is not found in the empty JSON string",
 								ListCredentialsResponse.openapiRequiredFields.toString()));
 			}
@@ -142,8 +143,10 @@ public class ListCredentialsResponse {
 			if (!ListCredentialsResponse.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The field `%s` in the JSON string is not defined in the `ListCredentialsResponse` properties. JSON: %s",
-								entry.getKey(), jsonElement.toString()));
+								entry.getKey(),
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -154,6 +157,7 @@ public class ListCredentialsResponse {
 				if (!jsonObj.get("credentials").isJsonArray()) {
 					throw new IllegalArgumentException(
 							String.format(
+									java.util.Locale.ROOT,
 									"Expected the field `credentials` to be an array in the JSON string but got `%s`",
 									jsonObj.get("credentials").toString()));
 				}
