@@ -34,7 +34,7 @@ import java.util.UUID;
 /** Network */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class Network {
 	public static final String SERIALIZED_NAME_NETWORK_ID = "networkId";
 
@@ -207,6 +207,7 @@ public class Network {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in Network is not found in the empty JSON string",
 								Network.openapiRequiredFields.toString()));
 			}
@@ -218,8 +219,10 @@ public class Network {
 			if (!Network.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The field `%s` in the JSON string is not defined in the `Network` properties. JSON: %s",
-								entry.getKey(), jsonElement.toString()));
+								entry.getKey(),
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -227,6 +230,7 @@ public class Network {
 				&& !jsonObj.get("networkId").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `networkId` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("networkId").toString()));
 		}
@@ -234,6 +238,7 @@ public class Network {
 				&& !jsonObj.get("role").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `role` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("role").toString()));
 		}
