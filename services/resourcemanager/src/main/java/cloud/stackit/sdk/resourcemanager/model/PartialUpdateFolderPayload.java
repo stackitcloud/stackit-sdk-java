@@ -33,7 +33,7 @@ import java.util.Set;
 /** PartialUpdateFolderPayload */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class PartialUpdateFolderPayload {
 	public static final String SERIALIZED_NAME_CONTAINER_PARENT_ID = "containerParentId";
 
@@ -187,6 +187,7 @@ public class PartialUpdateFolderPayload {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in PartialUpdateFolderPayload is not found in the empty JSON string",
 								PartialUpdateFolderPayload.openapiRequiredFields.toString()));
 			}
@@ -198,8 +199,10 @@ public class PartialUpdateFolderPayload {
 			if (!PartialUpdateFolderPayload.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The field `%s` in the JSON string is not defined in the `PartialUpdateFolderPayload` properties. JSON: %s",
-								entry.getKey(), jsonElement.toString()));
+								entry.getKey(),
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -208,6 +211,7 @@ public class PartialUpdateFolderPayload {
 				&& !jsonObj.get("containerParentId").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `containerParentId` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("containerParentId").toString()));
 		}
@@ -215,6 +219,7 @@ public class PartialUpdateFolderPayload {
 				&& !jsonObj.get("name").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `name` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("name").toString()));
 		}
