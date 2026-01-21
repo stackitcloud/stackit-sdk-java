@@ -38,7 +38,7 @@ import java.util.UUID;
 /** GetProjectResponse */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class GetProjectResponse {
 	public static final String SERIALIZED_NAME_CONTAINER_ID = "containerId";
 
@@ -388,6 +388,7 @@ public class GetProjectResponse {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in GetProjectResponse is not found in the empty JSON string",
 								GetProjectResponse.openapiRequiredFields.toString()));
 			}
@@ -399,8 +400,10 @@ public class GetProjectResponse {
 			if (!GetProjectResponse.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The field `%s` in the JSON string is not defined in the `GetProjectResponse` properties. JSON: %s",
-								entry.getKey(), jsonElement.toString()));
+								entry.getKey(),
+								jsonElement.toString()));
 			}
 		}
 
@@ -409,14 +412,17 @@ public class GetProjectResponse {
 			if (jsonElement.getAsJsonObject().get(requiredField) == null) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field `%s` is not found in the JSON string: %s",
-								requiredField, jsonElement.toString()));
+								requiredField,
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
 		if (!jsonObj.get("containerId").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `containerId` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("containerId").toString()));
 		}
@@ -425,6 +431,7 @@ public class GetProjectResponse {
 		if (!jsonObj.get("name").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `name` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("name").toString()));
 		}
@@ -437,6 +444,7 @@ public class GetProjectResponse {
 				if (!jsonObj.get("parents").isJsonArray()) {
 					throw new IllegalArgumentException(
 							String.format(
+									java.util.Locale.ROOT,
 									"Expected the field `parents` to be an array in the JSON string but got `%s`",
 									jsonObj.get("parents").toString()));
 				}
@@ -451,6 +459,7 @@ public class GetProjectResponse {
 		if (!jsonObj.get("projectId").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `projectId` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("projectId").toString()));
 		}
