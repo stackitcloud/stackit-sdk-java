@@ -19,7 +19,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.spec.InvalidKeySpecException;
-import java.util.Date;
+import java.time.Instant;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -200,7 +200,7 @@ public class KeyFlowAuthenticator implements Authenticator {
 		}
 
 		protected boolean isExpired() {
-			return expiresIn < new Date().toInstant().getEpochSecond();
+			return expiresIn < Instant.now().getEpochSecond();
 		}
 
 		protected String getAccessToken() {
@@ -342,8 +342,8 @@ public class KeyFlowAuthenticator implements Authenticator {
 				.withSubject(saKey.getCredentials().getSub())
 				.withJWTId(UUID.randomUUID().toString())
 				.withAudience(saKey.getCredentials().getAud())
-				.withIssuedAt(new Date())
-				.withExpiresAt(new Date().toInstant().plusSeconds(10 * 60))
+				.withIssuedAt(Instant.now())
+				.withExpiresAt(Instant.now().plusSeconds(10 * 60))
 				.withHeader(jwtHeader)
 				.sign(algorithm);
 	}

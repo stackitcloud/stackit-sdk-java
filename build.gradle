@@ -69,7 +69,7 @@ allprojects {
 
 	pmd {
 		consoleOutput = true
-		toolVersion = "7.12.0"
+		toolVersion = "7.20.0"
 
 		// This tells PMD to use your custom ruleset file.
 		ruleSetFiles = rootProject.files("config/pmd/pmd-ruleset.xml")
