@@ -9,7 +9,7 @@ plugins {
 
 	/* We have to use this 3rd party plugin for publishing to MavenCentral because as of AUG-2025 there is no official
 	 * plugin which supports publishing to MavenCentral Portal. */
-	id "com.vanniktech.maven.publish.base" version "0.35.0"
+	id "com.vanniktech.maven.publish.base" version "0.36.0"
 }
 
 allprojects {
