@@ -136,8 +136,7 @@ public final class ResourcemanagerWait {
 						GetProjectResponse projectResponse =
 								apiClient.getProject(containerId, false);
 						if (projectResponse.getContainerId().equals(containerId)
-								&& projectResponse
-										.getLifecycleState() == LifecycleState.DELETING) {
+								&& projectResponse.getLifecycleState() == LifecycleState.DELETING) {
 							return new AsyncActionResult<>(true, null);
 						}
 
