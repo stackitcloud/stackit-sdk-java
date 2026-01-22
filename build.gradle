@@ -5,7 +5,7 @@ plugins {
 	id 'eclipse'
 	id 'pmd'
 
-	id 'com.diffplug.spotless' version '6.21.0'
+	id 'com.diffplug.spotless' version '8.1.0'
 
 	/* We have to use this 3rd party plugin for publishing to MavenCentral because as of AUG-2025 there is no official
 	 * plugin which supports publishing to MavenCentral Portal. */
