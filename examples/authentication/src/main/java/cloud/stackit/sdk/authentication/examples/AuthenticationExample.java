@@ -7,6 +7,7 @@ import cloud.stackit.sdk.resourcemanager.model.ListOrganizationsResponse;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 final class AuthenticationExample {
@@ -53,7 +54,7 @@ final class AuthenticationExample {
 				"examples/authentication/src/main/java/cloud/stackit/sdk/authentication/examples/dummy_credentials/dummy-service-account-key.json";
 		File serviceAccountKeyFile = new File(serviceAccountKeyPath);
 		StringBuilder serviceAccountKeyContent = new StringBuilder();
-		try (Scanner myReader = new Scanner(serviceAccountKeyFile)) {
+		try (Scanner myReader = new Scanner(serviceAccountKeyFile, StandardCharsets.UTF_8.name())) {
 			while (myReader.hasNextLine()) {
 				serviceAccountKeyContent.append(myReader.nextLine());
 			}
@@ -66,7 +67,7 @@ final class AuthenticationExample {
 				"examples/authentication/src/main/java/cloud/stackit/sdk/authentication/examples/dummy_credentials/dummy-private-key.pem";
 		File privateKeyFile = new File(privateKeyPath);
 		StringBuilder privateKeyContent = new StringBuilder();
-		try (Scanner myReader = new Scanner(privateKeyFile)) {
+		try (Scanner myReader = new Scanner(privateKeyFile, StandardCharsets.UTF_8.name())) {
 			while (myReader.hasNextLine()) {
 				privateKeyContent.append(myReader.nextLine());
 			}

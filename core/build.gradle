@@ -1,10 +1,10 @@
 
 dependencies {
 	implementation 'com.auth0:java-jwt:4.5.0'
-	implementation 'com.squareup.okhttp3:okhttp:4.12.0'
-	implementation 'com.google.code.gson:gson:2.9.1'
+	implementation 'com.squareup.okhttp3:okhttp:5.3.2'
+	implementation 'com.google.code.gson:gson:2.13.2'
 
-	testImplementation 'com.squareup.okhttp3:mockwebserver:4.9.0'
-	testImplementation 'org.mockito:mockito-core:5.18.0'
-	testImplementation 'org.mockito:mockito-junit-jupiter:5.18.0'
+	testImplementation 'com.squareup.okhttp3:mockwebserver:5.3.2'
+	testImplementation 'org.mockito:mockito-core:5.21.0'
+	testImplementation 'org.mockito:mockito-junit-jupiter:5.21.0'
 }

@@ -5,11 +5,11 @@ plugins {
 	id 'eclipse'
 	id 'pmd'
 
-	id 'com.diffplug.spotless' version '6.21.0'
+	id 'com.diffplug.spotless' version '8.1.0'
 
 	/* We have to use this 3rd party plugin for publishing to MavenCentral because as of AUG-2025 there is no official
 	 * plugin which supports publishing to MavenCentral Portal. */
-	id "com.vanniktech.maven.publish.base" version "0.34.0"
+	id "com.vanniktech.maven.publish.base" version "0.36.0"
 }
 
 allprojects {
@@ -69,7 +69,7 @@ allprojects {
 
 	pmd {
 		consoleOutput = true
-		toolVersion = "7.12.0"
+		toolVersion = "7.20.0"
 
 		// This tells PMD to use your custom ruleset file.
 		ruleSetFiles = rootProject.files("config/pmd/pmd-ruleset.xml")
@@ -215,7 +215,8 @@ subprojects {
 			implementation project(':core')
 		}
 
-		testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.0'
-		testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.0'
+		testImplementation 'org.junit.jupiter:junit-jupiter-api:5.14.2'
+		testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.14.2'
+		testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.14.2'
 	}
 }

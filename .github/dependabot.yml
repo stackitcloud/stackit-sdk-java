@@ -10,6 +10,16 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    ignore:
+      - dependency-name: "org.junit.jupiter:junit-jupiter-api"
+        versions: ["[6.0.0,)"]
+      - dependency-name: "org.junit.jupiter:junit-jupiter-engine"
+        versions: ["[6.0.0,)"]
+      - dependency-name: "org.junit.platform:junit-platform-launcher"
+        versions: ["[6.0.0,)"]
+    groups:
+      junit:
+        patterns: ["org.junit.*"]
     cooldown:
         default-days: 7
         exclude: ["cloud.stackit*"]
