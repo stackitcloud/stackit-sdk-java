@@ -11,6 +11,8 @@
   - [v0.1.0](services/loadbalancer/CHANGELOG.md#v010)
     - Initial onboarding of STACKIT Java SDK for Load balancer service
 - `alb`:
+  - [v0.2.1](services/alb/CHANGELOG.md#v021)
+    - **Feature:** added `usedLoadBalancers` and `usedCredentials` to `GetQuotaResponse`
   - [v0.2.0](services/alb/CHANGELOG.md#v020)
     - **Feature:** Switch from `v2beta` API version to `v2` version.
     - **Feature:** `MaxCredentials` field added to `GetQuotaResponse`
