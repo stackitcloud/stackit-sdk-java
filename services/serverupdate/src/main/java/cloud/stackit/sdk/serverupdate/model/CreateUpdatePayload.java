@@ -32,7 +32,7 @@ import java.util.Set;
 /** CreateUpdatePayload */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+		comments = "Generator version: 7.15.0")
 public class CreateUpdatePayload {
 	public static final String SERIALIZED_NAME_BACKUP_BEFORE_UPDATE = "backupBeforeUpdate";
 
@@ -153,7 +153,6 @@ public class CreateUpdatePayload {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
-								java.util.Locale.ROOT,
 								"The required field(s) %s in CreateUpdatePayload is not found in the empty JSON string",
 								CreateUpdatePayload.openapiRequiredFields.toString()));
 			}
@@ -165,10 +164,8 @@ public class CreateUpdatePayload {
 			if (!CreateUpdatePayload.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
-								java.util.Locale.ROOT,
 								"The field `%s` in the JSON string is not defined in the `CreateUpdatePayload` properties. JSON: %s",
-								entry.getKey(),
-								jsonElement.toString()));
+								entry.getKey(), jsonElement.toString()));
 			}
 		}
 
@@ -177,10 +174,8 @@ public class CreateUpdatePayload {
 			if (jsonElement.getAsJsonObject().get(requiredField) == null) {
 				throw new IllegalArgumentException(
 						String.format(
-								java.util.Locale.ROOT,
 								"The required field `%s` is not found in the JSON string: %s",
-								requiredField,
-								jsonElement.toString()));
+								requiredField, jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();

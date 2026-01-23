@@ -35,7 +35,7 @@ import java.util.Set;
 /** GetUpdatePoliciesResponse */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+		comments = "Generator version: 7.15.0")
 public class GetUpdatePoliciesResponse {
 	public static final String SERIALIZED_NAME_ITEMS = "items";
 
@@ -130,7 +130,6 @@ public class GetUpdatePoliciesResponse {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
-								java.util.Locale.ROOT,
 								"The required field(s) %s in GetUpdatePoliciesResponse is not found in the empty JSON string",
 								GetUpdatePoliciesResponse.openapiRequiredFields.toString()));
 			}
@@ -142,10 +141,8 @@ public class GetUpdatePoliciesResponse {
 			if (!GetUpdatePoliciesResponse.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
-								java.util.Locale.ROOT,
 								"The field `%s` in the JSON string is not defined in the `GetUpdatePoliciesResponse` properties. JSON: %s",
-								entry.getKey(),
-								jsonElement.toString()));
+								entry.getKey(), jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -156,7 +153,6 @@ public class GetUpdatePoliciesResponse {
 				if (!jsonObj.get("items").isJsonArray()) {
 					throw new IllegalArgumentException(
 							String.format(
-									java.util.Locale.ROOT,
 									"Expected the field `items` to be an array in the JSON string but got `%s`",
 									jsonObj.get("items").toString()));
 				}
