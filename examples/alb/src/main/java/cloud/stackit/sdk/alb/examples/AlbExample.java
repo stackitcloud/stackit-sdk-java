@@ -18,7 +18,6 @@ final class AlbExample {
 		"PMD.CognitiveComplexity",
 		"PMD.CommentSize",
 		"PMD.CyclomaticComplexity",
-		"PMD.NPathComplexity",
 		"PMD.NcssCount",
 		"PMD.SystemPrintln",
 		"PMD.AvoidThrowingRawExceptionTypes"
