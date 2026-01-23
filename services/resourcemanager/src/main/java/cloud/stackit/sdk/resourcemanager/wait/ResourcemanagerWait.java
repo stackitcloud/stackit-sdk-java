@@ -87,14 +87,12 @@ public final class ResourcemanagerWait {
 				() -> {
 					GetProjectResponse projectResponse = apiClient.getProject(containerId, false);
 					if (projectResponse.getContainerId().equals(containerId)
-							&& projectResponse.getLifecycleState().equals(LifecycleState.ACTIVE)) {
+							&& projectResponse.getLifecycleState() == LifecycleState.ACTIVE) {
 						return new AsyncActionResult<>(true, projectResponse);
 					}
 
 					if (projectResponse.getContainerId().equals(containerId)
-							&& projectResponse
-									.getLifecycleState()
-									.equals(LifecycleState.CREATING)) {
+							&& projectResponse.getLifecycleState() == LifecycleState.CREATING) {
 						return new AsyncActionResult<>(false, null);
 					}
 					// An invalid state was received which should not be possible.
@@ -138,9 +136,7 @@ public final class ResourcemanagerWait {
 						GetProjectResponse projectResponse =
 								apiClient.getProject(containerId, false);
 						if (projectResponse.getContainerId().equals(containerId)
-								&& projectResponse
-										.getLifecycleState()
-										.equals(LifecycleState.DELETING)) {
+								&& projectResponse.getLifecycleState() == LifecycleState.DELETING) {
 							return new AsyncActionResult<>(true, null);
 						}
 

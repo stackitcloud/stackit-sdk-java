@@ -327,7 +327,7 @@ public class SetupAuth {
 		} catch (ClassCastException ignored) {
 		}
 		if (Utils.isStringSet(keyPath)) {
-			return new String(Files.readAllBytes(Paths.get(keyPath)));
+			return new String(Files.readAllBytes(Paths.get(keyPath)), StandardCharsets.UTF_8);
 		}
 		throw new CredentialsInFileNotFoundException(
 				"could not find " + valueKey + " or " + pathKey + " in " + path);
