@@ -19,8 +19,6 @@ final class ObjectStorageExample {
 
 	@SuppressWarnings({
 		"PMD.CyclomaticComplexity",
-		"PMD.CognitiveComplexity",
-		"PMD.NPathComplexity",
 		"PMD.NcssCount",
 		"PMD.SystemPrintln",
 		"PMD.AvoidThrowingRawExceptionTypes"

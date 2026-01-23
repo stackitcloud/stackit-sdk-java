@@ -24,7 +24,7 @@ final class ResourcemanagerExample {
 	/** Prevent instantiation */
 	private ResourcemanagerExample() {}
 
-	@SuppressWarnings({"PMD.SystemPrintln", "PMD.AvoidThrowingRawExceptionTypes"})
+	@SuppressWarnings({"PMD.SystemPrintln"})
 	public static void main(String[] args)
 			throws IOException, ApiException, InterruptedException, ExecutionException {
 		// Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env
