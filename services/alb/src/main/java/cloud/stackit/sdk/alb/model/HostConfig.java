@@ -35,7 +35,7 @@ import java.util.Set;
 /** HostConfig */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class HostConfig {
 	public static final String SERIALIZED_NAME_HOST = "host";
 
@@ -155,6 +155,7 @@ public class HostConfig {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in HostConfig is not found in the empty JSON string",
 								HostConfig.openapiRequiredFields.toString()));
 			}
@@ -166,8 +167,10 @@ public class HostConfig {
 			if (!HostConfig.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The field `%s` in the JSON string is not defined in the `HostConfig` properties. JSON: %s",
-								entry.getKey(), jsonElement.toString()));
+								entry.getKey(),
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -175,6 +178,7 @@ public class HostConfig {
 				&& !jsonObj.get("host").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `host` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("host").toString()));
 		}
@@ -185,6 +189,7 @@ public class HostConfig {
 				if (!jsonObj.get("rules").isJsonArray()) {
 					throw new IllegalArgumentException(
 							String.format(
+									java.util.Locale.ROOT,
 									"Expected the field `rules` to be an array in the JSON string but got `%s`",
 									jsonObj.get("rules").toString()));
 				}

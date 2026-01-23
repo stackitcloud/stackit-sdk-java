@@ -35,7 +35,7 @@ import java.util.Set;
 /** Rule */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class Rule {
 	public static final String SERIALIZED_NAME_COOKIE_PERSISTENCE = "cookiePersistence";
 
@@ -279,6 +279,7 @@ public class Rule {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in Rule is not found in the empty JSON string",
 								Rule.openapiRequiredFields.toString()));
 			}
@@ -290,8 +291,10 @@ public class Rule {
 			if (!Rule.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The field `%s` in the JSON string is not defined in the `Rule` properties. JSON: %s",
-								entry.getKey(), jsonElement.toString()));
+								entry.getKey(),
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -307,6 +310,7 @@ public class Rule {
 				if (!jsonObj.get("headers").isJsonArray()) {
 					throw new IllegalArgumentException(
 							String.format(
+									java.util.Locale.ROOT,
 									"Expected the field `headers` to be an array in the JSON string but got `%s`",
 									jsonObj.get("headers").toString()));
 				}
@@ -330,6 +334,7 @@ public class Rule {
 				if (!jsonObj.get("queryParameters").isJsonArray()) {
 					throw new IllegalArgumentException(
 							String.format(
+									java.util.Locale.ROOT,
 									"Expected the field `queryParameters` to be an array in the JSON string but got `%s`",
 									jsonObj.get("queryParameters").toString()));
 				}
@@ -345,6 +350,7 @@ public class Rule {
 				&& !jsonObj.get("targetPool").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `targetPool` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("targetPool").toString()));
 		}

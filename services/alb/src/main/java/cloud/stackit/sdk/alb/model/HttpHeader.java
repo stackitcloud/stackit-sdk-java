@@ -32,7 +32,7 @@ import java.util.Set;
 /** HttpHeader */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class HttpHeader {
 	public static final String SERIALIZED_NAME_EXACT_MATCH = "exactMatch";
 
@@ -144,6 +144,7 @@ public class HttpHeader {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in HttpHeader is not found in the empty JSON string",
 								HttpHeader.openapiRequiredFields.toString()));
 			}
@@ -155,8 +156,10 @@ public class HttpHeader {
 			if (!HttpHeader.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The field `%s` in the JSON string is not defined in the `HttpHeader` properties. JSON: %s",
-								entry.getKey(), jsonElement.toString()));
+								entry.getKey(),
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -164,6 +167,7 @@ public class HttpHeader {
 				&& !jsonObj.get("exactMatch").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `exactMatch` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("exactMatch").toString()));
 		}
@@ -171,6 +175,7 @@ public class HttpHeader {
 				&& !jsonObj.get("name").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `name` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("name").toString()));
 		}

@@ -33,7 +33,7 @@ import java.util.Set;
 /** Listener */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class Listener {
 	public static final String SERIALIZED_NAME_HTTP = "http";
 
@@ -308,6 +308,7 @@ public class Listener {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in Listener is not found in the empty JSON string",
 								Listener.openapiRequiredFields.toString()));
 			}
@@ -319,8 +320,10 @@ public class Listener {
 			if (!Listener.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The field `%s` in the JSON string is not defined in the `Listener` properties. JSON: %s",
-								entry.getKey(), jsonElement.toString()));
+								entry.getKey(),
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -336,6 +339,7 @@ public class Listener {
 				&& !jsonObj.get("name").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `name` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("name").toString()));
 		}
@@ -343,6 +347,7 @@ public class Listener {
 				&& !jsonObj.get("protocol").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `protocol` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("protocol").toString()));
 		}
@@ -354,6 +359,7 @@ public class Listener {
 				&& !jsonObj.get("wafConfigName").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `wafConfigName` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("wafConfigName").toString()));
 		}

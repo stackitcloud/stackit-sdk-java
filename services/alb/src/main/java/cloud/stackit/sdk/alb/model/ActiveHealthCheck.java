@@ -32,7 +32,7 @@ import java.util.Set;
 /** Set this to customize active health checks for targets in this pool. */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class ActiveHealthCheck {
 	public static final String SERIALIZED_NAME_HEALTHY_THRESHOLD = "healthyThreshold";
 
@@ -262,6 +262,7 @@ public class ActiveHealthCheck {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in ActiveHealthCheck is not found in the empty JSON string",
 								ActiveHealthCheck.openapiRequiredFields.toString()));
 			}
@@ -273,8 +274,10 @@ public class ActiveHealthCheck {
 			if (!ActiveHealthCheck.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The field `%s` in the JSON string is not defined in the `ActiveHealthCheck` properties. JSON: %s",
-								entry.getKey(), jsonElement.toString()));
+								entry.getKey(),
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -287,6 +290,7 @@ public class ActiveHealthCheck {
 				&& !jsonObj.get("interval").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `interval` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("interval").toString()));
 		}
@@ -294,6 +298,7 @@ public class ActiveHealthCheck {
 				&& !jsonObj.get("intervalJitter").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `intervalJitter` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("intervalJitter").toString()));
 		}
@@ -301,6 +306,7 @@ public class ActiveHealthCheck {
 				&& !jsonObj.get("timeout").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `timeout` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("timeout").toString()));
 		}
