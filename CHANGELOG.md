@@ -1,4 +1,4 @@
-## Release (2026-MM-DD)
+## Release (2026-01-27)
 - `core`: [v0.4.1](core/CHANGELOG.md/#v041)
   - **Bugfix:** Add check in `KeyFlowAuthenticator` to prevent endless loops
 - `iaas`: [v0.3.1](services/iaas/CHANGELOG.md#v031)
