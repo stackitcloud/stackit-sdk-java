@@ -1,0 +1,6 @@
+dependencies {
+	implementation project (':services:sfs')
+	implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+}
+
+ext.mainClassName = 'cloud.stackit.sdk.sfs.examples.SfsExample'
