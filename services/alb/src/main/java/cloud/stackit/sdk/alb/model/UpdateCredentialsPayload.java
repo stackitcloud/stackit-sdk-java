@@ -32,7 +32,7 @@ import java.util.Set;
 /** UpdateCredentialsPayload */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class UpdateCredentialsPayload {
 	public static final String SERIALIZED_NAME_DISPLAY_NAME = "displayName";
 
@@ -171,6 +171,7 @@ public class UpdateCredentialsPayload {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in UpdateCredentialsPayload is not found in the empty JSON string",
 								UpdateCredentialsPayload.openapiRequiredFields.toString()));
 			}
@@ -182,8 +183,10 @@ public class UpdateCredentialsPayload {
 			if (!UpdateCredentialsPayload.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The field `%s` in the JSON string is not defined in the `UpdateCredentialsPayload` properties. JSON: %s",
-								entry.getKey(), jsonElement.toString()));
+								entry.getKey(),
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -191,6 +194,7 @@ public class UpdateCredentialsPayload {
 				&& !jsonObj.get("displayName").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `displayName` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("displayName").toString()));
 		}
@@ -198,6 +202,7 @@ public class UpdateCredentialsPayload {
 				&& !jsonObj.get("password").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `password` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("password").toString()));
 		}
@@ -205,6 +210,7 @@ public class UpdateCredentialsPayload {
 				&& !jsonObj.get("username").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `username` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("username").toString()));
 		}
