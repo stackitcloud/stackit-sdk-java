@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class LocationInner extends AbstractOpenApiSchema {
 	private static final Logger log = Logger.getLogger(LocationInner.class.getName());
 
@@ -92,6 +92,7 @@ public class LocationInner extends AbstractOpenApiSchema {
 								if (!jsonElement.getAsJsonPrimitive().isString()) {
 									throw new IllegalArgumentException(
 											String.format(
+													java.util.Locale.ROOT,
 													"Expected json element to be of type String in the JSON string but got `%s`",
 													jsonElement.toString()));
 								}
@@ -103,6 +104,7 @@ public class LocationInner extends AbstractOpenApiSchema {
 								// deserialization failed, continue
 								errorMessages.add(
 										String.format(
+												java.util.Locale.ROOT,
 												"Deserialization for String failed with `%s`.",
 												e.getMessage()));
 								log.log(
@@ -116,6 +118,7 @@ public class LocationInner extends AbstractOpenApiSchema {
 								if (!jsonElement.getAsJsonPrimitive().isNumber()) {
 									throw new IllegalArgumentException(
 											String.format(
+													java.util.Locale.ROOT,
 													"Expected json element to be of type Number in the JSON string but got `%s`",
 													jsonElement.toString()));
 								}
@@ -127,6 +130,7 @@ public class LocationInner extends AbstractOpenApiSchema {
 								// deserialization failed, continue
 								errorMessages.add(
 										String.format(
+												java.util.Locale.ROOT,
 												"Deserialization for Integer failed with `%s`.",
 												e.getMessage()));
 								log.log(
@@ -137,8 +141,10 @@ public class LocationInner extends AbstractOpenApiSchema {
 
 							throw new IOException(
 									String.format(
+											java.util.Locale.ROOT,
 											"Failed deserialization for LocationInner: no class matches result, expected at least 1. Detailed failure message for anyOf schemas: %s. JSON: %s",
-											errorMessages, jsonElement.toString()));
+											errorMessages,
+											jsonElement.toString()));
 						}
 					}.nullSafe();
 		}
@@ -234,13 +240,17 @@ public class LocationInner extends AbstractOpenApiSchema {
 			if (!jsonElement.getAsJsonPrimitive().isString()) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"Expected json element to be of type String in the JSON string but got `%s`",
 								jsonElement.toString()));
 			}
 			return;
 		} catch (Exception e) {
 			errorMessages.add(
-					String.format("Deserialization for String failed with `%s`.", e.getMessage()));
+					String.format(
+							java.util.Locale.ROOT,
+							"Deserialization for String failed with `%s`.",
+							e.getMessage()));
 			// continue to the next one
 		}
 		// validate the json string with Integer
@@ -248,19 +258,25 @@ public class LocationInner extends AbstractOpenApiSchema {
 			if (!jsonElement.getAsJsonPrimitive().isNumber()) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"Expected json element to be of type Number in the JSON string but got `%s`",
 								jsonElement.toString()));
 			}
 			return;
 		} catch (Exception e) {
 			errorMessages.add(
-					String.format("Deserialization for Integer failed with `%s`.", e.getMessage()));
+					String.format(
+							java.util.Locale.ROOT,
+							"Deserialization for Integer failed with `%s`.",
+							e.getMessage()));
 			// continue to the next one
 		}
 		throw new IOException(
 				String.format(
+						java.util.Locale.ROOT,
 						"The JSON string is invalid for LocationInner with anyOf schemas: Integer, String. no class match the result, expected at least 1. Detailed failure message for anyOf schemas: %s. JSON: %s",
-						errorMessages, jsonElement.toString()));
+						errorMessages,
+						jsonElement.toString()));
 	}
 
 	/**
