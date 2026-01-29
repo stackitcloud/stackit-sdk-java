@@ -36,7 +36,7 @@ import java.util.Set;
  */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class OptionsTCP {
 	public static final String SERIALIZED_NAME_IDLE_TIMEOUT = "idleTimeout";
 
@@ -124,6 +124,7 @@ public class OptionsTCP {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in OptionsTCP is not found in the empty JSON string",
 								OptionsTCP.openapiRequiredFields.toString()));
 			}
@@ -135,8 +136,10 @@ public class OptionsTCP {
 			if (!OptionsTCP.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The field `%s` in the JSON string is not defined in the `OptionsTCP` properties. JSON: %s",
-								entry.getKey(), jsonElement.toString()));
+								entry.getKey(),
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -144,6 +147,7 @@ public class OptionsTCP {
 				&& !jsonObj.get("idleTimeout").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `idleTimeout` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("idleTimeout").toString()));
 		}

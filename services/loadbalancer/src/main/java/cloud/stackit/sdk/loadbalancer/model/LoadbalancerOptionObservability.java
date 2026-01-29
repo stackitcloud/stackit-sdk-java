@@ -32,7 +32,7 @@ import java.util.Set;
 /** We offer Load Balancer observability via STACKIT Observability or external solutions. */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class LoadbalancerOptionObservability {
 	public static final String SERIALIZED_NAME_LOGS = "logs";
 
@@ -148,6 +148,7 @@ public class LoadbalancerOptionObservability {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in LoadbalancerOptionObservability is not found in the empty JSON string",
 								LoadbalancerOptionObservability.openapiRequiredFields.toString()));
 			}
@@ -159,8 +160,10 @@ public class LoadbalancerOptionObservability {
 			if (!LoadbalancerOptionObservability.openapiFields.contains(entry.getKey())) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The field `%s` in the JSON string is not defined in the `LoadbalancerOptionObservability` properties. JSON: %s",
-								entry.getKey(), jsonElement.toString()));
+								entry.getKey(),
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
