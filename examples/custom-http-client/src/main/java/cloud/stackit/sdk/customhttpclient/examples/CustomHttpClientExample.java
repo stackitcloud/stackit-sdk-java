@@ -46,9 +46,12 @@ final class CustomHttpClientExample {
 		}
 		UUID projectId = UUID.fromString(projectIdString);
 
+		// specify which region should be queried
+		String region = "eu01";
+
 		try {
 			/* list all servers */
-			ServerListResponse servers = iaasApi.listServers(projectId, false, null);
+			ServerListResponse servers = iaasApi.listServers(projectId, region, false, null);
 			System.out.println("\nAvailable servers: ");
 			for (Server server : servers.getItems()) {
 				System.out.println("* " + server.getId() + " | " + server.getName());
