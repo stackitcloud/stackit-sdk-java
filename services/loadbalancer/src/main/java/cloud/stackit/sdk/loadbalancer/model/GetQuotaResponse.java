@@ -35,6 +35,11 @@ import java.util.UUID;
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
 		comments = "Generator version: 7.15.0")
 public class GetQuotaResponse {
+	public static final String SERIALIZED_NAME_MAX_CREDENTIALS = "maxCredentials";
+
+	@SerializedName(SERIALIZED_NAME_MAX_CREDENTIALS)
+	@javax.annotation.Nullable private Integer maxCredentials;
+
 	public static final String SERIALIZED_NAME_MAX_LOAD_BALANCERS = "maxLoadBalancers";
 
 	@SerializedName(SERIALIZED_NAME_MAX_LOAD_BALANCERS)
@@ -50,12 +55,41 @@ public class GetQuotaResponse {
 	@SerializedName(SERIALIZED_NAME_REGION)
 	@javax.annotation.Nullable private String region;
 
+	public static final String SERIALIZED_NAME_USED_CREDENTIALS = "usedCredentials";
+
+	@SerializedName(SERIALIZED_NAME_USED_CREDENTIALS)
+	@javax.annotation.Nullable private Integer usedCredentials;
+
+	public static final String SERIALIZED_NAME_USED_LOAD_BALANCERS = "usedLoadBalancers";
+
+	@SerializedName(SERIALIZED_NAME_USED_LOAD_BALANCERS)
+	@javax.annotation.Nullable private Integer usedLoadBalancers;
+
 	public GetQuotaResponse() {}
 
 	public GetQuotaResponse(UUID projectId, String region) {
 		this();
 		this.projectId = projectId;
 		this.region = region;
+	}
+
+	public GetQuotaResponse maxCredentials(@javax.annotation.Nullable Integer maxCredentials) {
+		this.maxCredentials = maxCredentials;
+		return this;
+	}
+
+	/**
+	 * The maximum number of observability credentials that can be stored in this project. minimum:
+	 * -1 maximum: 999
+	 *
+	 * @return maxCredentials
+	 */
+	@javax.annotation.Nullable public Integer getMaxCredentials() {
+		return maxCredentials;
+	}
+
+	public void setMaxCredentials(@javax.annotation.Nullable Integer maxCredentials) {
+		this.maxCredentials = maxCredentials;
 	}
 
 	public GetQuotaResponse maxLoadBalancers(@javax.annotation.Nullable Integer maxLoadBalancers) {
@@ -95,6 +129,45 @@ public class GetQuotaResponse {
 		return region;
 	}
 
+	public GetQuotaResponse usedCredentials(@javax.annotation.Nullable Integer usedCredentials) {
+		this.usedCredentials = usedCredentials;
+		return this;
+	}
+
+	/**
+	 * The number of observability credentials that are currently existing in this project. minimum:
+	 * -1 maximum: 1000000
+	 *
+	 * @return usedCredentials
+	 */
+	@javax.annotation.Nullable public Integer getUsedCredentials() {
+		return usedCredentials;
+	}
+
+	public void setUsedCredentials(@javax.annotation.Nullable Integer usedCredentials) {
+		this.usedCredentials = usedCredentials;
+	}
+
+	public GetQuotaResponse usedLoadBalancers(
+			@javax.annotation.Nullable Integer usedLoadBalancers) {
+		this.usedLoadBalancers = usedLoadBalancers;
+		return this;
+	}
+
+	/**
+	 * The number of load balancing servers that are currently existing in this project. minimum: -1
+	 * maximum: 1000000
+	 *
+	 * @return usedLoadBalancers
+	 */
+	@javax.annotation.Nullable public Integer getUsedLoadBalancers() {
+		return usedLoadBalancers;
+	}
+
+	public void setUsedLoadBalancers(@javax.annotation.Nullable Integer usedLoadBalancers) {
+		this.usedLoadBalancers = usedLoadBalancers;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -104,23 +177,37 @@ public class GetQuotaResponse {
 			return false;
 		}
 		GetQuotaResponse getQuotaResponse = (GetQuotaResponse) o;
-		return Objects.equals(this.maxLoadBalancers, getQuotaResponse.maxLoadBalancers)
+		return Objects.equals(this.maxCredentials, getQuotaResponse.maxCredentials)
+				&& Objects.equals(this.maxLoadBalancers, getQuotaResponse.maxLoadBalancers)
 				&& Objects.equals(this.projectId, getQuotaResponse.projectId)
-				&& Objects.equals(this.region, getQuotaResponse.region);
+				&& Objects.equals(this.region, getQuotaResponse.region)
+				&& Objects.equals(this.usedCredentials, getQuotaResponse.usedCredentials)
+				&& Objects.equals(this.usedLoadBalancers, getQuotaResponse.usedLoadBalancers);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(maxLoadBalancers, projectId, region);
+		return Objects.hash(
+				maxCredentials,
+				maxLoadBalancers,
+				projectId,
+				region,
+				usedCredentials,
+				usedLoadBalancers);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class GetQuotaResponse {\n");
+		sb.append("    maxCredentials: ").append(toIndentedString(maxCredentials)).append("\n");
 		sb.append("    maxLoadBalancers: ").append(toIndentedString(maxLoadBalancers)).append("\n");
 		sb.append("    projectId: ").append(toIndentedString(projectId)).append("\n");
 		sb.append("    region: ").append(toIndentedString(region)).append("\n");
+		sb.append("    usedCredentials: ").append(toIndentedString(usedCredentials)).append("\n");
+		sb.append("    usedLoadBalancers: ")
+				.append(toIndentedString(usedLoadBalancers))
+				.append("\n");
 		sb.append("}");
 		return sb.toString();
 	}
@@ -142,7 +229,14 @@ public class GetQuotaResponse {
 	static {
 		// a set of all properties/fields (JSON key names)
 		openapiFields =
-				new HashSet<String>(Arrays.asList("maxLoadBalancers", "projectId", "region"));
+				new HashSet<String>(
+						Arrays.asList(
+								"maxCredentials",
+								"maxLoadBalancers",
+								"projectId",
+								"region",
+								"usedCredentials",
+								"usedLoadBalancers"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(0);
