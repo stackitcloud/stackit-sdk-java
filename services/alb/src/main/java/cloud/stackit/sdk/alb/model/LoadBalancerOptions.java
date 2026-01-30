@@ -85,7 +85,9 @@ public class LoadBalancerOptions {
 	}
 
 	/**
-	 * Get ephemeralAddress
+	 * This option automates the handling of the external IP address for an Application Load
+	 * Balancer. If set to true a new IP address will be automatically created. It will also be
+	 * automatically deleted when the Load Balancer is deleted.
 	 *
 	 * @return ephemeralAddress
 	 */
