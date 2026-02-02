@@ -2,6 +2,9 @@
 - `alb`: [v0.3.0](services/alb/CHANGELOG.md#v030)
   - **Feature:** Add fields `usedCredentials` and `usedLoadbalancers` to `GetQuotaResponse`
   - **Improvement:** Support additional properties in models
+- `loadbalancer`: [v0.2.0](services/loadbalancer/CHANGELOG.md#v020)
+  - **Feature:** Add fields `maxCredentials`, `usedCredentials` and `usedLoadbalancers` to model `GetQuotaResponse`
+  - **Improvement:** Support additional properties in models
 - `objectstorage`: [v0.1.2](services/objectstorage/CHANGELOG.md#v012)
   - **Improvement:** Support additional properties in models
 - `resourcemanager`: [v0.4.2](services/resourcemanager/CHANGELOG.md#v042)
