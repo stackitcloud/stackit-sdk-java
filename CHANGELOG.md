@@ -1,4 +1,6 @@
 ## Release (2026-MM-DD)
+- `serverbackup`: [v0.1.1](services/serverbackup/CHANGELOG.md#v011)
+  - **Improvement:** Support additional properties in models
 - `serverupdate`: [v0.1.2](services/serverupdate/CHANGELOG.md#v012)
   - **Improvement:** Support additional properties in models
 
