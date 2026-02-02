@@ -34,7 +34,7 @@ import java.util.Objects;
 /** CreateBackupPayload */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class CreateBackupPayload {
 	public static final String SERIALIZED_NAME_NAME = "name";
 
@@ -232,6 +232,7 @@ public class CreateBackupPayload {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in CreateBackupPayload is not found in the empty JSON string",
 								CreateBackupPayload.openapiRequiredFields.toString()));
 			}
@@ -242,14 +243,17 @@ public class CreateBackupPayload {
 			if (jsonElement.getAsJsonObject().get(requiredField) == null) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field `%s` is not found in the JSON string: %s",
-								requiredField, jsonElement.toString()));
+								requiredField,
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
 		if (!jsonObj.get("name").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `name` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("name").toString()));
 		}
@@ -259,6 +263,7 @@ public class CreateBackupPayload {
 				&& !jsonObj.get("volumeIds").isJsonArray()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `volumeIds` to be an array in the JSON string but got `%s`",
 							jsonObj.get("volumeIds").toString()));
 		}
@@ -331,6 +336,7 @@ public class CreateBackupPayload {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
