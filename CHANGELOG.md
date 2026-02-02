@@ -1,3 +1,7 @@
+## Release (2026-MM-DD)
+- `serverupdate`: [v0.1.2](services/serverupdate/CHANGELOG.md#v012)
+  - **Improvement:** Support additional properties in models
+
 ## Release (2026-01-27)
 - `core`: [v0.4.1](core/CHANGELOG.md/#v041)
   - **Bugfix:** Add check in `KeyFlowAuthenticator` to prevent endless loops
