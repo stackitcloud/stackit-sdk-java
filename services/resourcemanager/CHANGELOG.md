@@ -1,3 +1,6 @@
+## v0.4.2
+- **Improvement:** Support additional properties in models
+
 ## v0.4.1
 - Bump dependency `cloud.stackit.sdk.core` to v0.4.1
 
