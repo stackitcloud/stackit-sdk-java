@@ -24,10 +24,11 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
 /** GetQuotaResponse */
@@ -35,6 +36,11 @@ import java.util.UUID;
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
 		comments = "Generator version: 7.15.0")
 public class GetQuotaResponse {
+	public static final String SERIALIZED_NAME_MAX_CREDENTIALS = "maxCredentials";
+
+	@SerializedName(SERIALIZED_NAME_MAX_CREDENTIALS)
+	@javax.annotation.Nullable private Integer maxCredentials;
+
 	public static final String SERIALIZED_NAME_MAX_LOAD_BALANCERS = "maxLoadBalancers";
 
 	@SerializedName(SERIALIZED_NAME_MAX_LOAD_BALANCERS)
@@ -50,12 +56,41 @@ public class GetQuotaResponse {
 	@SerializedName(SERIALIZED_NAME_REGION)
 	@javax.annotation.Nullable private String region;
 
+	public static final String SERIALIZED_NAME_USED_CREDENTIALS = "usedCredentials";
+
+	@SerializedName(SERIALIZED_NAME_USED_CREDENTIALS)
+	@javax.annotation.Nullable private Integer usedCredentials;
+
+	public static final String SERIALIZED_NAME_USED_LOAD_BALANCERS = "usedLoadBalancers";
+
+	@SerializedName(SERIALIZED_NAME_USED_LOAD_BALANCERS)
+	@javax.annotation.Nullable private Integer usedLoadBalancers;
+
 	public GetQuotaResponse() {}
 
 	public GetQuotaResponse(UUID projectId, String region) {
 		this();
 		this.projectId = projectId;
 		this.region = region;
+	}
+
+	public GetQuotaResponse maxCredentials(@javax.annotation.Nullable Integer maxCredentials) {
+		this.maxCredentials = maxCredentials;
+		return this;
+	}
+
+	/**
+	 * The maximum number of observability credentials that can be stored in this project. minimum:
+	 * -1 maximum: 999
+	 *
+	 * @return maxCredentials
+	 */
+	@javax.annotation.Nullable public Integer getMaxCredentials() {
+		return maxCredentials;
+	}
+
+	public void setMaxCredentials(@javax.annotation.Nullable Integer maxCredentials) {
+		this.maxCredentials = maxCredentials;
 	}
 
 	public GetQuotaResponse maxLoadBalancers(@javax.annotation.Nullable Integer maxLoadBalancers) {
@@ -95,6 +130,89 @@ public class GetQuotaResponse {
 		return region;
 	}
 
+	public GetQuotaResponse usedCredentials(@javax.annotation.Nullable Integer usedCredentials) {
+		this.usedCredentials = usedCredentials;
+		return this;
+	}
+
+	/**
+	 * The number of observability credentials that are currently existing in this project. minimum:
+	 * -1 maximum: 1000000
+	 *
+	 * @return usedCredentials
+	 */
+	@javax.annotation.Nullable public Integer getUsedCredentials() {
+		return usedCredentials;
+	}
+
+	public void setUsedCredentials(@javax.annotation.Nullable Integer usedCredentials) {
+		this.usedCredentials = usedCredentials;
+	}
+
+	public GetQuotaResponse usedLoadBalancers(
+			@javax.annotation.Nullable Integer usedLoadBalancers) {
+		this.usedLoadBalancers = usedLoadBalancers;
+		return this;
+	}
+
+	/**
+	 * The number of load balancing servers that are currently existing in this project. minimum: -1
+	 * maximum: 1000000
+	 *
+	 * @return usedLoadBalancers
+	 */
+	@javax.annotation.Nullable public Integer getUsedLoadBalancers() {
+		return usedLoadBalancers;
+	}
+
+	public void setUsedLoadBalancers(@javax.annotation.Nullable Integer usedLoadBalancers) {
+		this.usedLoadBalancers = usedLoadBalancers;
+	}
+
+	/**
+	 * A container for additional, undeclared properties. This is a holder for any undeclared
+	 * properties as specified with the 'additionalProperties' keyword in the OAS document.
+	 */
+	private Map<String, Object> additionalProperties;
+
+	/**
+	 * Set the additional (undeclared) property with the specified name and value. If the property
+	 * does not already exist, create it otherwise replace it.
+	 *
+	 * @param key name of the property
+	 * @param value value of the property
+	 * @return the GetQuotaResponse instance itself
+	 */
+	public GetQuotaResponse putAdditionalProperty(String key, Object value) {
+		if (this.additionalProperties == null) {
+			this.additionalProperties = new HashMap<String, Object>();
+		}
+		this.additionalProperties.put(key, value);
+		return this;
+	}
+
+	/**
+	 * Return the additional (undeclared) property.
+	 *
+	 * @return a map of objects
+	 */
+	public Map<String, Object> getAdditionalProperties() {
+		return additionalProperties;
+	}
+
+	/**
+	 * Return the additional (undeclared) property with the specified name.
+	 *
+	 * @param key name of the property
+	 * @return an object
+	 */
+	public Object getAdditionalProperty(String key) {
+		if (this.additionalProperties == null) {
+			return null;
+		}
+		return this.additionalProperties.get(key);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -104,23 +222,42 @@ public class GetQuotaResponse {
 			return false;
 		}
 		GetQuotaResponse getQuotaResponse = (GetQuotaResponse) o;
-		return Objects.equals(this.maxLoadBalancers, getQuotaResponse.maxLoadBalancers)
+		return Objects.equals(this.maxCredentials, getQuotaResponse.maxCredentials)
+				&& Objects.equals(this.maxLoadBalancers, getQuotaResponse.maxLoadBalancers)
 				&& Objects.equals(this.projectId, getQuotaResponse.projectId)
-				&& Objects.equals(this.region, getQuotaResponse.region);
+				&& Objects.equals(this.region, getQuotaResponse.region)
+				&& Objects.equals(this.usedCredentials, getQuotaResponse.usedCredentials)
+				&& Objects.equals(this.usedLoadBalancers, getQuotaResponse.usedLoadBalancers)
+				&& Objects.equals(this.additionalProperties, getQuotaResponse.additionalProperties);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(maxLoadBalancers, projectId, region);
+		return Objects.hash(
+				maxCredentials,
+				maxLoadBalancers,
+				projectId,
+				region,
+				usedCredentials,
+				usedLoadBalancers,
+				additionalProperties);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class GetQuotaResponse {\n");
+		sb.append("    maxCredentials: ").append(toIndentedString(maxCredentials)).append("\n");
 		sb.append("    maxLoadBalancers: ").append(toIndentedString(maxLoadBalancers)).append("\n");
 		sb.append("    projectId: ").append(toIndentedString(projectId)).append("\n");
 		sb.append("    region: ").append(toIndentedString(region)).append("\n");
+		sb.append("    usedCredentials: ").append(toIndentedString(usedCredentials)).append("\n");
+		sb.append("    usedLoadBalancers: ")
+				.append(toIndentedString(usedLoadBalancers))
+				.append("\n");
+		sb.append("    additionalProperties: ")
+				.append(toIndentedString(additionalProperties))
+				.append("\n");
 		sb.append("}");
 		return sb.toString();
 	}
@@ -142,7 +279,14 @@ public class GetQuotaResponse {
 	static {
 		// a set of all properties/fields (JSON key names)
 		openapiFields =
-				new HashSet<String>(Arrays.asList("maxLoadBalancers", "projectId", "region"));
+				new HashSet<String>(
+						Arrays.asList(
+								"maxCredentials",
+								"maxLoadBalancers",
+								"projectId",
+								"region",
+								"usedCredentials",
+								"usedLoadBalancers"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(0);
@@ -162,17 +306,6 @@ public class GetQuotaResponse {
 						String.format(
 								"The required field(s) %s in GetQuotaResponse is not found in the empty JSON string",
 								GetQuotaResponse.openapiRequiredFields.toString()));
-			}
-		}
-
-		Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-		// check to see if the JSON string contains additional fields
-		for (Map.Entry<String, JsonElement> entry : entries) {
-			if (!GetQuotaResponse.openapiFields.contains(entry.getKey())) {
-				throw new IllegalArgumentException(
-						String.format(
-								"The field `%s` in the JSON string is not defined in the `GetQuotaResponse` properties. JSON: %s",
-								entry.getKey(), jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -209,6 +342,30 @@ public class GetQuotaResponse {
 						public void write(JsonWriter out, GetQuotaResponse value)
 								throws IOException {
 							JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+							obj.remove("additionalProperties");
+							// serialize additional properties
+							if (value.getAdditionalProperties() != null) {
+								for (Map.Entry<String, Object> entry :
+										value.getAdditionalProperties().entrySet()) {
+									if (entry.getValue() instanceof String)
+										obj.addProperty(entry.getKey(), (String) entry.getValue());
+									else if (entry.getValue() instanceof Number)
+										obj.addProperty(entry.getKey(), (Number) entry.getValue());
+									else if (entry.getValue() instanceof Boolean)
+										obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+									else if (entry.getValue() instanceof Character)
+										obj.addProperty(
+												entry.getKey(), (Character) entry.getValue());
+									else {
+										JsonElement jsonElement = gson.toJsonTree(entry.getValue());
+										if (jsonElement.isJsonArray()) {
+											obj.add(entry.getKey(), jsonElement.getAsJsonArray());
+										} else {
+											obj.add(entry.getKey(), jsonElement.getAsJsonObject());
+										}
+									}
+								}
+							}
 							elementAdapter.write(out, obj);
 						}
 
@@ -216,7 +373,40 @@ public class GetQuotaResponse {
 						public GetQuotaResponse read(JsonReader in) throws IOException {
 							JsonElement jsonElement = elementAdapter.read(in);
 							validateJsonElement(jsonElement);
-							return thisAdapter.fromJsonTree(jsonElement);
+							JsonObject jsonObj = jsonElement.getAsJsonObject();
+							// store additional fields in the deserialized instance
+							GetQuotaResponse instance = thisAdapter.fromJsonTree(jsonObj);
+							for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+								if (!openapiFields.contains(entry.getKey())) {
+									if (entry.getValue().isJsonPrimitive()) { // primitive type
+										if (entry.getValue().getAsJsonPrimitive().isString())
+											instance.putAdditionalProperty(
+													entry.getKey(), entry.getValue().getAsString());
+										else if (entry.getValue().getAsJsonPrimitive().isNumber())
+											instance.putAdditionalProperty(
+													entry.getKey(), entry.getValue().getAsNumber());
+										else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+											instance.putAdditionalProperty(
+													entry.getKey(),
+													entry.getValue().getAsBoolean());
+										else
+											throw new IllegalArgumentException(
+													String.format(
+															"The field `%s` has unknown primitive type. Value: %s",
+															entry.getKey(),
+															entry.getValue().toString()));
+									} else if (entry.getValue().isJsonArray()) {
+										instance.putAdditionalProperty(
+												entry.getKey(),
+												gson.fromJson(entry.getValue(), List.class));
+									} else { // JSON object
+										instance.putAdditionalProperty(
+												entry.getKey(),
+												gson.fromJson(entry.getValue(), HashMap.class));
+									}
+								}
+							}
+							return instance;
 						}
 					}.nullSafe();
 		}
