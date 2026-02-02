@@ -1,4 +1,6 @@
 ## Release (2026-MM-DD)
+- `objectstorage`: [v0.1.2](services/objectstorage/CHANGELOG.md#v012)
+  - **Improvement:** Support additional properties in models
 - `resourcemanager`: [v0.4.2](services/resourcemanager/CHANGELOG.md#v042)
   - **Improvement:** Support additional properties in models
 - `serverbackup`: [v0.1.1](services/serverbackup/CHANGELOG.md#v011)
