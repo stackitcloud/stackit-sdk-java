@@ -69,7 +69,7 @@ public final class SfsExample {
 			for (PerformanceClass performanceClass :
 					listPerformanceClassesResponse.getPerformanceClasses()) {
 				System.out.println("*************************");
-				System.out.println("* Performance class name: " + performanceClass.getName());
+				System.out.println("* Performance Class Name: " + performanceClass.getName());
 				System.out.println("* IOPS: " + performanceClass.getIops());
 				System.out.println("* Throughput: " + performanceClass.getThroughput());
 			}
@@ -118,7 +118,7 @@ public final class SfsExample {
 
 				// Check if it's in an error state
 				if (ERROR_STATE.equals(getResourcePoolResponse.getResourcePool().getState())) {
-					System.err.println("created resource pool is in error state");
+					System.err.println("Created resource pool is in error state");
 					return;
 				}
 
@@ -130,7 +130,8 @@ public final class SfsExample {
 			/* print details of the created resource pool */
 			System.out.println("\nResource pool details:");
 			System.out.println("* ID: " + getResourcePoolResponse.getResourcePool().getId());
-			System.out.println("* Name: " + getResourcePoolResponse.getResourcePool().getName());
+			System.out.println(
+					"* Resource Pool Name: " + getResourcePoolResponse.getResourcePool().getName());
 			System.out.println(
 					"* Mount Path: " + getResourcePoolResponse.getResourcePool().getMountPath());
 			System.out.println(
@@ -160,12 +161,12 @@ public final class SfsExample {
 			for (ResourcePool resourcePool : listResourcePools.getResourcePools()) {
 				System.out.println("*************************");
 				System.out.println("* ID: " + resourcePool.getId());
-				System.out.println("* Name: " + resourcePool.getName());
+				System.out.println("* Resource Pool Name: " + resourcePool.getName());
 				System.out.println("* Mount Path: " + resourcePool.getMountPath());
 				System.out.println("* Availability Zone: " + resourcePool.getAvailabilityZone());
 				Objects.requireNonNull(resourcePool.getPerformanceClass());
 				System.out.println(
-						"* Performance class: " + resourcePool.getPerformanceClass().getName());
+						"* Performance Class: " + resourcePool.getPerformanceClass().getName());
 				Objects.requireNonNull(resourcePool.getSpace());
 				System.out.println(
 						"* Size (in Gigabytes): " + resourcePool.getSpace().getSizeGigabytes());
@@ -207,7 +208,7 @@ public final class SfsExample {
 
 				// Check if it's in an error state
 				if (ERROR_STATE.equals(getResourcePoolResponse.getResourcePool().getState())) {
-					System.err.println("updated resource pool is in error state");
+					System.err.println("Updated resource pool is in error state");
 					return;
 				}
 
@@ -219,7 +220,8 @@ public final class SfsExample {
 			/* print details of the updated resource pool*/
 			System.out.println("\nUpdated resource pool details:");
 			System.out.println("* ID: " + getResourcePoolResponse.getResourcePool().getId());
-			System.out.println("* Name: " + getResourcePoolResponse.getResourcePool().getName());
+			System.out.println(
+					"* Resource Pool Name: " + getResourcePoolResponse.getResourcePool().getName());
 			System.out.println(
 					"* Mount Path: " + getResourcePoolResponse.getResourcePool().getMountPath());
 			System.out.println(
@@ -227,7 +229,7 @@ public final class SfsExample {
 							+ getResourcePoolResponse.getResourcePool().getAvailabilityZone());
 			Objects.requireNonNull(getResourcePoolResponse.getResourcePool().getPerformanceClass());
 			System.out.println(
-					"* Performance class: "
+					"* Performance Class: "
 							+ getResourcePoolResponse
 									.getResourcePool()
 									.getPerformanceClass()
@@ -258,7 +260,7 @@ public final class SfsExample {
 									.comment("my first snapshot"));
 			Objects.requireNonNull(createResourcePoolSnapshotResponse.getResourcePoolSnapshot());
 			System.out.println(
-					"* Snapshot name: "
+					"* Snapshot Name: "
 							+ createResourcePoolSnapshotResponse
 									.getResourcePoolSnapshot()
 									.getSnapshotName());
@@ -268,7 +270,7 @@ public final class SfsExample {
 									.getResourcePoolSnapshot()
 									.getComment());
 			System.out.println(
-					"* Resource pool ID: "
+					"* Resource Pool ID: "
 							+ createResourcePoolSnapshotResponse
 									.getResourcePoolSnapshot()
 									.getResourcePoolId());
@@ -281,11 +283,11 @@ public final class SfsExample {
 			for (ResourcePoolSnapshot snapshot :
 					listResourcePoolsSnapshots.getResourcePoolSnapshots()) {
 				System.out.println("*************************");
-				System.out.println("* Snapshot name: " + snapshot.getSnapshotName());
+				System.out.println("* Snapshot Name: " + snapshot.getSnapshotName());
 				System.out.println("* Comment: " + snapshot.getComment());
 				System.out.println("* Size (in Gigabytes): " + snapshot.getSizeGigabytes());
-				System.out.println("* Created at: " + snapshot.getCreatedAt());
-				System.out.println("* Resource pool ID: " + snapshot.getResourcePoolId());
+				System.out.println("* Created At: " + snapshot.getCreatedAt());
+				System.out.println("* Resource Pool ID: " + snapshot.getResourcePoolId());
 			}
 
 			/* delete the created snapshot */
@@ -332,19 +334,20 @@ public final class SfsExample {
 			System.out.println("\nCreated new share export policy:");
 			Objects.requireNonNull(createShareExportPolicyResponse.getShareExportPolicy());
 			System.out.println(
-					"* Share export policy ID: "
+					"* Share Export Policy ID: "
 							+ createShareExportPolicyResponse.getShareExportPolicy().getId());
 			System.out.println(
-					"* Name: " + createShareExportPolicyResponse.getShareExportPolicy().getName());
+					"* Share Export Policy Name: "
+							+ createShareExportPolicyResponse.getShareExportPolicy().getName());
 			System.out.println(
-					"* Shares using export policy: "
+					"* Shares using Export Policy: "
 							+ createShareExportPolicyResponse
 									.getShareExportPolicy()
 									.getSharesUsingExportPolicy());
 			Objects.requireNonNull(
 					createShareExportPolicyResponse.getShareExportPolicy().getRules());
 			System.out.println(
-					"* Rules amount: "
+					"* Rules Amount: "
 							+ createShareExportPolicyResponse
 									.getShareExportPolicy()
 									.getRules()
@@ -372,19 +375,20 @@ public final class SfsExample {
 			System.out.println("\nUpdated the created export policy:");
 			Objects.requireNonNull(updateShareExportPolicyResponse.getShareExportPolicy());
 			System.out.println(
-					"* Share export policy ID: "
+					"* Share Export Policy ID: "
 							+ updateShareExportPolicyResponse.getShareExportPolicy().getId());
 			System.out.println(
-					"* Name: " + updateShareExportPolicyResponse.getShareExportPolicy().getName());
+					"* Share Export Policy Name: "
+							+ updateShareExportPolicyResponse.getShareExportPolicy().getName());
 			System.out.println(
-					"* Shares using export policy: "
+					"* Shares using Export Policy: "
 							+ updateShareExportPolicyResponse
 									.getShareExportPolicy()
 									.getSharesUsingExportPolicy());
 			Objects.requireNonNull(
 					updateShareExportPolicyResponse.getShareExportPolicy().getRules());
 			System.out.println(
-					"* Rules amount: "
+					"* Rules Amount: "
 							+ updateShareExportPolicyResponse
 									.getShareExportPolicy()
 									.getRules()
@@ -398,13 +402,13 @@ public final class SfsExample {
 			for (ShareExportPolicy shareExportPolicy :
 					listShareExportPoliciesResponse.getShareExportPolicies()) {
 				System.out.println("*************************");
-				System.out.println("Share export policy ID: " + shareExportPolicy.getId());
+				System.out.println("Share Export Policy ID: " + shareExportPolicy.getId());
 				System.out.println("* Name: " + shareExportPolicy.getName());
 				System.out.println(
-						"* Shares using export policy: "
+						"* Shares using Export Policy: "
 								+ shareExportPolicy.getSharesUsingExportPolicy());
 				Objects.requireNonNull(shareExportPolicy.getRules());
-				System.out.println("* Rules amount: " + shareExportPolicy.getRules().size());
+				System.out.println("* Rules Amount: " + shareExportPolicy.getRules().size());
 			}
 
 			/*
@@ -451,7 +455,7 @@ public final class SfsExample {
 
 				// Check if it's in an error state
 				if (ERROR_STATE.equals(getShareResponse.getShare().getState())) {
-					System.err.println("created share is in error state");
+					System.err.println("Created share is in error state");
 					return;
 				}
 
@@ -463,16 +467,16 @@ public final class SfsExample {
 			/* print details of the created share */
 			System.out.println("\nCreated share details:");
 			System.out.println("* Share ID: " + getShareResponse.getShare().getId());
-			System.out.println("* Name: " + getShareResponse.getShare().getName());
+			System.out.println("* Share Name: " + getShareResponse.getShare().getName());
 			System.out.println("* Mount Path: " + getShareResponse.getShare().getMountPath());
 			System.out.println(
-					"* Space hard limit (in Gigabytes): "
+					"* Space Hard Limit (in Gigabytes): "
 							+ getShareResponse.getShare().getSpaceHardLimitGigabytes());
 			Objects.requireNonNull(getShareResponse.getShare().getExportPolicy());
 			System.out.println(
-					"* Export policy: " + getShareResponse.getShare().getExportPolicy().getName());
+					"* Export Policy: " + getShareResponse.getShare().getExportPolicy().getName());
 			System.out.println("* State: " + getShareResponse.getShare().getState());
-			System.out.println("* Created at: " + getShareResponse.getShare().getCreatedAt());
+			System.out.println("* Created At: " + getShareResponse.getShare().getCreatedAt());
 
 			/* update the created share */
 			System.out.println("\nTrigger update of share:");
@@ -510,7 +514,7 @@ public final class SfsExample {
 
 				// Check if it's in an error state
 				if (ERROR_STATE.equals(getShareResponse.getShare().getState())) {
-					System.err.println("updated share is in error state");
+					System.err.println("Updated share is in error state");
 					return;
 				}
 
@@ -520,20 +524,20 @@ public final class SfsExample {
 			System.out.println("Update of share finished");
 
 			/* print details of the update share */
-			System.out.println("\nUpdated share:");
+			System.out.println("\nUpdated Share:");
 			System.out.println("* Share ID: " + getShareResponse.getShare().getId());
-			System.out.println("* Name: " + getShareResponse.getShare().getName());
+			System.out.println("* Share Name: " + getShareResponse.getShare().getName());
 			System.out.println("* Mount Path: " + getShareResponse.getShare().getMountPath());
 			System.out.println(
-					"* Space hard limit (in Gigabytes): "
+					"* Space Hard Limit (in Gigabytes): "
 							+ getShareResponse.getShare().getSpaceHardLimitGigabytes());
 			if (getShareResponse.getShare().getExportPolicy() != null) {
 				System.out.println(
-						"* Export policy: "
+						"* Export Policy: "
 								+ getShareResponse.getShare().getExportPolicy().getName());
 			}
 			System.out.println("* State: " + getShareResponse.getShare().getState());
-			System.out.println("* Created at: " + getShareResponse.getShare().getCreatedAt());
+			System.out.println("* Created At: " + getShareResponse.getShare().getCreatedAt());
 
 			/* list all shares of the created resource pool */
 			System.out.println("\nList all shares of the resource pool:");
@@ -543,12 +547,12 @@ public final class SfsExample {
 			for (Share share : listSharesResponse.getShares()) {
 				System.out.println("*************************");
 				System.out.println("* Share ID: " + share.getId());
-				System.out.println("* Name: " + share.getName());
+				System.out.println("* Share Name: " + share.getName());
 				System.out.println("* Mount Path: " + share.getMountPath());
 				System.out.println(
-						"* Space hard limit (in Gigabytes): " + share.getSpaceHardLimitGigabytes());
+						"* Space Hard Limit (in Gigabytes): " + share.getSpaceHardLimitGigabytes());
 				if (share.getExportPolicy() != null) {
-					System.out.println("* Export policy: " + share.getExportPolicy().getName());
+					System.out.println("* Export Policy: " + share.getExportPolicy().getName());
 				}
 				System.out.println("* State: " + share.getState());
 				System.out.println("* Created at: " + share.getCreatedAt());
