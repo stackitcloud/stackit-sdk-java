@@ -122,7 +122,7 @@ public final class SfsExample {
 					return;
 				}
 
-				System.out.println("Waiting for resource pool create to complete ...");
+				System.out.println("Waiting for creation of resource pool to complete ...");
 				TimeUnit.SECONDS.sleep(5);
 			}
 			System.out.println("Creation of resource pool finished");
@@ -138,7 +138,7 @@ public final class SfsExample {
 							+ getResourcePoolResponse.getResourcePool().getAvailabilityZone());
 			Objects.requireNonNull(getResourcePoolResponse.getResourcePool().getPerformanceClass());
 			System.out.println(
-					"* Performance class: "
+					"* Performance Class: "
 							+ getResourcePoolResponse
 									.getResourcePool()
 									.getPerformanceClass()
@@ -558,7 +558,7 @@ public final class SfsExample {
 			 */
 			/* delete the created share */
 			System.out.println(
-					"\nTrigger deletion share with ID: " + createShareResponse.getShare().getId());
+					"\nTrigger deletion of share with ID: " + createShareResponse.getShare().getId());
 			sfsApi.deleteShare(
 					projectId,
 					REGION,
@@ -597,7 +597,7 @@ public final class SfsExample {
 
 			/* delete the created resource pool */
 			System.out.println(
-					"\nTrigger deletion of resource pool with ID " + createdResourcePoolId);
+					"\nTrigger deletion of resource pool with ID: " + createdResourcePoolId);
 			sfsApi.deleteResourcePool(projectId, REGION, createdResourcePoolId);
 
 			/* wait for the deletion to complete */
