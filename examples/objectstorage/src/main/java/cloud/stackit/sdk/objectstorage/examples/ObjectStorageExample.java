@@ -34,8 +34,8 @@ final class ObjectStorageExample {
 				httpClient
 						.newBuilder()
 						.authenticator(authenticator)
-						// The object storage requests are sychronous and may take a few seconds.
-						// To prevent an timeout, we increase the read timeout to 15 seconds
+						// The object storage requests are synchronous and may take a few seconds.
+						// To prevent a timeout, we increase the read timeout to 15 seconds
 						.readTimeout(Duration.ofSeconds(15))
 						.build();
 

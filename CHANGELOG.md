@@ -13,6 +13,8 @@
   - **Improvement:** Support additional properties in models
 - `serverupdate`: [v0.1.2](services/serverupdate/CHANGELOG.md#v012)
   - **Improvement:** Support additional properties in models
+- `sfs`: [v0.1.0](services/sfs/CHANGELOG.md#v010)
+  - Initial onboarding of STACKIT Java SDK for STACKIT File Storage (SFS) service
 
 ## Release (2026-01-27)
 - `core`: [v0.4.1](core/CHANGELOG.md/#v041)
