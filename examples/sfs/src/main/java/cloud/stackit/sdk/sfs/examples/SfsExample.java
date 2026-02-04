@@ -289,6 +289,7 @@ public final class SfsExample {
 			}
 
 			/* delete the created snapshot */
+			System.out.println("\nTrigger deletion of the resource pool snapshot");
 			Objects.requireNonNull(
 					createResourcePoolSnapshotResponse.getResourcePoolSnapshot().getSnapshotName());
 			sfsApi.deleteResourcePoolSnapshot(
@@ -296,7 +297,7 @@ public final class SfsExample {
 					REGION,
 					createdResourcePoolId,
 					createResourcePoolSnapshotResponse.getResourcePoolSnapshot().getSnapshotName());
-			System.out.println("\nDeleted the created snapshot");
+			System.out.println("Deleted the resource pool snapshot");
 
 			/*
 			 * ///////////////////////////////////////////////////////
@@ -327,6 +328,7 @@ public final class SfsExample {
 															.description("Java SDK example 2")
 															.order(2)
 															.readOnly(true))));
+
 			System.out.println("\nCreated new share export policy:");
 			Objects.requireNonNull(createShareExportPolicyResponse.getShareExportPolicy());
 			System.out.println(
@@ -473,6 +475,7 @@ public final class SfsExample {
 			System.out.println("* Created at: " + getShareResponse.getShare().getCreatedAt());
 
 			/* update the created share */
+			System.out.println("\nTrigger update of share:");
 			UpdateShareResponse updateShareResponse =
 					sfsApi.updateShare(
 							projectId,
@@ -558,7 +561,8 @@ public final class SfsExample {
 			 */
 			/* delete the created share */
 			System.out.println(
-					"\nTrigger deletion of share with ID: " + createShareResponse.getShare().getId());
+					"\nTrigger deletion of share with ID: "
+							+ createShareResponse.getShare().getId());
 			sfsApi.deleteShare(
 					projectId,
 					REGION,
