@@ -36,7 +36,7 @@ import java.util.Objects;
 /** LoadBalancer */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class LoadBalancer {
 	public static final String SERIALIZED_NAME_DISABLE_TARGET_SECURITY_GROUP_ASSIGNMENT =
 			"disableTargetSecurityGroupAssignment";
@@ -665,6 +665,7 @@ public class LoadBalancer {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in LoadBalancer is not found in the empty JSON string",
 								LoadBalancer.openapiRequiredFields.toString()));
 			}
@@ -677,6 +678,7 @@ public class LoadBalancer {
 				if (!jsonObj.get("errors").isJsonArray()) {
 					throw new IllegalArgumentException(
 							String.format(
+									java.util.Locale.ROOT,
 									"Expected the field `errors` to be an array in the JSON string but got `%s`",
 									jsonObj.get("errors").toString()));
 				}
@@ -692,6 +694,7 @@ public class LoadBalancer {
 				&& !jsonObj.get("externalAddress").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `externalAddress` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("externalAddress").toString()));
 		}
@@ -702,6 +705,7 @@ public class LoadBalancer {
 				if (!jsonObj.get("listeners").isJsonArray()) {
 					throw new IllegalArgumentException(
 							String.format(
+									java.util.Locale.ROOT,
 									"Expected the field `listeners` to be an array in the JSON string but got `%s`",
 									jsonObj.get("listeners").toString()));
 				}
@@ -722,6 +726,7 @@ public class LoadBalancer {
 				&& !jsonObj.get("name").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `name` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("name").toString()));
 		}
@@ -732,6 +737,7 @@ public class LoadBalancer {
 				if (!jsonObj.get("networks").isJsonArray()) {
 					throw new IllegalArgumentException(
 							String.format(
+									java.util.Locale.ROOT,
 									"Expected the field `networks` to be an array in the JSON string but got `%s`",
 									jsonObj.get("networks").toString()));
 				}
@@ -751,6 +757,7 @@ public class LoadBalancer {
 				&& !jsonObj.get("planId").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `planId` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("planId").toString()));
 		}
@@ -758,6 +765,7 @@ public class LoadBalancer {
 				&& !jsonObj.get("privateAddress").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `privateAddress` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("privateAddress").toString()));
 		}
@@ -765,6 +773,7 @@ public class LoadBalancer {
 				&& !jsonObj.get("region").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `region` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("region").toString()));
 		}
@@ -772,6 +781,7 @@ public class LoadBalancer {
 				&& !jsonObj.get("status").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `status` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("status").toString()));
 		}
@@ -786,6 +796,7 @@ public class LoadBalancer {
 				if (!jsonObj.get("targetPools").isJsonArray()) {
 					throw new IllegalArgumentException(
 							String.format(
+									java.util.Locale.ROOT,
 									"Expected the field `targetPools` to be an array in the JSON string but got `%s`",
 									jsonObj.get("targetPools").toString()));
 				}
@@ -806,6 +817,7 @@ public class LoadBalancer {
 				&& !jsonObj.get("version").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `version` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("version").toString()));
 		}
@@ -877,6 +889,7 @@ public class LoadBalancer {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
