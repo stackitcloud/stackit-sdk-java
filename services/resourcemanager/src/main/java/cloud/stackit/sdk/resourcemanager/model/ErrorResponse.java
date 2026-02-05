@@ -35,7 +35,7 @@ import java.util.Objects;
 /** ErrorResponse */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class ErrorResponse {
 	public static final String SERIALIZED_NAME_ERROR = "error";
 
@@ -284,6 +284,7 @@ public class ErrorResponse {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in ErrorResponse is not found in the empty JSON string",
 								ErrorResponse.openapiRequiredFields.toString()));
 			}
@@ -294,26 +295,31 @@ public class ErrorResponse {
 			if (jsonElement.getAsJsonObject().get(requiredField) == null) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field `%s` is not found in the JSON string: %s",
-								requiredField, jsonElement.toString()));
+								requiredField,
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
 		if (!jsonObj.get("error").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `error` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("error").toString()));
 		}
 		if (!jsonObj.get("message").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `message` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("message").toString()));
 		}
 		if (!jsonObj.get("path").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `path` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("path").toString()));
 		}
@@ -385,6 +391,7 @@ public class ErrorResponse {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
