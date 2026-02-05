@@ -33,7 +33,7 @@ import java.util.Objects;
 /** GetUpdateServiceResponse */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class GetUpdateServiceResponse {
 	public static final String SERIALIZED_NAME_ENABLED = "enabled";
 
@@ -169,6 +169,7 @@ public class GetUpdateServiceResponse {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in GetUpdateServiceResponse is not found in the empty JSON string",
 								GetUpdateServiceResponse.openapiRequiredFields.toString()));
 			}
@@ -244,6 +245,7 @@ public class GetUpdateServiceResponse {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
