@@ -35,7 +35,7 @@ import java.util.Objects;
 /** ListPlansResponse */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class ListPlansResponse {
 	public static final String SERIALIZED_NAME_VALID_PLANS = "validPlans";
 
@@ -179,6 +179,7 @@ public class ListPlansResponse {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in ListPlansResponse is not found in the empty JSON string",
 								ListPlansResponse.openapiRequiredFields.toString()));
 			}
@@ -191,6 +192,7 @@ public class ListPlansResponse {
 				if (!jsonObj.get("validPlans").isJsonArray()) {
 					throw new IllegalArgumentException(
 							String.format(
+									java.util.Locale.ROOT,
 									"Expected the field `validPlans` to be an array in the JSON string but got `%s`",
 									jsonObj.get("validPlans").toString()));
 				}
@@ -271,6 +273,7 @@ public class ListPlansResponse {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
