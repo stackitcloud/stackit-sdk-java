@@ -40,7 +40,7 @@ import java.util.Objects;
  */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class Status {
 	public static final String SERIALIZED_NAME_CODE = "code";
 
@@ -236,6 +236,7 @@ public class Status {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in Status is not found in the empty JSON string",
 								Status.openapiRequiredFields.toString()));
 			}
@@ -247,6 +248,7 @@ public class Status {
 				&& !jsonObj.get("details").isJsonArray()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `details` to be an array in the JSON string but got `%s`",
 							jsonObj.get("details").toString()));
 		}
@@ -254,6 +256,7 @@ public class Status {
 				&& !jsonObj.get("message").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `message` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("message").toString()));
 		}
@@ -325,6 +328,7 @@ public class Status {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
