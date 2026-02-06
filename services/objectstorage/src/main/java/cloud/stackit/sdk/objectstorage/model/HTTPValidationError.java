@@ -35,7 +35,7 @@ import java.util.Objects;
 /** HTTPValidationError */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class HTTPValidationError {
 	public static final String SERIALIZED_NAME_DETAIL = "detail";
 
@@ -179,6 +179,7 @@ public class HTTPValidationError {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in HTTPValidationError is not found in the empty JSON string",
 								HTTPValidationError.openapiRequiredFields.toString()));
 			}
@@ -191,6 +192,7 @@ public class HTTPValidationError {
 				if (!jsonObj.get("detail").isJsonArray()) {
 					throw new IllegalArgumentException(
 							String.format(
+									java.util.Locale.ROOT,
 									"Expected the field `detail` to be an array in the JSON string but got `%s`",
 									jsonObj.get("detail").toString()));
 				}
@@ -271,6 +273,7 @@ public class HTTPValidationError {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
