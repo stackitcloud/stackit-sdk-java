@@ -33,7 +33,7 @@ import java.util.Objects;
 /** CredentialsResponse */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class CredentialsResponse {
 	public static final String SERIALIZED_NAME_CREDENTIALS_REF = "credentialsRef";
 
@@ -246,6 +246,7 @@ public class CredentialsResponse {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in CredentialsResponse is not found in the empty JSON string",
 								CredentialsResponse.openapiRequiredFields.toString()));
 			}
@@ -255,6 +256,7 @@ public class CredentialsResponse {
 				&& !jsonObj.get("credentialsRef").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `credentialsRef` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("credentialsRef").toString()));
 		}
@@ -262,6 +264,7 @@ public class CredentialsResponse {
 				&& !jsonObj.get("displayName").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `displayName` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("displayName").toString()));
 		}
@@ -269,6 +272,7 @@ public class CredentialsResponse {
 				&& !jsonObj.get("region").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `region` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("region").toString()));
 		}
@@ -276,6 +280,7 @@ public class CredentialsResponse {
 				&& !jsonObj.get("username").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `username` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("username").toString()));
 		}
@@ -348,6 +353,7 @@ public class CredentialsResponse {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
