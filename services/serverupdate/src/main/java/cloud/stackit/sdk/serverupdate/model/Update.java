@@ -33,7 +33,7 @@ import java.util.Objects;
 /** Update */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class Update {
 	public static final String SERIALIZED_NAME_END_DATE = "endDate";
 
@@ -341,6 +341,7 @@ public class Update {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in Update is not found in the empty JSON string",
 								Update.openapiRequiredFields.toString()));
 			}
@@ -351,8 +352,10 @@ public class Update {
 			if (jsonElement.getAsJsonObject().get(requiredField) == null) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field `%s` is not found in the JSON string: %s",
-								requiredField, jsonElement.toString()));
+								requiredField,
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -360,6 +363,7 @@ public class Update {
 				&& !jsonObj.get("endDate").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `endDate` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("endDate").toString()));
 		}
@@ -367,18 +371,21 @@ public class Update {
 				&& !jsonObj.get("failReason").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `failReason` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("failReason").toString()));
 		}
 		if (!jsonObj.get("startDate").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `startDate` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("startDate").toString()));
 		}
 		if (!jsonObj.get("status").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `status` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("status").toString()));
 		}
@@ -450,6 +457,7 @@ public class Update {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
