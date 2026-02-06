@@ -35,7 +35,7 @@ import java.util.Objects;
 /** ValidationError */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class ValidationError {
 	public static final String SERIALIZED_NAME_LOC = "loc";
 
@@ -234,6 +234,7 @@ public class ValidationError {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in ValidationError is not found in the empty JSON string",
 								ValidationError.openapiRequiredFields.toString()));
 			}
@@ -244,8 +245,10 @@ public class ValidationError {
 			if (jsonElement.getAsJsonObject().get(requiredField) == null) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field `%s` is not found in the JSON string: %s",
-								requiredField, jsonElement.toString()));
+								requiredField,
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -253,6 +256,7 @@ public class ValidationError {
 		if (!jsonObj.get("loc").isJsonArray()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `loc` to be an array in the JSON string but got `%s`",
 							jsonObj.get("loc").toString()));
 		}
@@ -266,12 +270,14 @@ public class ValidationError {
 		if (!jsonObj.get("msg").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `msg` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("msg").toString()));
 		}
 		if (!jsonObj.get("type").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `type` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("type").toString()));
 		}
@@ -344,6 +350,7 @@ public class ValidationError {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
