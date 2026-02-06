@@ -36,7 +36,7 @@ import java.util.Objects;
 /** Backup */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class Backup {
 	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
 
@@ -451,6 +451,7 @@ public class Backup {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in Backup is not found in the empty JSON string",
 								Backup.openapiRequiredFields.toString()));
 			}
@@ -461,26 +462,31 @@ public class Backup {
 			if (jsonElement.getAsJsonObject().get(requiredField) == null) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field `%s` is not found in the JSON string: %s",
-								requiredField, jsonElement.toString()));
+								requiredField,
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
 		if (!jsonObj.get("createdAt").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `createdAt` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("createdAt").toString()));
 		}
 		if (!jsonObj.get("expireAt").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `expireAt` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("expireAt").toString()));
 		}
 		if (!jsonObj.get("id").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `id` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("id").toString()));
 		}
@@ -488,18 +494,21 @@ public class Backup {
 				&& !jsonObj.get("lastRestoredAt").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `lastRestoredAt` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("lastRestoredAt").toString()));
 		}
 		if (!jsonObj.get("name").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `name` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("name").toString()));
 		}
 		if (!jsonObj.get("status").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `status` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("status").toString()));
 		}
@@ -512,6 +521,7 @@ public class Backup {
 				if (!jsonObj.get("volumeBackups").isJsonArray()) {
 					throw new IllegalArgumentException(
 							String.format(
+									java.util.Locale.ROOT,
 									"Expected the field `volumeBackups` to be an array in the JSON string but got `%s`",
 									jsonObj.get("volumeBackups").toString()));
 				}
@@ -591,6 +601,7 @@ public class Backup {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
