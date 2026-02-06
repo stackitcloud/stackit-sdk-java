@@ -14,7 +14,7 @@ package cloud.stackit.sdk.loadbalancer;
 
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class Pair {
 	private final String name;
 	private final String value;
