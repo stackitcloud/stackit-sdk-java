@@ -33,7 +33,7 @@ import java.util.Objects;
 /** BackupPolicy */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class BackupPolicy {
 	public static final String SERIALIZED_NAME_BACKUP_PROPERTIES = "backupProperties";
 
@@ -188,7 +188,9 @@ public class BackupPolicy {
 	}
 
 	/**
-	 * Get rrule
+	 * An rrule (Recurrence Rule) is a standardized string format used in iCalendar (RFC 5545) to
+	 * define repeating events, and you can generate one by using a dedicated library or by using
+	 * online generator tools to specify parameters like frequency, interval, and end dates
 	 *
 	 * @return rrule
 	 */
@@ -337,6 +339,7 @@ public class BackupPolicy {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in BackupPolicy is not found in the empty JSON string",
 								BackupPolicy.openapiRequiredFields.toString()));
 			}
@@ -351,6 +354,7 @@ public class BackupPolicy {
 				&& !jsonObj.get("description").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `description` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("description").toString()));
 		}
@@ -358,6 +362,7 @@ public class BackupPolicy {
 				&& !jsonObj.get("id").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `id` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("id").toString()));
 		}
@@ -365,6 +370,7 @@ public class BackupPolicy {
 				&& !jsonObj.get("name").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `name` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("name").toString()));
 		}
@@ -372,6 +378,7 @@ public class BackupPolicy {
 				&& !jsonObj.get("rrule").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `rrule` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("rrule").toString()));
 		}
@@ -443,6 +450,7 @@ public class BackupPolicy {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
