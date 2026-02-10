@@ -37,7 +37,7 @@ import java.util.Objects;
  */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class Path {
 	public static final String SERIALIZED_NAME_EXACT_MATCH = "exactMatch";
 
@@ -199,6 +199,7 @@ public class Path {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in Path is not found in the empty JSON string",
 								Path.openapiRequiredFields.toString()));
 			}
@@ -208,6 +209,7 @@ public class Path {
 				&& !jsonObj.get("exactMatch").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `exactMatch` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("exactMatch").toString()));
 		}
@@ -215,6 +217,7 @@ public class Path {
 				&& !jsonObj.get("prefix").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `prefix` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("prefix").toString()));
 		}
@@ -286,6 +289,7 @@ public class Path {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
