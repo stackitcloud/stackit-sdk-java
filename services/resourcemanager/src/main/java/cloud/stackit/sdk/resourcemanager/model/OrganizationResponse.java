@@ -35,7 +35,7 @@ import java.util.UUID;
 /** OrganizationResponse */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class OrganizationResponse {
 	public static final String SERIALIZED_NAME_CONTAINER_ID = "containerId";
 
@@ -371,6 +371,7 @@ public class OrganizationResponse {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in OrganizationResponse is not found in the empty JSON string",
 								OrganizationResponse.openapiRequiredFields.toString()));
 			}
@@ -381,14 +382,17 @@ public class OrganizationResponse {
 			if (jsonElement.getAsJsonObject().get(requiredField) == null) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field `%s` is not found in the JSON string: %s",
-								requiredField, jsonElement.toString()));
+								requiredField,
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
 		if (!jsonObj.get("containerId").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `containerId` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("containerId").toString()));
 		}
@@ -397,12 +401,14 @@ public class OrganizationResponse {
 		if (!jsonObj.get("name").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `name` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("name").toString()));
 		}
 		if (!jsonObj.get("organizationId").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `organizationId` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("organizationId").toString()));
 		}
@@ -475,6 +481,7 @@ public class OrganizationResponse {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
