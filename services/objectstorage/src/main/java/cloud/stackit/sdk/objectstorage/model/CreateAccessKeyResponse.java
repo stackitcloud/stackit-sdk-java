@@ -33,7 +33,7 @@ import java.util.Objects;
 /** CreateAccessKeyResponse */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class CreateAccessKeyResponse {
 	public static final String SERIALIZED_NAME_ACCESS_KEY = "accessKey";
 
@@ -328,6 +328,7 @@ public class CreateAccessKeyResponse {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in CreateAccessKeyResponse is not found in the empty JSON string",
 								CreateAccessKeyResponse.openapiRequiredFields.toString()));
 			}
@@ -338,20 +339,24 @@ public class CreateAccessKeyResponse {
 			if (jsonElement.getAsJsonObject().get(requiredField) == null) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field `%s` is not found in the JSON string: %s",
-								requiredField, jsonElement.toString()));
+								requiredField,
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
 		if (!jsonObj.get("accessKey").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `accessKey` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("accessKey").toString()));
 		}
 		if (!jsonObj.get("displayName").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `displayName` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("displayName").toString()));
 		}
@@ -359,24 +364,28 @@ public class CreateAccessKeyResponse {
 				&& !jsonObj.get("expires").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `expires` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("expires").toString()));
 		}
 		if (!jsonObj.get("keyId").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `keyId` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("keyId").toString()));
 		}
 		if (!jsonObj.get("project").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `project` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("project").toString()));
 		}
 		if (!jsonObj.get("secretAccessKey").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `secretAccessKey` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("secretAccessKey").toString()));
 		}
@@ -450,6 +459,7 @@ public class CreateAccessKeyResponse {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
