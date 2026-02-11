@@ -33,7 +33,7 @@ import java.util.Objects;
 /** TLSConfig used for the target pool. */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class TargetPoolTlsConfig {
 	public static final String SERIALIZED_NAME_CUSTOM_CA = "customCa";
 
@@ -236,6 +236,7 @@ public class TargetPoolTlsConfig {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in TargetPoolTlsConfig is not found in the empty JSON string",
 								TargetPoolTlsConfig.openapiRequiredFields.toString()));
 			}
@@ -245,6 +246,7 @@ public class TargetPoolTlsConfig {
 				&& !jsonObj.get("customCa").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `customCa` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("customCa").toString()));
 		}
@@ -317,6 +319,7 @@ public class TargetPoolTlsConfig {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
