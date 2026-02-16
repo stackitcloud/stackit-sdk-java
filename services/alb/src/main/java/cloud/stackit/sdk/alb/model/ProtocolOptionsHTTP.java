@@ -35,7 +35,7 @@ import java.util.Objects;
 /** Configuration for handling HTTP traffic on this listener. */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class ProtocolOptionsHTTP {
 	public static final String SERIALIZED_NAME_HOSTS = "hosts";
 
@@ -179,6 +179,7 @@ public class ProtocolOptionsHTTP {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in ProtocolOptionsHTTP is not found in the empty JSON string",
 								ProtocolOptionsHTTP.openapiRequiredFields.toString()));
 			}
@@ -191,6 +192,7 @@ public class ProtocolOptionsHTTP {
 				if (!jsonObj.get("hosts").isJsonArray()) {
 					throw new IllegalArgumentException(
 							String.format(
+									java.util.Locale.ROOT,
 									"Expected the field `hosts` to be an array in the JSON string but got `%s`",
 									jsonObj.get("hosts").toString()));
 				}
@@ -271,6 +273,7 @@ public class ProtocolOptionsHTTP {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));

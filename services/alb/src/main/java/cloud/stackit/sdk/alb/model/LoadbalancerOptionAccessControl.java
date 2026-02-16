@@ -34,7 +34,7 @@ import java.util.Objects;
 /** Use this option to limit the IP ranges that can use the Application Load Balancer. */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class LoadbalancerOptionAccessControl {
 	public static final String SERIALIZED_NAME_ALLOWED_SOURCE_RANGES = "allowedSourceRanges";
 
@@ -188,6 +188,7 @@ public class LoadbalancerOptionAccessControl {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in LoadbalancerOptionAccessControl is not found in the empty JSON string",
 								LoadbalancerOptionAccessControl.openapiRequiredFields.toString()));
 			}
@@ -199,6 +200,7 @@ public class LoadbalancerOptionAccessControl {
 				&& !jsonObj.get("allowedSourceRanges").isJsonArray()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `allowedSourceRanges` to be an array in the JSON string but got `%s`",
 							jsonObj.get("allowedSourceRanges").toString()));
 		}
@@ -275,6 +277,7 @@ public class LoadbalancerOptionAccessControl {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
