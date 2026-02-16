@@ -35,7 +35,7 @@ import java.util.Objects;
 /** GetBackupSchedulesResponse */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class GetBackupSchedulesResponse {
 	public static final String SERIALIZED_NAME_ITEMS = "items";
 
@@ -179,6 +179,7 @@ public class GetBackupSchedulesResponse {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in GetBackupSchedulesResponse is not found in the empty JSON string",
 								GetBackupSchedulesResponse.openapiRequiredFields.toString()));
 			}
@@ -191,6 +192,7 @@ public class GetBackupSchedulesResponse {
 				if (!jsonObj.get("items").isJsonArray()) {
 					throw new IllegalArgumentException(
 							String.format(
+									java.util.Locale.ROOT,
 									"Expected the field `items` to be an array in the JSON string but got `%s`",
 									jsonObj.get("items").toString()));
 				}
@@ -272,6 +274,7 @@ public class GetBackupSchedulesResponse {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
