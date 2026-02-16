@@ -33,7 +33,7 @@ import java.util.Objects;
 /** Target */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class Target {
 	public static final String SERIALIZED_NAME_DISPLAY_NAME = "displayName";
 
@@ -193,6 +193,7 @@ public class Target {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in Target is not found in the empty JSON string",
 								Target.openapiRequiredFields.toString()));
 			}
@@ -202,6 +203,7 @@ public class Target {
 				&& !jsonObj.get("displayName").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `displayName` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("displayName").toString()));
 		}
@@ -209,6 +211,7 @@ public class Target {
 				&& !jsonObj.get("ip").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `ip` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("ip").toString()));
 		}
@@ -280,6 +283,7 @@ public class Target {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
