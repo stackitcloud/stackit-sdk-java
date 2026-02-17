@@ -5,8 +5,12 @@
 - `loadbalancer`: [v0.2.0](services/loadbalancer/CHANGELOG.md#v020)
   - **Feature:** Add fields `maxCredentials`, `usedCredentials` and `usedLoadbalancers` to model `GetQuotaResponse`
   - **Improvement:** Support additional properties in models
-- `objectstorage`: [v0.1.2](services/objectstorage/CHANGELOG.md#v012)
-  - **Improvement:** Support additional properties in models
+- `objectstorage`:
+  - [v0.1.3](services/objectstorage/CHANGELOG.md#v013)
+    - Bump dependency `org.apache.commons:commons-lang3` to `3.18.0`
+    - Bump dependency `org.openapitools:jackson-databind-nullable` to `0.2.8`
+  - [v0.1.2](services/objectstorage/CHANGELOG.md#v012)
+    - **Improvement:** Support additional properties in models
 - `resourcemanager`: [v0.4.2](services/resourcemanager/CHANGELOG.md#v042)
   - **Improvement:** Support additional properties in models
 - `serverbackup`: [v0.1.1](services/serverbackup/CHANGELOG.md#v011)
