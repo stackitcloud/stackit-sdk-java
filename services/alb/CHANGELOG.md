@@ -1,3 +1,7 @@
+## v0.3.1
+- Bump dependency `org.apache.commons:commons-lang3` to `3.18.0`
+- Bump dependency `org.openapitools:jackson-databind-nullable` to `0.2.8`
+
 ## v0.3.0
 - **Feature:** Add fields `usedCredentials` and `usedLoadbalancers` to `GetQuotaResponse`
 - **Improvement:** Support additional properties in models
