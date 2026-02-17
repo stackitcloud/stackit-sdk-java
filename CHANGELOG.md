@@ -15,8 +15,12 @@
     - Bump dependency `org.openapitools:jackson-databind-nullable` to `0.2.8`
   - [v0.1.1](services/serverbackup/CHANGELOG.md#v011)
     - **Improvement:** Support additional properties in models
-- `serverupdate`: [v0.1.2](services/serverupdate/CHANGELOG.md#v012)
-  - **Improvement:** Support additional properties in models
+- `serverupdate`:
+  - [v0.1.3](services/serverupdate/CHANGELOG.md#v013)
+    - Bump dependency `org.apache.commons:commons-lang3` to `3.18.0`
+    - Bump dependency `org.openapitools:jackson-databind-nullable` to `0.2.8`
+  - [v0.1.2](services/serverupdate/CHANGELOG.md#v012)
+    - **Improvement:** Support additional properties in models
 - `sfs`: [v0.1.0](services/sfs/CHANGELOG.md#v010)
   - Initial onboarding of STACKIT Java SDK for STACKIT File Storage (SFS) service
 
