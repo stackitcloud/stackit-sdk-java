@@ -2,9 +2,13 @@
 - `alb`: [v0.3.0](services/alb/CHANGELOG.md#v030)
   - **Feature:** Add fields `usedCredentials` and `usedLoadbalancers` to `GetQuotaResponse`
   - **Improvement:** Support additional properties in models
-- `loadbalancer`: [v0.2.0](services/loadbalancer/CHANGELOG.md#v020)
-  - **Feature:** Add fields `maxCredentials`, `usedCredentials` and `usedLoadbalancers` to model `GetQuotaResponse`
-  - **Improvement:** Support additional properties in models
+- `loadbalancer`:
+  - [v0.2.1](services/loadbalancer/CHANGELOG.md#v021)
+    - Bump dependency `org.apache.commons:commons-lang3` to `3.18.0`
+    - Bump dependency `org.openapitools:jackson-databind-nullable` to `0.2.8`
+  - [v0.2.0](services/loadbalancer/CHANGELOG.md#v020)
+    - **Feature:** Add fields `maxCredentials`, `usedCredentials` and `usedLoadbalancers` to model `GetQuotaResponse`
+    - **Improvement:** Support additional properties in models
 - `objectstorage`:
   - [v0.1.3](services/objectstorage/CHANGELOG.md#v013)
     - Bump dependency `org.apache.commons:commons-lang3` to `3.18.0`
