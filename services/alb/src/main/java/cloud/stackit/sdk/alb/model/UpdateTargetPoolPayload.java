@@ -35,7 +35,7 @@ import java.util.Objects;
 /** UpdateTargetPoolPayload */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class UpdateTargetPoolPayload {
 	public static final String SERIALIZED_NAME_ACTIVE_HEALTH_CHECK = "activeHealthCheck";
 
@@ -289,6 +289,7 @@ public class UpdateTargetPoolPayload {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in UpdateTargetPoolPayload is not found in the empty JSON string",
 								UpdateTargetPoolPayload.openapiRequiredFields.toString()));
 			}
@@ -303,6 +304,7 @@ public class UpdateTargetPoolPayload {
 				&& !jsonObj.get("name").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
+							java.util.Locale.ROOT,
 							"Expected the field `name` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("name").toString()));
 		}
@@ -313,6 +315,7 @@ public class UpdateTargetPoolPayload {
 				if (!jsonObj.get("targets").isJsonArray()) {
 					throw new IllegalArgumentException(
 							String.format(
+									java.util.Locale.ROOT,
 									"Expected the field `targets` to be an array in the JSON string but got `%s`",
 									jsonObj.get("targets").toString()));
 				}
@@ -398,6 +401,7 @@ public class UpdateTargetPoolPayload {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
