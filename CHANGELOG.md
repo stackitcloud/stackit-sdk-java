@@ -7,8 +7,12 @@
   - **Improvement:** Support additional properties in models
 - `objectstorage`: [v0.1.2](services/objectstorage/CHANGELOG.md#v012)
   - **Improvement:** Support additional properties in models
-- `resourcemanager`: [v0.4.2](services/resourcemanager/CHANGELOG.md#v042)
-  - **Improvement:** Support additional properties in models
+- `resourcemanager`:
+  - [v0.4.3](services/resourcemanager/CHANGELOG.md#v043)
+    - Bump dependency `org.apache.commons:commons-lang3` to `3.18.0`
+    - Bump dependency `org.openapitools:jackson-databind-nullable` to `0.2.8`
+  - [v0.4.2](services/resourcemanager/CHANGELOG.md#v042)
+    - **Improvement:** Support additional properties in models
 - `serverbackup`: [v0.1.1](services/serverbackup/CHANGELOG.md#v011)
   - **Improvement:** Support additional properties in models
 - `serverupdate`: [v0.1.2](services/serverupdate/CHANGELOG.md#v012)
