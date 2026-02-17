@@ -33,7 +33,7 @@ import java.util.Objects;
 /** CreateUpdatePayload */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.15.0")
+		comments = "Generator version: 7.19.0")
 public class CreateUpdatePayload {
 	public static final String SERIALIZED_NAME_BACKUP_BEFORE_UPDATE = "backupBeforeUpdate";
 
@@ -74,7 +74,8 @@ public class CreateUpdatePayload {
 	}
 
 	/**
-	 * Get maintenanceWindow minimum: 1 maximum: 24
+	 * Updates start within the defined hourly window. Depending on the updates, the process may
+	 * exceed this timeframe and require an automatic restart. minimum: 1 maximum: 24
 	 *
 	 * @return maintenanceWindow
 	 */
@@ -203,6 +204,7 @@ public class CreateUpdatePayload {
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field(s) %s in CreateUpdatePayload is not found in the empty JSON string",
 								CreateUpdatePayload.openapiRequiredFields.toString()));
 			}
@@ -213,8 +215,10 @@ public class CreateUpdatePayload {
 			if (jsonElement.getAsJsonObject().get(requiredField) == null) {
 				throw new IllegalArgumentException(
 						String.format(
+								java.util.Locale.ROOT,
 								"The required field `%s` is not found in the JSON string: %s",
-								requiredField, jsonElement.toString()));
+								requiredField,
+								jsonElement.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -287,6 +291,7 @@ public class CreateUpdatePayload {
 										else
 											throw new IllegalArgumentException(
 													String.format(
+															java.util.Locale.ROOT,
 															"The field `%s` has unknown primitive type. Value: %s",
 															entry.getKey(),
 															entry.getValue().toString()));
