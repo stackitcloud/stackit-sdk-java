@@ -35,10 +35,20 @@ import java.util.Objects;
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
 		comments = "Generator version: 7.19.0")
 public class ActiveHealthCheck {
+	public static final String SERIALIZED_NAME_ALT_PORT = "altPort";
+
+	@SerializedName(SERIALIZED_NAME_ALT_PORT)
+	@javax.annotation.Nullable private Integer altPort;
+
 	public static final String SERIALIZED_NAME_HEALTHY_THRESHOLD = "healthyThreshold";
 
 	@SerializedName(SERIALIZED_NAME_HEALTHY_THRESHOLD)
 	@javax.annotation.Nullable private Integer healthyThreshold;
+
+	public static final String SERIALIZED_NAME_HTTP_HEALTH_CHECKS = "httpHealthChecks";
+
+	@SerializedName(SERIALIZED_NAME_HTTP_HEALTH_CHECKS)
+	@javax.annotation.Nullable private HttpHealthChecks httpHealthChecks;
 
 	public static final String SERIALIZED_NAME_INTERVAL = "interval";
 
@@ -62,6 +72,24 @@ public class ActiveHealthCheck {
 
 	public ActiveHealthCheck() {}
 
+	public ActiveHealthCheck altPort(@javax.annotation.Nullable Integer altPort) {
+		this.altPort = altPort;
+		return this;
+	}
+
+	/**
+	 * Overrides the default port used for health check probes.
+	 *
+	 * @return altPort
+	 */
+	@javax.annotation.Nullable public Integer getAltPort() {
+		return altPort;
+	}
+
+	public void setAltPort(@javax.annotation.Nullable Integer altPort) {
+		this.altPort = altPort;
+	}
+
 	public ActiveHealthCheck healthyThreshold(@javax.annotation.Nullable Integer healthyThreshold) {
 		this.healthyThreshold = healthyThreshold;
 		return this;
@@ -78,6 +106,25 @@ public class ActiveHealthCheck {
 
 	public void setHealthyThreshold(@javax.annotation.Nullable Integer healthyThreshold) {
 		this.healthyThreshold = healthyThreshold;
+	}
+
+	public ActiveHealthCheck httpHealthChecks(
+			@javax.annotation.Nullable HttpHealthChecks httpHealthChecks) {
+		this.httpHealthChecks = httpHealthChecks;
+		return this;
+	}
+
+	/**
+	 * Get httpHealthChecks
+	 *
+	 * @return httpHealthChecks
+	 */
+	@javax.annotation.Nullable public HttpHealthChecks getHttpHealthChecks() {
+		return httpHealthChecks;
+	}
+
+	public void setHttpHealthChecks(@javax.annotation.Nullable HttpHealthChecks httpHealthChecks) {
+		this.httpHealthChecks = httpHealthChecks;
 	}
 
 	public ActiveHealthCheck interval(@javax.annotation.Nullable String interval) {
@@ -206,7 +253,9 @@ public class ActiveHealthCheck {
 			return false;
 		}
 		ActiveHealthCheck activeHealthCheck = (ActiveHealthCheck) o;
-		return Objects.equals(this.healthyThreshold, activeHealthCheck.healthyThreshold)
+		return Objects.equals(this.altPort, activeHealthCheck.altPort)
+				&& Objects.equals(this.healthyThreshold, activeHealthCheck.healthyThreshold)
+				&& Objects.equals(this.httpHealthChecks, activeHealthCheck.httpHealthChecks)
 				&& Objects.equals(this.interval, activeHealthCheck.interval)
 				&& Objects.equals(this.intervalJitter, activeHealthCheck.intervalJitter)
 				&& Objects.equals(this.timeout, activeHealthCheck.timeout)
@@ -218,7 +267,9 @@ public class ActiveHealthCheck {
 	@Override
 	public int hashCode() {
 		return Objects.hash(
+				altPort,
 				healthyThreshold,
+				httpHealthChecks,
 				interval,
 				intervalJitter,
 				timeout,
@@ -230,7 +281,9 @@ public class ActiveHealthCheck {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class ActiveHealthCheck {\n");
+		sb.append("    altPort: ").append(toIndentedString(altPort)).append("\n");
 		sb.append("    healthyThreshold: ").append(toIndentedString(healthyThreshold)).append("\n");
+		sb.append("    httpHealthChecks: ").append(toIndentedString(httpHealthChecks)).append("\n");
 		sb.append("    interval: ").append(toIndentedString(interval)).append("\n");
 		sb.append("    intervalJitter: ").append(toIndentedString(intervalJitter)).append("\n");
 		sb.append("    timeout: ").append(toIndentedString(timeout)).append("\n");
@@ -263,7 +316,9 @@ public class ActiveHealthCheck {
 		openapiFields =
 				new HashSet<String>(
 						Arrays.asList(
+								"altPort",
 								"healthyThreshold",
+								"httpHealthChecks",
 								"interval",
 								"intervalJitter",
 								"timeout",
@@ -291,6 +346,11 @@ public class ActiveHealthCheck {
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
+		// validate the optional field `httpHealthChecks`
+		if (jsonObj.get("httpHealthChecks") != null
+				&& !jsonObj.get("httpHealthChecks").isJsonNull()) {
+			HttpHealthChecks.validateJsonElement(jsonObj.get("httpHealthChecks"));
+		}
 		if ((jsonObj.get("interval") != null && !jsonObj.get("interval").isJsonNull())
 				&& !jsonObj.get("interval").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
