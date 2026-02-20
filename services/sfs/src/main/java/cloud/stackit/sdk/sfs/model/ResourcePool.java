@@ -96,7 +96,7 @@ public class ResourcePool {
 	public static final String SERIALIZED_NAME_SNAPSHOTS_ARE_VISIBLE = "snapshotsAreVisible";
 
 	@SerializedName(SERIALIZED_NAME_SNAPSHOTS_ARE_VISIBLE)
-	@javax.annotation.Nullable private Boolean snapshotsAreVisible;
+	@javax.annotation.Nullable private Boolean snapshotsAreVisible = false;
 
 	public static final String SERIALIZED_NAME_SPACE = "space";
 

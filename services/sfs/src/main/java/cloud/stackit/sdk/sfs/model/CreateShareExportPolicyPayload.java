@@ -45,7 +45,8 @@ public class CreateShareExportPolicyPayload {
 	public static final String SERIALIZED_NAME_NAME = "name";
 
 	@SerializedName(SERIALIZED_NAME_NAME)
-	@javax.annotation.Nullable private String name;
+	@javax.annotation.Nonnull
+	private String name;
 
 	public static final String SERIALIZED_NAME_RULES = "rules";
 
@@ -84,7 +85,7 @@ public class CreateShareExportPolicyPayload {
 		this.labels = labels;
 	}
 
-	public CreateShareExportPolicyPayload name(@javax.annotation.Nullable String name) {
+	public CreateShareExportPolicyPayload name(@javax.annotation.Nonnull String name) {
 		this.name = name;
 		return this;
 	}
@@ -94,11 +95,12 @@ public class CreateShareExportPolicyPayload {
 	 *
 	 * @return name
 	 */
-	@javax.annotation.Nullable public String getName() {
+	@javax.annotation.Nonnull
+	public String getName() {
 		return name;
 	}
 
-	public void setName(@javax.annotation.Nullable String name) {
+	public void setName(@javax.annotation.Nonnull String name) {
 		this.name = name;
 	}
 
@@ -232,7 +234,7 @@ public class CreateShareExportPolicyPayload {
 		openapiFields = new HashSet<String>(Arrays.asList("labels", "name", "rules"));
 
 		// a set of required properties/fields (JSON key names)
-		openapiRequiredFields = new HashSet<String>(0);
+		openapiRequiredFields = new HashSet<String>(Arrays.asList("name"));
 	}
 
 	/**
@@ -253,9 +255,20 @@ public class CreateShareExportPolicyPayload {
 								CreateShareExportPolicyPayload.openapiRequiredFields.toString()));
 			}
 		}
+
+		// check to make sure all required properties/fields are present in the JSON string
+		for (String requiredField : CreateShareExportPolicyPayload.openapiRequiredFields) {
+			if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+				throw new IllegalArgumentException(
+						String.format(
+								java.util.Locale.ROOT,
+								"The required field `%s` is not found in the JSON string: %s",
+								requiredField,
+								jsonElement.toString()));
+			}
+		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
-		if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull())
-				&& !jsonObj.get("name").isJsonPrimitive()) {
+		if (!jsonObj.get("name").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
 							java.util.Locale.ROOT,
