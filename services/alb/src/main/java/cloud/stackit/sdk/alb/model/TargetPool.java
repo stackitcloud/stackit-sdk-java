@@ -60,7 +60,7 @@ public class TargetPool {
 	public static final String SERIALIZED_NAME_TLS_CONFIG = "tlsConfig";
 
 	@SerializedName(SERIALIZED_NAME_TLS_CONFIG)
-	@javax.annotation.Nullable private TargetPoolTlsConfig tlsConfig;
+	@javax.annotation.Nullable private TlsConfig tlsConfig;
 
 	public TargetPool() {}
 
@@ -147,7 +147,7 @@ public class TargetPool {
 		this.targets = targets;
 	}
 
-	public TargetPool tlsConfig(@javax.annotation.Nullable TargetPoolTlsConfig tlsConfig) {
+	public TargetPool tlsConfig(@javax.annotation.Nullable TlsConfig tlsConfig) {
 		this.tlsConfig = tlsConfig;
 		return this;
 	}
@@ -157,11 +157,11 @@ public class TargetPool {
 	 *
 	 * @return tlsConfig
 	 */
-	@javax.annotation.Nullable public TargetPoolTlsConfig getTlsConfig() {
+	@javax.annotation.Nullable public TlsConfig getTlsConfig() {
 		return tlsConfig;
 	}
 
-	public void setTlsConfig(@javax.annotation.Nullable TargetPoolTlsConfig tlsConfig) {
+	public void setTlsConfig(@javax.annotation.Nullable TlsConfig tlsConfig) {
 		this.tlsConfig = tlsConfig;
 	}
 
@@ -327,7 +327,7 @@ public class TargetPool {
 		}
 		// validate the optional field `tlsConfig`
 		if (jsonObj.get("tlsConfig") != null && !jsonObj.get("tlsConfig").isJsonNull()) {
-			TargetPoolTlsConfig.validateJsonElement(jsonObj.get("tlsConfig"));
+			TlsConfig.validateJsonElement(jsonObj.get("tlsConfig"));
 		}
 	}
 

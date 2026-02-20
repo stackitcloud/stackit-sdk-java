@@ -46,6 +46,11 @@ public class HttpHealthChecks {
 	@SerializedName(SERIALIZED_NAME_PATH)
 	@javax.annotation.Nullable private String path;
 
+	public static final String SERIALIZED_NAME_TLS = "tls";
+
+	@SerializedName(SERIALIZED_NAME_TLS)
+	@javax.annotation.Nullable private TlsConfig tls;
+
 	public HttpHealthChecks() {}
 
 	public HttpHealthChecks okStatuses(@javax.annotation.Nullable List<String> okStatuses) {
@@ -90,6 +95,24 @@ public class HttpHealthChecks {
 
 	public void setPath(@javax.annotation.Nullable String path) {
 		this.path = path;
+	}
+
+	public HttpHealthChecks tls(@javax.annotation.Nullable TlsConfig tls) {
+		this.tls = tls;
+		return this;
+	}
+
+	/**
+	 * Get tls
+	 *
+	 * @return tls
+	 */
+	@javax.annotation.Nullable public TlsConfig getTls() {
+		return tls;
+	}
+
+	public void setTls(@javax.annotation.Nullable TlsConfig tls) {
+		this.tls = tls;
 	}
 
 	/**
@@ -147,12 +170,13 @@ public class HttpHealthChecks {
 		HttpHealthChecks httpHealthChecks = (HttpHealthChecks) o;
 		return Objects.equals(this.okStatuses, httpHealthChecks.okStatuses)
 				&& Objects.equals(this.path, httpHealthChecks.path)
+				&& Objects.equals(this.tls, httpHealthChecks.tls)
 				&& Objects.equals(this.additionalProperties, httpHealthChecks.additionalProperties);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(okStatuses, path, additionalProperties);
+		return Objects.hash(okStatuses, path, tls, additionalProperties);
 	}
 
 	@Override
@@ -161,6 +185,7 @@ public class HttpHealthChecks {
 		sb.append("class HttpHealthChecks {\n");
 		sb.append("    okStatuses: ").append(toIndentedString(okStatuses)).append("\n");
 		sb.append("    path: ").append(toIndentedString(path)).append("\n");
+		sb.append("    tls: ").append(toIndentedString(tls)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -184,7 +209,7 @@ public class HttpHealthChecks {
 
 	static {
 		// a set of all properties/fields (JSON key names)
-		openapiFields = new HashSet<String>(Arrays.asList("okStatuses", "path"));
+		openapiFields = new HashSet<String>(Arrays.asList("okStatuses", "path", "tls"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(0);
@@ -225,6 +250,10 @@ public class HttpHealthChecks {
 							java.util.Locale.ROOT,
 							"Expected the field `path` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("path").toString()));
+		}
+		// validate the optional field `tls`
+		if (jsonObj.get("tls") != null && !jsonObj.get("tls").isJsonNull()) {
+			TlsConfig.validateJsonElement(jsonObj.get("tls"));
 		}
 	}
 
