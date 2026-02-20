@@ -49,13 +49,15 @@ public class CreateSharePayload {
 	public static final String SERIALIZED_NAME_NAME = "name";
 
 	@SerializedName(SERIALIZED_NAME_NAME)
-	@javax.annotation.Nullable private String name;
+	@javax.annotation.Nonnull
+	private String name;
 
 	public static final String SERIALIZED_NAME_SPACE_HARD_LIMIT_GIGABYTES =
 			"spaceHardLimitGigabytes";
 
 	@SerializedName(SERIALIZED_NAME_SPACE_HARD_LIMIT_GIGABYTES)
-	@javax.annotation.Nullable private Integer spaceHardLimitGigabytes;
+	@javax.annotation.Nonnull
+	private Integer spaceHardLimitGigabytes;
 
 	public CreateSharePayload() {}
 
@@ -107,7 +109,7 @@ public class CreateSharePayload {
 		this.labels = labels;
 	}
 
-	public CreateSharePayload name(@javax.annotation.Nullable String name) {
+	public CreateSharePayload name(@javax.annotation.Nonnull String name) {
 		this.name = name;
 		return this;
 	}
@@ -117,16 +119,17 @@ public class CreateSharePayload {
 	 *
 	 * @return name
 	 */
-	@javax.annotation.Nullable public String getName() {
+	@javax.annotation.Nonnull
+	public String getName() {
 		return name;
 	}
 
-	public void setName(@javax.annotation.Nullable String name) {
+	public void setName(@javax.annotation.Nonnull String name) {
 		this.name = name;
 	}
 
 	public CreateSharePayload spaceHardLimitGigabytes(
-			@javax.annotation.Nullable Integer spaceHardLimitGigabytes) {
+			@javax.annotation.Nonnull Integer spaceHardLimitGigabytes) {
 		this.spaceHardLimitGigabytes = spaceHardLimitGigabytes;
 		return this;
 	}
@@ -137,12 +140,13 @@ public class CreateSharePayload {
 	 *
 	 * @return spaceHardLimitGigabytes
 	 */
-	@javax.annotation.Nullable public Integer getSpaceHardLimitGigabytes() {
+	@javax.annotation.Nonnull
+	public Integer getSpaceHardLimitGigabytes() {
 		return spaceHardLimitGigabytes;
 	}
 
 	public void setSpaceHardLimitGigabytes(
-			@javax.annotation.Nullable Integer spaceHardLimitGigabytes) {
+			@javax.annotation.Nonnull Integer spaceHardLimitGigabytes) {
 		this.spaceHardLimitGigabytes = spaceHardLimitGigabytes;
 	}
 
@@ -269,7 +273,8 @@ public class CreateSharePayload {
 								"exportPolicyName", "labels", "name", "spaceHardLimitGigabytes"));
 
 		// a set of required properties/fields (JSON key names)
-		openapiRequiredFields = new HashSet<String>(0);
+		openapiRequiredFields =
+				new HashSet<String>(Arrays.asList("name", "spaceHardLimitGigabytes"));
 	}
 
 	/**
@@ -289,6 +294,18 @@ public class CreateSharePayload {
 								CreateSharePayload.openapiRequiredFields.toString()));
 			}
 		}
+
+		// check to make sure all required properties/fields are present in the JSON string
+		for (String requiredField : CreateSharePayload.openapiRequiredFields) {
+			if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+				throw new IllegalArgumentException(
+						String.format(
+								java.util.Locale.ROOT,
+								"The required field `%s` is not found in the JSON string: %s",
+								requiredField,
+								jsonElement.toString()));
+			}
+		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
 		if ((jsonObj.get("exportPolicyName") != null
 						&& !jsonObj.get("exportPolicyName").isJsonNull())
@@ -299,8 +316,7 @@ public class CreateSharePayload {
 							"Expected the field `exportPolicyName` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("exportPolicyName").toString()));
 		}
-		if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull())
-				&& !jsonObj.get("name").isJsonPrimitive()) {
+		if (!jsonObj.get("name").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
 							java.util.Locale.ROOT,

@@ -37,8 +37,11 @@
     - Bump dependency `org.openapitools:jackson-databind-nullable` to `0.2.8`
   - [v0.1.2](services/serverupdate/CHANGELOG.md#v012)
     - **Improvement:** Support additional properties in models
-- `sfs`: [v0.1.0](services/sfs/CHANGELOG.md#v010)
-  - Initial onboarding of STACKIT Java SDK for STACKIT File Storage (SFS) service
+- `sfs`:
+  - [v0.2.0](services/sfs/CHANGELOG.md#v020)
+    - **Breaking change:** The `name` and `spaceHardLimitGigabytes` fields are now marked as required for `ShareExportPayload`, `SharePayload`.
+  - [v0.1.0](services/sfs/CHANGELOG.md#v010)
+    - Initial onboarding of STACKIT Java SDK for STACKIT File Storage (SFS) service
 
 ## Release (2026-01-27)
 - `core`: [v0.4.1](core/CHANGELOG.md/#v041)
