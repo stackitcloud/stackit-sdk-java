@@ -30,11 +30,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** TLSConfig used for the target pool. */
+/** Set this to configure TLS settings. */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
 		comments = "Generator version: 7.19.0")
-public class TargetPoolTlsConfig {
+public class TlsConfig {
 	public static final String SERIALIZED_NAME_CUSTOM_CA = "customCa";
 
 	@SerializedName(SERIALIZED_NAME_CUSTOM_CA)
@@ -51,9 +51,9 @@ public class TargetPoolTlsConfig {
 	@SerializedName(SERIALIZED_NAME_SKIP_CERTIFICATE_VALIDATION)
 	@javax.annotation.Nullable private Boolean skipCertificateValidation;
 
-	public TargetPoolTlsConfig() {}
+	public TlsConfig() {}
 
-	public TargetPoolTlsConfig customCa(@javax.annotation.Nullable String customCa) {
+	public TlsConfig customCa(@javax.annotation.Nullable String customCa) {
 		this.customCa = customCa;
 		return this;
 	}
@@ -75,7 +75,7 @@ public class TargetPoolTlsConfig {
 		this.customCa = customCa;
 	}
 
-	public TargetPoolTlsConfig enabled(@javax.annotation.Nullable Boolean enabled) {
+	public TlsConfig enabled(@javax.annotation.Nullable Boolean enabled) {
 		this.enabled = enabled;
 		return this;
 	}
@@ -95,7 +95,7 @@ public class TargetPoolTlsConfig {
 		this.enabled = enabled;
 	}
 
-	public TargetPoolTlsConfig skipCertificateValidation(
+	public TlsConfig skipCertificateValidation(
 			@javax.annotation.Nullable Boolean skipCertificateValidation) {
 		this.skipCertificateValidation = skipCertificateValidation;
 		return this;
@@ -129,9 +129,9 @@ public class TargetPoolTlsConfig {
 	 *
 	 * @param key name of the property
 	 * @param value value of the property
-	 * @return the TargetPoolTlsConfig instance itself
+	 * @return the TlsConfig instance itself
 	 */
-	public TargetPoolTlsConfig putAdditionalProperty(String key, Object value) {
+	public TlsConfig putAdditionalProperty(String key, Object value) {
 		if (this.additionalProperties == null) {
 			this.additionalProperties = new HashMap<String, Object>();
 		}
@@ -169,14 +169,12 @@ public class TargetPoolTlsConfig {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		TargetPoolTlsConfig targetPoolTlsConfig = (TargetPoolTlsConfig) o;
-		return Objects.equals(this.customCa, targetPoolTlsConfig.customCa)
-				&& Objects.equals(this.enabled, targetPoolTlsConfig.enabled)
+		TlsConfig tlsConfig = (TlsConfig) o;
+		return Objects.equals(this.customCa, tlsConfig.customCa)
+				&& Objects.equals(this.enabled, tlsConfig.enabled)
 				&& Objects.equals(
-						this.skipCertificateValidation,
-						targetPoolTlsConfig.skipCertificateValidation)
-				&& Objects.equals(
-						this.additionalProperties, targetPoolTlsConfig.additionalProperties);
+						this.skipCertificateValidation, tlsConfig.skipCertificateValidation)
+				&& Objects.equals(this.additionalProperties, tlsConfig.additionalProperties);
 	}
 
 	@Override
@@ -187,7 +185,7 @@ public class TargetPoolTlsConfig {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class TargetPoolTlsConfig {\n");
+		sb.append("class TlsConfig {\n");
 		sb.append("    customCa: ").append(toIndentedString(customCa)).append("\n");
 		sb.append("    enabled: ").append(toIndentedString(enabled)).append("\n");
 		sb.append("    skipCertificateValidation: ")
@@ -228,17 +226,17 @@ public class TargetPoolTlsConfig {
 	 * Validates the JSON Element and throws an exception if issues found
 	 *
 	 * @param jsonElement JSON Element
-	 * @throws IOException if the JSON Element is invalid with respect to TargetPoolTlsConfig
+	 * @throws IOException if the JSON Element is invalid with respect to TlsConfig
 	 */
 	public static void validateJsonElement(JsonElement jsonElement) throws IOException {
 		if (jsonElement == null) {
-			if (!TargetPoolTlsConfig.openapiRequiredFields
+			if (!TlsConfig.openapiRequiredFields
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
 								java.util.Locale.ROOT,
-								"The required field(s) %s in TargetPoolTlsConfig is not found in the empty JSON string",
-								TargetPoolTlsConfig.openapiRequiredFields.toString()));
+								"The required field(s) %s in TlsConfig is not found in the empty JSON string",
+								TlsConfig.openapiRequiredFields.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -256,18 +254,17 @@ public class TargetPoolTlsConfig {
 		@SuppressWarnings("unchecked")
 		@Override
 		public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-			if (!TargetPoolTlsConfig.class.isAssignableFrom(type.getRawType())) {
-				return null; // this class only serializes 'TargetPoolTlsConfig' and its subtypes
+			if (!TlsConfig.class.isAssignableFrom(type.getRawType())) {
+				return null; // this class only serializes 'TlsConfig' and its subtypes
 			}
 			final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-			final TypeAdapter<TargetPoolTlsConfig> thisAdapter =
-					gson.getDelegateAdapter(this, TypeToken.get(TargetPoolTlsConfig.class));
+			final TypeAdapter<TlsConfig> thisAdapter =
+					gson.getDelegateAdapter(this, TypeToken.get(TlsConfig.class));
 
 			return (TypeAdapter<T>)
-					new TypeAdapter<TargetPoolTlsConfig>() {
+					new TypeAdapter<TlsConfig>() {
 						@Override
-						public void write(JsonWriter out, TargetPoolTlsConfig value)
-								throws IOException {
+						public void write(JsonWriter out, TlsConfig value) throws IOException {
 							JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
 							obj.remove("additionalProperties");
 							// serialize additional properties
@@ -297,12 +294,12 @@ public class TargetPoolTlsConfig {
 						}
 
 						@Override
-						public TargetPoolTlsConfig read(JsonReader in) throws IOException {
+						public TlsConfig read(JsonReader in) throws IOException {
 							JsonElement jsonElement = elementAdapter.read(in);
 							validateJsonElement(jsonElement);
 							JsonObject jsonObj = jsonElement.getAsJsonObject();
 							// store additional fields in the deserialized instance
-							TargetPoolTlsConfig instance = thisAdapter.fromJsonTree(jsonObj);
+							TlsConfig instance = thisAdapter.fromJsonTree(jsonObj);
 							for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
 								if (!openapiFields.contains(entry.getKey())) {
 									if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -341,18 +338,18 @@ public class TargetPoolTlsConfig {
 	}
 
 	/**
-	 * Create an instance of TargetPoolTlsConfig given an JSON string
+	 * Create an instance of TlsConfig given an JSON string
 	 *
 	 * @param jsonString JSON string
-	 * @return An instance of TargetPoolTlsConfig
-	 * @throws IOException if the JSON string is invalid with respect to TargetPoolTlsConfig
+	 * @return An instance of TlsConfig
+	 * @throws IOException if the JSON string is invalid with respect to TlsConfig
 	 */
-	public static TargetPoolTlsConfig fromJson(String jsonString) throws IOException {
-		return JSON.getGson().fromJson(jsonString, TargetPoolTlsConfig.class);
+	public static TlsConfig fromJson(String jsonString) throws IOException {
+		return JSON.getGson().fromJson(jsonString, TlsConfig.class);
 	}
 
 	/**
-	 * Convert an instance of TargetPoolTlsConfig to an JSON string
+	 * Convert an instance of TlsConfig to an JSON string
 	 *
 	 * @return JSON string
 	 */
