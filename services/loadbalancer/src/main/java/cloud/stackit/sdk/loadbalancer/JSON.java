@@ -120,6 +120,9 @@ public class JSON {
 				new cloud.stackit.sdk.loadbalancer.model.GoogleProtobufAny
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.loadbalancer.model.HttpHealthChecks
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.loadbalancer.model.ListCredentialsResponse
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
@@ -172,6 +175,8 @@ public class JSON {
 				new cloud.stackit.sdk.loadbalancer.model.Target.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.loadbalancer.model.TargetPool.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.loadbalancer.model.TlsConfig.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.loadbalancer.model.UpdateCredentialsPayload
 						.CustomTypeAdapterFactory());
