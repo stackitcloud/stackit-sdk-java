@@ -1,3 +1,8 @@
+## v0.4.0
+  - **Feature:** Add new field `AltPort` to `ActiveHealthCheck`
+  - **Feature:** Add new field `Tls` to `HttpHealthCheck`
+  - **Breaking change:** Renamed `TargetPoolTlsConfig` to `TlsConfig`
+
 ## v0.3.1
 - Bump dependency `org.apache.commons:commons-lang3` to `3.18.0`
 - Bump dependency `org.openapitools:jackson-databind-nullable` to `0.2.8`
