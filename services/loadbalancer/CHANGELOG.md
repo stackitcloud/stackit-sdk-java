@@ -1,3 +1,6 @@
+## v0.3.0
+- **Feature:** Add new fields `AltPort` and `HttpHealthCheck` to `ActiveHealthCheck`
+
 ## v0.2.1
 - Bump dependency `org.apache.commons:commons-lang3` to `3.18.0`
 - Bump dependency `org.openapitools:jackson-databind-nullable` to `0.2.8`

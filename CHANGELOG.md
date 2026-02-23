@@ -11,6 +11,8 @@
     - **Feature:** Add fields `usedCredentials` and `usedLoadbalancers` to `GetQuotaResponse`
     - **Improvement:** Support additional properties in models
 - `loadbalancer`:
+  - [v0.3.0](services/loadbalancer/CHANGELOG.md#v030)
+    - **Feature:** Add new fields `AltPort` and `HttpHealthCheck` to `ActiveHealthCheck`
   - [v0.2.1](services/loadbalancer/CHANGELOG.md#v021)
     - Bump dependency `org.apache.commons:commons-lang3` to `3.18.0`
     - Bump dependency `org.openapitools:jackson-databind-nullable` to `0.2.8`
