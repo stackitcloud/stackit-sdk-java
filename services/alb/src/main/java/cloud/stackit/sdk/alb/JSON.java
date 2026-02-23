@@ -173,7 +173,7 @@ public class JSON {
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.alb.model.TargetPool.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
-				new cloud.stackit.sdk.alb.model.TargetPoolTlsConfig.CustomTypeAdapterFactory());
+				new cloud.stackit.sdk.alb.model.TlsConfig.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.alb.model.UpdateCredentialsPayload
 						.CustomTypeAdapterFactory());

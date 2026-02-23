@@ -35,6 +35,11 @@ import java.util.Objects;
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
 		comments = "Generator version: 7.19.0")
 public class ActiveHealthCheck {
+	public static final String SERIALIZED_NAME_ALT_PORT = "altPort";
+
+	@SerializedName(SERIALIZED_NAME_ALT_PORT)
+	@javax.annotation.Nullable private Integer altPort;
+
 	public static final String SERIALIZED_NAME_HEALTHY_THRESHOLD = "healthyThreshold";
 
 	@SerializedName(SERIALIZED_NAME_HEALTHY_THRESHOLD)
@@ -66,6 +71,24 @@ public class ActiveHealthCheck {
 	@javax.annotation.Nullable private Integer unhealthyThreshold;
 
 	public ActiveHealthCheck() {}
+
+	public ActiveHealthCheck altPort(@javax.annotation.Nullable Integer altPort) {
+		this.altPort = altPort;
+		return this;
+	}
+
+	/**
+	 * Overrides the default port used for health check probes.
+	 *
+	 * @return altPort
+	 */
+	@javax.annotation.Nullable public Integer getAltPort() {
+		return altPort;
+	}
+
+	public void setAltPort(@javax.annotation.Nullable Integer altPort) {
+		this.altPort = altPort;
+	}
 
 	public ActiveHealthCheck healthyThreshold(@javax.annotation.Nullable Integer healthyThreshold) {
 		this.healthyThreshold = healthyThreshold;
@@ -230,7 +253,8 @@ public class ActiveHealthCheck {
 			return false;
 		}
 		ActiveHealthCheck activeHealthCheck = (ActiveHealthCheck) o;
-		return Objects.equals(this.healthyThreshold, activeHealthCheck.healthyThreshold)
+		return Objects.equals(this.altPort, activeHealthCheck.altPort)
+				&& Objects.equals(this.healthyThreshold, activeHealthCheck.healthyThreshold)
 				&& Objects.equals(this.httpHealthChecks, activeHealthCheck.httpHealthChecks)
 				&& Objects.equals(this.interval, activeHealthCheck.interval)
 				&& Objects.equals(this.intervalJitter, activeHealthCheck.intervalJitter)
@@ -243,6 +267,7 @@ public class ActiveHealthCheck {
 	@Override
 	public int hashCode() {
 		return Objects.hash(
+				altPort,
 				healthyThreshold,
 				httpHealthChecks,
 				interval,
@@ -256,6 +281,7 @@ public class ActiveHealthCheck {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class ActiveHealthCheck {\n");
+		sb.append("    altPort: ").append(toIndentedString(altPort)).append("\n");
 		sb.append("    healthyThreshold: ").append(toIndentedString(healthyThreshold)).append("\n");
 		sb.append("    httpHealthChecks: ").append(toIndentedString(httpHealthChecks)).append("\n");
 		sb.append("    interval: ").append(toIndentedString(interval)).append("\n");
@@ -290,6 +316,7 @@ public class ActiveHealthCheck {
 		openapiFields =
 				new HashSet<String>(
 						Arrays.asList(
+								"altPort",
 								"healthyThreshold",
 								"httpHealthChecks",
 								"interval",
