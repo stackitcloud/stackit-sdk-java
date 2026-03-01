@@ -52,8 +52,30 @@
 ## Release (2026-01-27)
 - `core`: [v0.4.1](core/CHANGELOG.md/#v041)
   - **Bugfix:** Add check in `KeyFlowAuthenticator` to prevent endless loops
-- `iaas`: [v0.3.1](services/iaas/CHANGELOG.md#v031)
-  - Bump dependency `cloud.stackit.sdk.core` to v0.4.1
+- `iaas`:
+  - [v1.0.0](services/iaas/CHANGELOG.md#v100)
+    - **Breaking Change:** The region must be passed as a parameter to any region-specific request.
+    - **Feature:** Add new methods to manage routing tables: `addRoutingTableToArea`, `deleteRoutingTableFromArea`, `getRoutingTableOfArea`, `listRoutingTablesOfArea`, `updateRoutingTableOfArea`
+    - **Feature:** Add new methods to manage routes in routing tables: `addRoutesToRoutingTable`, `deleteRouteFromRoutingTable`, `getRouteOfRoutingTable`, `listRoutesOfRoutingTable`, `updateRouteOfRoutingTable`
+    - **Breaking Change:** Add new method to manage network area regions: `createNetworkAreaRegion`, `deleteNetworkAreaRegion`, `getNetworkAreaRegion`, `listNetworkAreaRegions`, `updateNetworkAreaRegion`
+    - **Feature:** Add new field `Encrypted` to `Backup` model, which indicates if a backup is encrypted
+    - **Feature:** Add new field `ImportProgress` to `Image` model, which indicates the import progress of an image
+    - **Breaking Change:** Remove field `addressFamily` in `CreateNetworkAreaPayload` model
+    - **Breaking Change:** `Network` model has changed:
+      - Rename `networkId` to `id`
+      - Rename `state` to `status`
+      - Move fields `gateway`, `nameservers`, `prefixes` and `publicIp` to new model `NetworkIPv4`, and can be accessed in the new field `ipv4`
+      - Move fields `gatewayv6`, `nameserversv6` and `prefixesv6` to new model `NetworkIPv6`, and can be accessed in the new field `ipv6`
+      - Add new field `routingTabledId`
+    - **Breaking Change:** `NetworkArea` model has changed:
+      - Rename `areaId` to `id`
+      - Remove field `ipv4`
+    - **Breaking Change:** Rename `networkRangeId` to `id` in `NetworkRange` model
+    - **Breaking Change:** `CreateServerPayload` model has changed:
+      - Model `CreateServerPayloadBootVolume` of `BootVolume` property changed to `ServerBootVolume`
+      - Property `Networking` in `CreateServerPayload` is required now
+  - [v0.3.1](services/iaas/CHANGELOG.md#v031)
+    - Bump dependency `cloud.stackit.sdk.core` to v0.4.1
 - `resourcemanager`: [v0.4.1](services/resourcemanager/CHANGELOG.md#v041)
   - Bump dependency `cloud.stackit.sdk.core` to v0.4.1
 - `loadbalancer`:

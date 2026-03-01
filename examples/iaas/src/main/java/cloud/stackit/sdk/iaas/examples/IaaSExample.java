@@ -37,6 +37,8 @@ final class IaaSExample {
 		}
 		UUID projectId = UUID.fromString(projectIdString);
 
+		String region = "eu01";
+
 		try {
 			/*
 			 * ///////////////////////////////////////////////////////
@@ -49,38 +51,40 @@ final class IaaSExample {
 			Network newNetwork =
 					iaasApi.createNetwork(
 							projectId,
+							region,
 							new CreateNetworkPayload()
 									.name("java-sdk-example-network-01")
 									.dhcp(true)
 									.routed(false)
 									.labels(Collections.singletonMap("some-network-label", "bar"))
-									.addressFamily(
-											new CreateNetworkAddressFamily()
-													.ipv4(
-															new CreateNetworkIPv4Body()
-																	.addNameserversItem(
-																			"8.8.8.8"))));
-
+									.ipv4(
+											new CreateNetworkIPv4(
+													new CreateNetworkIPv4WithPrefixLength()
+															.addNameserversItem("8.8.8.8")
+															.prefixLength(24L))));
 			/* update the network we just created */
 			iaasApi.partialUpdateNetwork(
 					projectId,
-					newNetwork.getNetworkId(),
+					region,
+					newNetwork.getId(),
 					new PartialUpdateNetworkPayload()
 							.dhcp(false)
 							.labels(Collections.singletonMap("some-network-label", "bar-updated")));
 
 			/* fetch the network we just created */
-			Network fetchedNetwork = iaasApi.getNetwork(projectId, newNetwork.getNetworkId());
+			Network fetchedNetwork = iaasApi.getNetwork(projectId, region, newNetwork.getId());
 			System.out.println("\nFetched network: ");
 			System.out.println("* Network name: " + fetchedNetwork.getName());
-			System.out.println("* Id: " + fetchedNetwork.getNetworkId());
+			System.out.println("* Id: " + fetchedNetwork.getId());
 			System.out.println(
 					"* DHCP: " + (Boolean.TRUE.equals(fetchedNetwork.getDhcp()) ? "YES" : "NO"));
-			System.out.println("* Gateway: " + fetchedNetwork.getGateway());
-			System.out.println("* Public IP: " + fetchedNetwork.getPublicIp());
+			if (fetchedNetwork.getIpv4() != null) {
+				System.out.println("* Gateway: " + fetchedNetwork.getIpv4().getGateway());
+				System.out.println("* Public IP: " + fetchedNetwork.getIpv4().getPublicIp());
+			}
 
 			/* list all available networks in the project */
-			NetworkListResponse networks = iaasApi.listNetworks(projectId, null);
+			NetworkListResponse networks = iaasApi.listNetworks(projectId, region, null);
 			System.out.println("\nAvailable networks: ");
 			for (Network network : networks.getItems()) {
 				System.out.println("* " + network.getName());
@@ -93,7 +97,7 @@ final class IaaSExample {
 			 * */
 
 			/* list all available images */
-			ImageListResponse images = iaasApi.listImages(projectId, false, null);
+			ImageListResponse images = iaasApi.listImages(projectId, region, false, null);
 			System.out.println("\nAvailable images: ");
 			for (Image image : images.getItems()) {
 				System.out.println(image.getId() + " | " + image.getName());
@@ -105,7 +109,7 @@ final class IaaSExample {
 							.get(0)
 							.getId(); // we just use a random image id in our example
 			assert imageId != null;
-			Image fetchedImage = iaasApi.getImage(projectId, imageId);
+			Image fetchedImage = iaasApi.getImage(projectId, region, imageId);
 			System.out.println("\nFetched image:");
 			System.out.println("* Image name: " + fetchedImage.getName());
 			System.out.println("* Image id: " + fetchedImage.getId());
@@ -160,7 +164,8 @@ final class IaaSExample {
 			 * */
 
 			/* list all available machine types */
-			MachineTypeListResponse machineTypes = iaasApi.listMachineTypes(projectId, null);
+			MachineTypeListResponse machineTypes =
+					iaasApi.listMachineTypes(projectId, region, null);
 			System.out.println("\nAvailable machine types: ");
 			for (MachineType machineType : machineTypes.getItems()) {
 				System.out.println("* " + machineType.getName());
@@ -168,7 +173,8 @@ final class IaaSExample {
 
 			/* fetch details about a machine type */
 			MachineType fetchedMachineType =
-					iaasApi.getMachineType(projectId, machineTypes.getItems().get(0).getName());
+					iaasApi.getMachineType(
+							projectId, region, machineTypes.getItems().get(0).getName());
 			System.out.println("\nFetched machine type: ");
 			System.out.println("* Machine type name: " + fetchedMachineType.getName());
 			System.out.println("* Description: " + fetchedMachineType.getDescription());
@@ -187,6 +193,7 @@ final class IaaSExample {
 			Server newServer =
 					iaasApi.createServer(
 							projectId,
+							region,
 							new CreateServerPayload()
 									.name("java-sdk-example-server-01")
 									.machineType("t2i.1")
@@ -196,17 +203,17 @@ final class IaaSExample {
 									.keypairName(newKeypair.getName())
 									// add the server to the network we created above
 									.networking(
-											new CreateServerPayloadNetworking(
+											new CreateServerPayloadAllOfNetworking(
 													new CreateServerNetworking()
-															.networkId(
-																	newNetwork.getNetworkId()))));
+															.networkId(newNetwork.getId()))));
 			assert newServer.getId() != null;
 
 			/* wait for the server creation to complete */
 			UUID serverId = newServer.getId();
 			assert serverId != null;
 			while (Objects.equals(
-					iaasApi.getServer(projectId, serverId, false).getStatus(), "CREATING")) {
+					iaasApi.getServer(projectId, region, serverId, false).getStatus(),
+					"CREATING")) {
 				System.out.println("Waiting for server creation to complete ...");
 				TimeUnit.SECONDS.sleep(5);
 			}
@@ -214,19 +221,20 @@ final class IaaSExample {
 			/* update the server we just created */
 			iaasApi.updateServer(
 					projectId,
+					region,
 					newServer.getId(),
 					new UpdateServerPayload()
 							.labels(Collections.singletonMap("foo", "bar-updated")));
 
 			/* list all servers */
-			ServerListResponse servers = iaasApi.listServers(projectId, false, null);
+			ServerListResponse servers = iaasApi.listServers(projectId, region, false, null);
 			System.out.println("\nAvailable servers: ");
 			for (Server server : servers.getItems()) {
 				System.out.println("* " + server.getId() + " | " + server.getName());
 			}
 
 			/* fetch the server we just created */
-			Server fetchedServer = iaasApi.getServer(projectId, serverId, false);
+			Server fetchedServer = iaasApi.getServer(projectId, region, serverId, false);
 			System.out.println("\nFetched server:");
 			System.out.println("* Name: " + fetchedServer.getName());
 			System.out.println("* Id: " + fetchedServer.getId());
@@ -239,25 +247,27 @@ final class IaaSExample {
 			System.out.println("* Launched at: " + fetchedServer.getLaunchedAt());
 
 			/* stop the server we just created */
-			iaasApi.stopServer(projectId, serverId);
+			iaasApi.stopServer(projectId, region, serverId);
 			/* wait for the server to stop */
 			while (!Objects.equals(
-					iaasApi.getServer(projectId, serverId, false).getPowerStatus(), "STOPPED")) {
+					iaasApi.getServer(projectId, region, serverId, false).getPowerStatus(),
+					"STOPPED")) {
 				System.out.println("Waiting for server " + serverId + " to stop...");
 				TimeUnit.SECONDS.sleep(5);
 			}
 
 			/* boot the server we just created */
-			iaasApi.startServer(projectId, serverId);
+			iaasApi.startServer(projectId, region, serverId);
 			/* wait for the server to boot */
 			while (!Objects.equals(
-					iaasApi.getServer(projectId, serverId, false).getPowerStatus(), "RUNNING")) {
+					iaasApi.getServer(projectId, region, serverId, false).getPowerStatus(),
+					"RUNNING")) {
 				System.out.println("Waiting for server " + serverId + " to boot...");
 				TimeUnit.SECONDS.sleep(5);
 			}
 
 			/* reboot the server we just created */
-			iaasApi.rebootServer(projectId, serverId, null);
+			iaasApi.rebootServer(projectId, region, serverId, null);
 
 			/*
 			 * ///////////////////////////////////////////////////////
@@ -266,13 +276,13 @@ final class IaaSExample {
 			 * */
 
 			/* delete the server we just created */
-			iaasApi.deleteServer(projectId, serverId);
+			iaasApi.deleteServer(projectId, region, serverId);
 			System.out.println("Deleted server: " + serverId);
 
 			/* wait for server deletion to complete */
 			while (true) {
 				try {
-					iaasApi.getServer(projectId, serverId, false);
+					iaasApi.getServer(projectId, region, serverId, false);
 					System.out.println("Waiting for server deletion to complete...");
 					TimeUnit.SECONDS.sleep(5);
 				} catch (ApiException e) {
@@ -287,8 +297,8 @@ final class IaaSExample {
 			System.out.println("Deleted key pair: " + newKeypair.getName());
 
 			/* delete the network we just created */
-			iaasApi.deleteNetwork(projectId, newNetwork.getNetworkId());
-			System.out.println("Deleted network: " + newNetwork.getNetworkId());
+			iaasApi.deleteNetwork(projectId, region, newNetwork.getId());
+			System.out.println("Deleted network: " + newNetwork.getId());
 
 		} catch (ApiException | InterruptedException e) {
 			throw new RuntimeException(e);
