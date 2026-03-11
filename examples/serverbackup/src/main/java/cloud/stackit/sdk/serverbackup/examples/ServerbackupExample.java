@@ -47,7 +47,7 @@ final class ServerBackupExample {
 		UUID serverId = UUID.fromString(serverIdString);
 
 		try {
-			Server server = iaasApi.getServer(projectId, serverId, true);
+			Server server = iaasApi.getServer(projectId, REGION, serverId, true);
 			assert server.getId() != null;
 			assert server.getVolumes() != null;
 
