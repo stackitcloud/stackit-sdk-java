@@ -141,7 +141,10 @@ public class Project {
 	 * Labels are key-value string pairs that can be attached to a resource container. Some labels
 	 * may be enforced via policies. - A label key must match the regex
 	 * &#x60;[A-ZÄÜÖa-zäüöß0-9_-]{1,64}&#x60;. - A label value must match the regex
-	 * &#x60;^$|[A-ZÄÜÖa-zäüöß0-9_-]{1,64}&#x60;.
+	 * &#x60;^$|[A-ZÄÜÖa-zäüöß0-9_-]{1,64}&#x60;. - To create a project within a STACKIT Network
+	 * Area, setting the label &#x60;\&quot;networkArea\&quot;:
+	 * \&quot;&lt;networkAreaID&gt;\&quot;&#x60; is required. This can not be changed after project
+	 * creation.
 	 *
 	 * @return labels
 	 */
