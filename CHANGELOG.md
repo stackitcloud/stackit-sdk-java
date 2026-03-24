@@ -1,4 +1,4 @@
-## Release (2026-MM-DD)
+## Release (2026-03-24)
 - `alb`:
   - [v0.4.0](services/alb/CHANGELOG.md#v040)
     - **Feature:** Add new field `AltPort` to `ActiveHealthCheck`
@@ -22,6 +22,12 @@
     - **Feature:** Add fields `maxCredentials`, `usedCredentials` and `usedLoadbalancers` to model `GetQuotaResponse`
     - **Improvement:** Support additional properties in models
 - `objectstorage`:
+  - [v0.2.0](services/objectstorage/CHANGELOG.md#v020)
+    - New model classes: `ComplianceLockResponse`, `CredentialsGroupExtended`, `DefaultRetentionResponse`, `DeleteDefaultRetentionResponse`, `GetCredentialsGroupResponse`, `SetDefaultRetentionPayload`
+    - New methods for `Bucket` model class: `objectLockEnabled`,`setObjectLockEnabled`,`getObjectLockEnabled`
+    - New enum: `RetentionMode`
+    - New API client methods: `createComplianceLock`, `deleteComplianceLock`, `deleteDefaultRetention`, `getComplianceLock`, `getCredentialsGroup`, `getDefaultRetention`, `setDefaultRetention`
+    - **Breaking change:** New parameter `objectLockEnabled` for `createBucket` API client method
   - [v0.1.3](services/objectstorage/CHANGELOG.md#v013)
     - Bump dependency `org.apache.commons:commons-lang3` to `3.18.0`
     - Bump dependency `org.openapitools:jackson-databind-nullable` to `0.2.8`
