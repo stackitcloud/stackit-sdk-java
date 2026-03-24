@@ -122,6 +122,7 @@ public class Listener {
 
 	public static final String SERIALIZED_NAME_SERVER_NAME_INDICATORS = "serverNameIndicators";
 
+	@Deprecated
 	@SerializedName(SERIALIZED_NAME_SERVER_NAME_INDICATORS)
 	@javax.annotation.Nullable private List<ServerNameIndicator> serverNameIndicators = new ArrayList<>();
 
@@ -212,6 +213,7 @@ public class Listener {
 		this.protocol = protocol;
 	}
 
+	@Deprecated
 	public Listener serverNameIndicators(
 			@javax.annotation.Nullable List<ServerNameIndicator> serverNameIndicators) {
 		this.serverNameIndicators = serverNameIndicators;
@@ -231,11 +233,14 @@ public class Listener {
 	 * listener.
 	 *
 	 * @return serverNameIndicators
+	 * @deprecated
 	 */
+	@Deprecated
 	@javax.annotation.Nullable public List<ServerNameIndicator> getServerNameIndicators() {
 		return serverNameIndicators;
 	}
 
+	@Deprecated
 	public void setServerNameIndicators(
 			@javax.annotation.Nullable List<ServerNameIndicator> serverNameIndicators) {
 		this.serverNameIndicators = serverNameIndicators;
