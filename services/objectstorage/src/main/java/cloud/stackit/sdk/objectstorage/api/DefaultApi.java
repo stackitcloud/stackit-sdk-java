@@ -18,19 +18,24 @@ import cloud.stackit.sdk.objectstorage.ApiCallback;
 import cloud.stackit.sdk.objectstorage.ApiClient;
 import cloud.stackit.sdk.objectstorage.ApiResponse;
 import cloud.stackit.sdk.objectstorage.Pair;
+import cloud.stackit.sdk.objectstorage.model.ComplianceLockResponse;
 import cloud.stackit.sdk.objectstorage.model.CreateAccessKeyPayload;
 import cloud.stackit.sdk.objectstorage.model.CreateAccessKeyResponse;
 import cloud.stackit.sdk.objectstorage.model.CreateBucketResponse;
 import cloud.stackit.sdk.objectstorage.model.CreateCredentialsGroupPayload;
 import cloud.stackit.sdk.objectstorage.model.CreateCredentialsGroupResponse;
+import cloud.stackit.sdk.objectstorage.model.DefaultRetentionResponse;
 import cloud.stackit.sdk.objectstorage.model.DeleteAccessKeyResponse;
 import cloud.stackit.sdk.objectstorage.model.DeleteBucketResponse;
 import cloud.stackit.sdk.objectstorage.model.DeleteCredentialsGroupResponse;
+import cloud.stackit.sdk.objectstorage.model.DeleteDefaultRetentionResponse;
 import cloud.stackit.sdk.objectstorage.model.GetBucketResponse;
+import cloud.stackit.sdk.objectstorage.model.GetCredentialsGroupResponse;
 import cloud.stackit.sdk.objectstorage.model.ListAccessKeysResponse;
 import cloud.stackit.sdk.objectstorage.model.ListBucketsResponse;
 import cloud.stackit.sdk.objectstorage.model.ListCredentialsGroupsResponse;
 import cloud.stackit.sdk.objectstorage.model.ProjectStatus;
+import cloud.stackit.sdk.objectstorage.model.SetDefaultRetentionPayload;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -354,6 +359,8 @@ class DefaultApi {
 	 * @param projectId STACKIT project ID (required)
 	 * @param region STACKIT Region (required)
 	 * @param bucketName The name has to be dns-conform. (required)
+	 * @param objectLockEnabled Enable S3 Object Lock on this bucket. Can only be set at creation
+	 *     time. Requires an active project-level compliance lock. (optional, default to false)
 	 * @param _callback Callback for upload/download progress
 	 * @return Call to execute
 	 * @throws ApiException If fail to serialize the request body object
@@ -373,6 +380,7 @@ class DefaultApi {
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull String bucketName,
+			@javax.annotation.Nullable Boolean objectLockEnabled,
 			final ApiCallback _callback)
 			throws ApiException {
 		String basePath = null;
@@ -409,6 +417,11 @@ class DefaultApi {
 		Map<String, String> localVarCookieParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
+		if (objectLockEnabled != null) {
+			localVarQueryParams.addAll(
+					localVarApiClient.parameterToPair("objectLockEnabled", objectLockEnabled));
+		}
+
 		final String[] localVarAccepts = {"application/json"};
 		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
 		if (localVarAccept != null) {
@@ -442,6 +455,7 @@ class DefaultApi {
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull String bucketName,
+			@javax.annotation.Nullable Boolean objectLockEnabled,
 			final ApiCallback _callback)
 			throws ApiException {
 		// verify the required parameter 'projectId' is set
@@ -462,7 +476,7 @@ class DefaultApi {
 					"Missing the required parameter 'bucketName' when calling createBucket(Async)");
 		}
 
-		return createBucketCall(projectId, region, bucketName, _callback);
+		return createBucketCall(projectId, region, bucketName, objectLockEnabled, _callback);
 	}
 
 	/**
@@ -472,6 +486,8 @@ class DefaultApi {
 	 * @param projectId STACKIT project ID (required)
 	 * @param region STACKIT Region (required)
 	 * @param bucketName The name has to be dns-conform. (required)
+	 * @param objectLockEnabled Enable S3 Object Lock on this bucket. Can only be set at creation
+	 *     time. Requires an active project-level compliance lock. (optional, default to false)
 	 * @return CreateBucketResponse
 	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
 	 *     response body
@@ -490,10 +506,11 @@ class DefaultApi {
 	public CreateBucketResponse createBucket(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String region,
-			@javax.annotation.Nonnull String bucketName)
+			@javax.annotation.Nonnull String bucketName,
+			@javax.annotation.Nullable Boolean objectLockEnabled)
 			throws ApiException {
 		ApiResponse<CreateBucketResponse> localVarResp =
-				createBucketWithHttpInfo(projectId, region, bucketName);
+				createBucketWithHttpInfo(projectId, region, bucketName, objectLockEnabled);
 		return localVarResp.getData();
 	}
 
@@ -504,6 +521,8 @@ class DefaultApi {
 	 * @param projectId STACKIT project ID (required)
 	 * @param region STACKIT Region (required)
 	 * @param bucketName The name has to be dns-conform. (required)
+	 * @param objectLockEnabled Enable S3 Object Lock on this bucket. Can only be set at creation
+	 *     time. Requires an active project-level compliance lock. (optional, default to false)
 	 * @return ApiResponse&lt;CreateBucketResponse&gt;
 	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
 	 *     response body
@@ -522,10 +541,12 @@ class DefaultApi {
 	public ApiResponse<CreateBucketResponse> createBucketWithHttpInfo(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String region,
-			@javax.annotation.Nonnull String bucketName)
+			@javax.annotation.Nonnull String bucketName,
+			@javax.annotation.Nullable Boolean objectLockEnabled)
 			throws ApiException {
 		okhttp3.Call localVarCall =
-				createBucketValidateBeforeCall(projectId, region, bucketName, null);
+				createBucketValidateBeforeCall(
+						projectId, region, bucketName, objectLockEnabled, null);
 		Type localVarReturnType = new TypeToken<CreateBucketResponse>() {}.getType();
 		return localVarApiClient.execute(localVarCall, localVarReturnType);
 	}
@@ -537,6 +558,8 @@ class DefaultApi {
 	 * @param projectId STACKIT project ID (required)
 	 * @param region STACKIT Region (required)
 	 * @param bucketName The name has to be dns-conform. (required)
+	 * @param objectLockEnabled Enable S3 Object Lock on this bucket. Can only be set at creation
+	 *     time. Requires an active project-level compliance lock. (optional, default to false)
 	 * @param _callback The callback to be executed when the API call finishes
 	 * @return The request call
 	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -557,12 +580,201 @@ class DefaultApi {
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull String bucketName,
+			@javax.annotation.Nullable Boolean objectLockEnabled,
 			final ApiCallback<CreateBucketResponse> _callback)
 			throws ApiException {
 
 		okhttp3.Call localVarCall =
-				createBucketValidateBeforeCall(projectId, region, bucketName, _callback);
+				createBucketValidateBeforeCall(
+						projectId, region, bucketName, objectLockEnabled, _callback);
 		Type localVarReturnType = new TypeToken<CreateBucketResponse>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for createComplianceLock
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 201 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call createComplianceLockCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2/project/{projectId}/regions/{region}/compliance-lock"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"POST",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call createComplianceLockValidateBeforeCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling createComplianceLock(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling createComplianceLock(Async)");
+		}
+
+		return createComplianceLockCall(projectId, region, _callback);
+	}
+
+	/**
+	 * Create Compliance Lock Enable compliance lock for a project.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @return ComplianceLockResponse
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 201 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ComplianceLockResponse createComplianceLock(
+			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String region)
+			throws ApiException {
+		ApiResponse<ComplianceLockResponse> localVarResp =
+				createComplianceLockWithHttpInfo(projectId, region);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Create Compliance Lock Enable compliance lock for a project.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @return ApiResponse&lt;ComplianceLockResponse&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 201 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<ComplianceLockResponse> createComplianceLockWithHttpInfo(
+			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String region)
+			throws ApiException {
+		okhttp3.Call localVarCall = createComplianceLockValidateBeforeCall(projectId, region, null);
+		Type localVarReturnType = new TypeToken<ComplianceLockResponse>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Create Compliance Lock (asynchronously) Enable compliance lock for a project.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 201 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call createComplianceLockAsync(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			final ApiCallback<ComplianceLockResponse> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				createComplianceLockValidateBeforeCall(projectId, region, _callback);
+		Type localVarReturnType = new TypeToken<ComplianceLockResponse>() {}.getType();
 		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
 		return localVarCall;
 	}
@@ -1236,6 +1448,193 @@ class DefaultApi {
 	}
 
 	/**
+	 * Build call for deleteComplianceLock
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call deleteComplianceLockCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2/project/{projectId}/regions/{region}/compliance-lock"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"DELETE",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call deleteComplianceLockValidateBeforeCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling deleteComplianceLock(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling deleteComplianceLock(Async)");
+		}
+
+		return deleteComplianceLockCall(projectId, region, _callback);
+	}
+
+	/**
+	 * Delete Compliance Lock Remove compliance lock from a project.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @return ComplianceLockResponse
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ComplianceLockResponse deleteComplianceLock(
+			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String region)
+			throws ApiException {
+		ApiResponse<ComplianceLockResponse> localVarResp =
+				deleteComplianceLockWithHttpInfo(projectId, region);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Delete Compliance Lock Remove compliance lock from a project.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @return ApiResponse&lt;ComplianceLockResponse&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<ComplianceLockResponse> deleteComplianceLockWithHttpInfo(
+			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String region)
+			throws ApiException {
+		okhttp3.Call localVarCall = deleteComplianceLockValidateBeforeCall(projectId, region, null);
+		Type localVarReturnType = new TypeToken<ComplianceLockResponse>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Delete Compliance Lock (asynchronously) Remove compliance lock from a project.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call deleteComplianceLockAsync(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			final ApiCallback<ComplianceLockResponse> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				deleteComplianceLockValidateBeforeCall(projectId, region, _callback);
+		Type localVarReturnType = new TypeToken<ComplianceLockResponse>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
 	 * Build call for deleteCredentialsGroup
 	 *
 	 * @param projectId STACKIT project ID (required)
@@ -1451,6 +1850,217 @@ class DefaultApi {
 	}
 
 	/**
+	 * Build call for deleteDefaultRetention
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param bucketName The name has to be dns-conform. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call deleteDefaultRetentionCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String bucketName,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2/project/{projectId}/regions/{region}/bucket/{bucketName}/default-retention"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "bucketName" + "}",
+								localVarApiClient.escapeString(bucketName.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"DELETE",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call deleteDefaultRetentionValidateBeforeCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String bucketName,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling deleteDefaultRetention(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling deleteDefaultRetention(Async)");
+		}
+
+		// verify the required parameter 'bucketName' is set
+		if (bucketName == null) {
+			throw new ApiException(
+					"Missing the required parameter 'bucketName' when calling deleteDefaultRetention(Async)");
+		}
+
+		return deleteDefaultRetentionCall(projectId, region, bucketName, _callback);
+	}
+
+	/**
+	 * Delete Default Retention Remove the default retention from a bucket. Object Lock itself
+	 * remains enabled.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param bucketName The name has to be dns-conform. (required)
+	 * @return DeleteDefaultRetentionResponse
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public DeleteDefaultRetentionResponse deleteDefaultRetention(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String bucketName)
+			throws ApiException {
+		ApiResponse<DeleteDefaultRetentionResponse> localVarResp =
+				deleteDefaultRetentionWithHttpInfo(projectId, region, bucketName);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Delete Default Retention Remove the default retention from a bucket. Object Lock itself
+	 * remains enabled.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param bucketName The name has to be dns-conform. (required)
+	 * @return ApiResponse&lt;DeleteDefaultRetentionResponse&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<DeleteDefaultRetentionResponse> deleteDefaultRetentionWithHttpInfo(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String bucketName)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				deleteDefaultRetentionValidateBeforeCall(projectId, region, bucketName, null);
+		Type localVarReturnType = new TypeToken<DeleteDefaultRetentionResponse>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Delete Default Retention (asynchronously) Remove the default retention from a bucket. Object
+	 * Lock itself remains enabled.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param bucketName The name has to be dns-conform. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call deleteDefaultRetentionAsync(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String bucketName,
+			final ApiCallback<DeleteDefaultRetentionResponse> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				deleteDefaultRetentionValidateBeforeCall(projectId, region, bucketName, _callback);
+		Type localVarReturnType = new TypeToken<DeleteDefaultRetentionResponse>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
 	 * Build call for disableService
 	 *
 	 * @param projectId STACKIT project ID (required)
@@ -1467,6 +2077,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
@@ -1573,6 +2184,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
@@ -1601,6 +2213,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
@@ -1631,6 +2244,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
@@ -2059,6 +2673,605 @@ class DefaultApi {
 		okhttp3.Call localVarCall =
 				getBucketValidateBeforeCall(projectId, region, bucketName, _callback);
 		Type localVarReturnType = new TypeToken<GetBucketResponse>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for getComplianceLock
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getComplianceLockCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2/project/{projectId}/regions/{region}/compliance-lock"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call getComplianceLockValidateBeforeCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling getComplianceLock(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling getComplianceLock(Async)");
+		}
+
+		return getComplianceLockCall(projectId, region, _callback);
+	}
+
+	/**
+	 * Get Compliance Lock Get the project-level compliance lock.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @return ComplianceLockResponse
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ComplianceLockResponse getComplianceLock(
+			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String region)
+			throws ApiException {
+		ApiResponse<ComplianceLockResponse> localVarResp =
+				getComplianceLockWithHttpInfo(projectId, region);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Get Compliance Lock Get the project-level compliance lock.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @return ApiResponse&lt;ComplianceLockResponse&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<ComplianceLockResponse> getComplianceLockWithHttpInfo(
+			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String region)
+			throws ApiException {
+		okhttp3.Call localVarCall = getComplianceLockValidateBeforeCall(projectId, region, null);
+		Type localVarReturnType = new TypeToken<ComplianceLockResponse>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Get Compliance Lock (asynchronously) Get the project-level compliance lock.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getComplianceLockAsync(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			final ApiCallback<ComplianceLockResponse> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				getComplianceLockValidateBeforeCall(projectId, region, _callback);
+		Type localVarReturnType = new TypeToken<ComplianceLockResponse>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for getCredentialsGroup
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param groupId Id of the credentials group (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getCredentialsGroupCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String groupId,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2/project/{projectId}/regions/{region}/credentials-group/{groupId}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "groupId" + "}",
+								localVarApiClient.escapeString(groupId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call getCredentialsGroupValidateBeforeCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String groupId,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling getCredentialsGroup(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling getCredentialsGroup(Async)");
+		}
+
+		// verify the required parameter 'groupId' is set
+		if (groupId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'groupId' when calling getCredentialsGroup(Async)");
+		}
+
+		return getCredentialsGroupCall(projectId, region, groupId, _callback);
+	}
+
+	/**
+	 * Get Credentials Group Get the details of a single credentials group
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param groupId Id of the credentials group (required)
+	 * @return GetCredentialsGroupResponse
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public GetCredentialsGroupResponse getCredentialsGroup(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String groupId)
+			throws ApiException {
+		ApiResponse<GetCredentialsGroupResponse> localVarResp =
+				getCredentialsGroupWithHttpInfo(projectId, region, groupId);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Get Credentials Group Get the details of a single credentials group
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param groupId Id of the credentials group (required)
+	 * @return ApiResponse&lt;GetCredentialsGroupResponse&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<GetCredentialsGroupResponse> getCredentialsGroupWithHttpInfo(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String groupId)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				getCredentialsGroupValidateBeforeCall(projectId, region, groupId, null);
+		Type localVarReturnType = new TypeToken<GetCredentialsGroupResponse>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Get Credentials Group (asynchronously) Get the details of a single credentials group
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param groupId Id of the credentials group (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getCredentialsGroupAsync(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String groupId,
+			final ApiCallback<GetCredentialsGroupResponse> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				getCredentialsGroupValidateBeforeCall(projectId, region, groupId, _callback);
+		Type localVarReturnType = new TypeToken<GetCredentialsGroupResponse>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for getDefaultRetention
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param bucketName The name has to be dns-conform. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getDefaultRetentionCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String bucketName,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2/project/{projectId}/regions/{region}/bucket/{bucketName}/default-retention"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "bucketName" + "}",
+								localVarApiClient.escapeString(bucketName.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call getDefaultRetentionValidateBeforeCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String bucketName,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling getDefaultRetention(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling getDefaultRetention(Async)");
+		}
+
+		// verify the required parameter 'bucketName' is set
+		if (bucketName == null) {
+			throw new ApiException(
+					"Missing the required parameter 'bucketName' when calling getDefaultRetention(Async)");
+		}
+
+		return getDefaultRetentionCall(projectId, region, bucketName, _callback);
+	}
+
+	/**
+	 * Get Default Retention Get the default retention configuration for a bucket.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param bucketName The name has to be dns-conform. (required)
+	 * @return DefaultRetentionResponse
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public DefaultRetentionResponse getDefaultRetention(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String bucketName)
+			throws ApiException {
+		ApiResponse<DefaultRetentionResponse> localVarResp =
+				getDefaultRetentionWithHttpInfo(projectId, region, bucketName);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Get Default Retention Get the default retention configuration for a bucket.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param bucketName The name has to be dns-conform. (required)
+	 * @return ApiResponse&lt;DefaultRetentionResponse&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<DefaultRetentionResponse> getDefaultRetentionWithHttpInfo(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String bucketName)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				getDefaultRetentionValidateBeforeCall(projectId, region, bucketName, null);
+		Type localVarReturnType = new TypeToken<DefaultRetentionResponse>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Get Default Retention (asynchronously) Get the default retention configuration for a bucket.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param bucketName The name has to be dns-conform. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getDefaultRetentionAsync(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String bucketName,
+			final ApiCallback<DefaultRetentionResponse> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				getDefaultRetentionValidateBeforeCall(projectId, region, bucketName, _callback);
+		Type localVarReturnType = new TypeToken<DefaultRetentionResponse>() {}.getType();
 		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
 		return localVarCall;
 	}
@@ -2851,6 +4064,237 @@ class DefaultApi {
 		okhttp3.Call localVarCall =
 				listCredentialsGroupsValidateBeforeCall(projectId, region, _callback);
 		Type localVarReturnType = new TypeToken<ListCredentialsGroupsResponse>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for setDefaultRetention
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param bucketName The name has to be dns-conform. (required)
+	 * @param setDefaultRetentionPayload (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call setDefaultRetentionCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String bucketName,
+			@javax.annotation.Nonnull SetDefaultRetentionPayload setDefaultRetentionPayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = setDefaultRetentionPayload;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2/project/{projectId}/regions/{region}/bucket/{bucketName}/default-retention"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "bucketName" + "}",
+								localVarApiClient.escapeString(bucketName.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {"application/json"};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"PUT",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call setDefaultRetentionValidateBeforeCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String bucketName,
+			@javax.annotation.Nonnull SetDefaultRetentionPayload setDefaultRetentionPayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling setDefaultRetention(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling setDefaultRetention(Async)");
+		}
+
+		// verify the required parameter 'bucketName' is set
+		if (bucketName == null) {
+			throw new ApiException(
+					"Missing the required parameter 'bucketName' when calling setDefaultRetention(Async)");
+		}
+
+		// verify the required parameter 'setDefaultRetentionPayload' is set
+		if (setDefaultRetentionPayload == null) {
+			throw new ApiException(
+					"Missing the required parameter 'setDefaultRetentionPayload' when calling setDefaultRetention(Async)");
+		}
+
+		return setDefaultRetentionCall(
+				projectId, region, bucketName, setDefaultRetentionPayload, _callback);
+	}
+
+	/**
+	 * Update Default Retention Set or update the default retention for a bucket.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param bucketName The name has to be dns-conform. (required)
+	 * @param setDefaultRetentionPayload (required)
+	 * @return DefaultRetentionResponse
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public DefaultRetentionResponse setDefaultRetention(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String bucketName,
+			@javax.annotation.Nonnull SetDefaultRetentionPayload setDefaultRetentionPayload)
+			throws ApiException {
+		ApiResponse<DefaultRetentionResponse> localVarResp =
+				setDefaultRetentionWithHttpInfo(
+						projectId, region, bucketName, setDefaultRetentionPayload);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Update Default Retention Set or update the default retention for a bucket.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param bucketName The name has to be dns-conform. (required)
+	 * @param setDefaultRetentionPayload (required)
+	 * @return ApiResponse&lt;DefaultRetentionResponse&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<DefaultRetentionResponse> setDefaultRetentionWithHttpInfo(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String bucketName,
+			@javax.annotation.Nonnull SetDefaultRetentionPayload setDefaultRetentionPayload)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				setDefaultRetentionValidateBeforeCall(
+						projectId, region, bucketName, setDefaultRetentionPayload, null);
+		Type localVarReturnType = new TypeToken<DefaultRetentionResponse>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Update Default Retention (asynchronously) Set or update the default retention for a bucket.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param region STACKIT Region (required)
+	 * @param bucketName The name has to be dns-conform. (required)
+	 * @param setDefaultRetentionPayload (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call setDefaultRetentionAsync(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String bucketName,
+			@javax.annotation.Nonnull SetDefaultRetentionPayload setDefaultRetentionPayload,
+			final ApiCallback<DefaultRetentionResponse> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				setDefaultRetentionValidateBeforeCall(
+						projectId, region, bucketName, setDefaultRetentionPayload, _callback);
+		Type localVarReturnType = new TypeToken<DefaultRetentionResponse>() {}.getType();
 		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
 		return localVarCall;
 	}
