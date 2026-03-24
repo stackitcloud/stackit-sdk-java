@@ -1592,9 +1592,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Get the quota of Load Balancers in a project. Retrieves the configured Load Balancer quota
-	 * for the project. Limit can be changed via service request. There can be 3 times as many
-	 * observability credentials as Load Balancers.
+	 * Get the quota of Network Load Balancers in a project. Retrieves the configured Network Load
+	 * Balancer quota for the project. Limit can be changed via service request.
 	 *
 	 * @param projectId (required)
 	 * @param region (required)
@@ -1621,9 +1620,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Get the quota of Load Balancers in a project. Retrieves the configured Load Balancer quota
-	 * for the project. Limit can be changed via service request. There can be 3 times as many
-	 * observability credentials as Load Balancers.
+	 * Get the quota of Network Load Balancers in a project. Retrieves the configured Network Load
+	 * Balancer quota for the project. Limit can be changed via service request.
 	 *
 	 * @param projectId (required)
 	 * @param region (required)
@@ -1651,9 +1649,9 @@ class DefaultApi {
 	}
 
 	/**
-	 * Get the quota of Load Balancers in a project. (asynchronously) Retrieves the configured Load
-	 * Balancer quota for the project. Limit can be changed via service request. There can be 3
-	 * times as many observability credentials as Load Balancers.
+	 * Get the quota of Network Load Balancers in a project. (asynchronously) Retrieves the
+	 * configured Network Load Balancer quota for the project. Limit can be changed via service
+	 * request.
 	 *
 	 * @param projectId (required)
 	 * @param region (required)
