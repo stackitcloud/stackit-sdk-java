@@ -87,7 +87,7 @@ final class ObjectStorageExample {
 			/* create a new bucket in the project */
 			System.out.println("\nCreating bucket");
 			CreateBucketResponse newBucket =
-					objectStorageApi.createBucket(projectId, region, "java-sdk-example");
+					objectStorageApi.createBucket(projectId, region, "java-sdk-example", null);
 			System.out.println(" * Bucket name: " + newBucket.getBucket());
 			System.out.println(" * Project ID: " + newBucket.getProject());
 
