@@ -1,3 +1,6 @@
+## v0.4.0
+- Deprecation of methods `serverNameIndicators`, `setServerNameIndicators` and `getServerNameIndicators` in `Listener` model class
+
 ## v0.3.0
 - **Feature:** Add new fields `AltPort` and `HttpHealthCheck` to `ActiveHealthCheck`
 
