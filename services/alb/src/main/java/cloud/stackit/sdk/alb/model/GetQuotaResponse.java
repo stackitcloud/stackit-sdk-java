@@ -81,7 +81,7 @@ public class GetQuotaResponse {
 
 	/**
 	 * The maximum number of observability credentials that can be stored in this project. minimum:
-	 * -1 maximum: 999
+	 * -1 maximum: 1000000
 	 *
 	 * @return maxCredentials
 	 */
@@ -99,7 +99,7 @@ public class GetQuotaResponse {
 	}
 
 	/**
-	 * The maximum number of load balancing servers in this project. minimum: -1 maximum: 999
+	 * The maximum number of load balancing servers in this project. minimum: -1 maximum: 1000000
 	 *
 	 * @return maxLoadBalancers
 	 */
