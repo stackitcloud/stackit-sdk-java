@@ -100,6 +100,9 @@ public class JSON {
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.objectstorage.model.Bucket.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.objectstorage.model.ComplianceLockResponse
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.objectstorage.model.CreateAccessKeyPayload
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
@@ -118,6 +121,12 @@ public class JSON {
 				new cloud.stackit.sdk.objectstorage.model.CredentialsGroup
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.objectstorage.model.CredentialsGroupExtended
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.objectstorage.model.DefaultRetentionResponse
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.objectstorage.model.DeleteAccessKeyResponse
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
@@ -127,11 +136,17 @@ public class JSON {
 				new cloud.stackit.sdk.objectstorage.model.DeleteCredentialsGroupResponse
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.objectstorage.model.DeleteDefaultRetentionResponse
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.objectstorage.model.DetailedError.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.objectstorage.model.ErrorMessage.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.objectstorage.model.GetBucketResponse
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.objectstorage.model.GetCredentialsGroupResponse
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.objectstorage.model.HTTPValidationError
@@ -149,6 +164,11 @@ public class JSON {
 				new cloud.stackit.sdk.objectstorage.model.LocationInner.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.objectstorage.model.ProjectStatus.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.objectstorage.model.RetentionMode.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.objectstorage.model.SetDefaultRetentionPayload
+						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.objectstorage.model.ValidationError
 						.CustomTypeAdapterFactory());
