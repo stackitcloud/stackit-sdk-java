@@ -11,6 +11,8 @@
     - **Feature:** Add fields `usedCredentials` and `usedLoadbalancers` to `GetQuotaResponse`
     - **Improvement:** Support additional properties in models
 - `loadbalancer`:
+  - [v0.4.0](services/loadbalancer/CHANGELOG.md#v040)
+    - Deprecation of methods `serverNameIndicators`, `setServerNameIndicators` and `getServerNameIndicators` in `Listener` model class
   - [v0.3.0](services/loadbalancer/CHANGELOG.md#v030)
     - **Feature:** Add new fields `AltPort` and `HttpHealthCheck` to `ActiveHealthCheck`
   - [v0.2.1](services/loadbalancer/CHANGELOG.md#v021)
