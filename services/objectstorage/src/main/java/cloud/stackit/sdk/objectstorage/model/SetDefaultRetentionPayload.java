@@ -30,136 +30,61 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** Bucket */
+/** SetDefaultRetentionPayload */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
 		comments = "Generator version: 7.19.0")
-public class Bucket {
-	public static final String SERIALIZED_NAME_NAME = "name";
+public class SetDefaultRetentionPayload {
+	public static final String SERIALIZED_NAME_DAYS = "days";
 
-	@SerializedName(SERIALIZED_NAME_NAME)
+	@SerializedName(SERIALIZED_NAME_DAYS)
 	@javax.annotation.Nonnull
-	private String name;
+	private Integer days;
 
-	public static final String SERIALIZED_NAME_OBJECT_LOCK_ENABLED = "objectLockEnabled";
+	public static final String SERIALIZED_NAME_MODE = "mode";
 
-	@SerializedName(SERIALIZED_NAME_OBJECT_LOCK_ENABLED)
+	@SerializedName(SERIALIZED_NAME_MODE)
 	@javax.annotation.Nonnull
-	private Boolean objectLockEnabled;
+	private RetentionMode mode;
 
-	public static final String SERIALIZED_NAME_REGION = "region";
+	public SetDefaultRetentionPayload() {}
 
-	@SerializedName(SERIALIZED_NAME_REGION)
-	@javax.annotation.Nonnull
-	private String region;
-
-	public static final String SERIALIZED_NAME_URL_PATH_STYLE = "urlPathStyle";
-
-	@SerializedName(SERIALIZED_NAME_URL_PATH_STYLE)
-	@javax.annotation.Nonnull
-	private String urlPathStyle;
-
-	public static final String SERIALIZED_NAME_URL_VIRTUAL_HOSTED_STYLE = "urlVirtualHostedStyle";
-
-	@SerializedName(SERIALIZED_NAME_URL_VIRTUAL_HOSTED_STYLE)
-	@javax.annotation.Nonnull
-	private String urlVirtualHostedStyle;
-
-	public Bucket() {}
-
-	public Bucket name(@javax.annotation.Nonnull String name) {
-		this.name = name;
+	public SetDefaultRetentionPayload days(@javax.annotation.Nonnull Integer days) {
+		this.days = days;
 		return this;
 	}
 
 	/**
-	 * Get name
+	 * Retention period in days minimum: 0
 	 *
-	 * @return name
+	 * @return days
 	 */
 	@javax.annotation.Nonnull
-	public String getName() {
-		return name;
+	public Integer getDays() {
+		return days;
 	}
 
-	public void setName(@javax.annotation.Nonnull String name) {
-		this.name = name;
+	public void setDays(@javax.annotation.Nonnull Integer days) {
+		this.days = days;
 	}
 
-	public Bucket objectLockEnabled(@javax.annotation.Nonnull Boolean objectLockEnabled) {
-		this.objectLockEnabled = objectLockEnabled;
+	public SetDefaultRetentionPayload mode(@javax.annotation.Nonnull RetentionMode mode) {
+		this.mode = mode;
 		return this;
 	}
 
 	/**
-	 * Whether S3 Object Lock is enabled for this bucket
+	 * Get mode
 	 *
-	 * @return objectLockEnabled
+	 * @return mode
 	 */
 	@javax.annotation.Nonnull
-	public Boolean getObjectLockEnabled() {
-		return objectLockEnabled;
+	public RetentionMode getMode() {
+		return mode;
 	}
 
-	public void setObjectLockEnabled(@javax.annotation.Nonnull Boolean objectLockEnabled) {
-		this.objectLockEnabled = objectLockEnabled;
-	}
-
-	public Bucket region(@javax.annotation.Nonnull String region) {
-		this.region = region;
-		return this;
-	}
-
-	/**
-	 * Get region
-	 *
-	 * @return region
-	 */
-	@javax.annotation.Nonnull
-	public String getRegion() {
-		return region;
-	}
-
-	public void setRegion(@javax.annotation.Nonnull String region) {
-		this.region = region;
-	}
-
-	public Bucket urlPathStyle(@javax.annotation.Nonnull String urlPathStyle) {
-		this.urlPathStyle = urlPathStyle;
-		return this;
-	}
-
-	/**
-	 * URL in path style
-	 *
-	 * @return urlPathStyle
-	 */
-	@javax.annotation.Nonnull
-	public String getUrlPathStyle() {
-		return urlPathStyle;
-	}
-
-	public void setUrlPathStyle(@javax.annotation.Nonnull String urlPathStyle) {
-		this.urlPathStyle = urlPathStyle;
-	}
-
-	public Bucket urlVirtualHostedStyle(@javax.annotation.Nonnull String urlVirtualHostedStyle) {
-		this.urlVirtualHostedStyle = urlVirtualHostedStyle;
-		return this;
-	}
-
-	/**
-	 * URL in virtual hosted style
-	 *
-	 * @return urlVirtualHostedStyle
-	 */
-	@javax.annotation.Nonnull
-	public String getUrlVirtualHostedStyle() {
-		return urlVirtualHostedStyle;
-	}
-
-	public void setUrlVirtualHostedStyle(@javax.annotation.Nonnull String urlVirtualHostedStyle) {
-		this.urlVirtualHostedStyle = urlVirtualHostedStyle;
+	public void setMode(@javax.annotation.Nonnull RetentionMode mode) {
+		this.mode = mode;
 	}
 
 	/**
@@ -174,9 +99,9 @@ public class Bucket {
 	 *
 	 * @param key name of the property
 	 * @param value value of the property
-	 * @return the Bucket instance itself
+	 * @return the SetDefaultRetentionPayload instance itself
 	 */
-	public Bucket putAdditionalProperty(String key, Object value) {
+	public SetDefaultRetentionPayload putAdditionalProperty(String key, Object value) {
 		if (this.additionalProperties == null) {
 			this.additionalProperties = new HashMap<String, Object>();
 		}
@@ -214,39 +139,24 @@ public class Bucket {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		Bucket bucket = (Bucket) o;
-		return Objects.equals(this.name, bucket.name)
-				&& Objects.equals(this.objectLockEnabled, bucket.objectLockEnabled)
-				&& Objects.equals(this.region, bucket.region)
-				&& Objects.equals(this.urlPathStyle, bucket.urlPathStyle)
-				&& Objects.equals(this.urlVirtualHostedStyle, bucket.urlVirtualHostedStyle)
-				&& Objects.equals(this.additionalProperties, bucket.additionalProperties);
+		SetDefaultRetentionPayload setDefaultRetentionPayload = (SetDefaultRetentionPayload) o;
+		return Objects.equals(this.days, setDefaultRetentionPayload.days)
+				&& Objects.equals(this.mode, setDefaultRetentionPayload.mode)
+				&& Objects.equals(
+						this.additionalProperties, setDefaultRetentionPayload.additionalProperties);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(
-				name,
-				objectLockEnabled,
-				region,
-				urlPathStyle,
-				urlVirtualHostedStyle,
-				additionalProperties);
+		return Objects.hash(days, mode, additionalProperties);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class Bucket {\n");
-		sb.append("    name: ").append(toIndentedString(name)).append("\n");
-		sb.append("    objectLockEnabled: ")
-				.append(toIndentedString(objectLockEnabled))
-				.append("\n");
-		sb.append("    region: ").append(toIndentedString(region)).append("\n");
-		sb.append("    urlPathStyle: ").append(toIndentedString(urlPathStyle)).append("\n");
-		sb.append("    urlVirtualHostedStyle: ")
-				.append(toIndentedString(urlVirtualHostedStyle))
-				.append("\n");
+		sb.append("class SetDefaultRetentionPayload {\n");
+		sb.append("    days: ").append(toIndentedString(days)).append("\n");
+		sb.append("    mode: ").append(toIndentedString(mode)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -270,46 +180,32 @@ public class Bucket {
 
 	static {
 		// a set of all properties/fields (JSON key names)
-		openapiFields =
-				new HashSet<String>(
-						Arrays.asList(
-								"name",
-								"objectLockEnabled",
-								"region",
-								"urlPathStyle",
-								"urlVirtualHostedStyle"));
+		openapiFields = new HashSet<String>(Arrays.asList("days", "mode"));
 
 		// a set of required properties/fields (JSON key names)
-		openapiRequiredFields =
-				new HashSet<String>(
-						Arrays.asList(
-								"name",
-								"objectLockEnabled",
-								"region",
-								"urlPathStyle",
-								"urlVirtualHostedStyle"));
+		openapiRequiredFields = new HashSet<String>(Arrays.asList("days", "mode"));
 	}
 
 	/**
 	 * Validates the JSON Element and throws an exception if issues found
 	 *
 	 * @param jsonElement JSON Element
-	 * @throws IOException if the JSON Element is invalid with respect to Bucket
+	 * @throws IOException if the JSON Element is invalid with respect to SetDefaultRetentionPayload
 	 */
 	public static void validateJsonElement(JsonElement jsonElement) throws IOException {
 		if (jsonElement == null) {
-			if (!Bucket.openapiRequiredFields
+			if (!SetDefaultRetentionPayload.openapiRequiredFields
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
 								java.util.Locale.ROOT,
-								"The required field(s) %s in Bucket is not found in the empty JSON string",
-								Bucket.openapiRequiredFields.toString()));
+								"The required field(s) %s in SetDefaultRetentionPayload is not found in the empty JSON string",
+								SetDefaultRetentionPayload.openapiRequiredFields.toString()));
 			}
 		}
 
 		// check to make sure all required properties/fields are present in the JSON string
-		for (String requiredField : Bucket.openapiRequiredFields) {
+		for (String requiredField : SetDefaultRetentionPayload.openapiRequiredFields) {
 			if (jsonElement.getAsJsonObject().get(requiredField) == null) {
 				throw new IllegalArgumentException(
 						String.format(
@@ -320,51 +216,27 @@ public class Bucket {
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
-		if (!jsonObj.get("name").isJsonPrimitive()) {
-			throw new IllegalArgumentException(
-					String.format(
-							java.util.Locale.ROOT,
-							"Expected the field `name` to be a primitive type in the JSON string but got `%s`",
-							jsonObj.get("name").toString()));
-		}
-		if (!jsonObj.get("region").isJsonPrimitive()) {
-			throw new IllegalArgumentException(
-					String.format(
-							java.util.Locale.ROOT,
-							"Expected the field `region` to be a primitive type in the JSON string but got `%s`",
-							jsonObj.get("region").toString()));
-		}
-		if (!jsonObj.get("urlPathStyle").isJsonPrimitive()) {
-			throw new IllegalArgumentException(
-					String.format(
-							java.util.Locale.ROOT,
-							"Expected the field `urlPathStyle` to be a primitive type in the JSON string but got `%s`",
-							jsonObj.get("urlPathStyle").toString()));
-		}
-		if (!jsonObj.get("urlVirtualHostedStyle").isJsonPrimitive()) {
-			throw new IllegalArgumentException(
-					String.format(
-							java.util.Locale.ROOT,
-							"Expected the field `urlVirtualHostedStyle` to be a primitive type in the JSON string but got `%s`",
-							jsonObj.get("urlVirtualHostedStyle").toString()));
-		}
+		// validate the required field `mode`
+		RetentionMode.validateJsonElement(jsonObj.get("mode"));
 	}
 
 	public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
 		@SuppressWarnings("unchecked")
 		@Override
 		public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-			if (!Bucket.class.isAssignableFrom(type.getRawType())) {
-				return null; // this class only serializes 'Bucket' and its subtypes
+			if (!SetDefaultRetentionPayload.class.isAssignableFrom(type.getRawType())) {
+				return null; // this class only serializes 'SetDefaultRetentionPayload' and its
+				// subtypes
 			}
 			final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-			final TypeAdapter<Bucket> thisAdapter =
-					gson.getDelegateAdapter(this, TypeToken.get(Bucket.class));
+			final TypeAdapter<SetDefaultRetentionPayload> thisAdapter =
+					gson.getDelegateAdapter(this, TypeToken.get(SetDefaultRetentionPayload.class));
 
 			return (TypeAdapter<T>)
-					new TypeAdapter<Bucket>() {
+					new TypeAdapter<SetDefaultRetentionPayload>() {
 						@Override
-						public void write(JsonWriter out, Bucket value) throws IOException {
+						public void write(JsonWriter out, SetDefaultRetentionPayload value)
+								throws IOException {
 							JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
 							obj.remove("additionalProperties");
 							// serialize additional properties
@@ -394,12 +266,12 @@ public class Bucket {
 						}
 
 						@Override
-						public Bucket read(JsonReader in) throws IOException {
+						public SetDefaultRetentionPayload read(JsonReader in) throws IOException {
 							JsonElement jsonElement = elementAdapter.read(in);
 							validateJsonElement(jsonElement);
 							JsonObject jsonObj = jsonElement.getAsJsonObject();
 							// store additional fields in the deserialized instance
-							Bucket instance = thisAdapter.fromJsonTree(jsonObj);
+							SetDefaultRetentionPayload instance = thisAdapter.fromJsonTree(jsonObj);
 							for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
 								if (!openapiFields.contains(entry.getKey())) {
 									if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -438,18 +310,18 @@ public class Bucket {
 	}
 
 	/**
-	 * Create an instance of Bucket given an JSON string
+	 * Create an instance of SetDefaultRetentionPayload given an JSON string
 	 *
 	 * @param jsonString JSON string
-	 * @return An instance of Bucket
-	 * @throws IOException if the JSON string is invalid with respect to Bucket
+	 * @return An instance of SetDefaultRetentionPayload
+	 * @throws IOException if the JSON string is invalid with respect to SetDefaultRetentionPayload
 	 */
-	public static Bucket fromJson(String jsonString) throws IOException {
-		return JSON.getGson().fromJson(jsonString, Bucket.class);
+	public static SetDefaultRetentionPayload fromJson(String jsonString) throws IOException {
+		return JSON.getGson().fromJson(jsonString, SetDefaultRetentionPayload.class);
 	}
 
 	/**
-	 * Convert an instance of Bucket to an JSON string
+	 * Convert an instance of SetDefaultRetentionPayload to an JSON string
 	 *
 	 * @return JSON string
 	 */
