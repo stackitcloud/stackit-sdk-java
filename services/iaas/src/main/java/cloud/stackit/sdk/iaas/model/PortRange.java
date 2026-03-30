@@ -30,7 +30,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** Object that represents a range of ports. */
+/**
+ * Object that represents a range of ports (this will be omitted if it covers the full default range
+ * 0/1-65535).
+ */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
 		comments = "Generator version: 7.19.0")
