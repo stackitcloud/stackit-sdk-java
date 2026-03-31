@@ -1,3 +1,6 @@
+## v1.0.1
+- **Docs:** Extend docs of class `PortRange`
+
 ## v1.0.0
 - **Breaking Change:** Add required `region` parameter to most API methods in `DefaultApi` class.
 - **Breaking Change:** Removal of API methods from `DefaultApi` class: `listSnapshots`, `updateImageScopeLocal`, `updateImageScopePublic`.
