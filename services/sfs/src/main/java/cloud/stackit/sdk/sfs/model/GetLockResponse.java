@@ -29,110 +29,35 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.openapitools.jackson.nullable.JsonNullable;
 
-/** ResourcePoolSpace */
+/** GetLockResponse */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
 		comments = "Generator version: 7.19.0")
-public class ResourcePoolSpace {
-	public static final String SERIALIZED_NAME_AVAILABLE_GIGABYTES = "availableGigabytes";
+public class GetLockResponse {
+	public static final String SERIALIZED_NAME_LOCK_ID = "lockId";
 
-	@SerializedName(SERIALIZED_NAME_AVAILABLE_GIGABYTES)
-	@javax.annotation.Nullable private Double availableGigabytes;
+	@SerializedName(SERIALIZED_NAME_LOCK_ID)
+	@javax.annotation.Nullable private String lockId;
 
-	public static final String SERIALIZED_NAME_SIZE_GIGABYTES = "sizeGigabytes";
+	public GetLockResponse() {}
 
-	@SerializedName(SERIALIZED_NAME_SIZE_GIGABYTES)
-	@javax.annotation.Nullable private Integer sizeGigabytes;
-
-	public static final String SERIALIZED_NAME_USED_BY_SNAPSHOTS_GIGABYTES =
-			"usedBySnapshotsGigabytes";
-
-	@SerializedName(SERIALIZED_NAME_USED_BY_SNAPSHOTS_GIGABYTES)
-	@javax.annotation.Nullable private Double usedBySnapshotsGigabytes;
-
-	public static final String SERIALIZED_NAME_USED_GIGABYTES = "usedGigabytes";
-
-	@SerializedName(SERIALIZED_NAME_USED_GIGABYTES)
-	@javax.annotation.Nullable private Double usedGigabytes;
-
-	public ResourcePoolSpace() {}
-
-	public ResourcePoolSpace availableGigabytes(
-			@javax.annotation.Nullable Double availableGigabytes) {
-		this.availableGigabytes = availableGigabytes;
+	public GetLockResponse lockId(@javax.annotation.Nullable String lockId) {
+		this.lockId = lockId;
 		return this;
 	}
 
 	/**
-	 * Available space of the Resource Pool (only available when retrieving a single Resource Pool
-	 * by ID)
+	 * Whether the lock is enabled for the project
 	 *
-	 * @return availableGigabytes
+	 * @return lockId
 	 */
-	@javax.annotation.Nullable public Double getAvailableGigabytes() {
-		return availableGigabytes;
+	@javax.annotation.Nullable public String getLockId() {
+		return lockId;
 	}
 
-	public void setAvailableGigabytes(@javax.annotation.Nullable Double availableGigabytes) {
-		this.availableGigabytes = availableGigabytes;
-	}
-
-	public ResourcePoolSpace sizeGigabytes(@javax.annotation.Nullable Integer sizeGigabytes) {
-		this.sizeGigabytes = sizeGigabytes;
-		return this;
-	}
-
-	/**
-	 * Size of the Resource Pool in Gibibytes.
-	 *
-	 * @return sizeGigabytes
-	 */
-	@javax.annotation.Nullable public Integer getSizeGigabytes() {
-		return sizeGigabytes;
-	}
-
-	public void setSizeGigabytes(@javax.annotation.Nullable Integer sizeGigabytes) {
-		this.sizeGigabytes = sizeGigabytes;
-	}
-
-	public ResourcePoolSpace usedBySnapshotsGigabytes(
-			@javax.annotation.Nullable Double usedBySnapshotsGigabytes) {
-		this.usedBySnapshotsGigabytes = usedBySnapshotsGigabytes;
-		return this;
-	}
-
-	/**
-	 * Used space by snapshots (only available when retrieving a single Resource Pool by ID)
-	 *
-	 * @return usedBySnapshotsGigabytes
-	 */
-	@javax.annotation.Nullable public Double getUsedBySnapshotsGigabytes() {
-		return usedBySnapshotsGigabytes;
-	}
-
-	public void setUsedBySnapshotsGigabytes(
-			@javax.annotation.Nullable Double usedBySnapshotsGigabytes) {
-		this.usedBySnapshotsGigabytes = usedBySnapshotsGigabytes;
-	}
-
-	public ResourcePoolSpace usedGigabytes(@javax.annotation.Nullable Double usedGigabytes) {
-		this.usedGigabytes = usedGigabytes;
-		return this;
-	}
-
-	/**
-	 * Used space of the Resource Pool (only available when retrieving a single Resource Pool by ID)
-	 *
-	 * @return usedGigabytes
-	 */
-	@javax.annotation.Nullable public Double getUsedGigabytes() {
-		return usedGigabytes;
-	}
-
-	public void setUsedGigabytes(@javax.annotation.Nullable Double usedGigabytes) {
-		this.usedGigabytes = usedGigabytes;
+	public void setLockId(@javax.annotation.Nullable String lockId) {
+		this.lockId = lockId;
 	}
 
 	/**
@@ -147,9 +72,9 @@ public class ResourcePoolSpace {
 	 *
 	 * @param key name of the property
 	 * @param value value of the property
-	 * @return the ResourcePoolSpace instance itself
+	 * @return the GetLockResponse instance itself
 	 */
-	public ResourcePoolSpace putAdditionalProperty(String key, Object value) {
+	public GetLockResponse putAdditionalProperty(String key, Object value) {
 		if (this.additionalProperties == null) {
 			this.additionalProperties = new HashMap<String, Object>();
 		}
@@ -187,54 +112,21 @@ public class ResourcePoolSpace {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		ResourcePoolSpace resourcePoolSpace = (ResourcePoolSpace) o;
-		return Objects.equals(this.availableGigabytes, resourcePoolSpace.availableGigabytes)
-				&& Objects.equals(this.sizeGigabytes, resourcePoolSpace.sizeGigabytes)
-				&& Objects.equals(
-						this.usedBySnapshotsGigabytes, resourcePoolSpace.usedBySnapshotsGigabytes)
-				&& Objects.equals(this.usedGigabytes, resourcePoolSpace.usedGigabytes)
-				&& Objects.equals(
-						this.additionalProperties, resourcePoolSpace.additionalProperties);
-	}
-
-	private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-		return a == b
-				|| (a != null
-						&& b != null
-						&& a.isPresent()
-						&& b.isPresent()
-						&& Objects.deepEquals(a.get(), b.get()));
+		GetLockResponse getLockResponse = (GetLockResponse) o;
+		return Objects.equals(this.lockId, getLockResponse.lockId)
+				&& Objects.equals(this.additionalProperties, getLockResponse.additionalProperties);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(
-				availableGigabytes,
-				sizeGigabytes,
-				usedBySnapshotsGigabytes,
-				usedGigabytes,
-				additionalProperties);
-	}
-
-	private static <T> int hashCodeNullable(JsonNullable<T> a) {
-		if (a == null) {
-			return 1;
-		}
-		return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
+		return Objects.hash(lockId, additionalProperties);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class ResourcePoolSpace {\n");
-		sb.append("    availableGigabytes: ")
-				.append(toIndentedString(availableGigabytes))
-				.append("\n");
-		sb.append("    sizeGigabytes: ").append(toIndentedString(sizeGigabytes)).append("\n");
-		sb.append("    usedBySnapshotsGigabytes: ")
-				.append(toIndentedString(usedBySnapshotsGigabytes))
-				.append("\n");
-		sb.append("    usedGigabytes: ").append(toIndentedString(usedGigabytes)).append("\n");
+		sb.append("class GetLockResponse {\n");
+		sb.append("    lockId: ").append(toIndentedString(lockId)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -258,13 +150,7 @@ public class ResourcePoolSpace {
 
 	static {
 		// a set of all properties/fields (JSON key names)
-		openapiFields =
-				new HashSet<String>(
-						Arrays.asList(
-								"availableGigabytes",
-								"sizeGigabytes",
-								"usedBySnapshotsGigabytes",
-								"usedGigabytes"));
+		openapiFields = new HashSet<String>(Arrays.asList("lockId"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(0);
@@ -274,37 +160,45 @@ public class ResourcePoolSpace {
 	 * Validates the JSON Element and throws an exception if issues found
 	 *
 	 * @param jsonElement JSON Element
-	 * @throws IOException if the JSON Element is invalid with respect to ResourcePoolSpace
+	 * @throws IOException if the JSON Element is invalid with respect to GetLockResponse
 	 */
 	public static void validateJsonElement(JsonElement jsonElement) throws IOException {
 		if (jsonElement == null) {
-			if (!ResourcePoolSpace.openapiRequiredFields
+			if (!GetLockResponse.openapiRequiredFields
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
 								java.util.Locale.ROOT,
-								"The required field(s) %s in ResourcePoolSpace is not found in the empty JSON string",
-								ResourcePoolSpace.openapiRequiredFields.toString()));
+								"The required field(s) %s in GetLockResponse is not found in the empty JSON string",
+								GetLockResponse.openapiRequiredFields.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
+		if ((jsonObj.get("lockId") != null && !jsonObj.get("lockId").isJsonNull())
+				&& !jsonObj.get("lockId").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `lockId` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("lockId").toString()));
+		}
 	}
 
 	public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
 		@SuppressWarnings("unchecked")
 		@Override
 		public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-			if (!ResourcePoolSpace.class.isAssignableFrom(type.getRawType())) {
-				return null; // this class only serializes 'ResourcePoolSpace' and its subtypes
+			if (!GetLockResponse.class.isAssignableFrom(type.getRawType())) {
+				return null; // this class only serializes 'GetLockResponse' and its subtypes
 			}
 			final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-			final TypeAdapter<ResourcePoolSpace> thisAdapter =
-					gson.getDelegateAdapter(this, TypeToken.get(ResourcePoolSpace.class));
+			final TypeAdapter<GetLockResponse> thisAdapter =
+					gson.getDelegateAdapter(this, TypeToken.get(GetLockResponse.class));
 
 			return (TypeAdapter<T>)
-					new TypeAdapter<ResourcePoolSpace>() {
+					new TypeAdapter<GetLockResponse>() {
 						@Override
-						public void write(JsonWriter out, ResourcePoolSpace value)
+						public void write(JsonWriter out, GetLockResponse value)
 								throws IOException {
 							JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
 							obj.remove("additionalProperties");
@@ -335,12 +229,12 @@ public class ResourcePoolSpace {
 						}
 
 						@Override
-						public ResourcePoolSpace read(JsonReader in) throws IOException {
+						public GetLockResponse read(JsonReader in) throws IOException {
 							JsonElement jsonElement = elementAdapter.read(in);
 							validateJsonElement(jsonElement);
 							JsonObject jsonObj = jsonElement.getAsJsonObject();
 							// store additional fields in the deserialized instance
-							ResourcePoolSpace instance = thisAdapter.fromJsonTree(jsonObj);
+							GetLockResponse instance = thisAdapter.fromJsonTree(jsonObj);
 							for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
 								if (!openapiFields.contains(entry.getKey())) {
 									if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -379,18 +273,18 @@ public class ResourcePoolSpace {
 	}
 
 	/**
-	 * Create an instance of ResourcePoolSpace given an JSON string
+	 * Create an instance of GetLockResponse given an JSON string
 	 *
 	 * @param jsonString JSON string
-	 * @return An instance of ResourcePoolSpace
-	 * @throws IOException if the JSON string is invalid with respect to ResourcePoolSpace
+	 * @return An instance of GetLockResponse
+	 * @throws IOException if the JSON string is invalid with respect to GetLockResponse
 	 */
-	public static ResourcePoolSpace fromJson(String jsonString) throws IOException {
-		return JSON.getGson().fromJson(jsonString, ResourcePoolSpace.class);
+	public static GetLockResponse fromJson(String jsonString) throws IOException {
+		return JSON.getGson().fromJson(jsonString, GetLockResponse.class);
 	}
 
 	/**
-	 * Convert an instance of ResourcePoolSpace to an JSON string
+	 * Convert an instance of GetLockResponse to an JSON string
 	 *
 	 * @return JSON string
 	 */

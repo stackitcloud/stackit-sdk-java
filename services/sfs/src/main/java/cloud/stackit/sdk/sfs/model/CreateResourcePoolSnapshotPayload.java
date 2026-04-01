@@ -46,6 +46,11 @@ public class CreateResourcePoolSnapshotPayload {
 	@SerializedName(SERIALIZED_NAME_NAME)
 	@javax.annotation.Nullable private String name;
 
+	public static final String SERIALIZED_NAME_SNAPLOCK_RETENTION_HOURS = "snaplockRetentionHours";
+
+	@SerializedName(SERIALIZED_NAME_SNAPLOCK_RETENTION_HOURS)
+	@javax.annotation.Nullable private Integer snaplockRetentionHours;
+
 	public CreateResourcePoolSnapshotPayload() {}
 
 	public CreateResourcePoolSnapshotPayload comment(@javax.annotation.Nullable String comment) {
@@ -82,6 +87,26 @@ public class CreateResourcePoolSnapshotPayload {
 
 	public void setName(@javax.annotation.Nullable String name) {
 		this.name = name;
+	}
+
+	public CreateResourcePoolSnapshotPayload snaplockRetentionHours(
+			@javax.annotation.Nullable Integer snaplockRetentionHours) {
+		this.snaplockRetentionHours = snaplockRetentionHours;
+		return this;
+	}
+
+	/**
+	 * (optional) Time in hours after which snaplock on the snapshot expires
+	 *
+	 * @return snaplockRetentionHours
+	 */
+	@javax.annotation.Nullable public Integer getSnaplockRetentionHours() {
+		return snaplockRetentionHours;
+	}
+
+	public void setSnaplockRetentionHours(
+			@javax.annotation.Nullable Integer snaplockRetentionHours) {
+		this.snaplockRetentionHours = snaplockRetentionHours;
 	}
 
 	/**
@@ -141,6 +166,9 @@ public class CreateResourcePoolSnapshotPayload {
 		return Objects.equals(this.comment, createResourcePoolSnapshotPayload.comment)
 				&& Objects.equals(this.name, createResourcePoolSnapshotPayload.name)
 				&& Objects.equals(
+						this.snaplockRetentionHours,
+						createResourcePoolSnapshotPayload.snaplockRetentionHours)
+				&& Objects.equals(
 						this.additionalProperties,
 						createResourcePoolSnapshotPayload.additionalProperties);
 	}
@@ -156,7 +184,7 @@ public class CreateResourcePoolSnapshotPayload {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(comment, name, additionalProperties);
+		return Objects.hash(comment, name, snaplockRetentionHours, additionalProperties);
 	}
 
 	private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -172,6 +200,9 @@ public class CreateResourcePoolSnapshotPayload {
 		sb.append("class CreateResourcePoolSnapshotPayload {\n");
 		sb.append("    comment: ").append(toIndentedString(comment)).append("\n");
 		sb.append("    name: ").append(toIndentedString(name)).append("\n");
+		sb.append("    snaplockRetentionHours: ")
+				.append(toIndentedString(snaplockRetentionHours))
+				.append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -195,7 +226,8 @@ public class CreateResourcePoolSnapshotPayload {
 
 	static {
 		// a set of all properties/fields (JSON key names)
-		openapiFields = new HashSet<String>(Arrays.asList("comment", "name"));
+		openapiFields =
+				new HashSet<String>(Arrays.asList("comment", "name", "snaplockRetentionHours"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(0);
