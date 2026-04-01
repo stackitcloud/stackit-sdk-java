@@ -137,6 +137,7 @@ class DefaultApi {
 	 * <tr><td> 400 </td><td> One or more fields are invalid. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> this project_id is not allowed to try this API </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> maximum number of credentials reached - please contact support to increase it </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> internal error - please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
 	 * </table>
@@ -264,6 +265,7 @@ class DefaultApi {
 	 * <tr><td> 400 </td><td> One or more fields are invalid. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> this project_id is not allowed to try this API </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> maximum number of credentials reached - please contact support to increase it </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> internal error - please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
 	 * </table>
@@ -302,6 +304,7 @@ class DefaultApi {
 	 * <tr><td> 400 </td><td> One or more fields are invalid. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> this project_id is not allowed to try this API </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> maximum number of credentials reached - please contact support to increase it </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> internal error - please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
 	 * </table>
@@ -342,6 +345,7 @@ class DefaultApi {
 	 * <tr><td> 400 </td><td> One or more fields are invalid. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> this project_id is not allowed to try this API </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> maximum number of credentials reached - please contact support to increase it </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> internal error - please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
 	 * </table>
@@ -381,6 +385,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> this project_id is not allowed to try this API </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> load balancer already exists </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> maximum number of load balancing servers reached - please contact support to increase it </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> internal error - please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
 	 * </table>
@@ -507,6 +512,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> this project_id is not allowed to try this API </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> load balancer already exists </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> maximum number of load balancing servers reached - please contact support to increase it </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> internal error - please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
 	 * </table>
@@ -544,6 +550,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> this project_id is not allowed to try this API </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> load balancer already exists </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> maximum number of load balancing servers reached - please contact support to increase it </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> internal error - please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
 	 * </table>
@@ -583,6 +590,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> this project_id is not allowed to try this API </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> load balancer already exists </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> maximum number of load balancing servers reached - please contact support to increase it </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> internal error - please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
 	 * </table>
