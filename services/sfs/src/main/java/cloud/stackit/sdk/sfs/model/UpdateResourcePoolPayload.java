@@ -57,6 +57,11 @@ public class UpdateResourcePoolPayload {
 	@SerializedName(SERIALIZED_NAME_SIZE_GIGABYTES)
 	@javax.annotation.Nullable private Integer sizeGigabytes;
 
+	public static final String SERIALIZED_NAME_SNAPSHOT_POLICY_ID = "snapshotPolicyId";
+
+	@SerializedName(SERIALIZED_NAME_SNAPSHOT_POLICY_ID)
+	@javax.annotation.Nullable private String snapshotPolicyId;
+
 	public static final String SERIALIZED_NAME_SNAPSHOTS_ARE_VISIBLE = "snapshotsAreVisible";
 
 	@SerializedName(SERIALIZED_NAME_SNAPSHOTS_ARE_VISIBLE)
@@ -158,6 +163,26 @@ public class UpdateResourcePoolPayload {
 		this.sizeGigabytes = sizeGigabytes;
 	}
 
+	public UpdateResourcePoolPayload snapshotPolicyId(
+			@javax.annotation.Nullable String snapshotPolicyId) {
+		this.snapshotPolicyId = snapshotPolicyId;
+		return this;
+	}
+
+	/**
+	 * (optional) Id of the Snapshot Policy to use If not set, the Snapshot Policy is not updated If
+	 * set to an empty string, the Snapshot Policy is removed
+	 *
+	 * @return snapshotPolicyId
+	 */
+	@javax.annotation.Nullable public String getSnapshotPolicyId() {
+		return snapshotPolicyId;
+	}
+
+	public void setSnapshotPolicyId(@javax.annotation.Nullable String snapshotPolicyId) {
+		this.snapshotPolicyId = snapshotPolicyId;
+	}
+
 	public UpdateResourcePoolPayload snapshotsAreVisible(
 			@javax.annotation.Nullable Boolean snapshotsAreVisible) {
 		this.snapshotsAreVisible = snapshotsAreVisible;
@@ -238,6 +263,7 @@ public class UpdateResourcePoolPayload {
 				&& Objects.equals(this.labels, updateResourcePoolPayload.labels)
 				&& Objects.equals(this.performanceClass, updateResourcePoolPayload.performanceClass)
 				&& Objects.equals(this.sizeGigabytes, updateResourcePoolPayload.sizeGigabytes)
+				&& Objects.equals(this.snapshotPolicyId, updateResourcePoolPayload.snapshotPolicyId)
 				&& Objects.equals(
 						this.snapshotsAreVisible, updateResourcePoolPayload.snapshotsAreVisible)
 				&& Objects.equals(
@@ -260,6 +286,7 @@ public class UpdateResourcePoolPayload {
 				labels,
 				performanceClass,
 				sizeGigabytes,
+				snapshotPolicyId,
 				snapshotsAreVisible,
 				additionalProperties);
 	}
@@ -279,6 +306,7 @@ public class UpdateResourcePoolPayload {
 		sb.append("    labels: ").append(toIndentedString(labels)).append("\n");
 		sb.append("    performanceClass: ").append(toIndentedString(performanceClass)).append("\n");
 		sb.append("    sizeGigabytes: ").append(toIndentedString(sizeGigabytes)).append("\n");
+		sb.append("    snapshotPolicyId: ").append(toIndentedString(snapshotPolicyId)).append("\n");
 		sb.append("    snapshotsAreVisible: ")
 				.append(toIndentedString(snapshotsAreVisible))
 				.append("\n");
@@ -312,6 +340,7 @@ public class UpdateResourcePoolPayload {
 								"labels",
 								"performanceClass",
 								"sizeGigabytes",
+								"snapshotPolicyId",
 								"snapshotsAreVisible"));
 
 		// a set of required properties/fields (JSON key names)
@@ -354,6 +383,15 @@ public class UpdateResourcePoolPayload {
 							java.util.Locale.ROOT,
 							"Expected the field `performanceClass` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("performanceClass").toString()));
+		}
+		if ((jsonObj.get("snapshotPolicyId") != null
+						&& !jsonObj.get("snapshotPolicyId").isJsonNull())
+				&& !jsonObj.get("snapshotPolicyId").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `snapshotPolicyId` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("snapshotPolicyId").toString()));
 		}
 	}
 

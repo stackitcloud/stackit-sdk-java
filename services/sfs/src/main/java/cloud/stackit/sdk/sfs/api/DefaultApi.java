@@ -18,6 +18,7 @@ import cloud.stackit.sdk.sfs.ApiCallback;
 import cloud.stackit.sdk.sfs.ApiClient;
 import cloud.stackit.sdk.sfs.ApiResponse;
 import cloud.stackit.sdk.sfs.Pair;
+import cloud.stackit.sdk.sfs.model.CreateLockResponse;
 import cloud.stackit.sdk.sfs.model.CreateResourcePoolPayload;
 import cloud.stackit.sdk.sfs.model.CreateResourcePoolResponse;
 import cloud.stackit.sdk.sfs.model.CreateResourcePoolSnapshotPayload;
@@ -28,13 +29,17 @@ import cloud.stackit.sdk.sfs.model.CreateSharePayload;
 import cloud.stackit.sdk.sfs.model.CreateShareResponse;
 import cloud.stackit.sdk.sfs.model.GetResourcePoolResponse;
 import cloud.stackit.sdk.sfs.model.GetResourcePoolSnapshotResponse;
+import cloud.stackit.sdk.sfs.model.GetScheduleResponse;
 import cloud.stackit.sdk.sfs.model.GetShareExportPolicyResponse;
 import cloud.stackit.sdk.sfs.model.GetShareResponse;
+import cloud.stackit.sdk.sfs.model.GetSnapshotPolicyResponse;
 import cloud.stackit.sdk.sfs.model.ListPerformanceClassesResponse;
 import cloud.stackit.sdk.sfs.model.ListResourcePoolSnapshotsResponse;
 import cloud.stackit.sdk.sfs.model.ListResourcePoolsResponse;
+import cloud.stackit.sdk.sfs.model.ListSchedulesResponse;
 import cloud.stackit.sdk.sfs.model.ListShareExportPoliciesResponse;
 import cloud.stackit.sdk.sfs.model.ListSharesResponse;
+import cloud.stackit.sdk.sfs.model.ListSnapshotPoliciesResponse;
 import cloud.stackit.sdk.sfs.model.UpdateResourcePoolPayload;
 import cloud.stackit.sdk.sfs.model.UpdateResourcePoolResponse;
 import cloud.stackit.sdk.sfs.model.UpdateShareExportPolicyPayload;
@@ -125,6 +130,183 @@ class DefaultApi {
 
 	public void setCustomBaseUrl(String customBaseUrl) {
 		this.localCustomBaseUrl = customBaseUrl;
+	}
+
+	/**
+	 * Build call for createLock
+	 *
+	 * @param region (required)
+	 * @param projectId (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call createLockCall(
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String projectId,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v1/regions/{region}/project/{projectId}/locks"
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"POST",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call createLockValidateBeforeCall(
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String projectId,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling createLock(Async)");
+		}
+
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling createLock(Async)");
+		}
+
+		return createLockCall(region, projectId, _callback);
+	}
+
+	/**
+	 * Create Lock
+	 *
+	 * @param region (required)
+	 * @param projectId (required)
+	 * @return CreateLockResponse
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public CreateLockResponse createLock(
+			@javax.annotation.Nonnull String region, @javax.annotation.Nonnull String projectId)
+			throws ApiException {
+		ApiResponse<CreateLockResponse> localVarResp = createLockWithHttpInfo(region, projectId);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Create Lock
+	 *
+	 * @param region (required)
+	 * @param projectId (required)
+	 * @return ApiResponse&lt;CreateLockResponse&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<CreateLockResponse> createLockWithHttpInfo(
+			@javax.annotation.Nonnull String region, @javax.annotation.Nonnull String projectId)
+			throws ApiException {
+		okhttp3.Call localVarCall = createLockValidateBeforeCall(region, projectId, null);
+		Type localVarReturnType = new TypeToken<CreateLockResponse>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * (asynchronously) Create Lock
+	 *
+	 * @param region (required)
+	 * @param projectId (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call createLockAsync(
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String projectId,
+			final ApiCallback<CreateLockResponse> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall = createLockValidateBeforeCall(region, projectId, _callback);
+		Type localVarReturnType = new TypeToken<CreateLockResponse>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
 	}
 
 	/**
@@ -1010,6 +1192,183 @@ class DefaultApi {
 				createShareExportPolicyValidateBeforeCall(
 						projectId, region, createShareExportPolicyPayload, _callback);
 		Type localVarReturnType = new TypeToken<CreateShareExportPolicyResponse>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for deleteLock
+	 *
+	 * @param region (required)
+	 * @param projectId (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call deleteLockCall(
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String projectId,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v1/regions/{region}/project/{projectId}/locks"
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"DELETE",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call deleteLockValidateBeforeCall(
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String projectId,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling deleteLock(Async)");
+		}
+
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling deleteLock(Async)");
+		}
+
+		return deleteLockCall(region, projectId, _callback);
+	}
+
+	/**
+	 * Delete Lock
+	 *
+	 * @param region (required)
+	 * @param projectId (required)
+	 * @return Object
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public Object deleteLock(
+			@javax.annotation.Nonnull String region, @javax.annotation.Nonnull String projectId)
+			throws ApiException {
+		ApiResponse<Object> localVarResp = deleteLockWithHttpInfo(region, projectId);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Delete Lock
+	 *
+	 * @param region (required)
+	 * @param projectId (required)
+	 * @return ApiResponse&lt;Object&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<Object> deleteLockWithHttpInfo(
+			@javax.annotation.Nonnull String region, @javax.annotation.Nonnull String projectId)
+			throws ApiException {
+		okhttp3.Call localVarCall = deleteLockValidateBeforeCall(region, projectId, null);
+		Type localVarReturnType = new TypeToken<Object>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * (asynchronously) Delete Lock
+	 *
+	 * @param region (required)
+	 * @param projectId (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call deleteLockAsync(
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull String projectId,
+			final ApiCallback<Object> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall = deleteLockValidateBeforeCall(region, projectId, _callback);
+		Type localVarReturnType = new TypeToken<Object>() {}.getType();
 		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
 		return localVarCall;
 	}
@@ -2341,6 +2700,181 @@ class DefaultApi {
 	}
 
 	/**
+	 * Build call for getSchedule
+	 *
+	 * @param projectId (required)
+	 * @param id (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getScheduleCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String id,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v1/projects/{projectId}/schedules/{id}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call getScheduleValidateBeforeCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String id,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling getSchedule(Async)");
+		}
+
+		// verify the required parameter 'id' is set
+		if (id == null) {
+			throw new ApiException(
+					"Missing the required parameter 'id' when calling getSchedule(Async)");
+		}
+
+		return getScheduleCall(projectId, id, _callback);
+	}
+
+	/**
+	 * Get Schedule
+	 *
+	 * @param projectId (required)
+	 * @param id (required)
+	 * @return GetScheduleResponse
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public GetScheduleResponse getSchedule(
+			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String id)
+			throws ApiException {
+		ApiResponse<GetScheduleResponse> localVarResp = getScheduleWithHttpInfo(projectId, id);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Get Schedule
+	 *
+	 * @param projectId (required)
+	 * @param id (required)
+	 * @return ApiResponse&lt;GetScheduleResponse&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<GetScheduleResponse> getScheduleWithHttpInfo(
+			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String id)
+			throws ApiException {
+		okhttp3.Call localVarCall = getScheduleValidateBeforeCall(projectId, id, null);
+		Type localVarReturnType = new TypeToken<GetScheduleResponse>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * (asynchronously) Get Schedule
+	 *
+	 * @param projectId (required)
+	 * @param id (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getScheduleAsync(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String id,
+			final ApiCallback<GetScheduleResponse> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall = getScheduleValidateBeforeCall(projectId, id, _callback);
+		Type localVarReturnType = new TypeToken<GetScheduleResponse>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
 	 * Build call for getShare
 	 *
 	 * @param projectId (required)
@@ -2780,6 +3314,182 @@ class DefaultApi {
 	}
 
 	/**
+	 * Build call for getSnapshotPolicy
+	 *
+	 * @param projectId (required)
+	 * @param id (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getSnapshotPolicyCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String id,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v1/projects/{projectId}/snapshotPolicies/{id}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace("{" + "id" + "}", localVarApiClient.escapeString(id.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call getSnapshotPolicyValidateBeforeCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String id,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling getSnapshotPolicy(Async)");
+		}
+
+		// verify the required parameter 'id' is set
+		if (id == null) {
+			throw new ApiException(
+					"Missing the required parameter 'id' when calling getSnapshotPolicy(Async)");
+		}
+
+		return getSnapshotPolicyCall(projectId, id, _callback);
+	}
+
+	/**
+	 * Get Snapshot Policy
+	 *
+	 * @param projectId (required)
+	 * @param id (required)
+	 * @return GetSnapshotPolicyResponse
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public GetSnapshotPolicyResponse getSnapshotPolicy(
+			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String id)
+			throws ApiException {
+		ApiResponse<GetSnapshotPolicyResponse> localVarResp =
+				getSnapshotPolicyWithHttpInfo(projectId, id);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Get Snapshot Policy
+	 *
+	 * @param projectId (required)
+	 * @param id (required)
+	 * @return ApiResponse&lt;GetSnapshotPolicyResponse&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<GetSnapshotPolicyResponse> getSnapshotPolicyWithHttpInfo(
+			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String id)
+			throws ApiException {
+		okhttp3.Call localVarCall = getSnapshotPolicyValidateBeforeCall(projectId, id, null);
+		Type localVarReturnType = new TypeToken<GetSnapshotPolicyResponse>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * (asynchronously) Get Snapshot Policy
+	 *
+	 * @param projectId (required)
+	 * @param id (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getSnapshotPolicyAsync(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull String id,
+			final ApiCallback<GetSnapshotPolicyResponse> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall = getSnapshotPolicyValidateBeforeCall(projectId, id, _callback);
+		Type localVarReturnType = new TypeToken<GetSnapshotPolicyResponse>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
 	 * Build call for listPerformanceClasses
 	 *
 	 * @param _callback Callback for upload/download progress
@@ -2858,7 +3568,7 @@ class DefaultApi {
 	}
 
 	/**
-	 * List Resource Pool Performance Classes Lists all performances classes available
+	 * List Resource Performance Classes Lists all performances classes available
 	 *
 	 * @return ListPerformanceClassesResponse
 	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -2880,7 +3590,7 @@ class DefaultApi {
 	}
 
 	/**
-	 * List Resource Pool Performance Classes Lists all performances classes available
+	 * List Resource Performance Classes Lists all performances classes available
 	 *
 	 * @return ApiResponse&lt;ListPerformanceClassesResponse&gt;
 	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -2903,8 +3613,7 @@ class DefaultApi {
 	}
 
 	/**
-	 * List Resource Pool Performance Classes (asynchronously) Lists all performances classes
-	 * available
+	 * List Resource Performance Classes (asynchronously) Lists all performances classes available
 	 *
 	 * @param _callback The callback to be executed when the API call finishes
 	 * @return The request call
@@ -3332,6 +4041,163 @@ class DefaultApi {
 	}
 
 	/**
+	 * Build call for listSchedules
+	 *
+	 * @param projectId (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listSchedulesCall(
+			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v1/projects/{projectId}/schedules"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call listSchedulesValidateBeforeCall(
+			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling listSchedules(Async)");
+		}
+
+		return listSchedulesCall(projectId, _callback);
+	}
+
+	/**
+	 * List Schedules
+	 *
+	 * @param projectId (required)
+	 * @return ListSchedulesResponse
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ListSchedulesResponse listSchedules(@javax.annotation.Nonnull String projectId)
+			throws ApiException {
+		ApiResponse<ListSchedulesResponse> localVarResp = listSchedulesWithHttpInfo(projectId);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * List Schedules
+	 *
+	 * @param projectId (required)
+	 * @return ApiResponse&lt;ListSchedulesResponse&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<ListSchedulesResponse> listSchedulesWithHttpInfo(
+			@javax.annotation.Nonnull String projectId) throws ApiException {
+		okhttp3.Call localVarCall = listSchedulesValidateBeforeCall(projectId, null);
+		Type localVarReturnType = new TypeToken<ListSchedulesResponse>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * (asynchronously) List Schedules
+	 *
+	 * @param projectId (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listSchedulesAsync(
+			@javax.annotation.Nonnull String projectId,
+			final ApiCallback<ListSchedulesResponse> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall = listSchedulesValidateBeforeCall(projectId, _callback);
+		Type localVarReturnType = new TypeToken<ListSchedulesResponse>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
 	 * Build call for listShareExportPolicies
 	 *
 	 * @param projectId (required)
@@ -3728,6 +4594,183 @@ class DefaultApi {
 		okhttp3.Call localVarCall =
 				listSharesValidateBeforeCall(projectId, region, resourcePoolId, _callback);
 		Type localVarReturnType = new TypeToken<ListSharesResponse>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for listSnapshotPolicies
+	 *
+	 * @param projectId (required)
+	 * @param immutable (optional)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listSnapshotPoliciesCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nullable Boolean immutable,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v1/projects/{projectId}/snapshotPolicies"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		if (immutable != null) {
+			localVarQueryParams.addAll(localVarApiClient.parameterToPair("immutable", immutable));
+		}
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call listSnapshotPoliciesValidateBeforeCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nullable Boolean immutable,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling listSnapshotPolicies(Async)");
+		}
+
+		return listSnapshotPoliciesCall(projectId, immutable, _callback);
+	}
+
+	/**
+	 * List Snapshot Policies
+	 *
+	 * @param projectId (required)
+	 * @param immutable (optional)
+	 * @return ListSnapshotPoliciesResponse
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ListSnapshotPoliciesResponse listSnapshotPolicies(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nullable Boolean immutable)
+			throws ApiException {
+		ApiResponse<ListSnapshotPoliciesResponse> localVarResp =
+				listSnapshotPoliciesWithHttpInfo(projectId, immutable);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * List Snapshot Policies
+	 *
+	 * @param projectId (required)
+	 * @param immutable (optional)
+	 * @return ApiResponse&lt;ListSnapshotPoliciesResponse&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<ListSnapshotPoliciesResponse> listSnapshotPoliciesWithHttpInfo(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nullable Boolean immutable)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				listSnapshotPoliciesValidateBeforeCall(projectId, immutable, null);
+		Type localVarReturnType = new TypeToken<ListSnapshotPoliciesResponse>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * (asynchronously) List Snapshot Policies
+	 *
+	 * @param projectId (required)
+	 * @param immutable (optional)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listSnapshotPoliciesAsync(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nullable Boolean immutable,
+			final ApiCallback<ListSnapshotPoliciesResponse> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				listSnapshotPoliciesValidateBeforeCall(projectId, immutable, _callback);
+		Type localVarReturnType = new TypeToken<ListSnapshotPoliciesResponse>() {}.getType();
 		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
 		return localVarCall;
 	}
