@@ -14,6 +14,7 @@ package cloud.stackit.sdk.sfs.model;
 
 import cloud.stackit.sdk.sfs.JSON;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
@@ -24,19 +25,19 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.openapitools.jackson.nullable.JsonNullable;
 
-/** ResourcePoolSnapshot */
+/** SnapshotPolicy */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
 		comments = "Generator version: 7.19.0")
-public class ResourcePoolSnapshot {
+public class SnapshotPolicy {
 	public static final String SERIALIZED_NAME_COMMENT = "comment";
 
 	@SerializedName(SERIALIZED_NAME_COMMENT)
@@ -47,40 +48,35 @@ public class ResourcePoolSnapshot {
 	@SerializedName(SERIALIZED_NAME_CREATED_AT)
 	@javax.annotation.Nullable private OffsetDateTime createdAt;
 
-	public static final String SERIALIZED_NAME_LOGICAL_SIZE_GIGABYTES = "logicalSizeGigabytes";
+	public static final String SERIALIZED_NAME_ENABLED = "enabled";
 
-	@SerializedName(SERIALIZED_NAME_LOGICAL_SIZE_GIGABYTES)
-	@javax.annotation.Nullable private Integer logicalSizeGigabytes;
+	@SerializedName(SERIALIZED_NAME_ENABLED)
+	@javax.annotation.Nullable private Boolean enabled;
 
-	public static final String SERIALIZED_NAME_RESOURCE_POOL_ID = "resourcePoolId";
+	public static final String SERIALIZED_NAME_ID = "id";
 
-	@SerializedName(SERIALIZED_NAME_RESOURCE_POOL_ID)
-	@javax.annotation.Nullable private String resourcePoolId;
+	@SerializedName(SERIALIZED_NAME_ID)
+	@javax.annotation.Nullable private String id;
 
-	public static final String SERIALIZED_NAME_SIZE_GIGABYTES = "sizeGigabytes";
+	public static final String SERIALIZED_NAME_NAME = "name";
 
-	@SerializedName(SERIALIZED_NAME_SIZE_GIGABYTES)
-	@javax.annotation.Nullable private Integer sizeGigabytes;
+	@SerializedName(SERIALIZED_NAME_NAME)
+	@javax.annotation.Nullable private String name;
 
-	public static final String SERIALIZED_NAME_SNAPLOCK_EXPIRY_TIME = "snaplockExpiryTime";
+	public static final String SERIALIZED_NAME_SCHEDULES = "schedules";
 
-	@SerializedName(SERIALIZED_NAME_SNAPLOCK_EXPIRY_TIME)
-	@javax.annotation.Nullable private OffsetDateTime snaplockExpiryTime;
+	@SerializedName(SERIALIZED_NAME_SCHEDULES)
+	@javax.annotation.Nullable private List<SnapshotPolicySchedule> schedules = new ArrayList<>();
 
-	public static final String SERIALIZED_NAME_SNAPSHOT_NAME = "snapshotName";
+	public SnapshotPolicy() {}
 
-	@SerializedName(SERIALIZED_NAME_SNAPSHOT_NAME)
-	@javax.annotation.Nullable private String snapshotName;
-
-	public ResourcePoolSnapshot() {}
-
-	public ResourcePoolSnapshot comment(@javax.annotation.Nullable String comment) {
+	public SnapshotPolicy comment(@javax.annotation.Nullable String comment) {
 		this.comment = comment;
 		return this;
 	}
 
 	/**
-	 * (optional) A comment to add more information about a snapshot
+	 * Comment of the Snapshot Policy
 	 *
 	 * @return comment
 	 */
@@ -92,13 +88,13 @@ public class ResourcePoolSnapshot {
 		this.comment = comment;
 	}
 
-	public ResourcePoolSnapshot createdAt(@javax.annotation.Nullable OffsetDateTime createdAt) {
+	public SnapshotPolicy createdAt(@javax.annotation.Nullable OffsetDateTime createdAt) {
 		this.createdAt = createdAt;
 		return this;
 	}
 
 	/**
-	 * Get createdAt
+	 * created at timestamp
 	 *
 	 * @return createdAt
 	 */
@@ -110,99 +106,85 @@ public class ResourcePoolSnapshot {
 		this.createdAt = createdAt;
 	}
 
-	public ResourcePoolSnapshot logicalSizeGigabytes(
-			@javax.annotation.Nullable Integer logicalSizeGigabytes) {
-		this.logicalSizeGigabytes = logicalSizeGigabytes;
+	public SnapshotPolicy enabled(@javax.annotation.Nullable Boolean enabled) {
+		this.enabled = enabled;
 		return this;
 	}
 
 	/**
-	 * Represents the user-visible data size at the time of the snapshot in Gibibytes (e.g. what’s
-	 * in the snapshot)
+	 * Wether the Snapshot Policy is enabled
 	 *
-	 * @return logicalSizeGigabytes
+	 * @return enabled
 	 */
-	@javax.annotation.Nullable public Integer getLogicalSizeGigabytes() {
-		return logicalSizeGigabytes;
+	@javax.annotation.Nullable public Boolean getEnabled() {
+		return enabled;
 	}
 
-	public void setLogicalSizeGigabytes(@javax.annotation.Nullable Integer logicalSizeGigabytes) {
-		this.logicalSizeGigabytes = logicalSizeGigabytes;
+	public void setEnabled(@javax.annotation.Nullable Boolean enabled) {
+		this.enabled = enabled;
 	}
 
-	public ResourcePoolSnapshot resourcePoolId(@javax.annotation.Nullable String resourcePoolId) {
-		this.resourcePoolId = resourcePoolId;
+	public SnapshotPolicy id(@javax.annotation.Nullable String id) {
+		this.id = id;
 		return this;
 	}
 
 	/**
-	 * ID of the Resource Pool of the Snapshot
+	 * ID of the Snapshot Policy
 	 *
-	 * @return resourcePoolId
+	 * @return id
 	 */
-	@javax.annotation.Nullable public String getResourcePoolId() {
-		return resourcePoolId;
+	@javax.annotation.Nullable public String getId() {
+		return id;
 	}
 
-	public void setResourcePoolId(@javax.annotation.Nullable String resourcePoolId) {
-		this.resourcePoolId = resourcePoolId;
+	public void setId(@javax.annotation.Nullable String id) {
+		this.id = id;
 	}
 
-	public ResourcePoolSnapshot sizeGigabytes(@javax.annotation.Nullable Integer sizeGigabytes) {
-		this.sizeGigabytes = sizeGigabytes;
+	public SnapshotPolicy name(@javax.annotation.Nullable String name) {
+		this.name = name;
 		return this;
 	}
 
 	/**
-	 * Reflects the actual storage footprint in the backend at snapshot time in Gibibytes (e.g. how
-	 * much storage from the Resource Pool does it use).
+	 * Name of the Snapshot Policy
 	 *
-	 * @return sizeGigabytes
+	 * @return name
 	 */
-	@javax.annotation.Nullable public Integer getSizeGigabytes() {
-		return sizeGigabytes;
+	@javax.annotation.Nullable public String getName() {
+		return name;
 	}
 
-	public void setSizeGigabytes(@javax.annotation.Nullable Integer sizeGigabytes) {
-		this.sizeGigabytes = sizeGigabytes;
+	public void setName(@javax.annotation.Nullable String name) {
+		this.name = name;
 	}
 
-	public ResourcePoolSnapshot snaplockExpiryTime(
-			@javax.annotation.Nullable OffsetDateTime snaplockExpiryTime) {
-		this.snaplockExpiryTime = snaplockExpiryTime;
+	public SnapshotPolicy schedules(
+			@javax.annotation.Nullable List<SnapshotPolicySchedule> schedules) {
+		this.schedules = schedules;
+		return this;
+	}
+
+	public SnapshotPolicy addSchedulesItem(SnapshotPolicySchedule schedulesItem) {
+		if (this.schedules == null) {
+			this.schedules = new ArrayList<>();
+		}
+		this.schedules.add(schedulesItem);
 		return this;
 	}
 
 	/**
-	 * Represents the snaplock expiry time if snaplock is enabled for the resource pool
+	 * associated schedules
 	 *
-	 * @return snaplockExpiryTime
+	 * @return schedules
 	 */
-	@javax.annotation.Nullable public OffsetDateTime getSnaplockExpiryTime() {
-		return snaplockExpiryTime;
+	@javax.annotation.Nullable public List<SnapshotPolicySchedule> getSchedules() {
+		return schedules;
 	}
 
-	public void setSnaplockExpiryTime(
-			@javax.annotation.Nullable OffsetDateTime snaplockExpiryTime) {
-		this.snaplockExpiryTime = snaplockExpiryTime;
-	}
-
-	public ResourcePoolSnapshot snapshotName(@javax.annotation.Nullable String snapshotName) {
-		this.snapshotName = snapshotName;
-		return this;
-	}
-
-	/**
-	 * Name of the Resource Pool Snapshot
-	 *
-	 * @return snapshotName
-	 */
-	@javax.annotation.Nullable public String getSnapshotName() {
-		return snapshotName;
-	}
-
-	public void setSnapshotName(@javax.annotation.Nullable String snapshotName) {
-		this.snapshotName = snapshotName;
+	public void setSchedules(@javax.annotation.Nullable List<SnapshotPolicySchedule> schedules) {
+		this.schedules = schedules;
 	}
 
 	/**
@@ -217,9 +199,9 @@ public class ResourcePoolSnapshot {
 	 *
 	 * @param key name of the property
 	 * @param value value of the property
-	 * @return the ResourcePoolSnapshot instance itself
+	 * @return the SnapshotPolicy instance itself
 	 */
-	public ResourcePoolSnapshot putAdditionalProperty(String key, Object value) {
+	public SnapshotPolicy putAdditionalProperty(String key, Object value) {
 		if (this.additionalProperties == null) {
 			this.additionalProperties = new HashMap<String, Object>();
 		}
@@ -257,63 +239,31 @@ public class ResourcePoolSnapshot {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		ResourcePoolSnapshot resourcePoolSnapshot = (ResourcePoolSnapshot) o;
-		return Objects.equals(this.comment, resourcePoolSnapshot.comment)
-				&& Objects.equals(this.createdAt, resourcePoolSnapshot.createdAt)
-				&& Objects.equals(
-						this.logicalSizeGigabytes, resourcePoolSnapshot.logicalSizeGigabytes)
-				&& Objects.equals(this.resourcePoolId, resourcePoolSnapshot.resourcePoolId)
-				&& Objects.equals(this.sizeGigabytes, resourcePoolSnapshot.sizeGigabytes)
-				&& Objects.equals(this.snaplockExpiryTime, resourcePoolSnapshot.snaplockExpiryTime)
-				&& Objects.equals(this.snapshotName, resourcePoolSnapshot.snapshotName)
-				&& Objects.equals(
-						this.additionalProperties, resourcePoolSnapshot.additionalProperties);
-	}
-
-	private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-		return a == b
-				|| (a != null
-						&& b != null
-						&& a.isPresent()
-						&& b.isPresent()
-						&& Objects.deepEquals(a.get(), b.get()));
+		SnapshotPolicy snapshotPolicy = (SnapshotPolicy) o;
+		return Objects.equals(this.comment, snapshotPolicy.comment)
+				&& Objects.equals(this.createdAt, snapshotPolicy.createdAt)
+				&& Objects.equals(this.enabled, snapshotPolicy.enabled)
+				&& Objects.equals(this.id, snapshotPolicy.id)
+				&& Objects.equals(this.name, snapshotPolicy.name)
+				&& Objects.equals(this.schedules, snapshotPolicy.schedules)
+				&& Objects.equals(this.additionalProperties, snapshotPolicy.additionalProperties);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(
-				comment,
-				createdAt,
-				logicalSizeGigabytes,
-				resourcePoolId,
-				sizeGigabytes,
-				snaplockExpiryTime,
-				snapshotName,
-				additionalProperties);
-	}
-
-	private static <T> int hashCodeNullable(JsonNullable<T> a) {
-		if (a == null) {
-			return 1;
-		}
-		return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
+		return Objects.hash(comment, createdAt, enabled, id, name, schedules, additionalProperties);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class ResourcePoolSnapshot {\n");
+		sb.append("class SnapshotPolicy {\n");
 		sb.append("    comment: ").append(toIndentedString(comment)).append("\n");
 		sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
-		sb.append("    logicalSizeGigabytes: ")
-				.append(toIndentedString(logicalSizeGigabytes))
-				.append("\n");
-		sb.append("    resourcePoolId: ").append(toIndentedString(resourcePoolId)).append("\n");
-		sb.append("    sizeGigabytes: ").append(toIndentedString(sizeGigabytes)).append("\n");
-		sb.append("    snaplockExpiryTime: ")
-				.append(toIndentedString(snaplockExpiryTime))
-				.append("\n");
-		sb.append("    snapshotName: ").append(toIndentedString(snapshotName)).append("\n");
+		sb.append("    enabled: ").append(toIndentedString(enabled)).append("\n");
+		sb.append("    id: ").append(toIndentedString(id)).append("\n");
+		sb.append("    name: ").append(toIndentedString(name)).append("\n");
+		sb.append("    schedules: ").append(toIndentedString(schedules)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -340,13 +290,7 @@ public class ResourcePoolSnapshot {
 		openapiFields =
 				new HashSet<String>(
 						Arrays.asList(
-								"comment",
-								"createdAt",
-								"logicalSizeGigabytes",
-								"resourcePoolId",
-								"sizeGigabytes",
-								"snaplockExpiryTime",
-								"snapshotName"));
+								"comment", "createdAt", "enabled", "id", "name", "schedules"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(0);
@@ -356,17 +300,17 @@ public class ResourcePoolSnapshot {
 	 * Validates the JSON Element and throws an exception if issues found
 	 *
 	 * @param jsonElement JSON Element
-	 * @throws IOException if the JSON Element is invalid with respect to ResourcePoolSnapshot
+	 * @throws IOException if the JSON Element is invalid with respect to SnapshotPolicy
 	 */
 	public static void validateJsonElement(JsonElement jsonElement) throws IOException {
 		if (jsonElement == null) {
-			if (!ResourcePoolSnapshot.openapiRequiredFields
+			if (!SnapshotPolicy.openapiRequiredFields
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
 								java.util.Locale.ROOT,
-								"The required field(s) %s in ResourcePoolSnapshot is not found in the empty JSON string",
-								ResourcePoolSnapshot.openapiRequiredFields.toString()));
+								"The required field(s) %s in SnapshotPolicy is not found in the empty JSON string",
+								SnapshotPolicy.openapiRequiredFields.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -378,21 +322,40 @@ public class ResourcePoolSnapshot {
 							"Expected the field `comment` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("comment").toString()));
 		}
-		if ((jsonObj.get("resourcePoolId") != null && !jsonObj.get("resourcePoolId").isJsonNull())
-				&& !jsonObj.get("resourcePoolId").isJsonPrimitive()) {
+		if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull())
+				&& !jsonObj.get("id").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
 							java.util.Locale.ROOT,
-							"Expected the field `resourcePoolId` to be a primitive type in the JSON string but got `%s`",
-							jsonObj.get("resourcePoolId").toString()));
+							"Expected the field `id` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("id").toString()));
 		}
-		if ((jsonObj.get("snapshotName") != null && !jsonObj.get("snapshotName").isJsonNull())
-				&& !jsonObj.get("snapshotName").isJsonPrimitive()) {
+		if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull())
+				&& !jsonObj.get("name").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
 							java.util.Locale.ROOT,
-							"Expected the field `snapshotName` to be a primitive type in the JSON string but got `%s`",
-							jsonObj.get("snapshotName").toString()));
+							"Expected the field `name` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("name").toString()));
+		}
+		if (jsonObj.get("schedules") != null && !jsonObj.get("schedules").isJsonNull()) {
+			JsonArray jsonArrayschedules = jsonObj.getAsJsonArray("schedules");
+			if (jsonArrayschedules != null) {
+				// ensure the json data is an array
+				if (!jsonObj.get("schedules").isJsonArray()) {
+					throw new IllegalArgumentException(
+							String.format(
+									java.util.Locale.ROOT,
+									"Expected the field `schedules` to be an array in the JSON string but got `%s`",
+									jsonObj.get("schedules").toString()));
+				}
+
+				// validate the optional field `schedules` (array)
+				for (int i = 0; i < jsonArrayschedules.size(); i++) {
+					SnapshotPolicySchedule.validateJsonElement(jsonArrayschedules.get(i));
+				}
+				;
+			}
 		}
 	}
 
@@ -400,18 +363,17 @@ public class ResourcePoolSnapshot {
 		@SuppressWarnings("unchecked")
 		@Override
 		public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-			if (!ResourcePoolSnapshot.class.isAssignableFrom(type.getRawType())) {
-				return null; // this class only serializes 'ResourcePoolSnapshot' and its subtypes
+			if (!SnapshotPolicy.class.isAssignableFrom(type.getRawType())) {
+				return null; // this class only serializes 'SnapshotPolicy' and its subtypes
 			}
 			final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-			final TypeAdapter<ResourcePoolSnapshot> thisAdapter =
-					gson.getDelegateAdapter(this, TypeToken.get(ResourcePoolSnapshot.class));
+			final TypeAdapter<SnapshotPolicy> thisAdapter =
+					gson.getDelegateAdapter(this, TypeToken.get(SnapshotPolicy.class));
 
 			return (TypeAdapter<T>)
-					new TypeAdapter<ResourcePoolSnapshot>() {
+					new TypeAdapter<SnapshotPolicy>() {
 						@Override
-						public void write(JsonWriter out, ResourcePoolSnapshot value)
-								throws IOException {
+						public void write(JsonWriter out, SnapshotPolicy value) throws IOException {
 							JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
 							obj.remove("additionalProperties");
 							// serialize additional properties
@@ -441,12 +403,12 @@ public class ResourcePoolSnapshot {
 						}
 
 						@Override
-						public ResourcePoolSnapshot read(JsonReader in) throws IOException {
+						public SnapshotPolicy read(JsonReader in) throws IOException {
 							JsonElement jsonElement = elementAdapter.read(in);
 							validateJsonElement(jsonElement);
 							JsonObject jsonObj = jsonElement.getAsJsonObject();
 							// store additional fields in the deserialized instance
-							ResourcePoolSnapshot instance = thisAdapter.fromJsonTree(jsonObj);
+							SnapshotPolicy instance = thisAdapter.fromJsonTree(jsonObj);
 							for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
 								if (!openapiFields.contains(entry.getKey())) {
 									if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -485,18 +447,18 @@ public class ResourcePoolSnapshot {
 	}
 
 	/**
-	 * Create an instance of ResourcePoolSnapshot given an JSON string
+	 * Create an instance of SnapshotPolicy given an JSON string
 	 *
 	 * @param jsonString JSON string
-	 * @return An instance of ResourcePoolSnapshot
-	 * @throws IOException if the JSON string is invalid with respect to ResourcePoolSnapshot
+	 * @return An instance of SnapshotPolicy
+	 * @throws IOException if the JSON string is invalid with respect to SnapshotPolicy
 	 */
-	public static ResourcePoolSnapshot fromJson(String jsonString) throws IOException {
-		return JSON.getGson().fromJson(jsonString, ResourcePoolSnapshot.class);
+	public static SnapshotPolicy fromJson(String jsonString) throws IOException {
+		return JSON.getGson().fromJson(jsonString, SnapshotPolicy.class);
 	}
 
 	/**
-	 * Convert an instance of ResourcePoolSnapshot to an JSON string
+	 * Convert an instance of SnapshotPolicy to an JSON string
 	 *
 	 * @return JSON string
 	 */
