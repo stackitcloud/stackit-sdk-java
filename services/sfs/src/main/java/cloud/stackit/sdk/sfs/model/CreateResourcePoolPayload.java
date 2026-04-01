@@ -71,6 +71,11 @@ public class CreateResourcePoolPayload {
 	@javax.annotation.Nonnull
 	private Integer sizeGigabytes;
 
+	public static final String SERIALIZED_NAME_SNAPSHOT_POLICY_ID = "snapshotPolicyId";
+
+	@SerializedName(SERIALIZED_NAME_SNAPSHOT_POLICY_ID)
+	@javax.annotation.Nullable private String snapshotPolicyId;
+
 	public static final String SERIALIZED_NAME_SNAPSHOTS_ARE_VISIBLE = "snapshotsAreVisible";
 
 	@SerializedName(SERIALIZED_NAME_SNAPSHOTS_ARE_VISIBLE)
@@ -214,6 +219,25 @@ public class CreateResourcePoolPayload {
 		this.sizeGigabytes = sizeGigabytes;
 	}
 
+	public CreateResourcePoolPayload snapshotPolicyId(
+			@javax.annotation.Nullable String snapshotPolicyId) {
+		this.snapshotPolicyId = snapshotPolicyId;
+		return this;
+	}
+
+	/**
+	 * (optional) Id of the Snapshot Policy to use
+	 *
+	 * @return snapshotPolicyId
+	 */
+	@javax.annotation.Nullable public String getSnapshotPolicyId() {
+		return snapshotPolicyId;
+	}
+
+	public void setSnapshotPolicyId(@javax.annotation.Nullable String snapshotPolicyId) {
+		this.snapshotPolicyId = snapshotPolicyId;
+	}
+
 	public CreateResourcePoolPayload snapshotsAreVisible(
 			@javax.annotation.Nullable Boolean snapshotsAreVisible) {
 		this.snapshotsAreVisible = snapshotsAreVisible;
@@ -296,6 +320,7 @@ public class CreateResourcePoolPayload {
 				&& Objects.equals(this.name, createResourcePoolPayload.name)
 				&& Objects.equals(this.performanceClass, createResourcePoolPayload.performanceClass)
 				&& Objects.equals(this.sizeGigabytes, createResourcePoolPayload.sizeGigabytes)
+				&& Objects.equals(this.snapshotPolicyId, createResourcePoolPayload.snapshotPolicyId)
 				&& Objects.equals(
 						this.snapshotsAreVisible, createResourcePoolPayload.snapshotsAreVisible)
 				&& Objects.equals(
@@ -311,6 +336,7 @@ public class CreateResourcePoolPayload {
 				name,
 				performanceClass,
 				sizeGigabytes,
+				snapshotPolicyId,
 				snapshotsAreVisible,
 				additionalProperties);
 	}
@@ -325,6 +351,7 @@ public class CreateResourcePoolPayload {
 		sb.append("    name: ").append(toIndentedString(name)).append("\n");
 		sb.append("    performanceClass: ").append(toIndentedString(performanceClass)).append("\n");
 		sb.append("    sizeGigabytes: ").append(toIndentedString(sizeGigabytes)).append("\n");
+		sb.append("    snapshotPolicyId: ").append(toIndentedString(snapshotPolicyId)).append("\n");
 		sb.append("    snapshotsAreVisible: ")
 				.append(toIndentedString(snapshotsAreVisible))
 				.append("\n");
@@ -360,6 +387,7 @@ public class CreateResourcePoolPayload {
 								"name",
 								"performanceClass",
 								"sizeGigabytes",
+								"snapshotPolicyId",
 								"snapshotsAreVisible"));
 
 		// a set of required properties/fields (JSON key names)
@@ -434,6 +462,15 @@ public class CreateResourcePoolPayload {
 							java.util.Locale.ROOT,
 							"Expected the field `performanceClass` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("performanceClass").toString()));
+		}
+		if ((jsonObj.get("snapshotPolicyId") != null
+						&& !jsonObj.get("snapshotPolicyId").isJsonNull())
+				&& !jsonObj.get("snapshotPolicyId").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `snapshotPolicyId` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("snapshotPolicyId").toString()));
 		}
 	}
 
