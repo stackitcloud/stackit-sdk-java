@@ -59,6 +59,11 @@ public class Server {
 	@SerializedName(SERIALIZED_NAME_BOOT_VOLUME)
 	@javax.annotation.Nullable private BootVolume bootVolume;
 
+	public static final String SERIALIZED_NAME_CONFIG_DRIVE = "configDrive";
+
+	@SerializedName(SERIALIZED_NAME_CONFIG_DRIVE)
+	@javax.annotation.Nullable private Boolean configDrive = false;
+
 	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
 
 	@SerializedName(SERIALIZED_NAME_CREATED_AT)
@@ -258,6 +263,24 @@ public class Server {
 
 	public void setBootVolume(@javax.annotation.Nullable BootVolume bootVolume) {
 		this.bootVolume = bootVolume;
+	}
+
+	public Server configDrive(@javax.annotation.Nullable Boolean configDrive) {
+		this.configDrive = configDrive;
+		return this;
+	}
+
+	/**
+	 * When true the server is created with a config drive.
+	 *
+	 * @return configDrive
+	 */
+	@javax.annotation.Nullable public Boolean getConfigDrive() {
+		return configDrive;
+	}
+
+	public void setConfigDrive(@javax.annotation.Nullable Boolean configDrive) {
+		this.configDrive = configDrive;
 	}
 
 	/**
@@ -638,6 +661,7 @@ public class Server {
 				&& Objects.equals(this.agent, server.agent)
 				&& Objects.equals(this.availabilityZone, server.availabilityZone)
 				&& Objects.equals(this.bootVolume, server.bootVolume)
+				&& Objects.equals(this.configDrive, server.configDrive)
 				&& Objects.equals(this.createdAt, server.createdAt)
 				&& Objects.equals(this.errorMessage, server.errorMessage)
 				&& Objects.equals(this.id, server.id)
@@ -668,6 +692,7 @@ public class Server {
 				agent,
 				availabilityZone,
 				bootVolume,
+				configDrive,
 				createdAt,
 				errorMessage,
 				id,
@@ -699,6 +724,7 @@ public class Server {
 		sb.append("    agent: ").append(toIndentedString(agent)).append("\n");
 		sb.append("    availabilityZone: ").append(toIndentedString(availabilityZone)).append("\n");
 		sb.append("    bootVolume: ").append(toIndentedString(bootVolume)).append("\n");
+		sb.append("    configDrive: ").append(toIndentedString(configDrive)).append("\n");
 		sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
 		sb.append("    errorMessage: ").append(toIndentedString(errorMessage)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
@@ -753,6 +779,7 @@ public class Server {
 								"agent",
 								"availabilityZone",
 								"bootVolume",
+								"configDrive",
 								"createdAt",
 								"errorMessage",
 								"id",
