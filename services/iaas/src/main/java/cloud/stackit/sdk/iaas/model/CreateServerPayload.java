@@ -59,6 +59,11 @@ public class CreateServerPayload {
 	@SerializedName(SERIALIZED_NAME_BOOT_VOLUME)
 	@javax.annotation.Nullable private BootVolume bootVolume;
 
+	public static final String SERIALIZED_NAME_CONFIG_DRIVE = "configDrive";
+
+	@SerializedName(SERIALIZED_NAME_CONFIG_DRIVE)
+	@javax.annotation.Nullable private Boolean configDrive = false;
+
 	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
 
 	@SerializedName(SERIALIZED_NAME_CREATED_AT)
@@ -260,6 +265,24 @@ public class CreateServerPayload {
 
 	public void setBootVolume(@javax.annotation.Nullable BootVolume bootVolume) {
 		this.bootVolume = bootVolume;
+	}
+
+	public CreateServerPayload configDrive(@javax.annotation.Nullable Boolean configDrive) {
+		this.configDrive = configDrive;
+		return this;
+	}
+
+	/**
+	 * When true the server is created with a config drive.
+	 *
+	 * @return configDrive
+	 */
+	@javax.annotation.Nullable public Boolean getConfigDrive() {
+		return configDrive;
+	}
+
+	public void setConfigDrive(@javax.annotation.Nullable Boolean configDrive) {
+		this.configDrive = configDrive;
 	}
 
 	/**
@@ -645,6 +668,7 @@ public class CreateServerPayload {
 				&& Objects.equals(this.agent, createServerPayload.agent)
 				&& Objects.equals(this.availabilityZone, createServerPayload.availabilityZone)
 				&& Objects.equals(this.bootVolume, createServerPayload.bootVolume)
+				&& Objects.equals(this.configDrive, createServerPayload.configDrive)
 				&& Objects.equals(this.createdAt, createServerPayload.createdAt)
 				&& Objects.equals(this.errorMessage, createServerPayload.errorMessage)
 				&& Objects.equals(this.id, createServerPayload.id)
@@ -676,6 +700,7 @@ public class CreateServerPayload {
 				agent,
 				availabilityZone,
 				bootVolume,
+				configDrive,
 				createdAt,
 				errorMessage,
 				id,
@@ -707,6 +732,7 @@ public class CreateServerPayload {
 		sb.append("    agent: ").append(toIndentedString(agent)).append("\n");
 		sb.append("    availabilityZone: ").append(toIndentedString(availabilityZone)).append("\n");
 		sb.append("    bootVolume: ").append(toIndentedString(bootVolume)).append("\n");
+		sb.append("    configDrive: ").append(toIndentedString(configDrive)).append("\n");
 		sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
 		sb.append("    errorMessage: ").append(toIndentedString(errorMessage)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
@@ -761,6 +787,7 @@ public class CreateServerPayload {
 								"agent",
 								"availabilityZone",
 								"bootVolume",
+								"configDrive",
 								"createdAt",
 								"errorMessage",
 								"id",
