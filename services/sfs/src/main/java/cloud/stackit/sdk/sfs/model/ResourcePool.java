@@ -31,6 +31,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 /** ResourcePool */
 @javax.annotation.Generated(
@@ -92,6 +93,11 @@ public class ResourcePool {
 
 	@SerializedName(SERIALIZED_NAME_SIZE_REDUCIBLE_AT)
 	@javax.annotation.Nullable private OffsetDateTime sizeReducibleAt;
+
+	public static final String SERIALIZED_NAME_SNAPSHOT_POLICY = "snapshotPolicy";
+
+	@SerializedName(SERIALIZED_NAME_SNAPSHOT_POLICY)
+	@javax.annotation.Nullable private ResourcePoolSnapshotPolicy snapshotPolicy;
 
 	public static final String SERIALIZED_NAME_SNAPSHOTS_ARE_VISIBLE = "snapshotsAreVisible";
 
@@ -331,6 +337,26 @@ public class ResourcePool {
 		this.sizeReducibleAt = sizeReducibleAt;
 	}
 
+	public ResourcePool snapshotPolicy(
+			@javax.annotation.Nullable ResourcePoolSnapshotPolicy snapshotPolicy) {
+		this.snapshotPolicy = snapshotPolicy;
+		return this;
+	}
+
+	/**
+	 * (optional) Snapshot Policy
+	 *
+	 * @return snapshotPolicy
+	 */
+	@javax.annotation.Nullable public ResourcePoolSnapshotPolicy getSnapshotPolicy() {
+		return snapshotPolicy;
+	}
+
+	public void setSnapshotPolicy(
+			@javax.annotation.Nullable ResourcePoolSnapshotPolicy snapshotPolicy) {
+		this.snapshotPolicy = snapshotPolicy;
+	}
+
 	public ResourcePool snapshotsAreVisible(
 			@javax.annotation.Nullable Boolean snapshotsAreVisible) {
 		this.snapshotsAreVisible = snapshotsAreVisible;
@@ -457,10 +483,20 @@ public class ResourcePool {
 						this.performanceClassDowngradableAt,
 						resourcePool.performanceClassDowngradableAt)
 				&& Objects.equals(this.sizeReducibleAt, resourcePool.sizeReducibleAt)
+				&& Objects.equals(this.snapshotPolicy, resourcePool.snapshotPolicy)
 				&& Objects.equals(this.snapshotsAreVisible, resourcePool.snapshotsAreVisible)
 				&& Objects.equals(this.space, resourcePool.space)
 				&& Objects.equals(this.state, resourcePool.state)
 				&& Objects.equals(this.additionalProperties, resourcePool.additionalProperties);
+	}
+
+	private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+		return a == b
+				|| (a != null
+						&& b != null
+						&& a.isPresent()
+						&& b.isPresent()
+						&& Objects.deepEquals(a.get(), b.get()));
 	}
 
 	@Override
@@ -477,10 +513,18 @@ public class ResourcePool {
 				performanceClass,
 				performanceClassDowngradableAt,
 				sizeReducibleAt,
+				snapshotPolicy,
 				snapshotsAreVisible,
 				space,
 				state,
 				additionalProperties);
+	}
+
+	private static <T> int hashCodeNullable(JsonNullable<T> a) {
+		if (a == null) {
+			return 1;
+		}
+		return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
 	}
 
 	@Override
@@ -500,6 +544,7 @@ public class ResourcePool {
 				.append(toIndentedString(performanceClassDowngradableAt))
 				.append("\n");
 		sb.append("    sizeReducibleAt: ").append(toIndentedString(sizeReducibleAt)).append("\n");
+		sb.append("    snapshotPolicy: ").append(toIndentedString(snapshotPolicy)).append("\n");
 		sb.append("    snapshotsAreVisible: ")
 				.append(toIndentedString(snapshotsAreVisible))
 				.append("\n");
@@ -542,6 +587,7 @@ public class ResourcePool {
 								"performanceClass",
 								"performanceClassDowngradableAt",
 								"sizeReducibleAt",
+								"snapshotPolicy",
 								"snapshotsAreVisible",
 								"space",
 								"state"));
@@ -615,6 +661,10 @@ public class ResourcePool {
 		if (jsonObj.get("performanceClass") != null
 				&& !jsonObj.get("performanceClass").isJsonNull()) {
 			ResourcePoolPerformanceClass.validateJsonElement(jsonObj.get("performanceClass"));
+		}
+		// validate the optional field `snapshotPolicy`
+		if (jsonObj.get("snapshotPolicy") != null && !jsonObj.get("snapshotPolicy").isJsonNull()) {
+			ResourcePoolSnapshotPolicy.validateJsonElement(jsonObj.get("snapshotPolicy"));
 		}
 		// validate the optional field `space`
 		if (jsonObj.get("space") != null && !jsonObj.get("space").isJsonNull()) {
