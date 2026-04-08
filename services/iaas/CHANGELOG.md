@@ -1,3 +1,7 @@
+## v1.1.0
+- **Feature:** Add `cascade` parameter to `deleteVolume` methods in `DefaultApi` / `IaasApi` class
+- **Feature:** Add methods for new attribute `configDrive` in `CreateServerPayload` and `Server` class
+
 ## v1.0.1
 - **Docs:** Extend docs of class `PortRange`
 

@@ -1,6 +1,10 @@
 ## Release (2026-MM-DD)
-- `iaas`: [v1.0.1](services/iaas/CHANGELOG.md#v101)
-  - **Docs:** Extend docs of class `PortRange`
+- `iaas`: 
+  - [v1.0.1](services/iaas/CHANGELOG.md#v101)
+    - **Docs:** Extend docs of class `PortRange`
+  - [v1.1.0](services/iaas/CHANGELOG.md#v110)
+    - **Feature:** Add `cascade` parameter to `deleteVolume` methods in `DefaultApi` / `IaasApi` class
+    - **Feature:** Add methods for new attribute `configDrive` in `CreateServerPayload` and `Server` class
 
 ## Release (2026-03-24)
 - `alb`:
