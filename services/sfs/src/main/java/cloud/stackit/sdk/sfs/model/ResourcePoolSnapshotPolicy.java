@@ -29,110 +29,58 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.openapitools.jackson.nullable.JsonNullable;
 
-/** ResourcePoolSpace */
+/** ResourcePoolSnapshotPolicy */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
 		comments = "Generator version: 7.19.0")
-public class ResourcePoolSpace {
-	public static final String SERIALIZED_NAME_AVAILABLE_GIGABYTES = "availableGigabytes";
+public class ResourcePoolSnapshotPolicy {
+	public static final String SERIALIZED_NAME_ID = "id";
 
-	@SerializedName(SERIALIZED_NAME_AVAILABLE_GIGABYTES)
-	@javax.annotation.Nullable private Double availableGigabytes;
+	@SerializedName(SERIALIZED_NAME_ID)
+	@javax.annotation.Nullable private String id;
 
-	public static final String SERIALIZED_NAME_SIZE_GIGABYTES = "sizeGigabytes";
+	public static final String SERIALIZED_NAME_NAME = "name";
 
-	@SerializedName(SERIALIZED_NAME_SIZE_GIGABYTES)
-	@javax.annotation.Nullable private Integer sizeGigabytes;
+	@SerializedName(SERIALIZED_NAME_NAME)
+	@javax.annotation.Nullable private String name;
 
-	public static final String SERIALIZED_NAME_USED_BY_SNAPSHOTS_GIGABYTES =
-			"usedBySnapshotsGigabytes";
+	public ResourcePoolSnapshotPolicy() {}
 
-	@SerializedName(SERIALIZED_NAME_USED_BY_SNAPSHOTS_GIGABYTES)
-	@javax.annotation.Nullable private Double usedBySnapshotsGigabytes;
-
-	public static final String SERIALIZED_NAME_USED_GIGABYTES = "usedGigabytes";
-
-	@SerializedName(SERIALIZED_NAME_USED_GIGABYTES)
-	@javax.annotation.Nullable private Double usedGigabytes;
-
-	public ResourcePoolSpace() {}
-
-	public ResourcePoolSpace availableGigabytes(
-			@javax.annotation.Nullable Double availableGigabytes) {
-		this.availableGigabytes = availableGigabytes;
+	public ResourcePoolSnapshotPolicy id(@javax.annotation.Nullable String id) {
+		this.id = id;
 		return this;
 	}
 
 	/**
-	 * Available space of the Resource Pool (only available when retrieving a single Resource Pool
-	 * by ID)
+	 * ID of the Snapshot Policy
 	 *
-	 * @return availableGigabytes
+	 * @return id
 	 */
-	@javax.annotation.Nullable public Double getAvailableGigabytes() {
-		return availableGigabytes;
+	@javax.annotation.Nullable public String getId() {
+		return id;
 	}
 
-	public void setAvailableGigabytes(@javax.annotation.Nullable Double availableGigabytes) {
-		this.availableGigabytes = availableGigabytes;
+	public void setId(@javax.annotation.Nullable String id) {
+		this.id = id;
 	}
 
-	public ResourcePoolSpace sizeGigabytes(@javax.annotation.Nullable Integer sizeGigabytes) {
-		this.sizeGigabytes = sizeGigabytes;
+	public ResourcePoolSnapshotPolicy name(@javax.annotation.Nullable String name) {
+		this.name = name;
 		return this;
 	}
 
 	/**
-	 * Size of the Resource Pool in Gibibytes.
+	 * Name of the Snapshot Policy
 	 *
-	 * @return sizeGigabytes
+	 * @return name
 	 */
-	@javax.annotation.Nullable public Integer getSizeGigabytes() {
-		return sizeGigabytes;
+	@javax.annotation.Nullable public String getName() {
+		return name;
 	}
 
-	public void setSizeGigabytes(@javax.annotation.Nullable Integer sizeGigabytes) {
-		this.sizeGigabytes = sizeGigabytes;
-	}
-
-	public ResourcePoolSpace usedBySnapshotsGigabytes(
-			@javax.annotation.Nullable Double usedBySnapshotsGigabytes) {
-		this.usedBySnapshotsGigabytes = usedBySnapshotsGigabytes;
-		return this;
-	}
-
-	/**
-	 * Used space by snapshots (only available when retrieving a single Resource Pool by ID)
-	 *
-	 * @return usedBySnapshotsGigabytes
-	 */
-	@javax.annotation.Nullable public Double getUsedBySnapshotsGigabytes() {
-		return usedBySnapshotsGigabytes;
-	}
-
-	public void setUsedBySnapshotsGigabytes(
-			@javax.annotation.Nullable Double usedBySnapshotsGigabytes) {
-		this.usedBySnapshotsGigabytes = usedBySnapshotsGigabytes;
-	}
-
-	public ResourcePoolSpace usedGigabytes(@javax.annotation.Nullable Double usedGigabytes) {
-		this.usedGigabytes = usedGigabytes;
-		return this;
-	}
-
-	/**
-	 * Used space of the Resource Pool (only available when retrieving a single Resource Pool by ID)
-	 *
-	 * @return usedGigabytes
-	 */
-	@javax.annotation.Nullable public Double getUsedGigabytes() {
-		return usedGigabytes;
-	}
-
-	public void setUsedGigabytes(@javax.annotation.Nullable Double usedGigabytes) {
-		this.usedGigabytes = usedGigabytes;
+	public void setName(@javax.annotation.Nullable String name) {
+		this.name = name;
 	}
 
 	/**
@@ -147,9 +95,9 @@ public class ResourcePoolSpace {
 	 *
 	 * @param key name of the property
 	 * @param value value of the property
-	 * @return the ResourcePoolSpace instance itself
+	 * @return the ResourcePoolSnapshotPolicy instance itself
 	 */
-	public ResourcePoolSpace putAdditionalProperty(String key, Object value) {
+	public ResourcePoolSnapshotPolicy putAdditionalProperty(String key, Object value) {
 		if (this.additionalProperties == null) {
 			this.additionalProperties = new HashMap<String, Object>();
 		}
@@ -187,54 +135,24 @@ public class ResourcePoolSpace {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		ResourcePoolSpace resourcePoolSpace = (ResourcePoolSpace) o;
-		return Objects.equals(this.availableGigabytes, resourcePoolSpace.availableGigabytes)
-				&& Objects.equals(this.sizeGigabytes, resourcePoolSpace.sizeGigabytes)
+		ResourcePoolSnapshotPolicy resourcePoolSnapshotPolicy = (ResourcePoolSnapshotPolicy) o;
+		return Objects.equals(this.id, resourcePoolSnapshotPolicy.id)
+				&& Objects.equals(this.name, resourcePoolSnapshotPolicy.name)
 				&& Objects.equals(
-						this.usedBySnapshotsGigabytes, resourcePoolSpace.usedBySnapshotsGigabytes)
-				&& Objects.equals(this.usedGigabytes, resourcePoolSpace.usedGigabytes)
-				&& Objects.equals(
-						this.additionalProperties, resourcePoolSpace.additionalProperties);
-	}
-
-	private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-		return a == b
-				|| (a != null
-						&& b != null
-						&& a.isPresent()
-						&& b.isPresent()
-						&& Objects.deepEquals(a.get(), b.get()));
+						this.additionalProperties, resourcePoolSnapshotPolicy.additionalProperties);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(
-				availableGigabytes,
-				sizeGigabytes,
-				usedBySnapshotsGigabytes,
-				usedGigabytes,
-				additionalProperties);
-	}
-
-	private static <T> int hashCodeNullable(JsonNullable<T> a) {
-		if (a == null) {
-			return 1;
-		}
-		return a.isPresent() ? Arrays.deepHashCode(new Object[] {a.get()}) : 31;
+		return Objects.hash(id, name, additionalProperties);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class ResourcePoolSpace {\n");
-		sb.append("    availableGigabytes: ")
-				.append(toIndentedString(availableGigabytes))
-				.append("\n");
-		sb.append("    sizeGigabytes: ").append(toIndentedString(sizeGigabytes)).append("\n");
-		sb.append("    usedBySnapshotsGigabytes: ")
-				.append(toIndentedString(usedBySnapshotsGigabytes))
-				.append("\n");
-		sb.append("    usedGigabytes: ").append(toIndentedString(usedGigabytes)).append("\n");
+		sb.append("class ResourcePoolSnapshotPolicy {\n");
+		sb.append("    id: ").append(toIndentedString(id)).append("\n");
+		sb.append("    name: ").append(toIndentedString(name)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -258,13 +176,7 @@ public class ResourcePoolSpace {
 
 	static {
 		// a set of all properties/fields (JSON key names)
-		openapiFields =
-				new HashSet<String>(
-						Arrays.asList(
-								"availableGigabytes",
-								"sizeGigabytes",
-								"usedBySnapshotsGigabytes",
-								"usedGigabytes"));
+		openapiFields = new HashSet<String>(Arrays.asList("id", "name"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(0);
@@ -274,37 +186,54 @@ public class ResourcePoolSpace {
 	 * Validates the JSON Element and throws an exception if issues found
 	 *
 	 * @param jsonElement JSON Element
-	 * @throws IOException if the JSON Element is invalid with respect to ResourcePoolSpace
+	 * @throws IOException if the JSON Element is invalid with respect to ResourcePoolSnapshotPolicy
 	 */
 	public static void validateJsonElement(JsonElement jsonElement) throws IOException {
 		if (jsonElement == null) {
-			if (!ResourcePoolSpace.openapiRequiredFields
+			if (!ResourcePoolSnapshotPolicy.openapiRequiredFields
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
 								java.util.Locale.ROOT,
-								"The required field(s) %s in ResourcePoolSpace is not found in the empty JSON string",
-								ResourcePoolSpace.openapiRequiredFields.toString()));
+								"The required field(s) %s in ResourcePoolSnapshotPolicy is not found in the empty JSON string",
+								ResourcePoolSnapshotPolicy.openapiRequiredFields.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
+		if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull())
+				&& !jsonObj.get("id").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `id` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("id").toString()));
+		}
+		if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull())
+				&& !jsonObj.get("name").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `name` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("name").toString()));
+		}
 	}
 
 	public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
 		@SuppressWarnings("unchecked")
 		@Override
 		public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-			if (!ResourcePoolSpace.class.isAssignableFrom(type.getRawType())) {
-				return null; // this class only serializes 'ResourcePoolSpace' and its subtypes
+			if (!ResourcePoolSnapshotPolicy.class.isAssignableFrom(type.getRawType())) {
+				return null; // this class only serializes 'ResourcePoolSnapshotPolicy' and its
+				// subtypes
 			}
 			final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-			final TypeAdapter<ResourcePoolSpace> thisAdapter =
-					gson.getDelegateAdapter(this, TypeToken.get(ResourcePoolSpace.class));
+			final TypeAdapter<ResourcePoolSnapshotPolicy> thisAdapter =
+					gson.getDelegateAdapter(this, TypeToken.get(ResourcePoolSnapshotPolicy.class));
 
 			return (TypeAdapter<T>)
-					new TypeAdapter<ResourcePoolSpace>() {
+					new TypeAdapter<ResourcePoolSnapshotPolicy>() {
 						@Override
-						public void write(JsonWriter out, ResourcePoolSpace value)
+						public void write(JsonWriter out, ResourcePoolSnapshotPolicy value)
 								throws IOException {
 							JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
 							obj.remove("additionalProperties");
@@ -335,12 +264,12 @@ public class ResourcePoolSpace {
 						}
 
 						@Override
-						public ResourcePoolSpace read(JsonReader in) throws IOException {
+						public ResourcePoolSnapshotPolicy read(JsonReader in) throws IOException {
 							JsonElement jsonElement = elementAdapter.read(in);
 							validateJsonElement(jsonElement);
 							JsonObject jsonObj = jsonElement.getAsJsonObject();
 							// store additional fields in the deserialized instance
-							ResourcePoolSpace instance = thisAdapter.fromJsonTree(jsonObj);
+							ResourcePoolSnapshotPolicy instance = thisAdapter.fromJsonTree(jsonObj);
 							for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
 								if (!openapiFields.contains(entry.getKey())) {
 									if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -379,18 +308,18 @@ public class ResourcePoolSpace {
 	}
 
 	/**
-	 * Create an instance of ResourcePoolSpace given an JSON string
+	 * Create an instance of ResourcePoolSnapshotPolicy given an JSON string
 	 *
 	 * @param jsonString JSON string
-	 * @return An instance of ResourcePoolSpace
-	 * @throws IOException if the JSON string is invalid with respect to ResourcePoolSpace
+	 * @return An instance of ResourcePoolSnapshotPolicy
+	 * @throws IOException if the JSON string is invalid with respect to ResourcePoolSnapshotPolicy
 	 */
-	public static ResourcePoolSpace fromJson(String jsonString) throws IOException {
-		return JSON.getGson().fromJson(jsonString, ResourcePoolSpace.class);
+	public static ResourcePoolSnapshotPolicy fromJson(String jsonString) throws IOException {
+		return JSON.getGson().fromJson(jsonString, ResourcePoolSnapshotPolicy.class);
 	}
 
 	/**
-	 * Convert an instance of ResourcePoolSpace to an JSON string
+	 * Convert an instance of ResourcePoolSnapshotPolicy to an JSON string
 	 *
 	 * @return JSON string
 	 */
