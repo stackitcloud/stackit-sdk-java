@@ -10334,6 +10334,7 @@ class DefaultApi {
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
 	 * @param volumeId The identifier (ID) of a STACKIT Volume. (required)
+	 * @param cascade Cascade action. (optional, default to false)
 	 * @param _callback Callback for upload/download progress
 	 * @return Call to execute
 	 * @throws ApiException If fail to serialize the request body object
@@ -10354,6 +10355,7 @@ class DefaultApi {
 			@javax.annotation.Nonnull UUID projectId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull UUID volumeId,
+			@javax.annotation.Nullable Boolean cascade,
 			final ApiCallback _callback)
 			throws ApiException {
 		String basePath = null;
@@ -10390,6 +10392,10 @@ class DefaultApi {
 		Map<String, String> localVarCookieParams = new HashMap<String, String>();
 		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
+		if (cascade != null) {
+			localVarQueryParams.addAll(localVarApiClient.parameterToPair("cascade", cascade));
+		}
+
 		final String[] localVarAccepts = {"application/json"};
 		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
 		if (localVarAccept != null) {
@@ -10423,6 +10429,7 @@ class DefaultApi {
 			@javax.annotation.Nonnull UUID projectId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull UUID volumeId,
+			@javax.annotation.Nullable Boolean cascade,
 			final ApiCallback _callback)
 			throws ApiException {
 		// verify the required parameter 'projectId' is set
@@ -10443,7 +10450,7 @@ class DefaultApi {
 					"Missing the required parameter 'volumeId' when calling deleteVolume(Async)");
 		}
 
-		return deleteVolumeCall(projectId, region, volumeId, _callback);
+		return deleteVolumeCall(projectId, region, volumeId, cascade, _callback);
 	}
 
 	/**
@@ -10453,6 +10460,7 @@ class DefaultApi {
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
 	 * @param volumeId The identifier (ID) of a STACKIT Volume. (required)
+	 * @param cascade Cascade action. (optional, default to false)
 	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
 	 *     response body
 	 * @http.response.details
@@ -10471,9 +10479,10 @@ class DefaultApi {
 	public void deleteVolume(
 			@javax.annotation.Nonnull UUID projectId,
 			@javax.annotation.Nonnull String region,
-			@javax.annotation.Nonnull UUID volumeId)
+			@javax.annotation.Nonnull UUID volumeId,
+			@javax.annotation.Nullable Boolean cascade)
 			throws ApiException {
-		deleteVolumeWithHttpInfo(projectId, region, volumeId);
+		deleteVolumeWithHttpInfo(projectId, region, volumeId, cascade);
 	}
 
 	/**
@@ -10483,6 +10492,7 @@ class DefaultApi {
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
 	 * @param volumeId The identifier (ID) of a STACKIT Volume. (required)
+	 * @param cascade Cascade action. (optional, default to false)
 	 * @return ApiResponse&lt;Void&gt;
 	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
 	 *     response body
@@ -10502,10 +10512,11 @@ class DefaultApi {
 	public ApiResponse<Void> deleteVolumeWithHttpInfo(
 			@javax.annotation.Nonnull UUID projectId,
 			@javax.annotation.Nonnull String region,
-			@javax.annotation.Nonnull UUID volumeId)
+			@javax.annotation.Nonnull UUID volumeId,
+			@javax.annotation.Nullable Boolean cascade)
 			throws ApiException {
 		okhttp3.Call localVarCall =
-				deleteVolumeValidateBeforeCall(projectId, region, volumeId, null);
+				deleteVolumeValidateBeforeCall(projectId, region, volumeId, cascade, null);
 		return localVarApiClient.execute(localVarCall);
 	}
 
@@ -10516,6 +10527,7 @@ class DefaultApi {
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
 	 * @param volumeId The identifier (ID) of a STACKIT Volume. (required)
+	 * @param cascade Cascade action. (optional, default to false)
 	 * @param _callback The callback to be executed when the API call finishes
 	 * @return The request call
 	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -10537,11 +10549,12 @@ class DefaultApi {
 			@javax.annotation.Nonnull UUID projectId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull UUID volumeId,
+			@javax.annotation.Nullable Boolean cascade,
 			final ApiCallback<Void> _callback)
 			throws ApiException {
 
 		okhttp3.Call localVarCall =
-				deleteVolumeValidateBeforeCall(projectId, region, volumeId, _callback);
+				deleteVolumeValidateBeforeCall(projectId, region, volumeId, cascade, _callback);
 		localVarApiClient.executeAsync(localVarCall, _callback);
 		return localVarCall;
 	}
