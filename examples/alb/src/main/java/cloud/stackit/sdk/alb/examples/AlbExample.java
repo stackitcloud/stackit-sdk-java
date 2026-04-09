@@ -1,7 +1,7 @@
 package cloud.stackit.sdk.alb.examples;
 
-import cloud.stackit.sdk.alb.api.AlbApi;
-import cloud.stackit.sdk.alb.model.*;
+import cloud.stackit.sdk.alb.v2api.api.AlbApi;
+import cloud.stackit.sdk.alb.v2api.model.*;
 import cloud.stackit.sdk.core.exception.ApiException;
 import java.io.IOException;
 import java.net.HttpURLConnection;
