@@ -1,3 +1,6 @@
+## v0.3.1
+- Deprecate `getSchedule` and `listSchedules` methods in `SfsApi` class
+
 ## v0.3.0
 - **Feature:** Add `disableLock`, `enableLock`, `getLock`, `getSchedule`, `listSchedules`, `getSnapshotPolicy`, `listSnapshotPolicies`,  methods to `DefaultApi` / `SfsApi` class
 - **Feature:** New model classes: `EnableLockResponse`, `GetLockResponse`, `GetScheduleResponse`, `GetSnapshotPolicyResponse`, `ListSchedulesResponse`, `ListSnapshotPoliciesResponse`, `ResourcePoolSnapshotPolicy`, `Schedule`, `SnapshotPolicy`, `SnapshotPolicySchedule`, `UpdateResourcePoolSnapshotPayload`, `UpdateResourcePoolSnapshotResponse`

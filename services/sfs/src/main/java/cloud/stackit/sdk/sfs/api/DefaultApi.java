@@ -2893,7 +2893,10 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call getScheduleCall(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String id,
@@ -2956,6 +2959,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call getScheduleValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId,
@@ -2992,7 +2996,10 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public GetScheduleResponse getSchedule(
 			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String id)
 			throws ApiException {
@@ -3015,7 +3022,10 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<GetScheduleResponse> getScheduleWithHttpInfo(
 			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String id)
 			throws ApiException {
@@ -3040,7 +3050,10 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call getScheduleAsync(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String id,
@@ -4233,7 +4246,10 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call listSchedulesCall(
 			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
 			throws ApiException {
@@ -4293,6 +4309,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call listSchedulesValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
@@ -4320,7 +4337,10 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ListSchedulesResponse listSchedules(@javax.annotation.Nonnull String projectId)
 			throws ApiException {
 		ApiResponse<ListSchedulesResponse> localVarResp = listSchedulesWithHttpInfo(projectId);
@@ -4341,7 +4361,10 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<ListSchedulesResponse> listSchedulesWithHttpInfo(
 			@javax.annotation.Nonnull String projectId) throws ApiException {
 		okhttp3.Call localVarCall = listSchedulesValidateBeforeCall(projectId, null);
@@ -4364,7 +4387,10 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 0 </td><td> Default error response </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call listSchedulesAsync(
 			@javax.annotation.Nonnull String projectId,
 			final ApiCallback<ListSchedulesResponse> _callback)
