@@ -1,3 +1,7 @@
+## Release (2026-MM-DD)
+- `sfs`: [v0.3.1](services/sfs/CHANGELOG.md#v031)
+  - Deprecate `getSchedule` and `listSchedules` methods in `SfsApi` class
+
 ## Release (2026-04-08)
 - `iaas`: 
   - [v1.0.1](services/iaas/CHANGELOG.md#v101)
