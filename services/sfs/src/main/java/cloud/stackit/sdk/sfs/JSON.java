@@ -132,8 +132,6 @@ public class JSON {
 				new cloud.stackit.sdk.sfs.model.GetResourcePoolSnapshotResponse
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
-				new cloud.stackit.sdk.sfs.model.GetScheduleResponse.CustomTypeAdapterFactory());
-		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.sfs.model.GetShareExportPolicyResponse
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
@@ -152,8 +150,6 @@ public class JSON {
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.sfs.model.ListResourcePoolsResponse
 						.CustomTypeAdapterFactory());
-		gsonBuilder.registerTypeAdapterFactory(
-				new cloud.stackit.sdk.sfs.model.ListSchedulesResponse.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.sfs.model.ListShareExportPoliciesResponse
 						.CustomTypeAdapterFactory());
@@ -176,8 +172,6 @@ public class JSON {
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.sfs.model.ResourcePoolSpace.CustomTypeAdapterFactory());
-		gsonBuilder.registerTypeAdapterFactory(
-				new cloud.stackit.sdk.sfs.model.Schedule.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.sfs.model.Share.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
