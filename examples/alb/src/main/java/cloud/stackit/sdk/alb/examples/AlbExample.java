@@ -190,6 +190,7 @@ final class AlbExample {
 									.listeners(
 											Collections.singletonList(
 													new Listener()
+															.name("listener-01")
 															.port(80)
 															.protocol(
 																	Listener.ProtocolEnum
@@ -284,6 +285,7 @@ final class AlbExample {
 									.listeners(
 											Collections.singletonList(
 													new Listener()
+															.name("listener-01")
 															.port(80)
 															.protocol(
 																	Listener.ProtocolEnum
