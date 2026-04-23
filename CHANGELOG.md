@@ -5,6 +5,8 @@
   - Deprecate `getSchedule` and `listSchedules` methods in `SfsApi` class
 
 ## Release (2026-04-08)
+- `alb`: [v0.5.0](services/alb/CHANGELOG.md#v050)
+  - **Feature (breaking change):** Introduction of multi API version support. See the GitHub discussion post for more details: https://github.com/stackitcloud/stackit-sdk-java/discussions/530
 - `iaas`: 
   - [v1.0.1](services/iaas/CHANGELOG.md#v101)
     - **Docs:** Extend docs of class `PortRange`
