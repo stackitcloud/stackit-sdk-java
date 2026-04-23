@@ -1,4 +1,6 @@
 ## Release (2026-MM-DD)
+- `resourcemanager`: [v0.5.0](services/resourcemanager/CHANGELOG.md#v050)
+  - **Feature (breaking change):** Introduction of multi API version support. See the GitHub discussion post for more details: https://github.com/stackitcloud/stackit-sdk-java/discussions/530
 - `sfs`: [v0.3.1](services/sfs/CHANGELOG.md#v031)
   - Deprecate `getSchedule` and `listSchedules` methods in `SfsApi` class
 

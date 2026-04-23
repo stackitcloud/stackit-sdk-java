@@ -2,8 +2,8 @@ package cloud.stackit.sdk.authentication.examples;
 
 import cloud.stackit.sdk.core.config.CoreConfiguration;
 import cloud.stackit.sdk.core.exception.ApiException;
-import cloud.stackit.sdk.resourcemanager.api.ResourceManagerApi;
-import cloud.stackit.sdk.resourcemanager.model.ListOrganizationsResponse;
+import cloud.stackit.sdk.resourcemanager.v0api.api.ResourceManagerApi;
+import cloud.stackit.sdk.resourcemanager.v0api.model.ListOrganizationsResponse;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
