@@ -1,8 +1,8 @@
 package cloud.stackit.sdk.iaas.examples;
 
 import cloud.stackit.sdk.core.exception.ApiException;
-import cloud.stackit.sdk.iaas.api.IaasApi;
-import cloud.stackit.sdk.iaas.model.*;
+import cloud.stackit.sdk.iaas.v2api.api.IaasApi;
+import cloud.stackit.sdk.iaas.v2api.model.*;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Collections;
