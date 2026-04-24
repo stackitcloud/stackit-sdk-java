@@ -1,3 +1,6 @@
+## v0.5.0
+- **Feature (breaking change):** Introduction of multi API version support. See the GitHub discussion post for more details: https://github.com/stackitcloud/stackit-sdk-java/discussions/530
+
 ## v0.4.0
 - Deprecation of methods `serverNameIndicators`, `setServerNameIndicators` and `getServerNameIndicators` in `Listener` model class
 
