@@ -1,3 +1,6 @@
+## v0.2.0
+- **Feature (breaking change):** Introduction of multi API version support. See the GitHub discussion post for more details: https://github.com/stackitcloud/stackit-sdk-java/discussions/530
+
 ## v0.1.3
 - Bump dependency `org.apache.commons:commons-lang3` to `3.18.0`
 - Bump dependency `org.openapitools:jackson-databind-nullable` to `0.2.8`
