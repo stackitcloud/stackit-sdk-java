@@ -1,8 +1,8 @@
 package cloud.stackit.sdk.loadbalancer.examples;
 
 import cloud.stackit.sdk.core.exception.ApiException;
-import cloud.stackit.sdk.loadbalancer.api.LoadBalancerApi;
-import cloud.stackit.sdk.loadbalancer.model.*;
+import cloud.stackit.sdk.loadbalancer.v2api.api.LoadBalancerApi;
+import cloud.stackit.sdk.loadbalancer.v2api.model.*;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.*;
