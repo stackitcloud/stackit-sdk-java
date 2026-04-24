@@ -1,10 +1,5 @@
 # STACKIT Java SDK for STACKIT File Storage (SFS)
 
-- API version: 1.0.0
-
-API used to create and manage NFS Shares.
-
-
 This package is part of the STACKIT Java SDK. For additional information, please visit the [GitHub repository](https://github.com/stackitcloud/stackit-sdk-java) of the SDK.
 
 ## Installation from Maven Central (recommended)
