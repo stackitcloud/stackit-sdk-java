@@ -1,3 +1,6 @@
+## v0.3.0
+- **Feature (breaking change):** Introduction of multi API version support. See the GitHub discussion post for more details: https://github.com/stackitcloud/stackit-sdk-java/discussions/530
+
 ## v0.2.0
 - New model classes: `ComplianceLockResponse`, `CredentialsGroupExtended`, `DefaultRetentionResponse`, `DeleteDefaultRetentionResponse`, `GetCredentialsGroupResponse`, `SetDefaultRetentionPayload`
 - New methods for `Bucket` model class: `objectLockEnabled`,`setObjectLockEnabled`,`getObjectLockEnabled`
