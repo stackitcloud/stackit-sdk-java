@@ -1,5 +1,10 @@
 # STACKIT Java SDK for STACKIT Server Update Management API
 
+- API version: 2.0
+
+API endpoints for Server Update Operations on STACKIT Servers.
+
+
 This package is part of the STACKIT Java SDK. For additional information, please visit the [GitHub repository](https://github.com/stackitcloud/stackit-sdk-java) of the SDK.
 
 ## Installation from Maven Central (recommended)
