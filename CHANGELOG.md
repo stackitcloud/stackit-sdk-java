@@ -11,6 +11,8 @@
   - **Feature (breaking change):** Introduction of multi API version support. See the GitHub discussion post for more details: https://github.com/stackitcloud/stackit-sdk-java/discussions/530
 - `loadbalancer`: [v0.5.0](services/loadbalancer/CHANGELOG.md#v050)
   - **Feature (breaking change):** Introduction of multi API version support. See the GitHub discussion post for more details: https://github.com/stackitcloud/stackit-sdk-java/discussions/530
+- `objectstorage`: [v0.3.0](services/objectstorage/CHANGELOG.md#v030)
+  - **Feature (breaking change):** Introduction of multi API version support. See the GitHub discussion post for more details: https://github.com/stackitcloud/stackit-sdk-java/discussions/530
 
 ## Release (2026-04-08)
 - `iaas`: 
