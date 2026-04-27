@@ -16,6 +16,8 @@
     - Deprecate `getSchedule` and `listSchedules` methods in `SfsApi` class
   - [v0.4.0](services/sfs/CHANGELOG.md#v040)
     - **Feature (breaking change):** Introduction of multi API version support. See the GitHub discussion post for more details: https://github.com/stackitcloud/stackit-sdk-java/discussions/530
+- `serverbackup`: [v0.2.0](services/serverbackup/CHANGELOG.md#v020)
+    - **Feature (breaking change):** Introduction of multi API version support. See the GitHub discussion post for more details: https://github.com/stackitcloud/stackit-sdk-java/discussions/530
 
 ## Release (2026-04-08)
 - `iaas`: 
