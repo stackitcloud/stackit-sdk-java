@@ -1,3 +1,6 @@
+## v1.2.0
+- **Feature (breaking change):** Introduction of multi API version support. See the GitHub discussion post for more details: https://github.com/stackitcloud/stackit-sdk-java/discussions/530
+
 ## v1.1.0
 - **Feature:** Add `cascade` parameter to `deleteVolume` methods in `DefaultApi` / `IaasApi` class
 - **Feature:** Add methods for new attribute `configDrive` in `CreateServerPayload` and `Server` class
