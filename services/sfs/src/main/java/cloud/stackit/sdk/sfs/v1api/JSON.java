@@ -199,6 +199,9 @@ public class JSON {
 				new cloud.stackit.sdk.sfs.v1api.model.SnapshotPolicySchedule
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.sfs.v1api.model.SnapshotPolicySnapshotPolicySchedule
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.sfs.v1api.model.Status.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.sfs.v1api.model.UpdateResourcePoolPayload

@@ -40,6 +40,11 @@ public class SnapshotPolicySchedule {
 	@SerializedName(SERIALIZED_NAME_COUNT)
 	@javax.annotation.Nullable private Integer count;
 
+	public static final String SERIALIZED_NAME_INTERVAL = "interval";
+
+	@SerializedName(SERIALIZED_NAME_INTERVAL)
+	@javax.annotation.Nullable private String interval;
+
 	public static final String SERIALIZED_NAME_PREFIX = "prefix";
 
 	@SerializedName(SERIALIZED_NAME_PREFIX)
@@ -63,7 +68,7 @@ public class SnapshotPolicySchedule {
 	}
 
 	/**
-	 * Get count
+	 * Retention Count
 	 *
 	 * @return count
 	 */
@@ -75,13 +80,31 @@ public class SnapshotPolicySchedule {
 		this.count = count;
 	}
 
+	public SnapshotPolicySchedule interval(@javax.annotation.Nullable String interval) {
+		this.interval = interval;
+		return this;
+	}
+
+	/**
+	 * Interval of the Schedule (follows the cron schedule expression in Unix-like systems)
+	 *
+	 * @return interval
+	 */
+	@javax.annotation.Nullable public String getInterval() {
+		return interval;
+	}
+
+	public void setInterval(@javax.annotation.Nullable String interval) {
+		this.interval = interval;
+	}
+
 	public SnapshotPolicySchedule prefix(@javax.annotation.Nullable String prefix) {
 		this.prefix = prefix;
 		return this;
 	}
 
 	/**
-	 * Get prefix
+	 * Prefix used for the snapshots created by this policy
 	 *
 	 * @return prefix
 	 */
@@ -100,7 +123,7 @@ public class SnapshotPolicySchedule {
 	}
 
 	/**
-	 * Get retentionPeriod
+	 * Retention Period (ISO 8601 format or \&quot;infinite\&quot;)
 	 *
 	 * @return retentionPeriod
 	 */
@@ -118,7 +141,7 @@ public class SnapshotPolicySchedule {
 	}
 
 	/**
-	 * Get scheduleId
+	 * ID of the Schedule
 	 *
 	 * @return scheduleId
 	 */
@@ -184,6 +207,7 @@ public class SnapshotPolicySchedule {
 		}
 		SnapshotPolicySchedule snapshotPolicySchedule = (SnapshotPolicySchedule) o;
 		return Objects.equals(this.count, snapshotPolicySchedule.count)
+				&& Objects.equals(this.interval, snapshotPolicySchedule.interval)
 				&& Objects.equals(this.prefix, snapshotPolicySchedule.prefix)
 				&& Objects.equals(this.retentionPeriod, snapshotPolicySchedule.retentionPeriod)
 				&& Objects.equals(this.scheduleId, snapshotPolicySchedule.scheduleId)
@@ -193,7 +217,8 @@ public class SnapshotPolicySchedule {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(count, prefix, retentionPeriod, scheduleId, additionalProperties);
+		return Objects.hash(
+				count, interval, prefix, retentionPeriod, scheduleId, additionalProperties);
 	}
 
 	@Override
@@ -201,6 +226,7 @@ public class SnapshotPolicySchedule {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class SnapshotPolicySchedule {\n");
 		sb.append("    count: ").append(toIndentedString(count)).append("\n");
+		sb.append("    interval: ").append(toIndentedString(interval)).append("\n");
 		sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
 		sb.append("    retentionPeriod: ").append(toIndentedString(retentionPeriod)).append("\n");
 		sb.append("    scheduleId: ").append(toIndentedString(scheduleId)).append("\n");
@@ -229,7 +255,8 @@ public class SnapshotPolicySchedule {
 		// a set of all properties/fields (JSON key names)
 		openapiFields =
 				new HashSet<String>(
-						Arrays.asList("count", "prefix", "retentionPeriod", "scheduleId"));
+						Arrays.asList(
+								"count", "interval", "prefix", "retentionPeriod", "scheduleId"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(0);
@@ -253,6 +280,14 @@ public class SnapshotPolicySchedule {
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
+		if ((jsonObj.get("interval") != null && !jsonObj.get("interval").isJsonNull())
+				&& !jsonObj.get("interval").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `interval` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("interval").toString()));
+		}
 		if ((jsonObj.get("prefix") != null && !jsonObj.get("prefix").isJsonNull())
 				&& !jsonObj.get("prefix").isJsonPrimitive()) {
 			throw new IllegalArgumentException(

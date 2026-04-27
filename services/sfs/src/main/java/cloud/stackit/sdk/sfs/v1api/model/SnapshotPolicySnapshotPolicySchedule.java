@@ -14,7 +14,6 @@ package cloud.stackit.sdk.sfs.v1api.model;
 
 import cloud.stackit.sdk.sfs.v1api.JSON;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
@@ -25,7 +24,6 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -33,74 +31,56 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** SnapshotPolicy */
+/** SnapshotPolicySnapshotPolicySchedule */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
 		comments = "Generator version: 7.19.0")
-public class SnapshotPolicy {
-	public static final String SERIALIZED_NAME_COMMENT = "comment";
-
-	@SerializedName(SERIALIZED_NAME_COMMENT)
-	@javax.annotation.Nullable private String comment;
-
+public class SnapshotPolicySnapshotPolicySchedule {
 	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
 
 	@SerializedName(SERIALIZED_NAME_CREATED_AT)
 	@javax.annotation.Nullable private OffsetDateTime createdAt;
-
-	public static final String SERIALIZED_NAME_ENABLED = "enabled";
-
-	@SerializedName(SERIALIZED_NAME_ENABLED)
-	@javax.annotation.Nullable private Boolean enabled;
 
 	public static final String SERIALIZED_NAME_ID = "id";
 
 	@SerializedName(SERIALIZED_NAME_ID)
 	@javax.annotation.Nullable private String id;
 
+	public static final String SERIALIZED_NAME_INTERVAL = "interval";
+
+	@SerializedName(SERIALIZED_NAME_INTERVAL)
+	@javax.annotation.Nullable private String interval;
+
 	public static final String SERIALIZED_NAME_NAME = "name";
 
 	@SerializedName(SERIALIZED_NAME_NAME)
 	@javax.annotation.Nullable private String name;
 
-	public static final String SERIALIZED_NAME_SCHEDULES = "schedules";
+	public static final String SERIALIZED_NAME_PREFIX = "prefix";
 
-	@Deprecated
-	@SerializedName(SERIALIZED_NAME_SCHEDULES)
-	@javax.annotation.Nullable private List<SnapshotPolicySchedule> schedules = new ArrayList<>();
+	@SerializedName(SERIALIZED_NAME_PREFIX)
+	@javax.annotation.Nullable private String prefix;
 
-	public static final String SERIALIZED_NAME_SNAPSHOT_SCHEDULES = "snapshotSchedules";
+	public static final String SERIALIZED_NAME_RETENTION_COUNT = "retentionCount";
 
-	@SerializedName(SERIALIZED_NAME_SNAPSHOT_SCHEDULES)
-	@javax.annotation.Nullable private List<SnapshotPolicySnapshotPolicySchedule> snapshotSchedules = new ArrayList<>();
+	@SerializedName(SERIALIZED_NAME_RETENTION_COUNT)
+	@javax.annotation.Nullable private Integer retentionCount;
 
-	public SnapshotPolicy() {}
+	public static final String SERIALIZED_NAME_RETENTION_PERIOD = "retentionPeriod";
 
-	public SnapshotPolicy comment(@javax.annotation.Nullable String comment) {
-		this.comment = comment;
-		return this;
-	}
+	@SerializedName(SERIALIZED_NAME_RETENTION_PERIOD)
+	@javax.annotation.Nullable private String retentionPeriod;
 
-	/**
-	 * Comment of the Snapshot Policy
-	 *
-	 * @return comment
-	 */
-	@javax.annotation.Nullable public String getComment() {
-		return comment;
-	}
+	public SnapshotPolicySnapshotPolicySchedule() {}
 
-	public void setComment(@javax.annotation.Nullable String comment) {
-		this.comment = comment;
-	}
-
-	public SnapshotPolicy createdAt(@javax.annotation.Nullable OffsetDateTime createdAt) {
+	public SnapshotPolicySnapshotPolicySchedule createdAt(
+			@javax.annotation.Nullable OffsetDateTime createdAt) {
 		this.createdAt = createdAt;
 		return this;
 	}
 
 	/**
-	 * created at timestamp
+	 * Get createdAt
 	 *
 	 * @return createdAt
 	 */
@@ -112,31 +92,13 @@ public class SnapshotPolicy {
 		this.createdAt = createdAt;
 	}
 
-	public SnapshotPolicy enabled(@javax.annotation.Nullable Boolean enabled) {
-		this.enabled = enabled;
-		return this;
-	}
-
-	/**
-	 * Wether the Snapshot Policy is enabled
-	 *
-	 * @return enabled
-	 */
-	@javax.annotation.Nullable public Boolean getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(@javax.annotation.Nullable Boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	public SnapshotPolicy id(@javax.annotation.Nullable String id) {
+	public SnapshotPolicySnapshotPolicySchedule id(@javax.annotation.Nullable String id) {
 		this.id = id;
 		return this;
 	}
 
 	/**
-	 * ID of the Snapshot Policy
+	 * ID of the Schedule
 	 *
 	 * @return id
 	 */
@@ -148,13 +110,32 @@ public class SnapshotPolicy {
 		this.id = id;
 	}
 
-	public SnapshotPolicy name(@javax.annotation.Nullable String name) {
+	public SnapshotPolicySnapshotPolicySchedule interval(
+			@javax.annotation.Nullable String interval) {
+		this.interval = interval;
+		return this;
+	}
+
+	/**
+	 * Interval of the Schedule (follows the cron schedule expression in Unix-like systems)
+	 *
+	 * @return interval
+	 */
+	@javax.annotation.Nullable public String getInterval() {
+		return interval;
+	}
+
+	public void setInterval(@javax.annotation.Nullable String interval) {
+		this.interval = interval;
+	}
+
+	public SnapshotPolicySnapshotPolicySchedule name(@javax.annotation.Nullable String name) {
 		this.name = name;
 		return this;
 	}
 
 	/**
-	 * Name of the Snapshot Policy
+	 * Name of the Schedule
 	 *
 	 * @return name
 	 */
@@ -166,64 +147,60 @@ public class SnapshotPolicy {
 		this.name = name;
 	}
 
-	@Deprecated
-	public SnapshotPolicy schedules(
-			@javax.annotation.Nullable List<SnapshotPolicySchedule> schedules) {
-		this.schedules = schedules;
-		return this;
-	}
-
-	public SnapshotPolicy addSchedulesItem(SnapshotPolicySchedule schedulesItem) {
-		if (this.schedules == null) {
-			this.schedules = new ArrayList<>();
-		}
-		this.schedules.add(schedulesItem);
+	public SnapshotPolicySnapshotPolicySchedule prefix(@javax.annotation.Nullable String prefix) {
+		this.prefix = prefix;
 		return this;
 	}
 
 	/**
-	 * (deprecated) associated schedules
+	 * Prefix used for the snapshots created by this policy
 	 *
-	 * @return schedules
-	 * @deprecated
+	 * @return prefix
 	 */
-	@Deprecated
-	@javax.annotation.Nullable public List<SnapshotPolicySchedule> getSchedules() {
-		return schedules;
+	@javax.annotation.Nullable public String getPrefix() {
+		return prefix;
 	}
 
-	@Deprecated
-	public void setSchedules(@javax.annotation.Nullable List<SnapshotPolicySchedule> schedules) {
-		this.schedules = schedules;
+	public void setPrefix(@javax.annotation.Nullable String prefix) {
+		this.prefix = prefix;
 	}
 
-	public SnapshotPolicy snapshotSchedules(
-			@javax.annotation.Nullable List<SnapshotPolicySnapshotPolicySchedule> snapshotSchedules) {
-		this.snapshotSchedules = snapshotSchedules;
-		return this;
-	}
-
-	public SnapshotPolicy addSnapshotSchedulesItem(
-			SnapshotPolicySnapshotPolicySchedule snapshotSchedulesItem) {
-		if (this.snapshotSchedules == null) {
-			this.snapshotSchedules = new ArrayList<>();
-		}
-		this.snapshotSchedules.add(snapshotSchedulesItem);
+	public SnapshotPolicySnapshotPolicySchedule retentionCount(
+			@javax.annotation.Nullable Integer retentionCount) {
+		this.retentionCount = retentionCount;
 		return this;
 	}
 
 	/**
-	 * associated schedules
+	 * Retention Count
 	 *
-	 * @return snapshotSchedules
+	 * @return retentionCount
 	 */
-	@javax.annotation.Nullable public List<SnapshotPolicySnapshotPolicySchedule> getSnapshotSchedules() {
-		return snapshotSchedules;
+	@javax.annotation.Nullable public Integer getRetentionCount() {
+		return retentionCount;
 	}
 
-	public void setSnapshotSchedules(
-			@javax.annotation.Nullable List<SnapshotPolicySnapshotPolicySchedule> snapshotSchedules) {
-		this.snapshotSchedules = snapshotSchedules;
+	public void setRetentionCount(@javax.annotation.Nullable Integer retentionCount) {
+		this.retentionCount = retentionCount;
+	}
+
+	public SnapshotPolicySnapshotPolicySchedule retentionPeriod(
+			@javax.annotation.Nullable String retentionPeriod) {
+		this.retentionPeriod = retentionPeriod;
+		return this;
+	}
+
+	/**
+	 * Retention Period (ISO 8601 format or \&quot;infinite\&quot;)
+	 *
+	 * @return retentionPeriod
+	 */
+	@javax.annotation.Nullable public String getRetentionPeriod() {
+		return retentionPeriod;
+	}
+
+	public void setRetentionPeriod(@javax.annotation.Nullable String retentionPeriod) {
+		this.retentionPeriod = retentionPeriod;
 	}
 
 	/**
@@ -238,9 +215,9 @@ public class SnapshotPolicy {
 	 *
 	 * @param key name of the property
 	 * @param value value of the property
-	 * @return the SnapshotPolicy instance itself
+	 * @return the SnapshotPolicySnapshotPolicySchedule instance itself
 	 */
-	public SnapshotPolicy putAdditionalProperty(String key, Object value) {
+	public SnapshotPolicySnapshotPolicySchedule putAdditionalProperty(String key, Object value) {
 		if (this.additionalProperties == null) {
 			this.additionalProperties = new HashMap<String, Object>();
 		}
@@ -278,43 +255,46 @@ public class SnapshotPolicy {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		SnapshotPolicy snapshotPolicy = (SnapshotPolicy) o;
-		return Objects.equals(this.comment, snapshotPolicy.comment)
-				&& Objects.equals(this.createdAt, snapshotPolicy.createdAt)
-				&& Objects.equals(this.enabled, snapshotPolicy.enabled)
-				&& Objects.equals(this.id, snapshotPolicy.id)
-				&& Objects.equals(this.name, snapshotPolicy.name)
-				&& Objects.equals(this.schedules, snapshotPolicy.schedules)
-				&& Objects.equals(this.snapshotSchedules, snapshotPolicy.snapshotSchedules)
-				&& Objects.equals(this.additionalProperties, snapshotPolicy.additionalProperties);
+		SnapshotPolicySnapshotPolicySchedule snapshotPolicySnapshotPolicySchedule =
+				(SnapshotPolicySnapshotPolicySchedule) o;
+		return Objects.equals(this.createdAt, snapshotPolicySnapshotPolicySchedule.createdAt)
+				&& Objects.equals(this.id, snapshotPolicySnapshotPolicySchedule.id)
+				&& Objects.equals(this.interval, snapshotPolicySnapshotPolicySchedule.interval)
+				&& Objects.equals(this.name, snapshotPolicySnapshotPolicySchedule.name)
+				&& Objects.equals(this.prefix, snapshotPolicySnapshotPolicySchedule.prefix)
+				&& Objects.equals(
+						this.retentionCount, snapshotPolicySnapshotPolicySchedule.retentionCount)
+				&& Objects.equals(
+						this.retentionPeriod, snapshotPolicySnapshotPolicySchedule.retentionPeriod)
+				&& Objects.equals(
+						this.additionalProperties,
+						snapshotPolicySnapshotPolicySchedule.additionalProperties);
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(
-				comment,
 				createdAt,
-				enabled,
 				id,
+				interval,
 				name,
-				schedules,
-				snapshotSchedules,
+				prefix,
+				retentionCount,
+				retentionPeriod,
 				additionalProperties);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class SnapshotPolicy {\n");
-		sb.append("    comment: ").append(toIndentedString(comment)).append("\n");
+		sb.append("class SnapshotPolicySnapshotPolicySchedule {\n");
 		sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
-		sb.append("    enabled: ").append(toIndentedString(enabled)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
+		sb.append("    interval: ").append(toIndentedString(interval)).append("\n");
 		sb.append("    name: ").append(toIndentedString(name)).append("\n");
-		sb.append("    schedules: ").append(toIndentedString(schedules)).append("\n");
-		sb.append("    snapshotSchedules: ")
-				.append(toIndentedString(snapshotSchedules))
-				.append("\n");
+		sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
+		sb.append("    retentionCount: ").append(toIndentedString(retentionCount)).append("\n");
+		sb.append("    retentionPeriod: ").append(toIndentedString(retentionPeriod)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -341,13 +321,13 @@ public class SnapshotPolicy {
 		openapiFields =
 				new HashSet<String>(
 						Arrays.asList(
-								"comment",
 								"createdAt",
-								"enabled",
 								"id",
+								"interval",
 								"name",
-								"schedules",
-								"snapshotSchedules"));
+								"prefix",
+								"retentionCount",
+								"retentionPeriod"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(0);
@@ -357,28 +337,22 @@ public class SnapshotPolicy {
 	 * Validates the JSON Element and throws an exception if issues found
 	 *
 	 * @param jsonElement JSON Element
-	 * @throws IOException if the JSON Element is invalid with respect to SnapshotPolicy
+	 * @throws IOException if the JSON Element is invalid with respect to
+	 *     SnapshotPolicySnapshotPolicySchedule
 	 */
 	public static void validateJsonElement(JsonElement jsonElement) throws IOException {
 		if (jsonElement == null) {
-			if (!SnapshotPolicy.openapiRequiredFields
+			if (!SnapshotPolicySnapshotPolicySchedule.openapiRequiredFields
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
 								java.util.Locale.ROOT,
-								"The required field(s) %s in SnapshotPolicy is not found in the empty JSON string",
-								SnapshotPolicy.openapiRequiredFields.toString()));
+								"The required field(s) %s in SnapshotPolicySnapshotPolicySchedule is not found in the empty JSON string",
+								SnapshotPolicySnapshotPolicySchedule.openapiRequiredFields
+										.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
-		if ((jsonObj.get("comment") != null && !jsonObj.get("comment").isJsonNull())
-				&& !jsonObj.get("comment").isJsonPrimitive()) {
-			throw new IllegalArgumentException(
-					String.format(
-							java.util.Locale.ROOT,
-							"Expected the field `comment` to be a primitive type in the JSON string but got `%s`",
-							jsonObj.get("comment").toString()));
-		}
 		if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull())
 				&& !jsonObj.get("id").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
@@ -386,6 +360,14 @@ public class SnapshotPolicy {
 							java.util.Locale.ROOT,
 							"Expected the field `id` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("id").toString()));
+		}
+		if ((jsonObj.get("interval") != null && !jsonObj.get("interval").isJsonNull())
+				&& !jsonObj.get("interval").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `interval` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("interval").toString()));
 		}
 		if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull())
 				&& !jsonObj.get("name").isJsonPrimitive()) {
@@ -395,45 +377,21 @@ public class SnapshotPolicy {
 							"Expected the field `name` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("name").toString()));
 		}
-		if (jsonObj.get("schedules") != null && !jsonObj.get("schedules").isJsonNull()) {
-			JsonArray jsonArrayschedules = jsonObj.getAsJsonArray("schedules");
-			if (jsonArrayschedules != null) {
-				// ensure the json data is an array
-				if (!jsonObj.get("schedules").isJsonArray()) {
-					throw new IllegalArgumentException(
-							String.format(
-									java.util.Locale.ROOT,
-									"Expected the field `schedules` to be an array in the JSON string but got `%s`",
-									jsonObj.get("schedules").toString()));
-				}
-
-				// validate the optional field `schedules` (array)
-				for (int i = 0; i < jsonArrayschedules.size(); i++) {
-					SnapshotPolicySchedule.validateJsonElement(jsonArrayschedules.get(i));
-				}
-				;
-			}
+		if ((jsonObj.get("prefix") != null && !jsonObj.get("prefix").isJsonNull())
+				&& !jsonObj.get("prefix").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `prefix` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("prefix").toString()));
 		}
-		if (jsonObj.get("snapshotSchedules") != null
-				&& !jsonObj.get("snapshotSchedules").isJsonNull()) {
-			JsonArray jsonArraysnapshotSchedules = jsonObj.getAsJsonArray("snapshotSchedules");
-			if (jsonArraysnapshotSchedules != null) {
-				// ensure the json data is an array
-				if (!jsonObj.get("snapshotSchedules").isJsonArray()) {
-					throw new IllegalArgumentException(
-							String.format(
-									java.util.Locale.ROOT,
-									"Expected the field `snapshotSchedules` to be an array in the JSON string but got `%s`",
-									jsonObj.get("snapshotSchedules").toString()));
-				}
-
-				// validate the optional field `snapshotSchedules` (array)
-				for (int i = 0; i < jsonArraysnapshotSchedules.size(); i++) {
-					SnapshotPolicySnapshotPolicySchedule.validateJsonElement(
-							jsonArraysnapshotSchedules.get(i));
-				}
-				;
-			}
+		if ((jsonObj.get("retentionPeriod") != null && !jsonObj.get("retentionPeriod").isJsonNull())
+				&& !jsonObj.get("retentionPeriod").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `retentionPeriod` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("retentionPeriod").toString()));
 		}
 	}
 
@@ -441,17 +399,21 @@ public class SnapshotPolicy {
 		@SuppressWarnings("unchecked")
 		@Override
 		public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-			if (!SnapshotPolicy.class.isAssignableFrom(type.getRawType())) {
-				return null; // this class only serializes 'SnapshotPolicy' and its subtypes
+			if (!SnapshotPolicySnapshotPolicySchedule.class.isAssignableFrom(type.getRawType())) {
+				return null; // this class only serializes 'SnapshotPolicySnapshotPolicySchedule'
+				// and its subtypes
 			}
 			final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-			final TypeAdapter<SnapshotPolicy> thisAdapter =
-					gson.getDelegateAdapter(this, TypeToken.get(SnapshotPolicy.class));
+			final TypeAdapter<SnapshotPolicySnapshotPolicySchedule> thisAdapter =
+					gson.getDelegateAdapter(
+							this, TypeToken.get(SnapshotPolicySnapshotPolicySchedule.class));
 
 			return (TypeAdapter<T>)
-					new TypeAdapter<SnapshotPolicy>() {
+					new TypeAdapter<SnapshotPolicySnapshotPolicySchedule>() {
 						@Override
-						public void write(JsonWriter out, SnapshotPolicy value) throws IOException {
+						public void write(
+								JsonWriter out, SnapshotPolicySnapshotPolicySchedule value)
+								throws IOException {
 							JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
 							obj.remove("additionalProperties");
 							// serialize additional properties
@@ -481,12 +443,14 @@ public class SnapshotPolicy {
 						}
 
 						@Override
-						public SnapshotPolicy read(JsonReader in) throws IOException {
+						public SnapshotPolicySnapshotPolicySchedule read(JsonReader in)
+								throws IOException {
 							JsonElement jsonElement = elementAdapter.read(in);
 							validateJsonElement(jsonElement);
 							JsonObject jsonObj = jsonElement.getAsJsonObject();
 							// store additional fields in the deserialized instance
-							SnapshotPolicy instance = thisAdapter.fromJsonTree(jsonObj);
+							SnapshotPolicySnapshotPolicySchedule instance =
+									thisAdapter.fromJsonTree(jsonObj);
 							for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
 								if (!openapiFields.contains(entry.getKey())) {
 									if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -525,18 +489,20 @@ public class SnapshotPolicy {
 	}
 
 	/**
-	 * Create an instance of SnapshotPolicy given an JSON string
+	 * Create an instance of SnapshotPolicySnapshotPolicySchedule given an JSON string
 	 *
 	 * @param jsonString JSON string
-	 * @return An instance of SnapshotPolicy
-	 * @throws IOException if the JSON string is invalid with respect to SnapshotPolicy
+	 * @return An instance of SnapshotPolicySnapshotPolicySchedule
+	 * @throws IOException if the JSON string is invalid with respect to
+	 *     SnapshotPolicySnapshotPolicySchedule
 	 */
-	public static SnapshotPolicy fromJson(String jsonString) throws IOException {
-		return JSON.getGson().fromJson(jsonString, SnapshotPolicy.class);
+	public static SnapshotPolicySnapshotPolicySchedule fromJson(String jsonString)
+			throws IOException {
+		return JSON.getGson().fromJson(jsonString, SnapshotPolicySnapshotPolicySchedule.class);
 	}
 
 	/**
-	 * Convert an instance of SnapshotPolicy to an JSON string
+	 * Convert an instance of SnapshotPolicySnapshotPolicySchedule to an JSON string
 	 *
 	 * @return JSON string
 	 */
