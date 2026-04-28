@@ -16,6 +16,11 @@
     - Deprecate `getSchedule` and `listSchedules` methods in `SfsApi` class
   - [v0.4.0](services/sfs/CHANGELOG.md#v040)
     - **Feature (breaking change):** Introduction of multi API version support. See the GitHub discussion post for more details: https://github.com/stackitcloud/stackit-sdk-java/discussions/530
+  - [v0.5.0](services/sfs/CHANGELOG.md#v050)
+    - **Deprecation:** deprecated field `schedules` in model `SnapshotPolicy`
+    - **Feature:** new field `snapshotSchedules` in model `SnapshotPolicy`
+    - **Feature:** new field `interval` in model `SnapshotPolicySchedule`
+    - **Feature:** new model `SnapshotPolicySnapshotPolicySchedule`
 - `serverbackup`: [v0.2.0](services/serverbackup/CHANGELOG.md#v020)
     - **Feature (breaking change):** Introduction of multi API version support. See the GitHub discussion post for more details: https://github.com/stackitcloud/stackit-sdk-java/discussions/530
 
