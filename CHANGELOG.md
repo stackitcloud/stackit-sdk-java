@@ -1,4 +1,4 @@
-## Release (2026-MM-DD)
+## Release (2026-04-28)
 - `alb`: [v0.5.0](services/alb/CHANGELOG.md#v050)
   - **Feature (breaking change):** Introduction of multi API version support. See the GitHub discussion post for more details: https://github.com/stackitcloud/stackit-sdk-java/discussions/530
 - `iaas`: [v1.2.0](services/resourcemanager/CHANGELOG.md#v120)
