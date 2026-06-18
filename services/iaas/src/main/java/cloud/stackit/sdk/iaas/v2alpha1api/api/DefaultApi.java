@@ -264,7 +264,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Create new routes in a routing table. Create new routes in an existing routing table.
+	 * Create new routes in a routing table. Create new routes in an existing routing table of a
+	 * network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -306,7 +307,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Create new routes in a routing table. Create new routes in an existing routing table.
+	 * Create new routes in a routing table. Create new routes in an existing routing table of a
+	 * network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -351,7 +353,7 @@ class DefaultApi {
 
 	/**
 	 * Create new routes in a routing table. (asynchronously) Create new routes in an existing
-	 * routing table.
+	 * routing table of a network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -1229,7 +1231,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Delete a route in a routing table. Delete a route in an existing routing table.
+	 * Delete a route in a routing table. Delete a route in an existing routing table of a network
+	 * area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -1262,7 +1265,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Delete a route in a routing table. Delete a route in an existing routing table.
+	 * Delete a route in a routing table. Delete a route in an existing routing table of a network
+	 * area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -1299,7 +1303,7 @@ class DefaultApi {
 
 	/**
 	 * Delete a route in a routing table. (asynchronously) Delete a route in an existing routing
-	 * table.
+	 * table of a network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -1929,7 +1933,7 @@ class DefaultApi {
 
 	/**
 	 * Get details about a route of a routing table. Get details about a route defined in a routing
-	 * table.
+	 * table of a network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -1966,7 +1970,7 @@ class DefaultApi {
 
 	/**
 	 * Get details about a route of a routing table. Get details about a route defined in a routing
-	 * table.
+	 * table of a network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -2004,7 +2008,7 @@ class DefaultApi {
 
 	/**
 	 * Get details about a route of a routing table. (asynchronously) Get details about a route
-	 * defined in a routing table.
+	 * defined in a routing table of a network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -2627,7 +2631,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * List all networks in a routing table. Get a list of all networks in a routing table.
+	 * List all networks in a routing table. Get a list of all networks in a routing table of a
+	 * network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -2661,7 +2666,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * List all networks in a routing table. Get a list of all networks in a routing table.
+	 * List all networks in a routing table. Get a list of all networks in a routing table of a
+	 * network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -2697,7 +2703,7 @@ class DefaultApi {
 
 	/**
 	 * List all networks in a routing table. (asynchronously) Get a list of all networks in a
-	 * routing table.
+	 * routing table of a network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -2874,7 +2880,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * List all routes in a routing table. Get a list of all routes in a routing table.
+	 * List all routes in a routing table. Get a list of all routes in a routing table of a network
+	 * area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -2910,7 +2917,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * List all routes in a routing table. Get a list of all routes in a routing table.
+	 * List all routes in a routing table. Get a list of all routes in a routing table of a network
+	 * area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -2948,7 +2956,7 @@ class DefaultApi {
 
 	/**
 	 * List all routes in a routing table. (asynchronously) Get a list of all routes in a routing
-	 * table.
+	 * table of a network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -3614,7 +3622,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Update a route of a routing table. Update a route defined in a routing table.
+	 * Update a route of a routing table. Update a route defined in a routing table of a network
+	 * area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -3659,7 +3668,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Update a route of a routing table. Update a route defined in a routing table.
+	 * Update a route of a routing table. Update a route defined in a routing table of a network
+	 * area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -3706,8 +3716,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Update a route of a routing table. (asynchronously) Update a route defined in a routing
-	 * table.
+	 * Update a route of a routing table. (asynchronously) Update a route defined in a routing table
+	 * of a network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
