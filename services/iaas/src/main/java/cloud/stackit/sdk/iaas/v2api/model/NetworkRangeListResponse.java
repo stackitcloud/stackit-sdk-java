@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** Network Range list response. */
+/** Network Range list response of a network area. */
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
 		comments = "Generator version: 7.19.0")
@@ -59,7 +59,7 @@ public class NetworkRangeListResponse {
 	}
 
 	/**
-	 * A list of network ranges.
+	 * A list of network area network ranges.
 	 *
 	 * @return items
 	 */
