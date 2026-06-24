@@ -173,7 +173,7 @@ public class RegionalAreaIPv4 {
 	}
 
 	/**
-	 * A list of network ranges.
+	 * A list of network area network ranges.
 	 *
 	 * @return networkRanges
 	 */
