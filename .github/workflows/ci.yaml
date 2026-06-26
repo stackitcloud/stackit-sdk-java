@@ -15,7 +15,7 @@ jobs:
         version: [17, 21, 25]
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.3
+        uses: actions/checkout@v7.0.0
       
       - name: Install java
         uses: actions/setup-java@v5.3.0
@@ -49,7 +49,7 @@ jobs:
       actions: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.3
+        uses: actions/checkout@v7.0.0
         with:
           # we need to fetch all existing git tags
           fetch-depth: 0
