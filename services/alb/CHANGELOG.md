@@ -1,3 +1,6 @@
+## v0.6.0
+- **Breaking change:** Remove `v2beta` API
+
 ## v0.5.0
 - **Feature (breaking change):** Introduction of multi API version support. See the GitHub discussion post for more details: https://github.com/stackitcloud/stackit-sdk-java/discussions/530
 
