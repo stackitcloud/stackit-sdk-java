@@ -1797,7 +1797,7 @@ class DefaultApi {
 	}
 
 	/**
-	 * Attach service account to a server. Attach an additional service account to the server.
+	 * Attach service account to a server. Attach a service account to the server.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -1832,7 +1832,7 @@ class DefaultApi {
 	}
 
 	/**
-	 * Attach service account to a server. Attach an additional service account to the server.
+	 * Attach service account to a server. Attach a service account to the server.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -1868,8 +1868,7 @@ class DefaultApi {
 	}
 
 	/**
-	 * Attach service account to a server. (asynchronously) Attach an additional service account to
-	 * the server.
+	 * Attach service account to a server. (asynchronously) Attach a service account to the server.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -2710,8 +2709,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Create new Image. Create a new Image in a project. This call, if successful, returns a
-	 * pre-signed URL for the customer to upload the image.
+	 * Create new Image. Create a new Image in a project in queued state. Image data must be
+	 * imported separately. This call returns a pre-signed URL to upload small images.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -2743,8 +2742,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Create new Image. Create a new Image in a project. This call, if successful, returns a
-	 * pre-signed URL for the customer to upload the image.
+	 * Create new Image. Create a new Image in a project in queued state. Image data must be
+	 * imported separately. This call returns a pre-signed URL to upload small images.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -2777,8 +2776,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Create new Image. (asynchronously) Create a new Image in a project. This call, if successful,
-	 * returns a pre-signed URL for the customer to upload the image.
+	 * Create new Image. (asynchronously) Create a new Image in a project in queued state. Image
+	 * data must be imported separately. This call returns a pre-signed URL to upload small images.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -22005,7 +22004,7 @@ class DefaultApi {
 	 *     <table border="1">
 	 * <caption>Response Details</caption>
 	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-	 * <tr><td> 200 </td><td> List service accounts. </td><td>  -  </td></tr>
+	 * <tr><td> 200 </td><td> List service account. </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
@@ -22110,7 +22109,7 @@ class DefaultApi {
 	}
 
 	/**
-	 * List all service accounts of the Server. Get the list of the service accounts of the server.
+	 * List the service account of the Server. Get service account of the server in a list.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -22122,7 +22121,7 @@ class DefaultApi {
 	 *     <table border="1">
 	 * <caption>Response Details</caption>
 	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-	 * <tr><td> 200 </td><td> List service accounts. </td><td>  -  </td></tr>
+	 * <tr><td> 200 </td><td> List service account. </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
@@ -22141,7 +22140,7 @@ class DefaultApi {
 	}
 
 	/**
-	 * List all service accounts of the Server. Get the list of the service accounts of the server.
+	 * List the service account of the Server. Get service account of the server in a list.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -22153,7 +22152,7 @@ class DefaultApi {
 	 *     <table border="1">
 	 * <caption>Response Details</caption>
 	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-	 * <tr><td> 200 </td><td> List service accounts. </td><td>  -  </td></tr>
+	 * <tr><td> 200 </td><td> List service account. </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
@@ -22173,8 +22172,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * List all service accounts of the Server. (asynchronously) Get the list of the service
-	 * accounts of the server.
+	 * List the service account of the Server. (asynchronously) Get service account of the server in
+	 * a list.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -22187,7 +22186,7 @@ class DefaultApi {
 	 *     <table border="1">
 	 * <caption>Response Details</caption>
 	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-	 * <tr><td> 200 </td><td> List service accounts. </td><td>  -  </td></tr>
+	 * <tr><td> 200 </td><td> List service account. </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
@@ -24835,7 +24834,7 @@ class DefaultApi {
 	}
 
 	/**
-	 * Detach a service account from a server. Detach an additional service account from the server.
+	 * Detach a service account from a server. Detach a service account from the server.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -24870,7 +24869,7 @@ class DefaultApi {
 	}
 
 	/**
-	 * Detach a service account from a server. Detach an additional service account from the server.
+	 * Detach a service account from a server. Detach a service account from the server.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -24906,8 +24905,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Detach a service account from a server. (asynchronously) Detach an additional service account
-	 * from the server.
+	 * Detach a service account from a server. (asynchronously) Detach a service account from the
+	 * server.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -27707,6 +27706,444 @@ class DefaultApi {
 		okhttp3.Call localVarCall =
 				updateImageValidateBeforeCall(
 						projectId, region, imageId, updateImagePayload, _callback);
+		Type localVarReturnType = new TypeToken<Image>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for updateImageScopeLocal
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param imageId The identifier (ID) of a STACKIT Image. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Response to update image-scope to local. Provide the updated image object. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call updateImageScopeLocalCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID imageId,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2/projects/{projectId}/regions/{region}/images/{imageId}/publish"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "imageId" + "}",
+								localVarApiClient.escapeString(imageId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"DELETE",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call updateImageScopeLocalValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID imageId,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling updateImageScopeLocal(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling updateImageScopeLocal(Async)");
+		}
+
+		// verify the required parameter 'imageId' is set
+		if (imageId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'imageId' when calling updateImageScopeLocal(Async)");
+		}
+
+		return updateImageScopeLocalCall(projectId, region, imageId, _callback);
+	}
+
+	/**
+	 * Update Image Scope to Local. Update the scope property of an existing Image inside a project
+	 * to local.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param imageId The identifier (ID) of a STACKIT Image. (required)
+	 * @return Image
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Response to update image-scope to local. Provide the updated image object. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public Image updateImageScopeLocal(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID imageId)
+			throws ApiException {
+		ApiResponse<Image> localVarResp =
+				updateImageScopeLocalWithHttpInfo(projectId, region, imageId);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Update Image Scope to Local. Update the scope property of an existing Image inside a project
+	 * to local.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param imageId The identifier (ID) of a STACKIT Image. (required)
+	 * @return ApiResponse&lt;Image&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Response to update image-scope to local. Provide the updated image object. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<Image> updateImageScopeLocalWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID imageId)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				updateImageScopeLocalValidateBeforeCall(projectId, region, imageId, null);
+		Type localVarReturnType = new TypeToken<Image>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Update Image Scope to Local. (asynchronously) Update the scope property of an existing Image
+	 * inside a project to local.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param imageId The identifier (ID) of a STACKIT Image. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Response to update image-scope to local. Provide the updated image object. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call updateImageScopeLocalAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID imageId,
+			final ApiCallback<Image> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				updateImageScopeLocalValidateBeforeCall(projectId, region, imageId, _callback);
+		Type localVarReturnType = new TypeToken<Image>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for updateImageScopePublic
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param imageId The identifier (ID) of a STACKIT Image. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Response to update image-scope to public. Provide the updated image object. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call updateImageScopePublicCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID imageId,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2/projects/{projectId}/regions/{region}/images/{imageId}/publish"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "imageId" + "}",
+								localVarApiClient.escapeString(imageId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"PUT",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call updateImageScopePublicValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID imageId,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling updateImageScopePublic(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling updateImageScopePublic(Async)");
+		}
+
+		// verify the required parameter 'imageId' is set
+		if (imageId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'imageId' when calling updateImageScopePublic(Async)");
+		}
+
+		return updateImageScopePublicCall(projectId, region, imageId, _callback);
+	}
+
+	/**
+	 * Update Image Scope to Public. Update the scope property of an existing Image inside a project
+	 * to public.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param imageId The identifier (ID) of a STACKIT Image. (required)
+	 * @return Image
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Response to update image-scope to public. Provide the updated image object. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public Image updateImageScopePublic(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID imageId)
+			throws ApiException {
+		ApiResponse<Image> localVarResp =
+				updateImageScopePublicWithHttpInfo(projectId, region, imageId);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Update Image Scope to Public. Update the scope property of an existing Image inside a project
+	 * to public.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param imageId The identifier (ID) of a STACKIT Image. (required)
+	 * @return ApiResponse&lt;Image&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Response to update image-scope to public. Provide the updated image object. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<Image> updateImageScopePublicWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID imageId)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				updateImageScopePublicValidateBeforeCall(projectId, region, imageId, null);
+		Type localVarReturnType = new TypeToken<Image>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Update Image Scope to Public. (asynchronously) Update the scope property of an existing Image
+	 * inside a project to public.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param imageId The identifier (ID) of a STACKIT Image. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Response to update image-scope to public. Provide the updated image object. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call updateImageScopePublicAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID imageId,
+			final ApiCallback<Image> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				updateImageScopePublicValidateBeforeCall(projectId, region, imageId, _callback);
 		Type localVarReturnType = new TypeToken<Image>() {}.getType();
 		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
 		return localVarCall;
