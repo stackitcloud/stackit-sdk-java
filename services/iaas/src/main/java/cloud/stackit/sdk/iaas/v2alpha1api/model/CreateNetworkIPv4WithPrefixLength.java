@@ -30,6 +30,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 /** The create request for an IPv4 network with a wanted prefix length. */
 @javax.annotation.Generated(
@@ -46,6 +47,11 @@ public class CreateNetworkIPv4WithPrefixLength {
 	@SerializedName(SERIALIZED_NAME_PREFIX_LENGTH)
 	@javax.annotation.Nonnull
 	private Long prefixLength;
+
+	public static final String SERIALIZED_NAME_VPC_NETWORK_RANGE_ID = "vpcNetworkRangeId";
+
+	@SerializedName(SERIALIZED_NAME_VPC_NETWORK_RANGE_ID)
+	@javax.annotation.Nullable private UUID vpcNetworkRangeId;
 
 	public CreateNetworkIPv4WithPrefixLength() {}
 
@@ -94,6 +100,25 @@ public class CreateNetworkIPv4WithPrefixLength {
 
 	public void setPrefixLength(@javax.annotation.Nonnull Long prefixLength) {
 		this.prefixLength = prefixLength;
+	}
+
+	public CreateNetworkIPv4WithPrefixLength vpcNetworkRangeId(
+			@javax.annotation.Nullable UUID vpcNetworkRangeId) {
+		this.vpcNetworkRangeId = vpcNetworkRangeId;
+		return this;
+	}
+
+	/**
+	 * Universally Unique Identifier (UUID).
+	 *
+	 * @return vpcNetworkRangeId
+	 */
+	@javax.annotation.Nullable public UUID getVpcNetworkRangeId() {
+		return vpcNetworkRangeId;
+	}
+
+	public void setVpcNetworkRangeId(@javax.annotation.Nullable UUID vpcNetworkRangeId) {
+		this.vpcNetworkRangeId = vpcNetworkRangeId;
 	}
 
 	/**
@@ -153,13 +178,15 @@ public class CreateNetworkIPv4WithPrefixLength {
 		return Objects.equals(this.nameservers, createNetworkIPv4WithPrefixLength.nameservers)
 				&& Objects.equals(this.prefixLength, createNetworkIPv4WithPrefixLength.prefixLength)
 				&& Objects.equals(
+						this.vpcNetworkRangeId, createNetworkIPv4WithPrefixLength.vpcNetworkRangeId)
+				&& Objects.equals(
 						this.additionalProperties,
 						createNetworkIPv4WithPrefixLength.additionalProperties);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(nameservers, prefixLength, additionalProperties);
+		return Objects.hash(nameservers, prefixLength, vpcNetworkRangeId, additionalProperties);
 	}
 
 	@Override
@@ -168,6 +195,9 @@ public class CreateNetworkIPv4WithPrefixLength {
 		sb.append("class CreateNetworkIPv4WithPrefixLength {\n");
 		sb.append("    nameservers: ").append(toIndentedString(nameservers)).append("\n");
 		sb.append("    prefixLength: ").append(toIndentedString(prefixLength)).append("\n");
+		sb.append("    vpcNetworkRangeId: ")
+				.append(toIndentedString(vpcNetworkRangeId))
+				.append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -191,7 +221,9 @@ public class CreateNetworkIPv4WithPrefixLength {
 
 	static {
 		// a set of all properties/fields (JSON key names)
-		openapiFields = new HashSet<String>(Arrays.asList("nameservers", "prefixLength"));
+		openapiFields =
+				new HashSet<String>(
+						Arrays.asList("nameservers", "prefixLength", "vpcNetworkRangeId"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(Arrays.asList("prefixLength"));
@@ -238,6 +270,15 @@ public class CreateNetworkIPv4WithPrefixLength {
 							java.util.Locale.ROOT,
 							"Expected the field `nameservers` to be an array in the JSON string but got `%s`",
 							jsonObj.get("nameservers").toString()));
+		}
+		if ((jsonObj.get("vpcNetworkRangeId") != null
+						&& !jsonObj.get("vpcNetworkRangeId").isJsonNull())
+				&& !jsonObj.get("vpcNetworkRangeId").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `vpcNetworkRangeId` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("vpcNetworkRangeId").toString()));
 		}
 	}
 
