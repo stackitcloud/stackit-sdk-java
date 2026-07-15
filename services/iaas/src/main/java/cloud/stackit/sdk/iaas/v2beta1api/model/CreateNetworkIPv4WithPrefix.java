@@ -30,6 +30,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 /** The create request for an IPv4 network with a specified prefix. */
@@ -52,6 +53,11 @@ public class CreateNetworkIPv4WithPrefix {
 	@SerializedName(SERIALIZED_NAME_PREFIX)
 	@javax.annotation.Nonnull
 	private String prefix;
+
+	public static final String SERIALIZED_NAME_VPC_NETWORK_RANGE_ID = "vpcNetworkRangeId";
+
+	@SerializedName(SERIALIZED_NAME_VPC_NETWORK_RANGE_ID)
+	@javax.annotation.Nullable private UUID vpcNetworkRangeId;
 
 	public CreateNetworkIPv4WithPrefix() {}
 
@@ -120,6 +126,25 @@ public class CreateNetworkIPv4WithPrefix {
 		this.prefix = prefix;
 	}
 
+	public CreateNetworkIPv4WithPrefix vpcNetworkRangeId(
+			@javax.annotation.Nullable UUID vpcNetworkRangeId) {
+		this.vpcNetworkRangeId = vpcNetworkRangeId;
+		return this;
+	}
+
+	/**
+	 * Universally Unique Identifier (UUID).
+	 *
+	 * @return vpcNetworkRangeId
+	 */
+	@javax.annotation.Nullable public UUID getVpcNetworkRangeId() {
+		return vpcNetworkRangeId;
+	}
+
+	public void setVpcNetworkRangeId(@javax.annotation.Nullable UUID vpcNetworkRangeId) {
+		this.vpcNetworkRangeId = vpcNetworkRangeId;
+	}
+
 	/**
 	 * A container for additional, undeclared properties. This is a holder for any undeclared
 	 * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -177,6 +202,8 @@ public class CreateNetworkIPv4WithPrefix {
 				&& Objects.equals(this.nameservers, createNetworkIPv4WithPrefix.nameservers)
 				&& Objects.equals(this.prefix, createNetworkIPv4WithPrefix.prefix)
 				&& Objects.equals(
+						this.vpcNetworkRangeId, createNetworkIPv4WithPrefix.vpcNetworkRangeId)
+				&& Objects.equals(
 						this.additionalProperties,
 						createNetworkIPv4WithPrefix.additionalProperties);
 	}
@@ -192,7 +219,7 @@ public class CreateNetworkIPv4WithPrefix {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(gateway, nameservers, prefix, additionalProperties);
+		return Objects.hash(gateway, nameservers, prefix, vpcNetworkRangeId, additionalProperties);
 	}
 
 	private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -209,6 +236,9 @@ public class CreateNetworkIPv4WithPrefix {
 		sb.append("    gateway: ").append(toIndentedString(gateway)).append("\n");
 		sb.append("    nameservers: ").append(toIndentedString(nameservers)).append("\n");
 		sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
+		sb.append("    vpcNetworkRangeId: ")
+				.append(toIndentedString(vpcNetworkRangeId))
+				.append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -232,7 +262,9 @@ public class CreateNetworkIPv4WithPrefix {
 
 	static {
 		// a set of all properties/fields (JSON key names)
-		openapiFields = new HashSet<String>(Arrays.asList("gateway", "nameservers", "prefix"));
+		openapiFields =
+				new HashSet<String>(
+						Arrays.asList("gateway", "nameservers", "prefix", "vpcNetworkRangeId"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(Arrays.asList("prefix"));
@@ -293,6 +325,15 @@ public class CreateNetworkIPv4WithPrefix {
 							java.util.Locale.ROOT,
 							"Expected the field `prefix` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("prefix").toString()));
+		}
+		if ((jsonObj.get("vpcNetworkRangeId") != null
+						&& !jsonObj.get("vpcNetworkRangeId").isJsonNull())
+				&& !jsonObj.get("vpcNetworkRangeId").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `vpcNetworkRangeId` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("vpcNetworkRangeId").toString()));
 		}
 	}
 
