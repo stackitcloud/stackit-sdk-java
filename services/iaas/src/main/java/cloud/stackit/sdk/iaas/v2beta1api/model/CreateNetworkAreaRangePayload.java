@@ -58,7 +58,7 @@ public class CreateNetworkAreaRangePayload {
 	}
 
 	/**
-	 * A list of network ranges.
+	 * A list of network area network ranges.
 	 *
 	 * @return ipv4
 	 */
