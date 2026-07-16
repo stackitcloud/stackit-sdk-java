@@ -34,7 +34,7 @@ import java.util.Objects;
 @javax.annotation.Generated(
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
 		comments = "Generator version: 7.19.0")
-public class V2beta1ConfigureNetworkAreaRegionPayload {
+public class V2beta1CreateNetworkAreaRegionPayload {
 	public static final String SERIALIZED_NAME_IPV4 = "ipv4";
 
 	@SerializedName(SERIALIZED_NAME_IPV4)
@@ -45,14 +45,14 @@ public class V2beta1ConfigureNetworkAreaRegionPayload {
 	@SerializedName(SERIALIZED_NAME_STATUS)
 	@javax.annotation.Nullable private String status;
 
-	public V2beta1ConfigureNetworkAreaRegionPayload() {}
+	public V2beta1CreateNetworkAreaRegionPayload() {}
 
-	public V2beta1ConfigureNetworkAreaRegionPayload(String status) {
+	public V2beta1CreateNetworkAreaRegionPayload(String status) {
 		this();
 		this.status = status;
 	}
 
-	public V2beta1ConfigureNetworkAreaRegionPayload ipv4(
+	public V2beta1CreateNetworkAreaRegionPayload ipv4(
 			@javax.annotation.Nullable RegionalAreaIPv4 ipv4) {
 		this.ipv4 = ipv4;
 		return this;
@@ -94,10 +94,9 @@ public class V2beta1ConfigureNetworkAreaRegionPayload {
 	 *
 	 * @param key name of the property
 	 * @param value value of the property
-	 * @return the V2beta1ConfigureNetworkAreaRegionPayload instance itself
+	 * @return the V2beta1CreateNetworkAreaRegionPayload instance itself
 	 */
-	public V2beta1ConfigureNetworkAreaRegionPayload putAdditionalProperty(
-			String key, Object value) {
+	public V2beta1CreateNetworkAreaRegionPayload putAdditionalProperty(String key, Object value) {
 		if (this.additionalProperties == null) {
 			this.additionalProperties = new HashMap<String, Object>();
 		}
@@ -135,13 +134,13 @@ public class V2beta1ConfigureNetworkAreaRegionPayload {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		V2beta1ConfigureNetworkAreaRegionPayload v2beta1ConfigureNetworkAreaRegionPayload =
-				(V2beta1ConfigureNetworkAreaRegionPayload) o;
-		return Objects.equals(this.ipv4, v2beta1ConfigureNetworkAreaRegionPayload.ipv4)
-				&& Objects.equals(this.status, v2beta1ConfigureNetworkAreaRegionPayload.status)
+		V2beta1CreateNetworkAreaRegionPayload v2beta1CreateNetworkAreaRegionPayload =
+				(V2beta1CreateNetworkAreaRegionPayload) o;
+		return Objects.equals(this.ipv4, v2beta1CreateNetworkAreaRegionPayload.ipv4)
+				&& Objects.equals(this.status, v2beta1CreateNetworkAreaRegionPayload.status)
 				&& Objects.equals(
 						this.additionalProperties,
-						v2beta1ConfigureNetworkAreaRegionPayload.additionalProperties);
+						v2beta1CreateNetworkAreaRegionPayload.additionalProperties);
 	}
 
 	@Override
@@ -152,7 +151,7 @@ public class V2beta1ConfigureNetworkAreaRegionPayload {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class V2beta1ConfigureNetworkAreaRegionPayload {\n");
+		sb.append("class V2beta1CreateNetworkAreaRegionPayload {\n");
 		sb.append("    ipv4: ").append(toIndentedString(ipv4)).append("\n");
 		sb.append("    status: ").append(toIndentedString(status)).append("\n");
 		sb.append("    additionalProperties: ")
@@ -189,17 +188,17 @@ public class V2beta1ConfigureNetworkAreaRegionPayload {
 	 *
 	 * @param jsonElement JSON Element
 	 * @throws IOException if the JSON Element is invalid with respect to
-	 *     V2beta1ConfigureNetworkAreaRegionPayload
+	 *     V2beta1CreateNetworkAreaRegionPayload
 	 */
 	public static void validateJsonElement(JsonElement jsonElement) throws IOException {
 		if (jsonElement == null) {
-			if (!V2beta1ConfigureNetworkAreaRegionPayload.openapiRequiredFields
+			if (!V2beta1CreateNetworkAreaRegionPayload.openapiRequiredFields
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
 								java.util.Locale.ROOT,
-								"The required field(s) %s in V2beta1ConfigureNetworkAreaRegionPayload is not found in the empty JSON string",
-								V2beta1ConfigureNetworkAreaRegionPayload.openapiRequiredFields
+								"The required field(s) %s in V2beta1CreateNetworkAreaRegionPayload is not found in the empty JSON string",
+								V2beta1CreateNetworkAreaRegionPayload.openapiRequiredFields
 										.toString()));
 			}
 		}
@@ -222,21 +221,20 @@ public class V2beta1ConfigureNetworkAreaRegionPayload {
 		@SuppressWarnings("unchecked")
 		@Override
 		public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-			if (!V2beta1ConfigureNetworkAreaRegionPayload.class.isAssignableFrom(
-					type.getRawType())) {
-				return null; // this class only serializes
-				// 'V2beta1ConfigureNetworkAreaRegionPayload' and its subtypes
+			if (!V2beta1CreateNetworkAreaRegionPayload.class.isAssignableFrom(type.getRawType())) {
+				return null; // this class only serializes 'V2beta1CreateNetworkAreaRegionPayload'
+				// and its subtypes
 			}
 			final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-			final TypeAdapter<V2beta1ConfigureNetworkAreaRegionPayload> thisAdapter =
+			final TypeAdapter<V2beta1CreateNetworkAreaRegionPayload> thisAdapter =
 					gson.getDelegateAdapter(
-							this, TypeToken.get(V2beta1ConfigureNetworkAreaRegionPayload.class));
+							this, TypeToken.get(V2beta1CreateNetworkAreaRegionPayload.class));
 
 			return (TypeAdapter<T>)
-					new TypeAdapter<V2beta1ConfigureNetworkAreaRegionPayload>() {
+					new TypeAdapter<V2beta1CreateNetworkAreaRegionPayload>() {
 						@Override
 						public void write(
-								JsonWriter out, V2beta1ConfigureNetworkAreaRegionPayload value)
+								JsonWriter out, V2beta1CreateNetworkAreaRegionPayload value)
 								throws IOException {
 							JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
 							obj.remove("additionalProperties");
@@ -267,13 +265,13 @@ public class V2beta1ConfigureNetworkAreaRegionPayload {
 						}
 
 						@Override
-						public V2beta1ConfigureNetworkAreaRegionPayload read(JsonReader in)
+						public V2beta1CreateNetworkAreaRegionPayload read(JsonReader in)
 								throws IOException {
 							JsonElement jsonElement = elementAdapter.read(in);
 							validateJsonElement(jsonElement);
 							JsonObject jsonObj = jsonElement.getAsJsonObject();
 							// store additional fields in the deserialized instance
-							V2beta1ConfigureNetworkAreaRegionPayload instance =
+							V2beta1CreateNetworkAreaRegionPayload instance =
 									thisAdapter.fromJsonTree(jsonObj);
 							for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
 								if (!openapiFields.contains(entry.getKey())) {
@@ -313,20 +311,20 @@ public class V2beta1ConfigureNetworkAreaRegionPayload {
 	}
 
 	/**
-	 * Create an instance of V2beta1ConfigureNetworkAreaRegionPayload given an JSON string
+	 * Create an instance of V2beta1CreateNetworkAreaRegionPayload given an JSON string
 	 *
 	 * @param jsonString JSON string
-	 * @return An instance of V2beta1ConfigureNetworkAreaRegionPayload
+	 * @return An instance of V2beta1CreateNetworkAreaRegionPayload
 	 * @throws IOException if the JSON string is invalid with respect to
-	 *     V2beta1ConfigureNetworkAreaRegionPayload
+	 *     V2beta1CreateNetworkAreaRegionPayload
 	 */
-	public static V2beta1ConfigureNetworkAreaRegionPayload fromJson(String jsonString)
+	public static V2beta1CreateNetworkAreaRegionPayload fromJson(String jsonString)
 			throws IOException {
-		return JSON.getGson().fromJson(jsonString, V2beta1ConfigureNetworkAreaRegionPayload.class);
+		return JSON.getGson().fromJson(jsonString, V2beta1CreateNetworkAreaRegionPayload.class);
 	}
 
 	/**
-	 * Convert an instance of V2beta1ConfigureNetworkAreaRegionPayload to an JSON string
+	 * Convert an instance of V2beta1CreateNetworkAreaRegionPayload to an JSON string
 	 *
 	 * @return JSON string
 	 */
