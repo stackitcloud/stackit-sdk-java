@@ -30,6 +30,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 /** Object that represents the IPv6 part of a network. */
@@ -52,6 +53,11 @@ public class NetworkIPv6 {
 	@SerializedName(SERIALIZED_NAME_PREFIXES)
 	@javax.annotation.Nonnull
 	private List<String> prefixes = new ArrayList<>();
+
+	public static final String SERIALIZED_NAME_VPC_NETWORK_RANGE_ID = "vpcNetworkRangeId";
+
+	@SerializedName(SERIALIZED_NAME_VPC_NETWORK_RANGE_ID)
+	@javax.annotation.Nullable private UUID vpcNetworkRangeId;
 
 	public NetworkIPv6() {}
 
@@ -127,6 +133,24 @@ public class NetworkIPv6 {
 		this.prefixes = prefixes;
 	}
 
+	public NetworkIPv6 vpcNetworkRangeId(@javax.annotation.Nullable UUID vpcNetworkRangeId) {
+		this.vpcNetworkRangeId = vpcNetworkRangeId;
+		return this;
+	}
+
+	/**
+	 * Universally Unique Identifier (UUID).
+	 *
+	 * @return vpcNetworkRangeId
+	 */
+	@javax.annotation.Nullable public UUID getVpcNetworkRangeId() {
+		return vpcNetworkRangeId;
+	}
+
+	public void setVpcNetworkRangeId(@javax.annotation.Nullable UUID vpcNetworkRangeId) {
+		this.vpcNetworkRangeId = vpcNetworkRangeId;
+	}
+
 	/**
 	 * A container for additional, undeclared properties. This is a holder for any undeclared
 	 * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -183,6 +207,7 @@ public class NetworkIPv6 {
 		return Objects.equals(this.gateway, networkIPv6.gateway)
 				&& Objects.equals(this.nameservers, networkIPv6.nameservers)
 				&& Objects.equals(this.prefixes, networkIPv6.prefixes)
+				&& Objects.equals(this.vpcNetworkRangeId, networkIPv6.vpcNetworkRangeId)
 				&& Objects.equals(this.additionalProperties, networkIPv6.additionalProperties);
 	}
 
@@ -197,7 +222,8 @@ public class NetworkIPv6 {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(gateway, nameservers, prefixes, additionalProperties);
+		return Objects.hash(
+				gateway, nameservers, prefixes, vpcNetworkRangeId, additionalProperties);
 	}
 
 	private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -214,6 +240,9 @@ public class NetworkIPv6 {
 		sb.append("    gateway: ").append(toIndentedString(gateway)).append("\n");
 		sb.append("    nameservers: ").append(toIndentedString(nameservers)).append("\n");
 		sb.append("    prefixes: ").append(toIndentedString(prefixes)).append("\n");
+		sb.append("    vpcNetworkRangeId: ")
+				.append(toIndentedString(vpcNetworkRangeId))
+				.append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -237,7 +266,9 @@ public class NetworkIPv6 {
 
 	static {
 		// a set of all properties/fields (JSON key names)
-		openapiFields = new HashSet<String>(Arrays.asList("gateway", "nameservers", "prefixes"));
+		openapiFields =
+				new HashSet<String>(
+						Arrays.asList("gateway", "nameservers", "prefixes", "vpcNetworkRangeId"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(Arrays.asList("prefixes"));
@@ -301,6 +332,15 @@ public class NetworkIPv6 {
 							java.util.Locale.ROOT,
 							"Expected the field `prefixes` to be an array in the JSON string but got `%s`",
 							jsonObj.get("prefixes").toString()));
+		}
+		if ((jsonObj.get("vpcNetworkRangeId") != null
+						&& !jsonObj.get("vpcNetworkRangeId").isJsonNull())
+				&& !jsonObj.get("vpcNetworkRangeId").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `vpcNetworkRangeId` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("vpcNetworkRangeId").toString()));
 		}
 	}
 
