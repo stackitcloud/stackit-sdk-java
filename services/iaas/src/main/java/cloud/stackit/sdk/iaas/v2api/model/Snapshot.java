@@ -37,6 +37,11 @@ import java.util.UUID;
 		value = "org.openapitools.codegen.languages.JavaClientCodegen",
 		comments = "Generator version: 7.19.0")
 public class Snapshot {
+	public static final String SERIALIZED_NAME_AVAILABILITY_ZONE = "availabilityZone";
+
+	@SerializedName(SERIALIZED_NAME_AVAILABILITY_ZONE)
+	@javax.annotation.Nullable private String availabilityZone;
+
 	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
 
 	@SerializedName(SERIALIZED_NAME_CREATED_AT)
@@ -86,13 +91,28 @@ public class Snapshot {
 	public Snapshot() {}
 
 	public Snapshot(
-			OffsetDateTime createdAt, UUID id, Long size, String status, OffsetDateTime updatedAt) {
+			String availabilityZone,
+			OffsetDateTime createdAt,
+			UUID id,
+			Long size,
+			String status,
+			OffsetDateTime updatedAt) {
 		this();
+		this.availabilityZone = availabilityZone;
 		this.createdAt = createdAt;
 		this.id = id;
 		this.size = size;
 		this.status = status;
 		this.updatedAt = updatedAt;
+	}
+
+	/**
+	 * Object that represents an availability zone.
+	 *
+	 * @return availabilityZone
+	 */
+	@javax.annotation.Nullable public String getAvailabilityZone() {
+		return availabilityZone;
 	}
 
 	/**
@@ -272,7 +292,8 @@ public class Snapshot {
 			return false;
 		}
 		Snapshot snapshot = (Snapshot) o;
-		return Objects.equals(this.createdAt, snapshot.createdAt)
+		return Objects.equals(this.availabilityZone, snapshot.availabilityZone)
+				&& Objects.equals(this.createdAt, snapshot.createdAt)
 				&& Objects.equals(this.description, snapshot.description)
 				&& Objects.equals(this.id, snapshot.id)
 				&& Objects.equals(this.labels, snapshot.labels)
@@ -287,6 +308,7 @@ public class Snapshot {
 	@Override
 	public int hashCode() {
 		return Objects.hash(
+				availabilityZone,
 				createdAt,
 				description,
 				id,
@@ -303,6 +325,7 @@ public class Snapshot {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class Snapshot {\n");
+		sb.append("    availabilityZone: ").append(toIndentedString(availabilityZone)).append("\n");
 		sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
 		sb.append("    description: ").append(toIndentedString(description)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
@@ -338,6 +361,7 @@ public class Snapshot {
 		openapiFields =
 				new HashSet<String>(
 						Arrays.asList(
+								"availabilityZone",
 								"createdAt",
 								"description",
 								"id",
@@ -382,6 +406,15 @@ public class Snapshot {
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
+		if ((jsonObj.get("availabilityZone") != null
+						&& !jsonObj.get("availabilityZone").isJsonNull())
+				&& !jsonObj.get("availabilityZone").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `availabilityZone` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("availabilityZone").toString()));
+		}
 		if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull())
 				&& !jsonObj.get("description").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
