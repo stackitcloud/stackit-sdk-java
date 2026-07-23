@@ -87,13 +87,11 @@ public class PartialUpdateFolderPayload {
 	}
 
 	/**
-	 * Labels are key-value string pairs that can be attached to a resource container. Some labels
-	 * may be enforced via policies. - A label key must match the regex
-	 * &#x60;[A-ZÄÜÖa-zäüöß0-9_-]{1,64}&#x60;. - A label value must match the regex
-	 * &#x60;^$|[A-ZÄÜÖa-zäüöß0-9_-]{1,64}&#x60;. - To create a project within a STACKIT Network
-	 * Area, setting the label &#x60;\&quot;networkArea\&quot;:
-	 * \&quot;&lt;networkAreaID&gt;\&quot;&#x60; is required. This can not be changed after project
-	 * creation.
+	 * Key-value string pairs attached to an existing resource container. Certain labels may be
+	 * enforced via organizational policies. * **Key:** Must match the regex
+	 * &#x60;[A-ZÄÜÖa-zäüöß0-9_-]{1,64}&#x60; * **Value:** Must match the regex
+	 * &#x60;^$|[A-ZÄÜÖa-zäüöß0-9_-]{1,64}&#x60; &gt; Note: Additional naming restrictions may apply
+	 * depending on your specific organization.*
 	 *
 	 * @return labels
 	 */
