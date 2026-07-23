@@ -166,6 +166,11 @@ public class Server {
 	@SerializedName(SERIALIZED_NAME_VOLUMES)
 	@javax.annotation.Nullable private List<UUID> volumes;
 
+	public static final String SERIALIZED_NAME_VTPM = "vtpm";
+
+	@SerializedName(SERIALIZED_NAME_VTPM)
+	@javax.annotation.Nullable private ServerVTPM vtpm;
+
 	public Server() {}
 
 	public Server(
@@ -604,6 +609,24 @@ public class Server {
 		this.volumes = volumes;
 	}
 
+	public Server vtpm(@javax.annotation.Nullable ServerVTPM vtpm) {
+		this.vtpm = vtpm;
+		return this;
+	}
+
+	/**
+	 * Get vtpm
+	 *
+	 * @return vtpm
+	 */
+	@javax.annotation.Nullable public ServerVTPM getVtpm() {
+		return vtpm;
+	}
+
+	public void setVtpm(@javax.annotation.Nullable ServerVTPM vtpm) {
+		this.vtpm = vtpm;
+	}
+
 	/**
 	 * A container for additional, undeclared properties. This is a holder for any undeclared
 	 * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -682,6 +705,7 @@ public class Server {
 				&& Objects.equals(this.updatedAt, server.updatedAt)
 				&& Arrays.equals(this.userData, server.userData)
 				&& Objects.equals(this.volumes, server.volumes)
+				&& Objects.equals(this.vtpm, server.vtpm)
 				&& Objects.equals(this.additionalProperties, server.additionalProperties);
 	}
 
@@ -713,6 +737,7 @@ public class Server {
 				updatedAt,
 				Arrays.hashCode(userData),
 				volumes,
+				vtpm,
 				additionalProperties);
 	}
 
@@ -749,6 +774,7 @@ public class Server {
 		sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
 		sb.append("    userData: ").append(toIndentedString(userData)).append("\n");
 		sb.append("    volumes: ").append(toIndentedString(volumes)).append("\n");
+		sb.append("    vtpm: ").append(toIndentedString(vtpm)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -799,7 +825,8 @@ public class Server {
 								"status",
 								"updatedAt",
 								"userData",
-								"volumes"));
+								"volumes",
+								"vtpm"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(Arrays.asList("machineType", "name"));
@@ -979,6 +1006,10 @@ public class Server {
 							java.util.Locale.ROOT,
 							"Expected the field `volumes` to be an array in the JSON string but got `%s`",
 							jsonObj.get("volumes").toString()));
+		}
+		// validate the optional field `vtpm`
+		if (jsonObj.get("vtpm") != null && !jsonObj.get("vtpm").isJsonNull()) {
+			ServerVTPM.validateJsonElement(jsonObj.get("vtpm"));
 		}
 	}
 
