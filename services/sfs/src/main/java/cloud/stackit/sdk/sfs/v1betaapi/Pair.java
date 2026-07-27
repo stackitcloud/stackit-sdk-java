@@ -12,9 +12,7 @@
 
 package cloud.stackit.sdk.sfs.v1betaapi;
 
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class Pair {
 	private final String name;
 	private final String value;

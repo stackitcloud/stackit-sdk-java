@@ -33,9 +33,7 @@ import java.util.Objects;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 /** UpdateShareExportPolicyBodyRule */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class UpdateShareExportPolicyBodyRule {
 	public static final String SERIALIZED_NAME_DESCRIPTION = "description";
 
