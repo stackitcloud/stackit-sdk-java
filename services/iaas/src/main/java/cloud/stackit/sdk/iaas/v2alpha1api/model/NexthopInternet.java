@@ -31,9 +31,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Object that represents a route to the internet. */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class NexthopInternet {
 	public static final String SERIALIZED_NAME_TYPE = "type";
 
@@ -194,6 +192,14 @@ public class NexthopInternet {
 							java.util.Locale.ROOT,
 							"Expected the field `type` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("type").toString()));
+		}
+		// OVERRIDE: this if block fixes oneOf issues
+		if (!"internet".equals(jsonObj.get("type").getAsString())) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expectd the field `type` to have value `internet` but got `%s`",
+							jsonObj.get("type")));
 		}
 	}
 

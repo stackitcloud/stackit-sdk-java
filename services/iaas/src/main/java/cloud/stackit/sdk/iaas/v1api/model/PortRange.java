@@ -34,9 +34,7 @@ import java.util.Objects;
  * Object that represents a range of ports (this will be omitted if it covers the full default range
  * 0/1-65535).
  */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class PortRange {
 	public static final String SERIALIZED_NAME_MAX = "max";
 
