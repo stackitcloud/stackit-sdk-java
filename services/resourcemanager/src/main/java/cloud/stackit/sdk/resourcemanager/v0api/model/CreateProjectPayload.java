@@ -34,9 +34,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /** CreateProjectPayload */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class CreateProjectPayload {
 	public static final String SERIALIZED_NAME_CONTAINER_PARENT_ID = "containerParentId";
 
@@ -98,13 +96,15 @@ public class CreateProjectPayload {
 	}
 
 	/**
-	 * Labels are key-value string pairs that can be attached to a resource container. Some labels
-	 * may be enforced via policies. - A label key must match the regex
-	 * &#x60;[A-ZÄÜÖa-zäüöß0-9_-]{1,64}&#x60;. - A label value must match the regex
-	 * &#x60;^$|[A-ZÄÜÖa-zäüöß0-9_-]{1,64}&#x60;. - To create a project within a STACKIT Network
-	 * Area, setting the label &#x60;\&quot;networkArea\&quot;:
-	 * \&quot;&lt;networkAreaID&gt;\&quot;&#x60; is required. This can not be changed after project
-	 * creation.
+	 * Key-value string pairs attached to a resource container during creation. Certain labels may
+	 * be enforced via organizational policies. * **Key:** Must match the regex
+	 * &#x60;[A-ZÄÜÖa-zäüöß0-9_-]{1,64}&#x60; * **Value:** Must match the regex
+	 * &#x60;^$|[A-ZÄÜÖa-zäüöß0-9_-]{1,64}&#x60; * Either a &#x60;\&quot;scope\&quot;:
+	 * \&quot;PUBLIC\&quot;&#x60; label or a valid &#x60;networkArea&#x60; label must be provided
+	 * for project creation. * To create a project within a STACKIT Network Area, you must set the
+	 * label &#x60;\&quot;networkArea\&quot;: \&quot;&lt;networkAreaID&gt;\&quot;&#x60;. &gt;
+	 * **Important:** The &#x60;networkArea&#x60; label is immutable and **cannot be changed** after
+	 * project creation.
 	 *
 	 * @return labels
 	 */
