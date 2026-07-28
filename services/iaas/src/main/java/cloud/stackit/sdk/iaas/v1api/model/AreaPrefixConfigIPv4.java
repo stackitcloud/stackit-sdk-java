@@ -31,9 +31,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** The IPv4 prefix config for a network area. */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class AreaPrefixConfigIPv4 {
 	public static final String SERIALIZED_NAME_DEFAULT_PREFIX_LEN = "defaultPrefixLen";
 

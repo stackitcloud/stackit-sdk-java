@@ -32,9 +32,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /** Object that represents the request body for a network create. */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class CreateNetworkPayload {
 	public static final String SERIALIZED_NAME_DHCP = "dhcp";
 
@@ -71,6 +69,11 @@ public class CreateNetworkPayload {
 
 	@SerializedName(SERIALIZED_NAME_ROUTING_TABLE_ID)
 	@javax.annotation.Nullable private UUID routingTableId;
+
+	public static final String SERIALIZED_NAME_VPC_ID = "vpcId";
+
+	@SerializedName(SERIALIZED_NAME_VPC_ID)
+	@javax.annotation.Nullable private UUID vpcId;
 
 	public CreateNetworkPayload() {}
 
@@ -205,6 +208,24 @@ public class CreateNetworkPayload {
 		this.routingTableId = routingTableId;
 	}
 
+	public CreateNetworkPayload vpcId(@javax.annotation.Nullable UUID vpcId) {
+		this.vpcId = vpcId;
+		return this;
+	}
+
+	/**
+	 * The identifier (ID) of a STACKIT VPC.
+	 *
+	 * @return vpcId
+	 */
+	@javax.annotation.Nullable public UUID getVpcId() {
+		return vpcId;
+	}
+
+	public void setVpcId(@javax.annotation.Nullable UUID vpcId) {
+		this.vpcId = vpcId;
+	}
+
 	/**
 	 * A container for additional, undeclared properties. This is a holder for any undeclared
 	 * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -265,6 +286,7 @@ public class CreateNetworkPayload {
 				&& Objects.equals(this.name, createNetworkPayload.name)
 				&& Objects.equals(this.routed, createNetworkPayload.routed)
 				&& Objects.equals(this.routingTableId, createNetworkPayload.routingTableId)
+				&& Objects.equals(this.vpcId, createNetworkPayload.vpcId)
 				&& Objects.equals(
 						this.additionalProperties, createNetworkPayload.additionalProperties);
 	}
@@ -272,7 +294,15 @@ public class CreateNetworkPayload {
 	@Override
 	public int hashCode() {
 		return Objects.hash(
-				dhcp, ipv4, ipv6, labels, name, routed, routingTableId, additionalProperties);
+				dhcp,
+				ipv4,
+				ipv6,
+				labels,
+				name,
+				routed,
+				routingTableId,
+				vpcId,
+				additionalProperties);
 	}
 
 	@Override
@@ -286,6 +316,7 @@ public class CreateNetworkPayload {
 		sb.append("    name: ").append(toIndentedString(name)).append("\n");
 		sb.append("    routed: ").append(toIndentedString(routed)).append("\n");
 		sb.append("    routingTableId: ").append(toIndentedString(routingTableId)).append("\n");
+		sb.append("    vpcId: ").append(toIndentedString(vpcId)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -318,7 +349,8 @@ public class CreateNetworkPayload {
 								"labels",
 								"name",
 								"routed",
-								"routingTableId"));
+								"routingTableId",
+								"vpcId"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(Arrays.asList("name"));
@@ -376,6 +408,14 @@ public class CreateNetworkPayload {
 							java.util.Locale.ROOT,
 							"Expected the field `routingTableId` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("routingTableId").toString()));
+		}
+		if ((jsonObj.get("vpcId") != null && !jsonObj.get("vpcId").isJsonNull())
+				&& !jsonObj.get("vpcId").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `vpcId` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("vpcId").toString()));
 		}
 	}
 
