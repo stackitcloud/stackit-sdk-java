@@ -31,9 +31,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** CreateUpdatePayload */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class CreateUpdatePayload {
 	public static final String SERIALIZED_NAME_BACKUP_BEFORE_UPDATE = "backupBeforeUpdate";
 
