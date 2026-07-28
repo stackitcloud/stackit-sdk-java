@@ -31,9 +31,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Object that represents the request body for a single isolated network create. */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class CreateIsolatedNetworkPayload {
 	public static final String SERIALIZED_NAME_DHCP = "dhcp";
 

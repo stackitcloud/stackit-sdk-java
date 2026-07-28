@@ -1,3 +1,17 @@
+## v1.3.0
+- new example for managing `VPCs` with the `v2alpha1api`
+- `v1api`
+  - **Braking Change:** remove deprecated operations: `updateImageScopeLocal`, `updateImageScopePublic`
+  - **Feature:** add attribute `vtpm` (new model `ServerVTPM`) to model `Server`
+  - **Feature:** add attribute `availabilityZone` to model `Snapshot`
+- `v2alpha1api`
+  - **Feature:** add operations and models to manage `VPCs`
+- `v2api`
+  - **Feature:** add attribute `vpcNetworkRangeId` to models `NetworkIPv4` `NetworkIPv6`
+  - **Feature:** add attribute `vpcId` to model `Network`,
+  - **Feature:** add attribute `vtpm` (new model `ServerVTPM`) to model `Server`,
+  - **Feature:** add attribute `availabilityZone` to model `Snapshot`,
+
 ## v1.2.0
 - **Feature (breaking change):** Introduction of multi API version support. See the GitHub discussion post for more details: https://github.com/stackitcloud/stackit-sdk-java/discussions/530
 
