@@ -32,9 +32,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Options for the HTTP health checking. */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class HttpHealthChecks {
 	public static final String SERIALIZED_NAME_OK_STATUSES = "okStatuses";
 
