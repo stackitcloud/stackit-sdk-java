@@ -32,10 +32,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-/** Object that represents a network range. */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+/** Object that represents a network range of a network area. */
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class NetworkRange {
 	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
 

@@ -1797,7 +1797,7 @@ class DefaultApi {
 	}
 
 	/**
-	 * Attach service account to a server. Attach an additional service account to the server.
+	 * Attach service account to a server. Attach a service account to the server.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -1832,7 +1832,7 @@ class DefaultApi {
 	}
 
 	/**
-	 * Attach service account to a server. Attach an additional service account to the server.
+	 * Attach service account to a server. Attach a service account to the server.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -1868,8 +1868,7 @@ class DefaultApi {
 	}
 
 	/**
-	 * Attach service account to a server. (asynchronously) Attach an additional service account to
-	 * the server.
+	 * Attach service account to a server. (asynchronously) Attach a service account to the server.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -2396,6 +2395,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2511,6 +2511,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2543,6 +2544,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2577,6 +2579,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2612,6 +2615,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 429 </td><td> Too Many Requests. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
@@ -2710,8 +2714,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Create new Image. Create a new Image in a project. This call, if successful, returns a
-	 * pre-signed URL for the customer to upload the image.
+	 * Create new Image. Create a new Image in a project in queued state. Image data must be
+	 * imported separately. This call returns a pre-signed URL to upload small images.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -2728,6 +2732,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 429 </td><td> Too Many Requests. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
@@ -2743,8 +2748,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Create new Image. Create a new Image in a project. This call, if successful, returns a
-	 * pre-signed URL for the customer to upload the image.
+	 * Create new Image. Create a new Image in a project in queued state. Image data must be
+	 * imported separately. This call returns a pre-signed URL to upload small images.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -2761,6 +2766,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 429 </td><td> Too Many Requests. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
@@ -2777,8 +2783,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Create new Image. (asynchronously) Create a new Image in a project. This call, if successful,
-	 * returns a pre-signed URL for the customer to upload the image.
+	 * Create new Image. (asynchronously) Create a new Image in a project in queued state. Image
+	 * data must be imported separately. This call returns a pre-signed URL to upload small images.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -2796,6 +2802,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 429 </td><td> Too Many Requests. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
@@ -5535,6 +5542,8 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -5649,6 +5658,8 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -5680,6 +5691,8 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -5713,6 +5726,8 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -5749,6 +5764,8 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -5865,6 +5882,8 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -5898,6 +5917,8 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -5933,6 +5954,8 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -22005,7 +22028,7 @@ class DefaultApi {
 	 *     <table border="1">
 	 * <caption>Response Details</caption>
 	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-	 * <tr><td> 200 </td><td> List service accounts. </td><td>  -  </td></tr>
+	 * <tr><td> 200 </td><td> List service account. </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
@@ -22110,7 +22133,7 @@ class DefaultApi {
 	}
 
 	/**
-	 * List all service accounts of the Server. Get the list of the service accounts of the server.
+	 * List the service account of the Server. Get service account of the server in a list.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -22122,7 +22145,7 @@ class DefaultApi {
 	 *     <table border="1">
 	 * <caption>Response Details</caption>
 	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-	 * <tr><td> 200 </td><td> List service accounts. </td><td>  -  </td></tr>
+	 * <tr><td> 200 </td><td> List service account. </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
@@ -22141,7 +22164,7 @@ class DefaultApi {
 	}
 
 	/**
-	 * List all service accounts of the Server. Get the list of the service accounts of the server.
+	 * List the service account of the Server. Get service account of the server in a list.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -22153,7 +22176,7 @@ class DefaultApi {
 	 *     <table border="1">
 	 * <caption>Response Details</caption>
 	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-	 * <tr><td> 200 </td><td> List service accounts. </td><td>  -  </td></tr>
+	 * <tr><td> 200 </td><td> List service account. </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
@@ -22173,8 +22196,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * List all service accounts of the Server. (asynchronously) Get the list of the service
-	 * accounts of the server.
+	 * List the service account of the Server. (asynchronously) Get service account of the server in
+	 * a list.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -22187,7 +22210,7 @@ class DefaultApi {
 	 *     <table border="1">
 	 * <caption>Response Details</caption>
 	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-	 * <tr><td> 200 </td><td> List service accounts. </td><td>  -  </td></tr>
+	 * <tr><td> 200 </td><td> List service account. </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
@@ -24835,7 +24858,7 @@ class DefaultApi {
 	}
 
 	/**
-	 * Detach a service account from a server. Detach an additional service account from the server.
+	 * Detach a service account from a server. Detach a service account from the server.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -24870,7 +24893,7 @@ class DefaultApi {
 	}
 
 	/**
-	 * Detach a service account from a server. Detach an additional service account from the server.
+	 * Detach a service account from a server. Detach a service account from the server.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -24906,8 +24929,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Detach a service account from a server. (asynchronously) Detach an additional service account
-	 * from the server.
+	 * Detach a service account from a server. (asynchronously) Detach a service account from the
+	 * server.
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)

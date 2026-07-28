@@ -36,9 +36,7 @@ import java.util.UUID;
  * Object that represents a network. If no routing table is specified, the default routing table is
  * used.
  */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class Network {
 	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
 
@@ -97,6 +95,11 @@ public class Network {
 
 	@SerializedName(SERIALIZED_NAME_UPDATED_AT)
 	@javax.annotation.Nullable private OffsetDateTime updatedAt;
+
+	public static final String SERIALIZED_NAME_VPC_ID = "vpcId";
+
+	@SerializedName(SERIALIZED_NAME_VPC_ID)
+	@javax.annotation.Nullable private UUID vpcId;
 
 	public Network() {}
 
@@ -295,6 +298,24 @@ public class Network {
 		return updatedAt;
 	}
 
+	public Network vpcId(@javax.annotation.Nullable UUID vpcId) {
+		this.vpcId = vpcId;
+		return this;
+	}
+
+	/**
+	 * The identifier (ID) of a STACKIT VPC.
+	 *
+	 * @return vpcId
+	 */
+	@javax.annotation.Nullable public UUID getVpcId() {
+		return vpcId;
+	}
+
+	public void setVpcId(@javax.annotation.Nullable UUID vpcId) {
+		this.vpcId = vpcId;
+	}
+
 	/**
 	 * A container for additional, undeclared properties. This is a holder for any undeclared
 	 * properties as specified with the 'additionalProperties' keyword in the OAS document.
@@ -359,6 +380,7 @@ public class Network {
 				&& Objects.equals(this.routingTableId, network.routingTableId)
 				&& Objects.equals(this.status, network.status)
 				&& Objects.equals(this.updatedAt, network.updatedAt)
+				&& Objects.equals(this.vpcId, network.vpcId)
 				&& Objects.equals(this.additionalProperties, network.additionalProperties);
 	}
 
@@ -376,6 +398,7 @@ public class Network {
 				routingTableId,
 				status,
 				updatedAt,
+				vpcId,
 				additionalProperties);
 	}
 
@@ -394,6 +417,7 @@ public class Network {
 		sb.append("    routingTableId: ").append(toIndentedString(routingTableId)).append("\n");
 		sb.append("    status: ").append(toIndentedString(status)).append("\n");
 		sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
+		sb.append("    vpcId: ").append(toIndentedString(vpcId)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -430,7 +454,8 @@ public class Network {
 								"routed",
 								"routingTableId",
 								"status",
-								"updatedAt"));
+								"updatedAt",
+								"vpcId"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "name", "status"));
@@ -502,6 +527,14 @@ public class Network {
 							java.util.Locale.ROOT,
 							"Expected the field `status` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("status").toString()));
+		}
+		if ((jsonObj.get("vpcId") != null && !jsonObj.get("vpcId").isJsonNull())
+				&& !jsonObj.get("vpcId").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `vpcId` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("vpcId").toString()));
 		}
 	}
 

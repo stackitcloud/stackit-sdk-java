@@ -34,9 +34,7 @@ import java.util.Objects;
  * Object that represents the upload request of an image to a volume. Used for creating an image
  * from a volume.
  */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class ImageFromVolumePayload {
 	public static final String SERIALIZED_NAME_DISK_FORMAT = "diskFormat";
 

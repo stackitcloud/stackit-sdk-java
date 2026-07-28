@@ -98,11 +98,11 @@ import cloud.stackit.sdk.iaas.v2beta1api.model.UpdateRouteOfRoutingTablePayload;
 import cloud.stackit.sdk.iaas.v2beta1api.model.UpdateRoutingTableOfAreaPayload;
 import cloud.stackit.sdk.iaas.v2beta1api.model.UpdateServerPayload;
 import cloud.stackit.sdk.iaas.v2beta1api.model.UpdateVolumePayload;
-import cloud.stackit.sdk.iaas.v2beta1api.model.V2beta1ConfigureNetworkAreaRegionPayload;
+import cloud.stackit.sdk.iaas.v2beta1api.model.V2beta1CreateNetworkAreaRegionPayload;
 import cloud.stackit.sdk.iaas.v2beta1api.model.V2beta1CreateSnapshotPayload;
 import cloud.stackit.sdk.iaas.v2beta1api.model.V2beta1UpdateBackupPayload;
 import cloud.stackit.sdk.iaas.v2beta1api.model.V2beta1UpdateNetworkAreaRegionPayload;
-import cloud.stackit.sdk.iaas.v2beta1api.model.V2beta1UpdateRouteOfAreaPayload;
+import cloud.stackit.sdk.iaas.v2beta1api.model.V2beta1UpdateNetworkAreaRoutePayload;
 import cloud.stackit.sdk.iaas.v2beta1api.model.V2beta1UpdateSecurityGroupPayload;
 import cloud.stackit.sdk.iaas.v2beta1api.model.V2beta1UpdateSnapshotPayload;
 import cloud.stackit.sdk.iaas.v2beta1api.model.Volume;
@@ -2395,6 +2395,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2510,6 +2511,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2542,6 +2544,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2576,6 +2579,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2611,6 +2615,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 429 </td><td> Too Many Requests. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
@@ -2727,6 +2732,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 429 </td><td> Too Many Requests. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
@@ -2760,6 +2766,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 429 </td><td> Too Many Requests. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
@@ -2795,6 +2802,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 429 </td><td> Too Many Requests. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
@@ -5282,6 +5290,8 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -5398,6 +5408,8 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -5431,6 +5443,8 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -5466,6 +5480,8 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -27476,12 +27492,12 @@ class DefaultApi {
 	}
 
 	/**
-	 * Build call for v2beta1ConfigureNetworkAreaRegion
+	 * Build call for v2beta1CreateNetworkAreaRegion
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
 	 * @param region The STACKIT Region of the resources. (required)
-	 * @param v2beta1ConfigureNetworkAreaRegionPayload Request to add a new regional network area
+	 * @param v2beta1CreateNetworkAreaRegionPayload Request to add a new regional network area
 	 *     configuration. (required)
 	 * @param _callback Callback for upload/download progress
 	 * @return Call to execute
@@ -27499,13 +27515,12 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public okhttp3.Call v2beta1ConfigureNetworkAreaRegionCall(
+	public okhttp3.Call v2beta1CreateNetworkAreaRegionCall(
 			@javax.annotation.Nonnull UUID organizationId,
 			@javax.annotation.Nonnull UUID areaId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull
-					V2beta1ConfigureNetworkAreaRegionPayload
-							v2beta1ConfigureNetworkAreaRegionPayload,
+					V2beta1CreateNetworkAreaRegionPayload v2beta1CreateNetworkAreaRegionPayload,
 			final ApiCallback _callback)
 			throws ApiException {
 		String basePath = null;
@@ -27521,7 +27536,7 @@ class DefaultApi {
 			basePath = null;
 		}
 
-		Object localVarPostBody = v2beta1ConfigureNetworkAreaRegionPayload;
+		Object localVarPostBody = v2beta1CreateNetworkAreaRegionPayload;
 
 		// create path and map variables
 		String localVarPath =
@@ -27571,45 +27586,40 @@ class DefaultApi {
 	}
 
 	@SuppressWarnings("rawtypes")
-	private okhttp3.Call v2beta1ConfigureNetworkAreaRegionValidateBeforeCall(
+	private okhttp3.Call v2beta1CreateNetworkAreaRegionValidateBeforeCall(
 			@javax.annotation.Nonnull UUID organizationId,
 			@javax.annotation.Nonnull UUID areaId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull
-					V2beta1ConfigureNetworkAreaRegionPayload
-							v2beta1ConfigureNetworkAreaRegionPayload,
+					V2beta1CreateNetworkAreaRegionPayload v2beta1CreateNetworkAreaRegionPayload,
 			final ApiCallback _callback)
 			throws ApiException {
 		// verify the required parameter 'organizationId' is set
 		if (organizationId == null) {
 			throw new ApiException(
-					"Missing the required parameter 'organizationId' when calling v2beta1ConfigureNetworkAreaRegion(Async)");
+					"Missing the required parameter 'organizationId' when calling v2beta1CreateNetworkAreaRegion(Async)");
 		}
 
 		// verify the required parameter 'areaId' is set
 		if (areaId == null) {
 			throw new ApiException(
-					"Missing the required parameter 'areaId' when calling v2beta1ConfigureNetworkAreaRegion(Async)");
+					"Missing the required parameter 'areaId' when calling v2beta1CreateNetworkAreaRegion(Async)");
 		}
 
 		// verify the required parameter 'region' is set
 		if (region == null) {
 			throw new ApiException(
-					"Missing the required parameter 'region' when calling v2beta1ConfigureNetworkAreaRegion(Async)");
+					"Missing the required parameter 'region' when calling v2beta1CreateNetworkAreaRegion(Async)");
 		}
 
-		// verify the required parameter 'v2beta1ConfigureNetworkAreaRegionPayload' is set
-		if (v2beta1ConfigureNetworkAreaRegionPayload == null) {
+		// verify the required parameter 'v2beta1CreateNetworkAreaRegionPayload' is set
+		if (v2beta1CreateNetworkAreaRegionPayload == null) {
 			throw new ApiException(
-					"Missing the required parameter 'v2beta1ConfigureNetworkAreaRegionPayload' when calling v2beta1ConfigureNetworkAreaRegion(Async)");
+					"Missing the required parameter 'v2beta1CreateNetworkAreaRegionPayload' when calling v2beta1CreateNetworkAreaRegion(Async)");
 		}
 
-		return v2beta1ConfigureNetworkAreaRegionCall(
-				organizationId,
-				areaId,
-				region,
-				v2beta1ConfigureNetworkAreaRegionPayload,
-				_callback);
+		return v2beta1CreateNetworkAreaRegionCall(
+				organizationId, areaId, region, v2beta1CreateNetworkAreaRegionPayload, _callback);
 	}
 
 	/**
@@ -27618,7 +27628,7 @@ class DefaultApi {
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
 	 * @param region The STACKIT Region of the resources. (required)
-	 * @param v2beta1ConfigureNetworkAreaRegionPayload Request to add a new regional network area
+	 * @param v2beta1CreateNetworkAreaRegionPayload Request to add a new regional network area
 	 *     configuration. (required)
 	 * @return RegionalArea
 	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -27636,17 +27646,16 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public RegionalArea v2beta1ConfigureNetworkAreaRegion(
+	public RegionalArea v2beta1CreateNetworkAreaRegion(
 			@javax.annotation.Nonnull UUID organizationId,
 			@javax.annotation.Nonnull UUID areaId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull
-					V2beta1ConfigureNetworkAreaRegionPayload
-							v2beta1ConfigureNetworkAreaRegionPayload)
+					V2beta1CreateNetworkAreaRegionPayload v2beta1CreateNetworkAreaRegionPayload)
 			throws ApiException {
 		ApiResponse<RegionalArea> localVarResp =
-				v2beta1ConfigureNetworkAreaRegionWithHttpInfo(
-						organizationId, areaId, region, v2beta1ConfigureNetworkAreaRegionPayload);
+				v2beta1CreateNetworkAreaRegionWithHttpInfo(
+						organizationId, areaId, region, v2beta1CreateNetworkAreaRegionPayload);
 		return localVarResp.getData();
 	}
 
@@ -27656,7 +27665,7 @@ class DefaultApi {
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
 	 * @param region The STACKIT Region of the resources. (required)
-	 * @param v2beta1ConfigureNetworkAreaRegionPayload Request to add a new regional network area
+	 * @param v2beta1CreateNetworkAreaRegionPayload Request to add a new regional network area
 	 *     configuration. (required)
 	 * @return ApiResponse&lt;RegionalArea&gt;
 	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -27674,20 +27683,19 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public ApiResponse<RegionalArea> v2beta1ConfigureNetworkAreaRegionWithHttpInfo(
+	public ApiResponse<RegionalArea> v2beta1CreateNetworkAreaRegionWithHttpInfo(
 			@javax.annotation.Nonnull UUID organizationId,
 			@javax.annotation.Nonnull UUID areaId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull
-					V2beta1ConfigureNetworkAreaRegionPayload
-							v2beta1ConfigureNetworkAreaRegionPayload)
+					V2beta1CreateNetworkAreaRegionPayload v2beta1CreateNetworkAreaRegionPayload)
 			throws ApiException {
 		okhttp3.Call localVarCall =
-				v2beta1ConfigureNetworkAreaRegionValidateBeforeCall(
+				v2beta1CreateNetworkAreaRegionValidateBeforeCall(
 						organizationId,
 						areaId,
 						region,
-						v2beta1ConfigureNetworkAreaRegionPayload,
+						v2beta1CreateNetworkAreaRegionPayload,
 						null);
 		Type localVarReturnType = new TypeToken<RegionalArea>() {}.getType();
 		return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -27700,7 +27708,7 @@ class DefaultApi {
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
 	 * @param region The STACKIT Region of the resources. (required)
-	 * @param v2beta1ConfigureNetworkAreaRegionPayload Request to add a new regional network area
+	 * @param v2beta1CreateNetworkAreaRegionPayload Request to add a new regional network area
 	 *     configuration. (required)
 	 * @param _callback The callback to be executed when the API call finishes
 	 * @return The request call
@@ -27719,22 +27727,21 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public okhttp3.Call v2beta1ConfigureNetworkAreaRegionAsync(
+	public okhttp3.Call v2beta1CreateNetworkAreaRegionAsync(
 			@javax.annotation.Nonnull UUID organizationId,
 			@javax.annotation.Nonnull UUID areaId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull
-					V2beta1ConfigureNetworkAreaRegionPayload
-							v2beta1ConfigureNetworkAreaRegionPayload,
+					V2beta1CreateNetworkAreaRegionPayload v2beta1CreateNetworkAreaRegionPayload,
 			final ApiCallback<RegionalArea> _callback)
 			throws ApiException {
 
 		okhttp3.Call localVarCall =
-				v2beta1ConfigureNetworkAreaRegionValidateBeforeCall(
+				v2beta1CreateNetworkAreaRegionValidateBeforeCall(
 						organizationId,
 						areaId,
 						region,
-						v2beta1ConfigureNetworkAreaRegionPayload,
+						v2beta1CreateNetworkAreaRegionPayload,
 						_callback);
 		Type localVarReturnType = new TypeToken<RegionalArea>() {}.getType();
 		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
@@ -27759,6 +27766,8 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -27874,6 +27883,8 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -27905,6 +27916,8 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -27939,6 +27952,8 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
 	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 413 </td><td> The request entity is too large. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -28389,7 +28404,7 @@ class DefaultApi {
 	}
 
 	/**
-	 * Build call for v2beta1GetAreaRegion
+	 * Build call for v2beta1GetNetworkAreaRegion
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -28409,7 +28424,7 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public okhttp3.Call v2beta1GetAreaRegionCall(
+	public okhttp3.Call v2beta1GetNetworkAreaRegionCall(
 			@javax.annotation.Nonnull UUID organizationId,
 			@javax.annotation.Nonnull UUID areaId,
 			@javax.annotation.Nonnull String region,
@@ -28478,7 +28493,7 @@ class DefaultApi {
 	}
 
 	@SuppressWarnings("rawtypes")
-	private okhttp3.Call v2beta1GetAreaRegionValidateBeforeCall(
+	private okhttp3.Call v2beta1GetNetworkAreaRegionValidateBeforeCall(
 			@javax.annotation.Nonnull UUID organizationId,
 			@javax.annotation.Nonnull UUID areaId,
 			@javax.annotation.Nonnull String region,
@@ -28487,22 +28502,22 @@ class DefaultApi {
 		// verify the required parameter 'organizationId' is set
 		if (organizationId == null) {
 			throw new ApiException(
-					"Missing the required parameter 'organizationId' when calling v2beta1GetAreaRegion(Async)");
+					"Missing the required parameter 'organizationId' when calling v2beta1GetNetworkAreaRegion(Async)");
 		}
 
 		// verify the required parameter 'areaId' is set
 		if (areaId == null) {
 			throw new ApiException(
-					"Missing the required parameter 'areaId' when calling v2beta1GetAreaRegion(Async)");
+					"Missing the required parameter 'areaId' when calling v2beta1GetNetworkAreaRegion(Async)");
 		}
 
 		// verify the required parameter 'region' is set
 		if (region == null) {
 			throw new ApiException(
-					"Missing the required parameter 'region' when calling v2beta1GetAreaRegion(Async)");
+					"Missing the required parameter 'region' when calling v2beta1GetNetworkAreaRegion(Async)");
 		}
 
-		return v2beta1GetAreaRegionCall(organizationId, areaId, region, _callback);
+		return v2beta1GetNetworkAreaRegionCall(organizationId, areaId, region, _callback);
 	}
 
 	/**
@@ -28527,13 +28542,13 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public RegionalArea v2beta1GetAreaRegion(
+	public RegionalArea v2beta1GetNetworkAreaRegion(
 			@javax.annotation.Nonnull UUID organizationId,
 			@javax.annotation.Nonnull UUID areaId,
 			@javax.annotation.Nonnull String region)
 			throws ApiException {
 		ApiResponse<RegionalArea> localVarResp =
-				v2beta1GetAreaRegionWithHttpInfo(organizationId, areaId, region);
+				v2beta1GetNetworkAreaRegionWithHttpInfo(organizationId, areaId, region);
 		return localVarResp.getData();
 	}
 
@@ -28559,13 +28574,13 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public ApiResponse<RegionalArea> v2beta1GetAreaRegionWithHttpInfo(
+	public ApiResponse<RegionalArea> v2beta1GetNetworkAreaRegionWithHttpInfo(
 			@javax.annotation.Nonnull UUID organizationId,
 			@javax.annotation.Nonnull UUID areaId,
 			@javax.annotation.Nonnull String region)
 			throws ApiException {
 		okhttp3.Call localVarCall =
-				v2beta1GetAreaRegionValidateBeforeCall(organizationId, areaId, region, null);
+				v2beta1GetNetworkAreaRegionValidateBeforeCall(organizationId, areaId, region, null);
 		Type localVarReturnType = new TypeToken<RegionalArea>() {}.getType();
 		return localVarApiClient.execute(localVarCall, localVarReturnType);
 	}
@@ -28593,7 +28608,7 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public okhttp3.Call v2beta1GetAreaRegionAsync(
+	public okhttp3.Call v2beta1GetNetworkAreaRegionAsync(
 			@javax.annotation.Nonnull UUID organizationId,
 			@javax.annotation.Nonnull UUID areaId,
 			@javax.annotation.Nonnull String region,
@@ -28601,7 +28616,8 @@ class DefaultApi {
 			throws ApiException {
 
 		okhttp3.Call localVarCall =
-				v2beta1GetAreaRegionValidateBeforeCall(organizationId, areaId, region, _callback);
+				v2beta1GetNetworkAreaRegionValidateBeforeCall(
+						organizationId, areaId, region, _callback);
 		Type localVarReturnType = new TypeToken<RegionalArea>() {}.getType();
 		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
 		return localVarCall;
@@ -28824,7 +28840,7 @@ class DefaultApi {
 	}
 
 	/**
-	 * Build call for v2beta1ListAreaRegions
+	 * Build call for v2beta1ListNetworkAreaRegions
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -28843,7 +28859,7 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public okhttp3.Call v2beta1ListAreaRegionsCall(
+	public okhttp3.Call v2beta1ListNetworkAreaRegionsCall(
 			@javax.annotation.Nonnull UUID organizationId,
 			@javax.annotation.Nonnull UUID areaId,
 			final ApiCallback _callback)
@@ -28908,7 +28924,7 @@ class DefaultApi {
 	}
 
 	@SuppressWarnings("rawtypes")
-	private okhttp3.Call v2beta1ListAreaRegionsValidateBeforeCall(
+	private okhttp3.Call v2beta1ListNetworkAreaRegionsValidateBeforeCall(
 			@javax.annotation.Nonnull UUID organizationId,
 			@javax.annotation.Nonnull UUID areaId,
 			final ApiCallback _callback)
@@ -28916,16 +28932,16 @@ class DefaultApi {
 		// verify the required parameter 'organizationId' is set
 		if (organizationId == null) {
 			throw new ApiException(
-					"Missing the required parameter 'organizationId' when calling v2beta1ListAreaRegions(Async)");
+					"Missing the required parameter 'organizationId' when calling v2beta1ListNetworkAreaRegions(Async)");
 		}
 
 		// verify the required parameter 'areaId' is set
 		if (areaId == null) {
 			throw new ApiException(
-					"Missing the required parameter 'areaId' when calling v2beta1ListAreaRegions(Async)");
+					"Missing the required parameter 'areaId' when calling v2beta1ListNetworkAreaRegions(Async)");
 		}
 
-		return v2beta1ListAreaRegionsCall(organizationId, areaId, _callback);
+		return v2beta1ListNetworkAreaRegionsCall(organizationId, areaId, _callback);
 	}
 
 	/**
@@ -28948,11 +28964,11 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public RegionalAreaListResponse v2beta1ListAreaRegions(
+	public RegionalAreaListResponse v2beta1ListNetworkAreaRegions(
 			@javax.annotation.Nonnull UUID organizationId, @javax.annotation.Nonnull UUID areaId)
 			throws ApiException {
 		ApiResponse<RegionalAreaListResponse> localVarResp =
-				v2beta1ListAreaRegionsWithHttpInfo(organizationId, areaId);
+				v2beta1ListNetworkAreaRegionsWithHttpInfo(organizationId, areaId);
 		return localVarResp.getData();
 	}
 
@@ -28976,11 +28992,11 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public ApiResponse<RegionalAreaListResponse> v2beta1ListAreaRegionsWithHttpInfo(
+	public ApiResponse<RegionalAreaListResponse> v2beta1ListNetworkAreaRegionsWithHttpInfo(
 			@javax.annotation.Nonnull UUID organizationId, @javax.annotation.Nonnull UUID areaId)
 			throws ApiException {
 		okhttp3.Call localVarCall =
-				v2beta1ListAreaRegionsValidateBeforeCall(organizationId, areaId, null);
+				v2beta1ListNetworkAreaRegionsValidateBeforeCall(organizationId, areaId, null);
 		Type localVarReturnType = new TypeToken<RegionalAreaListResponse>() {}.getType();
 		return localVarApiClient.execute(localVarCall, localVarReturnType);
 	}
@@ -29007,21 +29023,21 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public okhttp3.Call v2beta1ListAreaRegionsAsync(
+	public okhttp3.Call v2beta1ListNetworkAreaRegionsAsync(
 			@javax.annotation.Nonnull UUID organizationId,
 			@javax.annotation.Nonnull UUID areaId,
 			final ApiCallback<RegionalAreaListResponse> _callback)
 			throws ApiException {
 
 		okhttp3.Call localVarCall =
-				v2beta1ListAreaRegionsValidateBeforeCall(organizationId, areaId, _callback);
+				v2beta1ListNetworkAreaRegionsValidateBeforeCall(organizationId, areaId, _callback);
 		Type localVarReturnType = new TypeToken<RegionalAreaListResponse>() {}.getType();
 		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
 		return localVarCall;
 	}
 
 	/**
-	 * Build call for v2beta1ListSnapshotsInProject
+	 * Build call for v2beta1ListSnapshots
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
 	 * @param region The STACKIT Region of the resources. (required)
@@ -29041,7 +29057,7 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public okhttp3.Call v2beta1ListSnapshotsInProjectCall(
+	public okhttp3.Call v2beta1ListSnapshotsCall(
 			@javax.annotation.Nonnull UUID projectId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nullable String labelSelector,
@@ -29112,7 +29128,7 @@ class DefaultApi {
 	}
 
 	@SuppressWarnings("rawtypes")
-	private okhttp3.Call v2beta1ListSnapshotsInProjectValidateBeforeCall(
+	private okhttp3.Call v2beta1ListSnapshotsValidateBeforeCall(
 			@javax.annotation.Nonnull UUID projectId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nullable String labelSelector,
@@ -29121,16 +29137,16 @@ class DefaultApi {
 		// verify the required parameter 'projectId' is set
 		if (projectId == null) {
 			throw new ApiException(
-					"Missing the required parameter 'projectId' when calling v2beta1ListSnapshotsInProject(Async)");
+					"Missing the required parameter 'projectId' when calling v2beta1ListSnapshots(Async)");
 		}
 
 		// verify the required parameter 'region' is set
 		if (region == null) {
 			throw new ApiException(
-					"Missing the required parameter 'region' when calling v2beta1ListSnapshotsInProject(Async)");
+					"Missing the required parameter 'region' when calling v2beta1ListSnapshots(Async)");
 		}
 
-		return v2beta1ListSnapshotsInProjectCall(projectId, region, labelSelector, _callback);
+		return v2beta1ListSnapshotsCall(projectId, region, labelSelector, _callback);
 	}
 
 	/**
@@ -29154,13 +29170,13 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public SnapshotListResponse v2beta1ListSnapshotsInProject(
+	public SnapshotListResponse v2beta1ListSnapshots(
 			@javax.annotation.Nonnull UUID projectId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nullable String labelSelector)
 			throws ApiException {
 		ApiResponse<SnapshotListResponse> localVarResp =
-				v2beta1ListSnapshotsInProjectWithHttpInfo(projectId, region, labelSelector);
+				v2beta1ListSnapshotsWithHttpInfo(projectId, region, labelSelector);
 		return localVarResp.getData();
 	}
 
@@ -29185,14 +29201,13 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public ApiResponse<SnapshotListResponse> v2beta1ListSnapshotsInProjectWithHttpInfo(
+	public ApiResponse<SnapshotListResponse> v2beta1ListSnapshotsWithHttpInfo(
 			@javax.annotation.Nonnull UUID projectId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nullable String labelSelector)
 			throws ApiException {
 		okhttp3.Call localVarCall =
-				v2beta1ListSnapshotsInProjectValidateBeforeCall(
-						projectId, region, labelSelector, null);
+				v2beta1ListSnapshotsValidateBeforeCall(projectId, region, labelSelector, null);
 		Type localVarReturnType = new TypeToken<SnapshotListResponse>() {}.getType();
 		return localVarApiClient.execute(localVarCall, localVarReturnType);
 	}
@@ -29220,7 +29235,7 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public okhttp3.Call v2beta1ListSnapshotsInProjectAsync(
+	public okhttp3.Call v2beta1ListSnapshotsAsync(
 			@javax.annotation.Nonnull UUID projectId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nullable String labelSelector,
@@ -29228,8 +29243,7 @@ class DefaultApi {
 			throws ApiException {
 
 		okhttp3.Call localVarCall =
-				v2beta1ListSnapshotsInProjectValidateBeforeCall(
-						projectId, region, labelSelector, _callback);
+				v2beta1ListSnapshotsValidateBeforeCall(projectId, region, labelSelector, _callback);
 		Type localVarReturnType = new TypeToken<SnapshotListResponse>() {}.getType();
 		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
 		return localVarCall;
@@ -29727,13 +29741,13 @@ class DefaultApi {
 	}
 
 	/**
-	 * Build call for v2beta1UpdateRouteOfArea
+	 * Build call for v2beta1UpdateNetworkAreaRoute
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
 	 * @param region The STACKIT Region of the resources. (required)
 	 * @param routeId The identifier (ID) of a STACKIT Route. (required)
-	 * @param v2beta1UpdateRouteOfAreaPayload Request an update of a network route. (required)
+	 * @param v2beta1UpdateNetworkAreaRoutePayload Request an update of a network route. (required)
 	 * @param _callback Callback for upload/download progress
 	 * @return Call to execute
 	 * @throws ApiException If fail to serialize the request body object
@@ -29749,13 +29763,13 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public okhttp3.Call v2beta1UpdateRouteOfAreaCall(
+	public okhttp3.Call v2beta1UpdateNetworkAreaRouteCall(
 			@javax.annotation.Nonnull UUID organizationId,
 			@javax.annotation.Nonnull UUID areaId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull UUID routeId,
 			@javax.annotation.Nonnull
-					V2beta1UpdateRouteOfAreaPayload v2beta1UpdateRouteOfAreaPayload,
+					V2beta1UpdateNetworkAreaRoutePayload v2beta1UpdateNetworkAreaRoutePayload,
 			final ApiCallback _callback)
 			throws ApiException {
 		String basePath = null;
@@ -29771,7 +29785,7 @@ class DefaultApi {
 			basePath = null;
 		}
 
-		Object localVarPostBody = v2beta1UpdateRouteOfAreaPayload;
+		Object localVarPostBody = v2beta1UpdateNetworkAreaRoutePayload;
 
 		// create path and map variables
 		String localVarPath =
@@ -29824,51 +29838,51 @@ class DefaultApi {
 	}
 
 	@SuppressWarnings("rawtypes")
-	private okhttp3.Call v2beta1UpdateRouteOfAreaValidateBeforeCall(
+	private okhttp3.Call v2beta1UpdateNetworkAreaRouteValidateBeforeCall(
 			@javax.annotation.Nonnull UUID organizationId,
 			@javax.annotation.Nonnull UUID areaId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull UUID routeId,
 			@javax.annotation.Nonnull
-					V2beta1UpdateRouteOfAreaPayload v2beta1UpdateRouteOfAreaPayload,
+					V2beta1UpdateNetworkAreaRoutePayload v2beta1UpdateNetworkAreaRoutePayload,
 			final ApiCallback _callback)
 			throws ApiException {
 		// verify the required parameter 'organizationId' is set
 		if (organizationId == null) {
 			throw new ApiException(
-					"Missing the required parameter 'organizationId' when calling v2beta1UpdateRouteOfArea(Async)");
+					"Missing the required parameter 'organizationId' when calling v2beta1UpdateNetworkAreaRoute(Async)");
 		}
 
 		// verify the required parameter 'areaId' is set
 		if (areaId == null) {
 			throw new ApiException(
-					"Missing the required parameter 'areaId' when calling v2beta1UpdateRouteOfArea(Async)");
+					"Missing the required parameter 'areaId' when calling v2beta1UpdateNetworkAreaRoute(Async)");
 		}
 
 		// verify the required parameter 'region' is set
 		if (region == null) {
 			throw new ApiException(
-					"Missing the required parameter 'region' when calling v2beta1UpdateRouteOfArea(Async)");
+					"Missing the required parameter 'region' when calling v2beta1UpdateNetworkAreaRoute(Async)");
 		}
 
 		// verify the required parameter 'routeId' is set
 		if (routeId == null) {
 			throw new ApiException(
-					"Missing the required parameter 'routeId' when calling v2beta1UpdateRouteOfArea(Async)");
+					"Missing the required parameter 'routeId' when calling v2beta1UpdateNetworkAreaRoute(Async)");
 		}
 
-		// verify the required parameter 'v2beta1UpdateRouteOfAreaPayload' is set
-		if (v2beta1UpdateRouteOfAreaPayload == null) {
+		// verify the required parameter 'v2beta1UpdateNetworkAreaRoutePayload' is set
+		if (v2beta1UpdateNetworkAreaRoutePayload == null) {
 			throw new ApiException(
-					"Missing the required parameter 'v2beta1UpdateRouteOfAreaPayload' when calling v2beta1UpdateRouteOfArea(Async)");
+					"Missing the required parameter 'v2beta1UpdateNetworkAreaRoutePayload' when calling v2beta1UpdateNetworkAreaRoute(Async)");
 		}
 
-		return v2beta1UpdateRouteOfAreaCall(
+		return v2beta1UpdateNetworkAreaRouteCall(
 				organizationId,
 				areaId,
 				region,
 				routeId,
-				v2beta1UpdateRouteOfAreaPayload,
+				v2beta1UpdateNetworkAreaRoutePayload,
 				_callback);
 	}
 
@@ -29879,7 +29893,7 @@ class DefaultApi {
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
 	 * @param region The STACKIT Region of the resources. (required)
 	 * @param routeId The identifier (ID) of a STACKIT Route. (required)
-	 * @param v2beta1UpdateRouteOfAreaPayload Request an update of a network route. (required)
+	 * @param v2beta1UpdateNetworkAreaRoutePayload Request an update of a network route. (required)
 	 * @return Route
 	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
 	 *     response body
@@ -29895,17 +29909,21 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public Route v2beta1UpdateRouteOfArea(
+	public Route v2beta1UpdateNetworkAreaRoute(
 			@javax.annotation.Nonnull UUID organizationId,
 			@javax.annotation.Nonnull UUID areaId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull UUID routeId,
 			@javax.annotation.Nonnull
-					V2beta1UpdateRouteOfAreaPayload v2beta1UpdateRouteOfAreaPayload)
+					V2beta1UpdateNetworkAreaRoutePayload v2beta1UpdateNetworkAreaRoutePayload)
 			throws ApiException {
 		ApiResponse<Route> localVarResp =
-				v2beta1UpdateRouteOfAreaWithHttpInfo(
-						organizationId, areaId, region, routeId, v2beta1UpdateRouteOfAreaPayload);
+				v2beta1UpdateNetworkAreaRouteWithHttpInfo(
+						organizationId,
+						areaId,
+						region,
+						routeId,
+						v2beta1UpdateNetworkAreaRoutePayload);
 		return localVarResp.getData();
 	}
 
@@ -29916,7 +29934,7 @@ class DefaultApi {
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
 	 * @param region The STACKIT Region of the resources. (required)
 	 * @param routeId The identifier (ID) of a STACKIT Route. (required)
-	 * @param v2beta1UpdateRouteOfAreaPayload Request an update of a network route. (required)
+	 * @param v2beta1UpdateNetworkAreaRoutePayload Request an update of a network route. (required)
 	 * @return ApiResponse&lt;Route&gt;
 	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
 	 *     response body
@@ -29932,21 +29950,21 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public ApiResponse<Route> v2beta1UpdateRouteOfAreaWithHttpInfo(
+	public ApiResponse<Route> v2beta1UpdateNetworkAreaRouteWithHttpInfo(
 			@javax.annotation.Nonnull UUID organizationId,
 			@javax.annotation.Nonnull UUID areaId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull UUID routeId,
 			@javax.annotation.Nonnull
-					V2beta1UpdateRouteOfAreaPayload v2beta1UpdateRouteOfAreaPayload)
+					V2beta1UpdateNetworkAreaRoutePayload v2beta1UpdateNetworkAreaRoutePayload)
 			throws ApiException {
 		okhttp3.Call localVarCall =
-				v2beta1UpdateRouteOfAreaValidateBeforeCall(
+				v2beta1UpdateNetworkAreaRouteValidateBeforeCall(
 						organizationId,
 						areaId,
 						region,
 						routeId,
-						v2beta1UpdateRouteOfAreaPayload,
+						v2beta1UpdateNetworkAreaRoutePayload,
 						null);
 		Type localVarReturnType = new TypeToken<Route>() {}.getType();
 		return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -29959,7 +29977,7 @@ class DefaultApi {
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
 	 * @param region The STACKIT Region of the resources. (required)
 	 * @param routeId The identifier (ID) of a STACKIT Route. (required)
-	 * @param v2beta1UpdateRouteOfAreaPayload Request an update of a network route. (required)
+	 * @param v2beta1UpdateNetworkAreaRoutePayload Request an update of a network route. (required)
 	 * @param _callback The callback to be executed when the API call finishes
 	 * @return The request call
 	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -29976,23 +29994,23 @@ class DefaultApi {
 	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
 	 * </table>
 	 */
-	public okhttp3.Call v2beta1UpdateRouteOfAreaAsync(
+	public okhttp3.Call v2beta1UpdateNetworkAreaRouteAsync(
 			@javax.annotation.Nonnull UUID organizationId,
 			@javax.annotation.Nonnull UUID areaId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull UUID routeId,
 			@javax.annotation.Nonnull
-					V2beta1UpdateRouteOfAreaPayload v2beta1UpdateRouteOfAreaPayload,
+					V2beta1UpdateNetworkAreaRoutePayload v2beta1UpdateNetworkAreaRoutePayload,
 			final ApiCallback<Route> _callback)
 			throws ApiException {
 
 		okhttp3.Call localVarCall =
-				v2beta1UpdateRouteOfAreaValidateBeforeCall(
+				v2beta1UpdateNetworkAreaRouteValidateBeforeCall(
 						organizationId,
 						areaId,
 						region,
 						routeId,
-						v2beta1UpdateRouteOfAreaPayload,
+						v2beta1UpdateNetworkAreaRoutePayload,
 						_callback);
 		Type localVarReturnType = new TypeToken<Route>() {}.getType();
 		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);

@@ -34,9 +34,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /** Object that represents a security group. */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class SecurityGroup {
 	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
 
