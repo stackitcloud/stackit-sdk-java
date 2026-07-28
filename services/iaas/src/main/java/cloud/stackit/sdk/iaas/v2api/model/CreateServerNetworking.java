@@ -31,9 +31,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /** The initial networking setup for the server creation with a network. */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class CreateServerNetworking {
 	public static final String SERIALIZED_NAME_NETWORK_ID = "networkId";
 

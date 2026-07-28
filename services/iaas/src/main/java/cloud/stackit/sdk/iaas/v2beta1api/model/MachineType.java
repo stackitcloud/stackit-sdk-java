@@ -34,9 +34,7 @@ import java.util.Objects;
  * Machine Type. Filterable Fields: &#x60;disk&#x60;, &#x60;extraSpecs&#x60;, &#x60;name&#x60;,
  * &#x60;ram&#x60;, &#x60;vcpus&#x60;.
  */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class MachineType {
 	public static final String SERIALIZED_NAME_DESCRIPTION = "description";
 

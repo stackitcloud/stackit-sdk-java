@@ -37,9 +37,7 @@ import java.util.UUID;
  * STACKIT-KMS. These parameter never leave the backend again. So these parameters are not in the
  * responses.
  */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class VolumeEncryptionParameter {
 	public static final String SERIALIZED_NAME_KEK_KEY_ID = "kekKeyId";
 
