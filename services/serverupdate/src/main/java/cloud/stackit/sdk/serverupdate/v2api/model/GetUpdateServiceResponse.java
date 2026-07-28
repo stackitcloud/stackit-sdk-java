@@ -31,9 +31,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** GetUpdateServiceResponse */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class GetUpdateServiceResponse {
 	public static final String SERIALIZED_NAME_ENABLED = "enabled";
 
