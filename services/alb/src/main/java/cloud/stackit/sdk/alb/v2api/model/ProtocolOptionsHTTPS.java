@@ -31,9 +31,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Configuration for handling HTTPS traffic on this listener. */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class ProtocolOptionsHTTPS {
 	public static final String SERIALIZED_NAME_CERTIFICATE_CONFIG = "certificateConfig";
 
