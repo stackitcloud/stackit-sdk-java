@@ -32,9 +32,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Use this option to limit the IP ranges that can use the load balancer. */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class LoadbalancerOptionAccessControl {
 	public static final String SERIALIZED_NAME_ALLOWED_SOURCE_RANGES = "allowedSourceRanges";
 
