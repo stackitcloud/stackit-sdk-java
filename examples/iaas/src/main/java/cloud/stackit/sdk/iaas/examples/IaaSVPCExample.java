@@ -28,6 +28,22 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+@SuppressWarnings({
+        "PMD.CyclomaticComplexity",
+        "PMD.CognitiveComplexity",
+        "PMD.NcssCount",
+        "PMD.SystemPrintln",
+        "PMD.AvoidThrowingRawExceptionTypes",
+        "PMD.AvoidLiteralsInIfCondition",
+        "PMD.AvoidUsingHardCodedIP",
+        "PMD.AvoidDuplicateLiterals",
+        "PMD.ShortVariable",
+        "PMD.UseUtilityClass",
+        "PMD.AvoidPrintStackTrace",
+        "PMD.AvoidCatchingGenericException",
+        "PMD.ExceptionAsFlowControl",
+        "PMD.UseConcurrentHashMap",
+})
 public class IaaSVPCExample {
 	public static void main(String[] args) throws IOException {
 		/*
@@ -264,12 +280,12 @@ public class IaaSVPCExample {
 		}
 	}
 
-	private static class Resources {
-		Project project = null;
-		VPC vpc = null;
-		RegionalVPC vpcRegion = null;
-		VPCRoutingTable vpcRoutingTable = null;
-		Route staticRoute = null;
-		VPCNetworkRange networkRange = null;
+	private static final class Resources {
+		private Project project;
+        private VPC vpc;
+		private RegionalVPC vpcRegion;
+		private VPCRoutingTable vpcRoutingTable;
+		private Route staticRoute;
+		private VPCNetworkRange networkRange;
 	}
 }
