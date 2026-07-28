@@ -34,9 +34,7 @@ import java.util.Objects;
  * We offer Load Balancer metrics observability via ARGUS or external solutions. Not changeable
  * after creation.
  */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class LoadbalancerOptionObservability {
 	public static final String SERIALIZED_NAME_LOGS = "logs";
 

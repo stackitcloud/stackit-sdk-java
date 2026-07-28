@@ -38,9 +38,7 @@ import java.util.Objects;
  * error code, error message, and error details. You can find out more about this error model and
  * how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
  */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class Status {
 	public static final String SERIALIZED_NAME_CODE = "code";
 
