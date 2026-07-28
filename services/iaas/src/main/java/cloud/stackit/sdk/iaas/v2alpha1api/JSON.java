@@ -60,6 +60,76 @@ public class JSON {
 		GsonFireBuilder fireBuilder =
 				new GsonFireBuilder()
 						.registerTypeSelector(
+								cloud.stackit.sdk.iaas.v2alpha1api.model
+										.AddVPCStaticRoutePayloadDestination.class,
+								new TypeSelector<
+										cloud.stackit.sdk.iaas.v2alpha1api.model
+												.AddVPCStaticRoutePayloadDestination>() {
+									@Override
+									public Class<
+													? extends
+															cloud.stackit.sdk.iaas.v2alpha1api.model
+																	.AddVPCStaticRoutePayloadDestination>
+											getClassForElement(JsonElement readElement) {
+										Map<String, Class> classByDiscriminatorValue =
+												new HashMap<String, Class>();
+										classByDiscriminatorValue.put(
+												"cidrv4",
+												cloud.stackit.sdk.iaas.v2alpha1api.model
+														.DestinationCIDRv4.class);
+										classByDiscriminatorValue.put(
+												"cidrv6",
+												cloud.stackit.sdk.iaas.v2alpha1api.model
+														.DestinationCIDRv6.class);
+										classByDiscriminatorValue.put(
+												"AddVPCStaticRoutePayload_destination",
+												cloud.stackit.sdk.iaas.v2alpha1api.model
+														.AddVPCStaticRoutePayloadDestination.class);
+										return getClassByDiscriminator(
+												classByDiscriminatorValue,
+												getDiscriminatorValue(readElement, "type"));
+									}
+								})
+						.registerTypeSelector(
+								cloud.stackit.sdk.iaas.v2alpha1api.model
+										.AddVPCStaticRoutePayloadNexthop.class,
+								new TypeSelector<
+										cloud.stackit.sdk.iaas.v2alpha1api.model
+												.AddVPCStaticRoutePayloadNexthop>() {
+									@Override
+									public Class<
+													? extends
+															cloud.stackit.sdk.iaas.v2alpha1api.model
+																	.AddVPCStaticRoutePayloadNexthop>
+											getClassForElement(JsonElement readElement) {
+										Map<String, Class> classByDiscriminatorValue =
+												new HashMap<String, Class>();
+										classByDiscriminatorValue.put(
+												"blackhole",
+												cloud.stackit.sdk.iaas.v2alpha1api.model
+														.NexthopBlackhole.class);
+										classByDiscriminatorValue.put(
+												"internet",
+												cloud.stackit.sdk.iaas.v2alpha1api.model
+														.NexthopInternet.class);
+										classByDiscriminatorValue.put(
+												"ipv4",
+												cloud.stackit.sdk.iaas.v2alpha1api.model.NexthopIPv4
+														.class);
+										classByDiscriminatorValue.put(
+												"ipv6",
+												cloud.stackit.sdk.iaas.v2alpha1api.model.NexthopIPv6
+														.class);
+										classByDiscriminatorValue.put(
+												"AddVPCStaticRoutePayload_nexthop",
+												cloud.stackit.sdk.iaas.v2alpha1api.model
+														.AddVPCStaticRoutePayloadNexthop.class);
+										return getClassByDiscriminator(
+												classByDiscriminatorValue,
+												getDiscriminatorValue(readElement, "type"));
+									}
+								})
+						.registerTypeSelector(
 								cloud.stackit.sdk.iaas.v2alpha1api.model.RouteDestination.class,
 								new TypeSelector<
 										cloud.stackit.sdk.iaas.v2alpha1api.model
@@ -125,6 +195,36 @@ public class JSON {
 												classByDiscriminatorValue,
 												getDiscriminatorValue(readElement, "type"));
 									}
+								})
+						.registerTypeSelector(
+								cloud.stackit.sdk.iaas.v2alpha1api.model.VPCNetworkRange.class,
+								new TypeSelector<
+										cloud.stackit.sdk.iaas.v2alpha1api.model
+												.VPCNetworkRange>() {
+									@Override
+									public Class<
+													? extends
+															cloud.stackit.sdk.iaas.v2alpha1api.model
+																	.VPCNetworkRange>
+											getClassForElement(JsonElement readElement) {
+										Map<String, Class> classByDiscriminatorValue =
+												new HashMap<String, Class>();
+										classByDiscriminatorValue.put(
+												"ipv4",
+												cloud.stackit.sdk.iaas.v2alpha1api.model
+														.VPCNetworkRangeIPv4.class);
+										classByDiscriminatorValue.put(
+												"ipv6",
+												cloud.stackit.sdk.iaas.v2alpha1api.model
+														.VPCNetworkRangeIPv6.class);
+										classByDiscriminatorValue.put(
+												"VPCNetworkRange",
+												cloud.stackit.sdk.iaas.v2alpha1api.model
+														.VPCNetworkRange.class);
+										return getClassByDiscriminator(
+												classByDiscriminatorValue,
+												getDiscriminatorValue(readElement, "ipVersion"));
+									}
 								});
 		GsonBuilder builder = fireBuilder.createGsonBuilder();
 		return builder;
@@ -172,6 +272,18 @@ public class JSON {
 				new cloud.stackit.sdk.iaas.v2alpha1api.model.AddRoutingTableToAreaPayload
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.AddVPCRoutingTablePayload
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.AddVPCStaticRoutePayload
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.AddVPCStaticRoutePayloadDestination
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.AddVPCStaticRoutePayloadNexthop
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.iaas.v2alpha1api.model.CreateNetworkIPv4
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
@@ -193,6 +305,12 @@ public class JSON {
 				new cloud.stackit.sdk.iaas.v2alpha1api.model.CreateNetworkPayload
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.CreateVPCPayload
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.CreateVPCRegionPayload
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.iaas.v2alpha1api.model.DestinationCIDRv4
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
@@ -212,6 +330,9 @@ public class JSON {
 				new cloud.stackit.sdk.iaas.v2alpha1api.model.NetworkListResponse
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.NetworkRangeIPv4Request
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.iaas.v2alpha1api.model.NexthopBlackhole
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
@@ -225,6 +346,18 @@ public class JSON {
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.iaas.v2alpha1api.model.PartialUpdateNetworkPayload
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.PartialUpdateVPCPayload
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.RegionalVPC
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.RegionalVPCIPv4
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.RegionalVPCList
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.iaas.v2alpha1api.model.Route.CustomTypeAdapterFactory());
@@ -254,6 +387,43 @@ public class JSON {
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.iaas.v2alpha1api.model.UpdateRoutingTableOfAreaPayload
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.UpdateVPCRegionPayload
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.UpdateVPCRoutingTablePayload
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.UpdateVPCStaticRoutePayload
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.V1UpdateVPCNetworkRangeIPv4
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.VPC.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.VPCBaseNetworkRange
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.VPCList.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.VPCNetworkRange
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.VPCNetworkRangeIPv4
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.VPCNetworkRangeIPv6
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.VPCNetworkRangeList
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.VPCRoutingTable
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.VPCRoutingTableList
 						.CustomTypeAdapterFactory());
 		gson = gsonBuilder.create();
 	}

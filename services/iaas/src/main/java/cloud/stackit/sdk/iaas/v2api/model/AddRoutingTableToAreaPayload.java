@@ -32,10 +32,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-/** An object representing a routing table. */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+/**
+ * An object representing a routing table. Filterable Fields: &#x60;dynamicRoutes&#x60;,
+ * &#x60;systemRoutes&#x60;.
+ */
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class AddRoutingTableToAreaPayload {
 	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
 

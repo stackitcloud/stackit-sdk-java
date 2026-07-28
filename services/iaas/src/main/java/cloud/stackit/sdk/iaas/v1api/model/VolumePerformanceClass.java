@@ -31,9 +31,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Object that represents a Volume performance class. */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class VolumePerformanceClass {
 	public static final String SERIALIZED_NAME_DESCRIPTION = "description";
 
