@@ -32,9 +32,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /** Object that represents a resource as part of a request. */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class RequestResource {
 	public static final String SERIALIZED_NAME_ID = "id";
 
@@ -105,7 +103,8 @@ public class RequestResource {
 	 * Object that represents a resource type. Possible values: &#x60;BACKUP&#x60;,
 	 * &#x60;IMAGE&#x60;, &#x60;NETWORK&#x60;, &#x60;NETWORKAREA&#x60;, &#x60;NIC&#x60;,
 	 * &#x60;PROJECT&#x60;, &#x60;ROUTE&#x60;, &#x60;SERVER&#x60;, &#x60;SERVICEACCOUNT&#x60;,
-	 * &#x60;SNAPSHOT&#x60;, &#x60;VIRTUALIP&#x60;, &#x60;VOLUME&#x60;.
+	 * &#x60;SNAPSHOT&#x60;, &#x60;VIRTUALIP&#x60;, &#x60;VOLUME&#x60;, &#x60;VPC&#x60;,
+	 * &#x60;VPCNETWORKRANGE&#x60;.
 	 *
 	 * @return type
 	 */

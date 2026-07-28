@@ -469,6 +469,8 @@ public class JSON {
 				new cloud.stackit.sdk.iaas.v2beta1api.model.ServerNetworking
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2beta1api.model.ServerVTPM.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.iaas.v2beta1api.model.ServiceAccountMailListResponse
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
@@ -519,7 +521,7 @@ public class JSON {
 				new cloud.stackit.sdk.iaas.v2beta1api.model.UpdateVolumePayload
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
-				new cloud.stackit.sdk.iaas.v2beta1api.model.V2beta1ConfigureNetworkAreaRegionPayload
+				new cloud.stackit.sdk.iaas.v2beta1api.model.V2beta1CreateNetworkAreaRegionPayload
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.iaas.v2beta1api.model.V2beta1CreateSnapshotPayload
@@ -531,7 +533,7 @@ public class JSON {
 				new cloud.stackit.sdk.iaas.v2beta1api.model.V2beta1UpdateNetworkAreaRegionPayload
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
-				new cloud.stackit.sdk.iaas.v2beta1api.model.V2beta1UpdateRouteOfAreaPayload
+				new cloud.stackit.sdk.iaas.v2beta1api.model.V2beta1UpdateNetworkAreaRoutePayload
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.iaas.v2beta1api.model.V2beta1UpdateSecurityGroupPayload

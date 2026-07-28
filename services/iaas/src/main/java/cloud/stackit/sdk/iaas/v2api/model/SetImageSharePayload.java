@@ -35,9 +35,7 @@ import java.util.UUID;
 /**
  * Share details of an Image. For requests ParentOrganization and Projects are mutually exclusive.
  */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class SetImageSharePayload {
 	public static final String SERIALIZED_NAME_PARENT_ORGANIZATION = "parentOrganization";
 

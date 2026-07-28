@@ -33,9 +33,7 @@ import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 /** Object that represents a public IP. */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class CreatePublicIPPayload {
 	public static final String SERIALIZED_NAME_ID = "id";
 

@@ -20,16 +20,34 @@ import cloud.stackit.sdk.iaas.v2alpha1api.ApiResponse;
 import cloud.stackit.sdk.iaas.v2alpha1api.Pair;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.AddRoutesToRoutingTablePayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.AddRoutingTableToAreaPayload;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.AddVPCRoutingTablePayload;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.AddVPCStaticRoutePayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.CreateNetworkPayload;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.CreateVPCPayload;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.CreateVPCRegionPayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.Network;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.NetworkListResponse;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.NetworkRangeIPv4Request;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.PartialUpdateNetworkPayload;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.PartialUpdateVPCPayload;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.RegionalVPC;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.RegionalVPCList;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.Route;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.RouteListResponse;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.RoutingTable;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.RoutingTableListResponse;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.UpdateRouteOfRoutingTablePayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.UpdateRoutingTableOfAreaPayload;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.UpdateVPCRegionPayload;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.UpdateVPCRoutingTablePayload;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.UpdateVPCStaticRoutePayload;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.V1UpdateVPCNetworkRangeIPv4;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.VPC;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.VPCList;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.VPCNetworkRange;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.VPCNetworkRangeList;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.VPCRoutingTable;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.VPCRoutingTableList;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -264,7 +282,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Create new routes in a routing table. Create new routes in an existing routing table.
+	 * Create new routes in a routing table. Create new routes in an existing routing table of a
+	 * network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -306,7 +325,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Create new routes in a routing table. Create new routes in an existing routing table.
+	 * Create new routes in a routing table. Create new routes in an existing routing table of a
+	 * network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -351,7 +371,7 @@ class DefaultApi {
 
 	/**
 	 * Create new routes in a routing table. (asynchronously) Create new routes in an existing
-	 * routing table.
+	 * routing table of a network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -645,6 +665,526 @@ class DefaultApi {
 	}
 
 	/**
+	 * Build call for addVPCRoutingTable
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param addVPCRoutingTablePayload Request an addition of a routing table to a VPC. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 201 </td><td> Adding routing table was successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call addVPCRoutingTableCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull AddVPCRoutingTablePayload addVPCRoutingTablePayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = addVPCRoutingTablePayload;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}/routing-tables"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {"application/json"};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"POST",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call addVPCRoutingTableValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull AddVPCRoutingTablePayload addVPCRoutingTablePayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling addVPCRoutingTable(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling addVPCRoutingTable(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling addVPCRoutingTable(Async)");
+		}
+
+		// verify the required parameter 'addVPCRoutingTablePayload' is set
+		if (addVPCRoutingTablePayload == null) {
+			throw new ApiException(
+					"Missing the required parameter 'addVPCRoutingTablePayload' when calling addVPCRoutingTable(Async)");
+		}
+
+		return addVPCRoutingTableCall(
+				projectId, vpcId, region, addVPCRoutingTablePayload, _callback);
+	}
+
+	/**
+	 * Create a new regional routing table in a VPC. Create a new routing table in an existing VPC
+	 * for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param addVPCRoutingTablePayload Request an addition of a routing table to a VPC. (required)
+	 * @return VPCRoutingTable
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 201 </td><td> Adding routing table was successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public VPCRoutingTable addVPCRoutingTable(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull AddVPCRoutingTablePayload addVPCRoutingTablePayload)
+			throws ApiException {
+		ApiResponse<VPCRoutingTable> localVarResp =
+				addVPCRoutingTableWithHttpInfo(projectId, vpcId, region, addVPCRoutingTablePayload);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Create a new regional routing table in a VPC. Create a new routing table in an existing VPC
+	 * for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param addVPCRoutingTablePayload Request an addition of a routing table to a VPC. (required)
+	 * @return ApiResponse&lt;VPCRoutingTable&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 201 </td><td> Adding routing table was successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<VPCRoutingTable> addVPCRoutingTableWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull AddVPCRoutingTablePayload addVPCRoutingTablePayload)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				addVPCRoutingTableValidateBeforeCall(
+						projectId, vpcId, region, addVPCRoutingTablePayload, null);
+		Type localVarReturnType = new TypeToken<VPCRoutingTable>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Create a new regional routing table in a VPC. (asynchronously) Create a new routing table in
+	 * an existing VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param addVPCRoutingTablePayload Request an addition of a routing table to a VPC. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 201 </td><td> Adding routing table was successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call addVPCRoutingTableAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull AddVPCRoutingTablePayload addVPCRoutingTablePayload,
+			final ApiCallback<VPCRoutingTable> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				addVPCRoutingTableValidateBeforeCall(
+						projectId, vpcId, region, addVPCRoutingTablePayload, _callback);
+		Type localVarReturnType = new TypeToken<VPCRoutingTable>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for addVPCStaticRoute
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param addVPCStaticRoutePayload Request to add a static route to a VPC. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 201 </td><td> Adding static route was successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call addVPCStaticRouteCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull AddVPCStaticRoutePayload addVPCStaticRoutePayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = addVPCStaticRoutePayload;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}/routing-tables/{routingTableId}/static-routes"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "routingTableId" + "}",
+								localVarApiClient.escapeString(routingTableId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {"application/json"};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"POST",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call addVPCStaticRouteValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull AddVPCStaticRoutePayload addVPCStaticRoutePayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling addVPCStaticRoute(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling addVPCStaticRoute(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling addVPCStaticRoute(Async)");
+		}
+
+		// verify the required parameter 'routingTableId' is set
+		if (routingTableId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'routingTableId' when calling addVPCStaticRoute(Async)");
+		}
+
+		// verify the required parameter 'addVPCStaticRoutePayload' is set
+		if (addVPCStaticRoutePayload == null) {
+			throw new ApiException(
+					"Missing the required parameter 'addVPCStaticRoutePayload' when calling addVPCStaticRoute(Async)");
+		}
+
+		return addVPCStaticRouteCall(
+				projectId, vpcId, region, routingTableId, addVPCStaticRoutePayload, _callback);
+	}
+
+	/**
+	 * Create new regional static route. Create a new static route in the VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param addVPCStaticRoutePayload Request to add a static route to a VPC. (required)
+	 * @return Route
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 201 </td><td> Adding static route was successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public Route addVPCStaticRoute(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull AddVPCStaticRoutePayload addVPCStaticRoutePayload)
+			throws ApiException {
+		ApiResponse<Route> localVarResp =
+				addVPCStaticRouteWithHttpInfo(
+						projectId, vpcId, region, routingTableId, addVPCStaticRoutePayload);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Create new regional static route. Create a new static route in the VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param addVPCStaticRoutePayload Request to add a static route to a VPC. (required)
+	 * @return ApiResponse&lt;Route&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 201 </td><td> Adding static route was successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<Route> addVPCStaticRouteWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull AddVPCStaticRoutePayload addVPCStaticRoutePayload)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				addVPCStaticRouteValidateBeforeCall(
+						projectId, vpcId, region, routingTableId, addVPCStaticRoutePayload, null);
+		Type localVarReturnType = new TypeToken<Route>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Create new regional static route. (asynchronously) Create a new static route in the VPC for
+	 * this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param addVPCStaticRoutePayload Request to add a static route to a VPC. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 201 </td><td> Adding static route was successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call addVPCStaticRouteAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull AddVPCStaticRoutePayload addVPCStaticRoutePayload,
+			final ApiCallback<Route> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				addVPCStaticRouteValidateBeforeCall(
+						projectId,
+						vpcId,
+						region,
+						routingTableId,
+						addVPCStaticRoutePayload,
+						_callback);
+		Type localVarReturnType = new TypeToken<Route>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
 	 * Build call for createNetwork
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
@@ -866,6 +1406,691 @@ class DefaultApi {
 		okhttp3.Call localVarCall =
 				createNetworkValidateBeforeCall(projectId, region, createNetworkPayload, _callback);
 		Type localVarReturnType = new TypeToken<Network>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for createVPC
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param createVPCPayload Request a VPC creation. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 201 </td><td> VPC has been successfully created. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call createVPCCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull CreateVPCPayload createVPCPayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = createVPCPayload;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {"application/json"};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"POST",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call createVPCValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull CreateVPCPayload createVPCPayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling createVPC(Async)");
+		}
+
+		// verify the required parameter 'createVPCPayload' is set
+		if (createVPCPayload == null) {
+			throw new ApiException(
+					"Missing the required parameter 'createVPCPayload' when calling createVPC(Async)");
+		}
+
+		return createVPCCall(projectId, createVPCPayload, _callback);
+	}
+
+	/**
+	 * Create a new VPC. Create a new VPC in a project.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param createVPCPayload Request a VPC creation. (required)
+	 * @return VPC
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 201 </td><td> VPC has been successfully created. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public VPC createVPC(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull CreateVPCPayload createVPCPayload)
+			throws ApiException {
+		ApiResponse<VPC> localVarResp = createVPCWithHttpInfo(projectId, createVPCPayload);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Create a new VPC. Create a new VPC in a project.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param createVPCPayload Request a VPC creation. (required)
+	 * @return ApiResponse&lt;VPC&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 201 </td><td> VPC has been successfully created. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<VPC> createVPCWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull CreateVPCPayload createVPCPayload)
+			throws ApiException {
+		okhttp3.Call localVarCall = createVPCValidateBeforeCall(projectId, createVPCPayload, null);
+		Type localVarReturnType = new TypeToken<VPC>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Create a new VPC. (asynchronously) Create a new VPC in a project.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param createVPCPayload Request a VPC creation. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 201 </td><td> VPC has been successfully created. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call createVPCAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull CreateVPCPayload createVPCPayload,
+			final ApiCallback<VPC> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				createVPCValidateBeforeCall(projectId, createVPCPayload, _callback);
+		Type localVarReturnType = new TypeToken<VPC>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for createVPCNetworkRange
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param body Request to add an additional network range to a VPC. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Create request for a network range has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call createVPCNetworkRangeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull NetworkRangeIPv4Request body,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = body;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}/network-ranges"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {"application/json"};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"POST",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call createVPCNetworkRangeValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull NetworkRangeIPv4Request body,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling createVPCNetworkRange(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling createVPCNetworkRange(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling createVPCNetworkRange(Async)");
+		}
+
+		// verify the required parameter 'body' is set
+		if (body == null) {
+			throw new ApiException(
+					"Missing the required parameter 'body' when calling createVPCNetworkRange(Async)");
+		}
+
+		return createVPCNetworkRangeCall(projectId, vpcId, region, body, _callback);
+	}
+
+	/**
+	 * Create new regional network ranges in a VPC. Create a new network range in an existing VPC
+	 * for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param body Request to add an additional network range to a VPC. (required)
+	 * @return VPCNetworkRange
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Create request for a network range has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public VPCNetworkRange createVPCNetworkRange(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull NetworkRangeIPv4Request body)
+			throws ApiException {
+		ApiResponse<VPCNetworkRange> localVarResp =
+				createVPCNetworkRangeWithHttpInfo(projectId, vpcId, region, body);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Create new regional network ranges in a VPC. Create a new network range in an existing VPC
+	 * for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param body Request to add an additional network range to a VPC. (required)
+	 * @return ApiResponse&lt;VPCNetworkRange&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Create request for a network range has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<VPCNetworkRange> createVPCNetworkRangeWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull NetworkRangeIPv4Request body)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				createVPCNetworkRangeValidateBeforeCall(projectId, vpcId, region, body, null);
+		Type localVarReturnType = new TypeToken<VPCNetworkRange>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Create new regional network ranges in a VPC. (asynchronously) Create a new network range in
+	 * an existing VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param body Request to add an additional network range to a VPC. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Create request for a network range has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call createVPCNetworkRangeAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull NetworkRangeIPv4Request body,
+			final ApiCallback<VPCNetworkRange> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				createVPCNetworkRangeValidateBeforeCall(projectId, vpcId, region, body, _callback);
+		Type localVarReturnType = new TypeToken<VPCNetworkRange>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for createVPCRegion
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param createVPCRegionPayload Request to add a new regional VPC configuration. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Configure VPC in a new region was accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call createVPCRegionCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull CreateVPCRegionPayload createVPCRegionPayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = createVPCRegionPayload;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {"application/json"};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"PUT",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call createVPCRegionValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull CreateVPCRegionPayload createVPCRegionPayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling createVPCRegion(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling createVPCRegion(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling createVPCRegion(Async)");
+		}
+
+		// verify the required parameter 'createVPCRegionPayload' is set
+		if (createVPCRegionPayload == null) {
+			throw new ApiException(
+					"Missing the required parameter 'createVPCRegionPayload' when calling createVPCRegion(Async)");
+		}
+
+		return createVPCRegionCall(projectId, vpcId, region, createVPCRegionPayload, _callback);
+	}
+
+	/**
+	 * Create the regional configuration of a VPC. Create the configuration of a region for a VPC.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param createVPCRegionPayload Request to add a new regional VPC configuration. (required)
+	 * @return RegionalVPC
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Configure VPC in a new region was accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public RegionalVPC createVPCRegion(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull CreateVPCRegionPayload createVPCRegionPayload)
+			throws ApiException {
+		ApiResponse<RegionalVPC> localVarResp =
+				createVPCRegionWithHttpInfo(projectId, vpcId, region, createVPCRegionPayload);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Create the regional configuration of a VPC. Create the configuration of a region for a VPC.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param createVPCRegionPayload Request to add a new regional VPC configuration. (required)
+	 * @return ApiResponse&lt;RegionalVPC&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Configure VPC in a new region was accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<RegionalVPC> createVPCRegionWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull CreateVPCRegionPayload createVPCRegionPayload)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				createVPCRegionValidateBeforeCall(
+						projectId, vpcId, region, createVPCRegionPayload, null);
+		Type localVarReturnType = new TypeToken<RegionalVPC>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Create the regional configuration of a VPC. (asynchronously) Create the configuration of a
+	 * region for a VPC.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param createVPCRegionPayload Request to add a new regional VPC configuration. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Configure VPC in a new region was accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call createVPCRegionAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull CreateVPCRegionPayload createVPCRegionPayload,
+			final ApiCallback<RegionalVPC> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				createVPCRegionValidateBeforeCall(
+						projectId, vpcId, region, createVPCRegionPayload, _callback);
+		Type localVarReturnType = new TypeToken<RegionalVPC>() {}.getType();
 		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
 		return localVarCall;
 	}
@@ -1229,7 +2454,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Delete a route in a routing table. Delete a route in an existing routing table.
+	 * Delete a route in a routing table. Delete a route in an existing routing table of a network
+	 * area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -1262,7 +2488,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Delete a route in a routing table. Delete a route in an existing routing table.
+	 * Delete a route in a routing table. Delete a route in an existing routing table of a network
+	 * area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -1299,7 +2526,7 @@ class DefaultApi {
 
 	/**
 	 * Delete a route in a routing table. (asynchronously) Delete a route in an existing routing
-	 * table.
+	 * table of a network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -1566,6 +2793,1178 @@ class DefaultApi {
 		okhttp3.Call localVarCall =
 				deleteRoutingTableFromAreaValidateBeforeCall(
 						organizationId, areaId, region, routingTableId, _callback);
+		localVarApiClient.executeAsync(localVarCall, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for deleteVPC
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 204 </td><td> VPC has been deleted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call deleteVPCCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"DELETE",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call deleteVPCValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling deleteVPC(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling deleteVPC(Async)");
+		}
+
+		return deleteVPCCall(projectId, vpcId, _callback);
+	}
+
+	/**
+	 * Delete a VPC. Delete an existing VPC in a project.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 204 </td><td> VPC has been deleted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public void deleteVPC(
+			@javax.annotation.Nonnull UUID projectId, @javax.annotation.Nonnull UUID vpcId)
+			throws ApiException {
+		deleteVPCWithHttpInfo(projectId, vpcId);
+	}
+
+	/**
+	 * Delete a VPC. Delete an existing VPC in a project.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @return ApiResponse&lt;Void&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 204 </td><td> VPC has been deleted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<Void> deleteVPCWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId, @javax.annotation.Nonnull UUID vpcId)
+			throws ApiException {
+		okhttp3.Call localVarCall = deleteVPCValidateBeforeCall(projectId, vpcId, null);
+		return localVarApiClient.execute(localVarCall);
+	}
+
+	/**
+	 * Delete a VPC. (asynchronously) Delete an existing VPC in a project.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 204 </td><td> VPC has been deleted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call deleteVPCAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			final ApiCallback<Void> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall = deleteVPCValidateBeforeCall(projectId, vpcId, _callback);
+		localVarApiClient.executeAsync(localVarCall, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for deleteVPCNetworkRange
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param networkRangeId The identifier (ID) of a STACKIT Network Range. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Delete request for network range has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call deleteVPCNetworkRangeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID networkRangeId,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}/network-ranges/{networkRangeId}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "networkRangeId" + "}",
+								localVarApiClient.escapeString(networkRangeId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"DELETE",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call deleteVPCNetworkRangeValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID networkRangeId,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling deleteVPCNetworkRange(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling deleteVPCNetworkRange(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling deleteVPCNetworkRange(Async)");
+		}
+
+		// verify the required parameter 'networkRangeId' is set
+		if (networkRangeId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'networkRangeId' when calling deleteVPCNetworkRange(Async)");
+		}
+
+		return deleteVPCNetworkRangeCall(projectId, vpcId, region, networkRangeId, _callback);
+	}
+
+	/**
+	 * Delete a regional network range. Delete a network range of a VPC for this region, if the
+	 * network range is not used anymore.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param networkRangeId The identifier (ID) of a STACKIT Network Range. (required)
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Delete request for network range has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public void deleteVPCNetworkRange(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID networkRangeId)
+			throws ApiException {
+		deleteVPCNetworkRangeWithHttpInfo(projectId, vpcId, region, networkRangeId);
+	}
+
+	/**
+	 * Delete a regional network range. Delete a network range of a VPC for this region, if the
+	 * network range is not used anymore.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param networkRangeId The identifier (ID) of a STACKIT Network Range. (required)
+	 * @return ApiResponse&lt;Void&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Delete request for network range has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<Void> deleteVPCNetworkRangeWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID networkRangeId)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				deleteVPCNetworkRangeValidateBeforeCall(
+						projectId, vpcId, region, networkRangeId, null);
+		return localVarApiClient.execute(localVarCall);
+	}
+
+	/**
+	 * Delete a regional network range. (asynchronously) Delete a network range of a VPC for this
+	 * region, if the network range is not used anymore.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param networkRangeId The identifier (ID) of a STACKIT Network Range. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Delete request for network range has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call deleteVPCNetworkRangeAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID networkRangeId,
+			final ApiCallback<Void> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				deleteVPCNetworkRangeValidateBeforeCall(
+						projectId, vpcId, region, networkRangeId, _callback);
+		localVarApiClient.executeAsync(localVarCall, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for deleteVPCRegion
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Delete request for the regional VPC has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call deleteVPCRegionCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"DELETE",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call deleteVPCRegionValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling deleteVPCRegion(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling deleteVPCRegion(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling deleteVPCRegion(Async)");
+		}
+
+		return deleteVPCRegionCall(projectId, vpcId, region, _callback);
+	}
+
+	/**
+	 * Delete the regional configuration of a VPC. Delete the current configuration of a region for
+	 * a VPC.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Delete request for the regional VPC has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public void deleteVPCRegion(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region)
+			throws ApiException {
+		deleteVPCRegionWithHttpInfo(projectId, vpcId, region);
+	}
+
+	/**
+	 * Delete the regional configuration of a VPC. Delete the current configuration of a region for
+	 * a VPC.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @return ApiResponse&lt;Void&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Delete request for the regional VPC has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<Void> deleteVPCRegionWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				deleteVPCRegionValidateBeforeCall(projectId, vpcId, region, null);
+		return localVarApiClient.execute(localVarCall);
+	}
+
+	/**
+	 * Delete the regional configuration of a VPC. (asynchronously) Delete the current configuration
+	 * of a region for a VPC.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Delete request for the regional VPC has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call deleteVPCRegionAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			final ApiCallback<Void> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				deleteVPCRegionValidateBeforeCall(projectId, vpcId, region, _callback);
+		localVarApiClient.executeAsync(localVarCall, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for deleteVPCRoutingTable
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 204 </td><td> Routingtable has been deleted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call deleteVPCRoutingTableCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}/routing-tables/{routingTableId}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "routingTableId" + "}",
+								localVarApiClient.escapeString(routingTableId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"DELETE",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call deleteVPCRoutingTableValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling deleteVPCRoutingTable(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling deleteVPCRoutingTable(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling deleteVPCRoutingTable(Async)");
+		}
+
+		// verify the required parameter 'routingTableId' is set
+		if (routingTableId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'routingTableId' when calling deleteVPCRoutingTable(Async)");
+		}
+
+		return deleteVPCRoutingTableCall(projectId, vpcId, region, routingTableId, _callback);
+	}
+
+	/**
+	 * Delete a regional routing table. Delete a routing table of a VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 204 </td><td> Routingtable has been deleted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public void deleteVPCRoutingTable(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId)
+			throws ApiException {
+		deleteVPCRoutingTableWithHttpInfo(projectId, vpcId, region, routingTableId);
+	}
+
+	/**
+	 * Delete a regional routing table. Delete a routing table of a VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @return ApiResponse&lt;Void&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 204 </td><td> Routingtable has been deleted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<Void> deleteVPCRoutingTableWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				deleteVPCRoutingTableValidateBeforeCall(
+						projectId, vpcId, region, routingTableId, null);
+		return localVarApiClient.execute(localVarCall);
+	}
+
+	/**
+	 * Delete a regional routing table. (asynchronously) Delete a routing table of a VPC for this
+	 * region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 204 </td><td> Routingtable has been deleted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call deleteVPCRoutingTableAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			final ApiCallback<Void> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				deleteVPCRoutingTableValidateBeforeCall(
+						projectId, vpcId, region, routingTableId, _callback);
+		localVarApiClient.executeAsync(localVarCall, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for deleteVPCStaticRoute
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param routeId The identifier (ID) of a STACKIT Route. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 204 </td><td> Delete request for the static route has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call deleteVPCStaticRouteCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UUID routeId,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}/routing-tables/{routingTableId}/static-routes/{routeId}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "routingTableId" + "}",
+								localVarApiClient.escapeString(routingTableId.toString()))
+						.replace(
+								"{" + "routeId" + "}",
+								localVarApiClient.escapeString(routeId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"DELETE",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call deleteVPCStaticRouteValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UUID routeId,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling deleteVPCStaticRoute(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling deleteVPCStaticRoute(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling deleteVPCStaticRoute(Async)");
+		}
+
+		// verify the required parameter 'routingTableId' is set
+		if (routingTableId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'routingTableId' when calling deleteVPCStaticRoute(Async)");
+		}
+
+		// verify the required parameter 'routeId' is set
+		if (routeId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'routeId' when calling deleteVPCStaticRoute(Async)");
+		}
+
+		return deleteVPCStaticRouteCall(
+				projectId, vpcId, region, routingTableId, routeId, _callback);
+	}
+
+	/**
+	 * Delete a regional static route. Delete a static route of a VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param routeId The identifier (ID) of a STACKIT Route. (required)
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 204 </td><td> Delete request for the static route has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public void deleteVPCStaticRoute(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UUID routeId)
+			throws ApiException {
+		deleteVPCStaticRouteWithHttpInfo(projectId, vpcId, region, routingTableId, routeId);
+	}
+
+	/**
+	 * Delete a regional static route. Delete a static route of a VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param routeId The identifier (ID) of a STACKIT Route. (required)
+	 * @return ApiResponse&lt;Void&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 204 </td><td> Delete request for the static route has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<Void> deleteVPCStaticRouteWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UUID routeId)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				deleteVPCStaticRouteValidateBeforeCall(
+						projectId, vpcId, region, routingTableId, routeId, null);
+		return localVarApiClient.execute(localVarCall);
+	}
+
+	/**
+	 * Delete a regional static route. (asynchronously) Delete a static route of a VPC for this
+	 * region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param routeId The identifier (ID) of a STACKIT Route. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 204 </td><td> Delete request for the static route has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call deleteVPCStaticRouteAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UUID routeId,
+			final ApiCallback<Void> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				deleteVPCStaticRouteValidateBeforeCall(
+						projectId, vpcId, region, routingTableId, routeId, _callback);
 		localVarApiClient.executeAsync(localVarCall, _callback);
 		return localVarCall;
 	}
@@ -1929,7 +4328,7 @@ class DefaultApi {
 
 	/**
 	 * Get details about a route of a routing table. Get details about a route defined in a routing
-	 * table.
+	 * table of a network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -1966,7 +4365,7 @@ class DefaultApi {
 
 	/**
 	 * Get details about a route of a routing table. Get details about a route defined in a routing
-	 * table.
+	 * table of a network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -2004,7 +4403,7 @@ class DefaultApi {
 
 	/**
 	 * Get details about a route of a routing table. (asynchronously) Get details about a route
-	 * defined in a routing table.
+	 * defined in a routing table of a network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -2279,6 +4678,1189 @@ class DefaultApi {
 				getRoutingTableOfAreaValidateBeforeCall(
 						organizationId, areaId, region, routingTableId, _callback);
 		Type localVarReturnType = new TypeToken<RoutingTable>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for getVPC
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show VPC details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getVPCCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call getVPCValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling getVPC(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling getVPC(Async)");
+		}
+
+		return getVPCCall(projectId, vpcId, _callback);
+	}
+
+	/**
+	 * Get details about a VPC. Get details about a VPC in a project.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @return VPC
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show VPC details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public VPC getVPC(
+			@javax.annotation.Nonnull UUID projectId, @javax.annotation.Nonnull UUID vpcId)
+			throws ApiException {
+		ApiResponse<VPC> localVarResp = getVPCWithHttpInfo(projectId, vpcId);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Get details about a VPC. Get details about a VPC in a project.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @return ApiResponse&lt;VPC&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show VPC details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<VPC> getVPCWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId, @javax.annotation.Nonnull UUID vpcId)
+			throws ApiException {
+		okhttp3.Call localVarCall = getVPCValidateBeforeCall(projectId, vpcId, null);
+		Type localVarReturnType = new TypeToken<VPC>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Get details about a VPC. (asynchronously) Get details about a VPC in a project.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show VPC details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getVPCAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			final ApiCallback<VPC> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall = getVPCValidateBeforeCall(projectId, vpcId, _callback);
+		Type localVarReturnType = new TypeToken<VPC>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for getVPCNetworkRange
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param networkRangeId The identifier (ID) of a STACKIT Network Range. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show network range details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getVPCNetworkRangeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID networkRangeId,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}/network-ranges/{networkRangeId}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "networkRangeId" + "}",
+								localVarApiClient.escapeString(networkRangeId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call getVPCNetworkRangeValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID networkRangeId,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling getVPCNetworkRange(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling getVPCNetworkRange(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling getVPCNetworkRange(Async)");
+		}
+
+		// verify the required parameter 'networkRangeId' is set
+		if (networkRangeId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'networkRangeId' when calling getVPCNetworkRange(Async)");
+		}
+
+		return getVPCNetworkRangeCall(projectId, vpcId, region, networkRangeId, _callback);
+	}
+
+	/**
+	 * Get details about a regional network range. Get details about a network range in a VPC for
+	 * this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param networkRangeId The identifier (ID) of a STACKIT Network Range. (required)
+	 * @return VPCNetworkRange
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show network range details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public VPCNetworkRange getVPCNetworkRange(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID networkRangeId)
+			throws ApiException {
+		ApiResponse<VPCNetworkRange> localVarResp =
+				getVPCNetworkRangeWithHttpInfo(projectId, vpcId, region, networkRangeId);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Get details about a regional network range. Get details about a network range in a VPC for
+	 * this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param networkRangeId The identifier (ID) of a STACKIT Network Range. (required)
+	 * @return ApiResponse&lt;VPCNetworkRange&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show network range details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<VPCNetworkRange> getVPCNetworkRangeWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID networkRangeId)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				getVPCNetworkRangeValidateBeforeCall(
+						projectId, vpcId, region, networkRangeId, null);
+		Type localVarReturnType = new TypeToken<VPCNetworkRange>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Get details about a regional network range. (asynchronously) Get details about a network
+	 * range in a VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param networkRangeId The identifier (ID) of a STACKIT Network Range. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show network range details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getVPCNetworkRangeAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID networkRangeId,
+			final ApiCallback<VPCNetworkRange> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				getVPCNetworkRangeValidateBeforeCall(
+						projectId, vpcId, region, networkRangeId, _callback);
+		Type localVarReturnType = new TypeToken<VPCNetworkRange>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for getVPCRegion
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show the regional VPC configuration. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getVPCRegionCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call getVPCRegionValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling getVPCRegion(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling getVPCRegion(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling getVPCRegion(Async)");
+		}
+
+		return getVPCRegionCall(projectId, vpcId, region, _callback);
+	}
+
+	/**
+	 * Get the regional configuration of a VPC. Get the current configuration of a region for a VPC.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @return RegionalVPC
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show the regional VPC configuration. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public RegionalVPC getVPCRegion(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region)
+			throws ApiException {
+		ApiResponse<RegionalVPC> localVarResp = getVPCRegionWithHttpInfo(projectId, vpcId, region);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Get the regional configuration of a VPC. Get the current configuration of a region for a VPC.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @return ApiResponse&lt;RegionalVPC&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show the regional VPC configuration. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<RegionalVPC> getVPCRegionWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region)
+			throws ApiException {
+		okhttp3.Call localVarCall = getVPCRegionValidateBeforeCall(projectId, vpcId, region, null);
+		Type localVarReturnType = new TypeToken<RegionalVPC>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Get the regional configuration of a VPC. (asynchronously) Get the current configuration of a
+	 * region for a VPC.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show the regional VPC configuration. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getVPCRegionAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			final ApiCallback<RegionalVPC> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				getVPCRegionValidateBeforeCall(projectId, vpcId, region, _callback);
+		Type localVarReturnType = new TypeToken<RegionalVPC>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for getVPCRoutingTable
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show routing table details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getVPCRoutingTableCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}/routing-tables/{routingTableId}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "routingTableId" + "}",
+								localVarApiClient.escapeString(routingTableId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call getVPCRoutingTableValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling getVPCRoutingTable(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling getVPCRoutingTable(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling getVPCRoutingTable(Async)");
+		}
+
+		// verify the required parameter 'routingTableId' is set
+		if (routingTableId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'routingTableId' when calling getVPCRoutingTable(Async)");
+		}
+
+		return getVPCRoutingTableCall(projectId, vpcId, region, routingTableId, _callback);
+	}
+
+	/**
+	 * Get details about a regional routing table. Get details about a routing table of a VPC for
+	 * this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @return VPCRoutingTable
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show routing table details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public VPCRoutingTable getVPCRoutingTable(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId)
+			throws ApiException {
+		ApiResponse<VPCRoutingTable> localVarResp =
+				getVPCRoutingTableWithHttpInfo(projectId, vpcId, region, routingTableId);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Get details about a regional routing table. Get details about a routing table of a VPC for
+	 * this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @return ApiResponse&lt;VPCRoutingTable&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show routing table details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<VPCRoutingTable> getVPCRoutingTableWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				getVPCRoutingTableValidateBeforeCall(
+						projectId, vpcId, region, routingTableId, null);
+		Type localVarReturnType = new TypeToken<VPCRoutingTable>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Get details about a regional routing table. (asynchronously) Get details about a routing
+	 * table of a VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show routing table details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getVPCRoutingTableAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			final ApiCallback<VPCRoutingTable> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				getVPCRoutingTableValidateBeforeCall(
+						projectId, vpcId, region, routingTableId, _callback);
+		Type localVarReturnType = new TypeToken<VPCRoutingTable>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for getVPCStaticRoute
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param routeId The identifier (ID) of a STACKIT Route. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show static route details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getVPCStaticRouteCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UUID routeId,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}/routing-tables/{routingTableId}/static-routes/{routeId}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "routingTableId" + "}",
+								localVarApiClient.escapeString(routingTableId.toString()))
+						.replace(
+								"{" + "routeId" + "}",
+								localVarApiClient.escapeString(routeId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call getVPCStaticRouteValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UUID routeId,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling getVPCStaticRoute(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling getVPCStaticRoute(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling getVPCStaticRoute(Async)");
+		}
+
+		// verify the required parameter 'routingTableId' is set
+		if (routingTableId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'routingTableId' when calling getVPCStaticRoute(Async)");
+		}
+
+		// verify the required parameter 'routeId' is set
+		if (routeId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'routeId' when calling getVPCStaticRoute(Async)");
+		}
+
+		return getVPCStaticRouteCall(projectId, vpcId, region, routingTableId, routeId, _callback);
+	}
+
+	/**
+	 * Get details about a regional static route. Get details about a static route of a VPC for this
+	 * region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param routeId The identifier (ID) of a STACKIT Route. (required)
+	 * @return Route
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show static route details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public Route getVPCStaticRoute(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UUID routeId)
+			throws ApiException {
+		ApiResponse<Route> localVarResp =
+				getVPCStaticRouteWithHttpInfo(projectId, vpcId, region, routingTableId, routeId);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Get details about a regional static route. Get details about a static route of a VPC for this
+	 * region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param routeId The identifier (ID) of a STACKIT Route. (required)
+	 * @return ApiResponse&lt;Route&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show static route details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<Route> getVPCStaticRouteWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UUID routeId)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				getVPCStaticRouteValidateBeforeCall(
+						projectId, vpcId, region, routingTableId, routeId, null);
+		Type localVarReturnType = new TypeToken<Route>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Get details about a regional static route. (asynchronously) Get details about a static route
+	 * of a VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param routeId The identifier (ID) of a STACKIT Route. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show static route details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getVPCStaticRouteAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UUID routeId,
+			final ApiCallback<Route> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				getVPCStaticRouteValidateBeforeCall(
+						projectId, vpcId, region, routingTableId, routeId, _callback);
+		Type localVarReturnType = new TypeToken<Route>() {}.getType();
 		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
 		return localVarCall;
 	}
@@ -2627,7 +6209,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * List all networks in a routing table. Get a list of all networks in a routing table.
+	 * List all networks in a routing table. Get a list of all networks in a routing table of a
+	 * network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -2661,7 +6244,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * List all networks in a routing table. Get a list of all networks in a routing table.
+	 * List all networks in a routing table. Get a list of all networks in a routing table of a
+	 * network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -2697,7 +6281,7 @@ class DefaultApi {
 
 	/**
 	 * List all networks in a routing table. (asynchronously) Get a list of all networks in a
-	 * routing table.
+	 * routing table of a network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -2874,7 +6458,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * List all routes in a routing table. Get a list of all routes in a routing table.
+	 * List all routes in a routing table. Get a list of all routes in a routing table of a network
+	 * area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -2910,7 +6495,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * List all routes in a routing table. Get a list of all routes in a routing table.
+	 * List all routes in a routing table. Get a list of all routes in a routing table of a network
+	 * area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -2948,7 +6534,7 @@ class DefaultApi {
 
 	/**
 	 * List all routes in a routing table. (asynchronously) Get a list of all routes in a routing
-	 * table.
+	 * table of a network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -3225,6 +6811,1201 @@ class DefaultApi {
 	}
 
 	/**
+	 * Build call for listVPCNetworkRanges
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all network ranges. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listVPCNetworkRangesCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nullable String labelSelector,
+			@javax.annotation.Nullable String filter,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}/network-ranges"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		if (labelSelector != null) {
+			localVarQueryParams.addAll(
+					localVarApiClient.parameterToPair("label_selector", labelSelector));
+		}
+
+		if (filter != null) {
+			localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+		}
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call listVPCNetworkRangesValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nullable String labelSelector,
+			@javax.annotation.Nullable String filter,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling listVPCNetworkRanges(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling listVPCNetworkRanges(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling listVPCNetworkRanges(Async)");
+		}
+
+		return listVPCNetworkRangesCall(projectId, vpcId, region, labelSelector, filter, _callback);
+	}
+
+	/**
+	 * List all regional network ranges in a VPC. Get a list of all network ranges in a VPC for this
+	 * region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @return VPCNetworkRangeList
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all network ranges. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public VPCNetworkRangeList listVPCNetworkRanges(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nullable String labelSelector,
+			@javax.annotation.Nullable String filter)
+			throws ApiException {
+		ApiResponse<VPCNetworkRangeList> localVarResp =
+				listVPCNetworkRangesWithHttpInfo(projectId, vpcId, region, labelSelector, filter);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * List all regional network ranges in a VPC. Get a list of all network ranges in a VPC for this
+	 * region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @return ApiResponse&lt;VPCNetworkRangeList&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all network ranges. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<VPCNetworkRangeList> listVPCNetworkRangesWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nullable String labelSelector,
+			@javax.annotation.Nullable String filter)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				listVPCNetworkRangesValidateBeforeCall(
+						projectId, vpcId, region, labelSelector, filter, null);
+		Type localVarReturnType = new TypeToken<VPCNetworkRangeList>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * List all regional network ranges in a VPC. (asynchronously) Get a list of all network ranges
+	 * in a VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all network ranges. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listVPCNetworkRangesAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nullable String labelSelector,
+			@javax.annotation.Nullable String filter,
+			final ApiCallback<VPCNetworkRangeList> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				listVPCNetworkRangesValidateBeforeCall(
+						projectId, vpcId, region, labelSelector, filter, _callback);
+		Type localVarReturnType = new TypeToken<VPCNetworkRangeList>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for listVPCRegions
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all configured VPC regions. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listVPCRegionsCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call listVPCRegionsValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling listVPCRegions(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling listVPCRegions(Async)");
+		}
+
+		return listVPCRegionsCall(projectId, vpcId, _callback);
+	}
+
+	/**
+	 * List all configured regions in a VPC. Get a list of all configured regions in a VPC.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @return RegionalVPCList
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all configured VPC regions. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public RegionalVPCList listVPCRegions(
+			@javax.annotation.Nonnull UUID projectId, @javax.annotation.Nonnull UUID vpcId)
+			throws ApiException {
+		ApiResponse<RegionalVPCList> localVarResp = listVPCRegionsWithHttpInfo(projectId, vpcId);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * List all configured regions in a VPC. Get a list of all configured regions in a VPC.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @return ApiResponse&lt;RegionalVPCList&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all configured VPC regions. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<RegionalVPCList> listVPCRegionsWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId, @javax.annotation.Nonnull UUID vpcId)
+			throws ApiException {
+		okhttp3.Call localVarCall = listVPCRegionsValidateBeforeCall(projectId, vpcId, null);
+		Type localVarReturnType = new TypeToken<RegionalVPCList>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * List all configured regions in a VPC. (asynchronously) Get a list of all configured regions
+	 * in a VPC.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all configured VPC regions. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listVPCRegionsAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			final ApiCallback<RegionalVPCList> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall = listVPCRegionsValidateBeforeCall(projectId, vpcId, _callback);
+		Type localVarReturnType = new TypeToken<RegionalVPCList>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for listVPCRoutingTables
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all routing tables. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listVPCRoutingTablesCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nullable String labelSelector,
+			@javax.annotation.Nullable String filter,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}/routing-tables"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		if (labelSelector != null) {
+			localVarQueryParams.addAll(
+					localVarApiClient.parameterToPair("label_selector", labelSelector));
+		}
+
+		if (filter != null) {
+			localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+		}
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call listVPCRoutingTablesValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nullable String labelSelector,
+			@javax.annotation.Nullable String filter,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling listVPCRoutingTables(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling listVPCRoutingTables(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling listVPCRoutingTables(Async)");
+		}
+
+		return listVPCRoutingTablesCall(projectId, vpcId, region, labelSelector, filter, _callback);
+	}
+
+	/**
+	 * List all regional routing tables in a VPC. Get a list of all routing tables in a VPC for this
+	 * region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @return VPCRoutingTableList
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all routing tables. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public VPCRoutingTableList listVPCRoutingTables(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nullable String labelSelector,
+			@javax.annotation.Nullable String filter)
+			throws ApiException {
+		ApiResponse<VPCRoutingTableList> localVarResp =
+				listVPCRoutingTablesWithHttpInfo(projectId, vpcId, region, labelSelector, filter);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * List all regional routing tables in a VPC. Get a list of all routing tables in a VPC for this
+	 * region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @return ApiResponse&lt;VPCRoutingTableList&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all routing tables. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<VPCRoutingTableList> listVPCRoutingTablesWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nullable String labelSelector,
+			@javax.annotation.Nullable String filter)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				listVPCRoutingTablesValidateBeforeCall(
+						projectId, vpcId, region, labelSelector, filter, null);
+		Type localVarReturnType = new TypeToken<VPCRoutingTableList>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * List all regional routing tables in a VPC. (asynchronously) Get a list of all routing tables
+	 * in a VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all routing tables. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listVPCRoutingTablesAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nullable String labelSelector,
+			@javax.annotation.Nullable String filter,
+			final ApiCallback<VPCRoutingTableList> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				listVPCRoutingTablesValidateBeforeCall(
+						projectId, vpcId, region, labelSelector, filter, _callback);
+		Type localVarReturnType = new TypeToken<VPCRoutingTableList>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for listVPCStaticRoutes
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all static routes. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listVPCStaticRoutesCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nullable String labelSelector,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}/routing-tables/{routingTableId}/static-routes"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "routingTableId" + "}",
+								localVarApiClient.escapeString(routingTableId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		if (labelSelector != null) {
+			localVarQueryParams.addAll(
+					localVarApiClient.parameterToPair("label_selector", labelSelector));
+		}
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call listVPCStaticRoutesValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nullable String labelSelector,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling listVPCStaticRoutes(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling listVPCStaticRoutes(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling listVPCStaticRoutes(Async)");
+		}
+
+		// verify the required parameter 'routingTableId' is set
+		if (routingTableId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'routingTableId' when calling listVPCStaticRoutes(Async)");
+		}
+
+		return listVPCStaticRoutesCall(
+				projectId, vpcId, region, routingTableId, labelSelector, _callback);
+	}
+
+	/**
+	 * List all regional static routes in a VPC. Get a list of all static routes of a VPC for this
+	 * region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @return RouteListResponse
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all static routes. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public RouteListResponse listVPCStaticRoutes(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nullable String labelSelector)
+			throws ApiException {
+		ApiResponse<RouteListResponse> localVarResp =
+				listVPCStaticRoutesWithHttpInfo(
+						projectId, vpcId, region, routingTableId, labelSelector);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * List all regional static routes in a VPC. Get a list of all static routes of a VPC for this
+	 * region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @return ApiResponse&lt;RouteListResponse&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all static routes. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<RouteListResponse> listVPCStaticRoutesWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nullable String labelSelector)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				listVPCStaticRoutesValidateBeforeCall(
+						projectId, vpcId, region, routingTableId, labelSelector, null);
+		Type localVarReturnType = new TypeToken<RouteListResponse>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * List all regional static routes in a VPC. (asynchronously) Get a list of all static routes of
+	 * a VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all static routes. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listVPCStaticRoutesAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nullable String labelSelector,
+			final ApiCallback<RouteListResponse> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				listVPCStaticRoutesValidateBeforeCall(
+						projectId, vpcId, region, routingTableId, labelSelector, _callback);
+		Type localVarReturnType = new TypeToken<RouteListResponse>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for listVPCs
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Get a list of all VPCs. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listVPCsCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nullable String labelSelector,
+			@javax.annotation.Nullable String filter,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		if (labelSelector != null) {
+			localVarQueryParams.addAll(
+					localVarApiClient.parameterToPair("label_selector", labelSelector));
+		}
+
+		if (filter != null) {
+			localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+		}
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call listVPCsValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nullable String labelSelector,
+			@javax.annotation.Nullable String filter,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling listVPCs(Async)");
+		}
+
+		return listVPCsCall(projectId, labelSelector, filter, _callback);
+	}
+
+	/**
+	 * List project VPCs. List all visible VPCs of this project. To list shared VPCs from other
+	 * projects of the organization use the &#x60;List all shared VPCs&#x60; endpoint.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @return VPCList
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Get a list of all VPCs. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public VPCList listVPCs(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nullable String labelSelector,
+			@javax.annotation.Nullable String filter)
+			throws ApiException {
+		ApiResponse<VPCList> localVarResp = listVPCsWithHttpInfo(projectId, labelSelector, filter);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * List project VPCs. List all visible VPCs of this project. To list shared VPCs from other
+	 * projects of the organization use the &#x60;List all shared VPCs&#x60; endpoint.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @return ApiResponse&lt;VPCList&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Get a list of all VPCs. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<VPCList> listVPCsWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nullable String labelSelector,
+			@javax.annotation.Nullable String filter)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				listVPCsValidateBeforeCall(projectId, labelSelector, filter, null);
+		Type localVarReturnType = new TypeToken<VPCList>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * List project VPCs. (asynchronously) List all visible VPCs of this project. To list shared
+	 * VPCs from other projects of the organization use the &#x60;List all shared VPCs&#x60;
+	 * endpoint.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Get a list of all VPCs. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listVPCsAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nullable String labelSelector,
+			@javax.annotation.Nullable String filter,
+			final ApiCallback<VPCList> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				listVPCsValidateBeforeCall(projectId, labelSelector, filter, _callback);
+		Type localVarReturnType = new TypeToken<VPCList>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
 	 * Build call for partialUpdateNetwork
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
@@ -3454,6 +8235,228 @@ class DefaultApi {
 	}
 
 	/**
+	 * Build call for partialUpdateVPC
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param partialUpdateVPCPayload Request to update a VPC. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> VPC has been updated. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call partialUpdateVPCCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull PartialUpdateVPCPayload partialUpdateVPCPayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = partialUpdateVPCPayload;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {"application/json"};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"PATCH",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call partialUpdateVPCValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull PartialUpdateVPCPayload partialUpdateVPCPayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling partialUpdateVPC(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling partialUpdateVPC(Async)");
+		}
+
+		// verify the required parameter 'partialUpdateVPCPayload' is set
+		if (partialUpdateVPCPayload == null) {
+			throw new ApiException(
+					"Missing the required parameter 'partialUpdateVPCPayload' when calling partialUpdateVPC(Async)");
+		}
+
+		return partialUpdateVPCCall(projectId, vpcId, partialUpdateVPCPayload, _callback);
+	}
+
+	/**
+	 * Update VPC settings. Update the settings of a VPC.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param partialUpdateVPCPayload Request to update a VPC. (required)
+	 * @return VPC
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> VPC has been updated. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public VPC partialUpdateVPC(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull PartialUpdateVPCPayload partialUpdateVPCPayload)
+			throws ApiException {
+		ApiResponse<VPC> localVarResp =
+				partialUpdateVPCWithHttpInfo(projectId, vpcId, partialUpdateVPCPayload);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Update VPC settings. Update the settings of a VPC.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param partialUpdateVPCPayload Request to update a VPC. (required)
+	 * @return ApiResponse&lt;VPC&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> VPC has been updated. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<VPC> partialUpdateVPCWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull PartialUpdateVPCPayload partialUpdateVPCPayload)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				partialUpdateVPCValidateBeforeCall(projectId, vpcId, partialUpdateVPCPayload, null);
+		Type localVarReturnType = new TypeToken<VPC>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Update VPC settings. (asynchronously) Update the settings of a VPC.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param partialUpdateVPCPayload Request to update a VPC. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> VPC has been updated. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call partialUpdateVPCAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull PartialUpdateVPCPayload partialUpdateVPCPayload,
+			final ApiCallback<VPC> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				partialUpdateVPCValidateBeforeCall(
+						projectId, vpcId, partialUpdateVPCPayload, _callback);
+		Type localVarReturnType = new TypeToken<VPC>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
 	 * Build call for updateRouteOfRoutingTable
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
@@ -3614,7 +8617,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Update a route of a routing table. Update a route defined in a routing table.
+	 * Update a route of a routing table. Update a route defined in a routing table of a network
+	 * area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -3659,7 +8663,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Update a route of a routing table. Update a route defined in a routing table.
+	 * Update a route of a routing table. Update a route defined in a routing table of a network
+	 * area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -3706,8 +8711,8 @@ class DefaultApi {
 	}
 
 	/**
-	 * Update a route of a routing table. (asynchronously) Update a route defined in a routing
-	 * table.
+	 * Update a route of a routing table. (asynchronously) Update a route defined in a routing table
+	 * of a network area.
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
 	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
@@ -4030,6 +9035,1102 @@ class DefaultApi {
 						updateRoutingTableOfAreaPayload,
 						_callback);
 		Type localVarReturnType = new TypeToken<RoutingTable>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for updateVPCNetworkRange
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param networkRangeId The identifier (ID) of a STACKIT Network Range. (required)
+	 * @param body Request an update of a network range. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Network Range has been updated. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call updateVPCNetworkRangeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID networkRangeId,
+			@javax.annotation.Nonnull V1UpdateVPCNetworkRangeIPv4 body,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = body;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}/network-ranges/{networkRangeId}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "networkRangeId" + "}",
+								localVarApiClient.escapeString(networkRangeId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {"application/json"};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"PATCH",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call updateVPCNetworkRangeValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID networkRangeId,
+			@javax.annotation.Nonnull V1UpdateVPCNetworkRangeIPv4 body,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling updateVPCNetworkRange(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling updateVPCNetworkRange(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling updateVPCNetworkRange(Async)");
+		}
+
+		// verify the required parameter 'networkRangeId' is set
+		if (networkRangeId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'networkRangeId' when calling updateVPCNetworkRange(Async)");
+		}
+
+		// verify the required parameter 'body' is set
+		if (body == null) {
+			throw new ApiException(
+					"Missing the required parameter 'body' when calling updateVPCNetworkRange(Async)");
+		}
+
+		return updateVPCNetworkRangeCall(projectId, vpcId, region, networkRangeId, body, _callback);
+	}
+
+	/**
+	 * Update a regional network range. Update a network range of a VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param networkRangeId The identifier (ID) of a STACKIT Network Range. (required)
+	 * @param body Request an update of a network range. (required)
+	 * @return VPCNetworkRange
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Network Range has been updated. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public VPCNetworkRange updateVPCNetworkRange(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID networkRangeId,
+			@javax.annotation.Nonnull V1UpdateVPCNetworkRangeIPv4 body)
+			throws ApiException {
+		ApiResponse<VPCNetworkRange> localVarResp =
+				updateVPCNetworkRangeWithHttpInfo(projectId, vpcId, region, networkRangeId, body);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Update a regional network range. Update a network range of a VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param networkRangeId The identifier (ID) of a STACKIT Network Range. (required)
+	 * @param body Request an update of a network range. (required)
+	 * @return ApiResponse&lt;VPCNetworkRange&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Network Range has been updated. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<VPCNetworkRange> updateVPCNetworkRangeWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID networkRangeId,
+			@javax.annotation.Nonnull V1UpdateVPCNetworkRangeIPv4 body)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				updateVPCNetworkRangeValidateBeforeCall(
+						projectId, vpcId, region, networkRangeId, body, null);
+		Type localVarReturnType = new TypeToken<VPCNetworkRange>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Update a regional network range. (asynchronously) Update a network range of a VPC for this
+	 * region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param networkRangeId The identifier (ID) of a STACKIT Network Range. (required)
+	 * @param body Request an update of a network range. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Network Range has been updated. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call updateVPCNetworkRangeAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID networkRangeId,
+			@javax.annotation.Nonnull V1UpdateVPCNetworkRangeIPv4 body,
+			final ApiCallback<VPCNetworkRange> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				updateVPCNetworkRangeValidateBeforeCall(
+						projectId, vpcId, region, networkRangeId, body, _callback);
+		Type localVarReturnType = new TypeToken<VPCNetworkRange>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for updateVPCRegion
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param updateVPCRegionPayload Request an update of the regional VPC configuration. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Regional VPC configuration has been updated. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call updateVPCRegionCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UpdateVPCRegionPayload updateVPCRegionPayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = updateVPCRegionPayload;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {"application/json"};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"PATCH",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call updateVPCRegionValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UpdateVPCRegionPayload updateVPCRegionPayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling updateVPCRegion(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling updateVPCRegion(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling updateVPCRegion(Async)");
+		}
+
+		// verify the required parameter 'updateVPCRegionPayload' is set
+		if (updateVPCRegionPayload == null) {
+			throw new ApiException(
+					"Missing the required parameter 'updateVPCRegionPayload' when calling updateVPCRegion(Async)");
+		}
+
+		return updateVPCRegionCall(projectId, vpcId, region, updateVPCRegionPayload, _callback);
+	}
+
+	/**
+	 * Update the regional configuration of a VPC. Update the current configuration of a region for
+	 * a VPC. **Example:** Update nameservers. **Request Body:** &#x60;&#x60;&#x60;json {
+	 * \&quot;ipv4\&quot;: { \&quot;defaultNameservers\&quot;: [ \&quot;10.1.2.10\&quot;,
+	 * \&quot;10.1.2.11\&quot; ], } } &#x60;&#x60;&#x60; **Result:** *
+	 * &#x60;ipv4.defaultNameservers&#x60;: **Updated** as a new value was provided.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param updateVPCRegionPayload Request an update of the regional VPC configuration. (required)
+	 * @return RegionalVPC
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Regional VPC configuration has been updated. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public RegionalVPC updateVPCRegion(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UpdateVPCRegionPayload updateVPCRegionPayload)
+			throws ApiException {
+		ApiResponse<RegionalVPC> localVarResp =
+				updateVPCRegionWithHttpInfo(projectId, vpcId, region, updateVPCRegionPayload);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Update the regional configuration of a VPC. Update the current configuration of a region for
+	 * a VPC. **Example:** Update nameservers. **Request Body:** &#x60;&#x60;&#x60;json {
+	 * \&quot;ipv4\&quot;: { \&quot;defaultNameservers\&quot;: [ \&quot;10.1.2.10\&quot;,
+	 * \&quot;10.1.2.11\&quot; ], } } &#x60;&#x60;&#x60; **Result:** *
+	 * &#x60;ipv4.defaultNameservers&#x60;: **Updated** as a new value was provided.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param updateVPCRegionPayload Request an update of the regional VPC configuration. (required)
+	 * @return ApiResponse&lt;RegionalVPC&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Regional VPC configuration has been updated. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<RegionalVPC> updateVPCRegionWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UpdateVPCRegionPayload updateVPCRegionPayload)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				updateVPCRegionValidateBeforeCall(
+						projectId, vpcId, region, updateVPCRegionPayload, null);
+		Type localVarReturnType = new TypeToken<RegionalVPC>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Update the regional configuration of a VPC. (asynchronously) Update the current configuration
+	 * of a region for a VPC. **Example:** Update nameservers. **Request Body:**
+	 * &#x60;&#x60;&#x60;json { \&quot;ipv4\&quot;: { \&quot;defaultNameservers\&quot;: [
+	 * \&quot;10.1.2.10\&quot;, \&quot;10.1.2.11\&quot; ], } } &#x60;&#x60;&#x60; **Result:** *
+	 * &#x60;ipv4.defaultNameservers&#x60;: **Updated** as a new value was provided.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param updateVPCRegionPayload Request an update of the regional VPC configuration. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Regional VPC configuration has been updated. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call updateVPCRegionAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UpdateVPCRegionPayload updateVPCRegionPayload,
+			final ApiCallback<RegionalVPC> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				updateVPCRegionValidateBeforeCall(
+						projectId, vpcId, region, updateVPCRegionPayload, _callback);
+		Type localVarReturnType = new TypeToken<RegionalVPC>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for updateVPCRoutingTable
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param updateVPCRoutingTablePayload Request an update of a routing table. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Update request for routing table successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call updateVPCRoutingTableCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UpdateVPCRoutingTablePayload updateVPCRoutingTablePayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = updateVPCRoutingTablePayload;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}/routing-tables/{routingTableId}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "routingTableId" + "}",
+								localVarApiClient.escapeString(routingTableId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {"application/json"};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"PATCH",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call updateVPCRoutingTableValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UpdateVPCRoutingTablePayload updateVPCRoutingTablePayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling updateVPCRoutingTable(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling updateVPCRoutingTable(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling updateVPCRoutingTable(Async)");
+		}
+
+		// verify the required parameter 'routingTableId' is set
+		if (routingTableId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'routingTableId' when calling updateVPCRoutingTable(Async)");
+		}
+
+		// verify the required parameter 'updateVPCRoutingTablePayload' is set
+		if (updateVPCRoutingTablePayload == null) {
+			throw new ApiException(
+					"Missing the required parameter 'updateVPCRoutingTablePayload' when calling updateVPCRoutingTable(Async)");
+		}
+
+		return updateVPCRoutingTableCall(
+				projectId, vpcId, region, routingTableId, updateVPCRoutingTablePayload, _callback);
+	}
+
+	/**
+	 * Update a regional routing table. Update a routing table of a VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param updateVPCRoutingTablePayload Request an update of a routing table. (required)
+	 * @return VPCRoutingTable
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Update request for routing table successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public VPCRoutingTable updateVPCRoutingTable(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UpdateVPCRoutingTablePayload updateVPCRoutingTablePayload)
+			throws ApiException {
+		ApiResponse<VPCRoutingTable> localVarResp =
+				updateVPCRoutingTableWithHttpInfo(
+						projectId, vpcId, region, routingTableId, updateVPCRoutingTablePayload);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Update a regional routing table. Update a routing table of a VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param updateVPCRoutingTablePayload Request an update of a routing table. (required)
+	 * @return ApiResponse&lt;VPCRoutingTable&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Update request for routing table successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<VPCRoutingTable> updateVPCRoutingTableWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UpdateVPCRoutingTablePayload updateVPCRoutingTablePayload)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				updateVPCRoutingTableValidateBeforeCall(
+						projectId,
+						vpcId,
+						region,
+						routingTableId,
+						updateVPCRoutingTablePayload,
+						null);
+		Type localVarReturnType = new TypeToken<VPCRoutingTable>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Update a regional routing table. (asynchronously) Update a routing table of a VPC for this
+	 * region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param updateVPCRoutingTablePayload Request an update of a routing table. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Update request for routing table successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call updateVPCRoutingTableAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UpdateVPCRoutingTablePayload updateVPCRoutingTablePayload,
+			final ApiCallback<VPCRoutingTable> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				updateVPCRoutingTableValidateBeforeCall(
+						projectId,
+						vpcId,
+						region,
+						routingTableId,
+						updateVPCRoutingTablePayload,
+						_callback);
+		Type localVarReturnType = new TypeToken<VPCRoutingTable>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for updateVPCStaticRoute
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param routeId The identifier (ID) of a STACKIT Route. (required)
+	 * @param updateVPCStaticRoutePayload Request an update of a static route. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Update request for static route successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call updateVPCStaticRouteCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UUID routeId,
+			@javax.annotation.Nonnull UpdateVPCStaticRoutePayload updateVPCStaticRoutePayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = updateVPCStaticRoutePayload;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}/routing-tables/{routingTableId}/static-routes/{routeId}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "routingTableId" + "}",
+								localVarApiClient.escapeString(routingTableId.toString()))
+						.replace(
+								"{" + "routeId" + "}",
+								localVarApiClient.escapeString(routeId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {"application/json"};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"PATCH",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call updateVPCStaticRouteValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UUID routeId,
+			@javax.annotation.Nonnull UpdateVPCStaticRoutePayload updateVPCStaticRoutePayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling updateVPCStaticRoute(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling updateVPCStaticRoute(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling updateVPCStaticRoute(Async)");
+		}
+
+		// verify the required parameter 'routingTableId' is set
+		if (routingTableId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'routingTableId' when calling updateVPCStaticRoute(Async)");
+		}
+
+		// verify the required parameter 'routeId' is set
+		if (routeId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'routeId' when calling updateVPCStaticRoute(Async)");
+		}
+
+		// verify the required parameter 'updateVPCStaticRoutePayload' is set
+		if (updateVPCStaticRoutePayload == null) {
+			throw new ApiException(
+					"Missing the required parameter 'updateVPCStaticRoutePayload' when calling updateVPCStaticRoute(Async)");
+		}
+
+		return updateVPCStaticRouteCall(
+				projectId,
+				vpcId,
+				region,
+				routingTableId,
+				routeId,
+				updateVPCStaticRoutePayload,
+				_callback);
+	}
+
+	/**
+	 * Update a regional static route. Update a static route of a VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param routeId The identifier (ID) of a STACKIT Route. (required)
+	 * @param updateVPCStaticRoutePayload Request an update of a static route. (required)
+	 * @return Route
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Update request for static route successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public Route updateVPCStaticRoute(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UUID routeId,
+			@javax.annotation.Nonnull UpdateVPCStaticRoutePayload updateVPCStaticRoutePayload)
+			throws ApiException {
+		ApiResponse<Route> localVarResp =
+				updateVPCStaticRouteWithHttpInfo(
+						projectId,
+						vpcId,
+						region,
+						routingTableId,
+						routeId,
+						updateVPCStaticRoutePayload);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Update a regional static route. Update a static route of a VPC for this region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param routeId The identifier (ID) of a STACKIT Route. (required)
+	 * @param updateVPCStaticRoutePayload Request an update of a static route. (required)
+	 * @return ApiResponse&lt;Route&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Update request for static route successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<Route> updateVPCStaticRouteWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UUID routeId,
+			@javax.annotation.Nonnull UpdateVPCStaticRoutePayload updateVPCStaticRoutePayload)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				updateVPCStaticRouteValidateBeforeCall(
+						projectId,
+						vpcId,
+						region,
+						routingTableId,
+						routeId,
+						updateVPCStaticRoutePayload,
+						null);
+		Type localVarReturnType = new TypeToken<Route>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Update a regional static route. (asynchronously) Update a static route of a VPC for this
+	 * region.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param routeId The identifier (ID) of a STACKIT Route. (required)
+	 * @param updateVPCStaticRoutePayload Request an update of a static route. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Update request for static route successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 424 </td><td> The region of the vpc is not enabled. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call updateVPCStaticRouteAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nonnull UUID routeId,
+			@javax.annotation.Nonnull UpdateVPCStaticRoutePayload updateVPCStaticRoutePayload,
+			final ApiCallback<Route> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				updateVPCStaticRouteValidateBeforeCall(
+						projectId,
+						vpcId,
+						region,
+						routingTableId,
+						routeId,
+						updateVPCStaticRoutePayload,
+						_callback);
+		Type localVarReturnType = new TypeToken<Route>() {}.getType();
 		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
 		return localVarCall;
 	}
