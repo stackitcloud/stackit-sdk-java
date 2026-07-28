@@ -31,9 +31,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Object that represents an IPv4 address. */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class NexthopIPv4 {
 	public static final String SERIALIZED_NAME_TYPE = "type";
 
@@ -221,6 +219,14 @@ public class NexthopIPv4 {
 							java.util.Locale.ROOT,
 							"Expected the field `type` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("type").toString()));
+		}
+		// OVERRIDE: this if block fixes oneOf issues
+		if (!"ipv4".equals(jsonObj.get("type").getAsString())) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expectd the field `type` to have value `ipv4` but got `%s`",
+							jsonObj.get("type")));
 		}
 		if (!jsonObj.get("value").isJsonPrimitive()) {
 			throw new IllegalArgumentException(

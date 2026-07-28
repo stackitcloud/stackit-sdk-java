@@ -1,6 +1,19 @@
 ## Release (YYYY-MM-DD)
 - `alb`: [v0.6.0](services/alb/CHANGELOG.md#v060)
   - **Breaking change:** Remove `v2beta` API
+- `iaas`: [v1.3.0](services/iaas/CHANGELOG.md#v130)
+  - new example for managing `VPCs` with the `v2alpha1api`
+  - `v1api`
+    - **Braking Change:** remove deprecated operations: `updateImageScopeLocal`, `updateImageScopePublic`
+    - **Feature:** add attribute `vtpm` (new model `ServerVTPM`) to model `Server`
+    - **Feature:** add attribute `availabilityZone` to model `Snapshot`
+  - `v2alpha1api`
+    - **Feature:** add operations and models to manage `VPCs`
+  - `v2api`
+    - **Feature:** add attribute `vpcNetworkRangeId` to models `NetworkIPv4` `NetworkIPv6`
+    - **Feature:** add attribute `vpcId` to model `Network`,
+    - **Feature:** add attribute `vtpm` (new model `ServerVTPM`) to model `Server`,
+    - **Feature:** add attribute `availabilityZone` to model `Snapshot`,
 
 ## Release (2026-04-28)
 - `alb`: [v0.5.0](services/alb/CHANGELOG.md#v050)
