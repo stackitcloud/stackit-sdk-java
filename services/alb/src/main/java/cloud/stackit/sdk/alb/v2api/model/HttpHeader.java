@@ -31,9 +31,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** HttpHeader */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class HttpHeader {
 	public static final String SERIALIZED_NAME_EXACT_MATCH = "exactMatch";
 

@@ -31,9 +31,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** We offer Load Balancer observability via STACKIT Observability or external solutions. */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class LoadbalancerOptionObservability {
 	public static final String SERIALIZED_NAME_LOGS = "logs";
 

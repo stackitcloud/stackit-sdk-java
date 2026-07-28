@@ -35,9 +35,7 @@ import java.util.Objects;
  * &#39;/&#39; of prefix type. Cannot be set if &#39;path_prefix&#39; is used. Prefer using this
  * field over &#39;path_prefix&#39;.
  */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class Path {
 	public static final String SERIALIZED_NAME_EXACT_MATCH = "exactMatch";
 
