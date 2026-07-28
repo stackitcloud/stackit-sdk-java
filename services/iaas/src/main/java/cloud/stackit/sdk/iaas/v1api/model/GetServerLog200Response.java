@@ -31,9 +31,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** GetServerLog200Response */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class GetServerLog200Response {
 	public static final String SERIALIZED_NAME_OUTPUT = "output";
 

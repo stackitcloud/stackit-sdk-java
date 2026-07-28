@@ -33,9 +33,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** The IPv4 properties of a network area. */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class NetworkAreaIPv4 {
 	public static final String SERIALIZED_NAME_DEFAULT_NAMESERVERS = "defaultNameservers";
 

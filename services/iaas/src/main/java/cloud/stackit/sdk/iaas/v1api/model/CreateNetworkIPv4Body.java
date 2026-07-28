@@ -33,9 +33,7 @@ import java.util.Objects;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 /** The config object for an IPv4 network. */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class CreateNetworkIPv4Body {
 	public static final String SERIALIZED_NAME_GATEWAY = "gateway";
 
