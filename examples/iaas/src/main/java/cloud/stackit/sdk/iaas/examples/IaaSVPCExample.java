@@ -192,7 +192,7 @@ public class IaaSVPCExample {
                     region,
                     r.vpcRoutingTable.getId(),
                     new AddVPCStaticRoutePayload()
-                            .destination(new AddVPCStaticRoutePayloadDestination(new DestinationCIDRv4().cidrv4("0.0.0.0/0")))
+                            .destination(new AddVPCStaticRoutePayloadDestination(new DestinationCIDRv4().type("cidrv4").value("0.0.0.0/0")))
                             .nexthop(new AddVPCStaticRoutePayloadNexthop(new NexthopInternet().type("internet")))
             );
             System.out.println("static route created: " + r.staticRoute.getId());
