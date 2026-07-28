@@ -32,9 +32,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** LoadBalancerError */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class LoadBalancerError {
 	public static final String SERIALIZED_NAME_DESCRIPTION = "description";
 
@@ -66,6 +64,14 @@ public class LoadBalancerError {
 		TYPE_METRICS_MISCONFIGURED("TYPE_METRICS_MISCONFIGURED"),
 
 		TYPE_LOGS_MISCONFIGURED("TYPE_LOGS_MISCONFIGURED"),
+
+		TYPE_FIP_NOT_FOUND("TYPE_FIP_NOT_FOUND"),
+
+		TYPE_IP_EXHAUSTED("TYPE_IP_EXHAUSTED"),
+
+		TYPE_DNS_NOT_CONFIGURED("TYPE_DNS_NOT_CONFIGURED"),
+
+		TYPE_VM_PORT_NOT_CONFIGURED("TYPE_VM_PORT_NOT_CONFIGURED"),
 
 		UNKNOWN_DEFAULT_OPEN_API("unknown_default_open_api");
 

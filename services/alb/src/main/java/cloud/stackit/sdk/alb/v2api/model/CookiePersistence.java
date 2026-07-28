@@ -31,9 +31,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** CookiePersistence contains the cookie-based session persistence configuration. */
-@javax.annotation.Generated(
-		value = "org.openapitools.codegen.languages.JavaClientCodegen",
-		comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class CookiePersistence {
 	public static final String SERIALIZED_NAME_NAME = "name";
 
