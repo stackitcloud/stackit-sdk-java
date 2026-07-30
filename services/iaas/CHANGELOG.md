@@ -1,3 +1,8 @@
+## v1.4.0
+- `v2alpha1api`:
+  - **Breaking Change:** `NetworkRangeIPv4Request` was moved into the oneOf class `CreateVPCNetworkRangePayload`. Changes parameter in method `createVPCNetworkRange`.
+  - **Breaking Change:** `V1UpdateVPCNetworkRangeIPv4` was moved into the oneOf class `UpdateVPCNetworkRangePayload`. Changes parameter in method `updateVPCNetworkRange`.
+
 ## v1.3.0
 - new example for managing `VPCs` with the `v2alpha1api`
 - `v1api`

@@ -23,11 +23,11 @@ import cloud.stackit.sdk.iaas.v2alpha1api.model.AddRoutingTableToAreaPayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.AddVPCRoutingTablePayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.AddVPCStaticRoutePayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.CreateNetworkPayload;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.CreateVPCNetworkRangePayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.CreateVPCPayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.CreateVPCRegionPayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.Network;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.NetworkListResponse;
-import cloud.stackit.sdk.iaas.v2alpha1api.model.NetworkRangeIPv4Request;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.PartialUpdateNetworkPayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.PartialUpdateVPCPayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.RegionalVPC;
@@ -38,10 +38,10 @@ import cloud.stackit.sdk.iaas.v2alpha1api.model.RoutingTable;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.RoutingTableListResponse;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.UpdateRouteOfRoutingTablePayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.UpdateRoutingTableOfAreaPayload;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.UpdateVPCNetworkRangePayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.UpdateVPCRegionPayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.UpdateVPCRoutingTablePayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.UpdateVPCStaticRoutePayload;
-import cloud.stackit.sdk.iaas.v2alpha1api.model.V1UpdateVPCNetworkRangeIPv4;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.VPC;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.VPCList;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.VPCNetworkRange;
@@ -1610,7 +1610,8 @@ class DefaultApi {
 	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
 	 *     (required)
 	 * @param region The STACKIT Region of the resources. (required)
-	 * @param body Request to add an additional network range to a VPC. (required)
+	 * @param createVPCNetworkRangePayload Request to add an additional network range to a VPC.
+	 *     (required)
 	 * @param _callback Callback for upload/download progress
 	 * @return Call to execute
 	 * @throws ApiException If fail to serialize the request body object
@@ -1632,7 +1633,7 @@ class DefaultApi {
 			@javax.annotation.Nonnull UUID projectId,
 			@javax.annotation.Nonnull UUID vpcId,
 			@javax.annotation.Nonnull String region,
-			@javax.annotation.Nonnull NetworkRangeIPv4Request body,
+			@javax.annotation.Nonnull CreateVPCNetworkRangePayload createVPCNetworkRangePayload,
 			final ApiCallback _callback)
 			throws ApiException {
 		String basePath = null;
@@ -1648,7 +1649,7 @@ class DefaultApi {
 			basePath = null;
 		}
 
-		Object localVarPostBody = body;
+		Object localVarPostBody = createVPCNetworkRangePayload;
 
 		// create path and map variables
 		String localVarPath =
@@ -1702,7 +1703,7 @@ class DefaultApi {
 			@javax.annotation.Nonnull UUID projectId,
 			@javax.annotation.Nonnull UUID vpcId,
 			@javax.annotation.Nonnull String region,
-			@javax.annotation.Nonnull NetworkRangeIPv4Request body,
+			@javax.annotation.Nonnull CreateVPCNetworkRangePayload createVPCNetworkRangePayload,
 			final ApiCallback _callback)
 			throws ApiException {
 		// verify the required parameter 'projectId' is set
@@ -1723,13 +1724,14 @@ class DefaultApi {
 					"Missing the required parameter 'region' when calling createVPCNetworkRange(Async)");
 		}
 
-		// verify the required parameter 'body' is set
-		if (body == null) {
+		// verify the required parameter 'createVPCNetworkRangePayload' is set
+		if (createVPCNetworkRangePayload == null) {
 			throw new ApiException(
-					"Missing the required parameter 'body' when calling createVPCNetworkRange(Async)");
+					"Missing the required parameter 'createVPCNetworkRangePayload' when calling createVPCNetworkRange(Async)");
 		}
 
-		return createVPCNetworkRangeCall(projectId, vpcId, region, body, _callback);
+		return createVPCNetworkRangeCall(
+				projectId, vpcId, region, createVPCNetworkRangePayload, _callback);
 	}
 
 	/**
@@ -1740,7 +1742,8 @@ class DefaultApi {
 	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
 	 *     (required)
 	 * @param region The STACKIT Region of the resources. (required)
-	 * @param body Request to add an additional network range to a VPC. (required)
+	 * @param createVPCNetworkRangePayload Request to add an additional network range to a VPC.
+	 *     (required)
 	 * @return VPCNetworkRange
 	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
 	 *     response body
@@ -1762,10 +1765,11 @@ class DefaultApi {
 			@javax.annotation.Nonnull UUID projectId,
 			@javax.annotation.Nonnull UUID vpcId,
 			@javax.annotation.Nonnull String region,
-			@javax.annotation.Nonnull NetworkRangeIPv4Request body)
+			@javax.annotation.Nonnull CreateVPCNetworkRangePayload createVPCNetworkRangePayload)
 			throws ApiException {
 		ApiResponse<VPCNetworkRange> localVarResp =
-				createVPCNetworkRangeWithHttpInfo(projectId, vpcId, region, body);
+				createVPCNetworkRangeWithHttpInfo(
+						projectId, vpcId, region, createVPCNetworkRangePayload);
 		return localVarResp.getData();
 	}
 
@@ -1777,7 +1781,8 @@ class DefaultApi {
 	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
 	 *     (required)
 	 * @param region The STACKIT Region of the resources. (required)
-	 * @param body Request to add an additional network range to a VPC. (required)
+	 * @param createVPCNetworkRangePayload Request to add an additional network range to a VPC.
+	 *     (required)
 	 * @return ApiResponse&lt;VPCNetworkRange&gt;
 	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
 	 *     response body
@@ -1799,10 +1804,11 @@ class DefaultApi {
 			@javax.annotation.Nonnull UUID projectId,
 			@javax.annotation.Nonnull UUID vpcId,
 			@javax.annotation.Nonnull String region,
-			@javax.annotation.Nonnull NetworkRangeIPv4Request body)
+			@javax.annotation.Nonnull CreateVPCNetworkRangePayload createVPCNetworkRangePayload)
 			throws ApiException {
 		okhttp3.Call localVarCall =
-				createVPCNetworkRangeValidateBeforeCall(projectId, vpcId, region, body, null);
+				createVPCNetworkRangeValidateBeforeCall(
+						projectId, vpcId, region, createVPCNetworkRangePayload, null);
 		Type localVarReturnType = new TypeToken<VPCNetworkRange>() {}.getType();
 		return localVarApiClient.execute(localVarCall, localVarReturnType);
 	}
@@ -1815,7 +1821,8 @@ class DefaultApi {
 	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
 	 *     (required)
 	 * @param region The STACKIT Region of the resources. (required)
-	 * @param body Request to add an additional network range to a VPC. (required)
+	 * @param createVPCNetworkRangePayload Request to add an additional network range to a VPC.
+	 *     (required)
 	 * @param _callback The callback to be executed when the API call finishes
 	 * @return The request call
 	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -1838,12 +1845,13 @@ class DefaultApi {
 			@javax.annotation.Nonnull UUID projectId,
 			@javax.annotation.Nonnull UUID vpcId,
 			@javax.annotation.Nonnull String region,
-			@javax.annotation.Nonnull NetworkRangeIPv4Request body,
+			@javax.annotation.Nonnull CreateVPCNetworkRangePayload createVPCNetworkRangePayload,
 			final ApiCallback<VPCNetworkRange> _callback)
 			throws ApiException {
 
 		okhttp3.Call localVarCall =
-				createVPCNetworkRangeValidateBeforeCall(projectId, vpcId, region, body, _callback);
+				createVPCNetworkRangeValidateBeforeCall(
+						projectId, vpcId, region, createVPCNetworkRangePayload, _callback);
 		Type localVarReturnType = new TypeToken<VPCNetworkRange>() {}.getType();
 		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
 		return localVarCall;
@@ -9047,7 +9055,7 @@ class DefaultApi {
 	 *     (required)
 	 * @param region The STACKIT Region of the resources. (required)
 	 * @param networkRangeId The identifier (ID) of a STACKIT Network Range. (required)
-	 * @param body Request an update of a network range. (required)
+	 * @param updateVPCNetworkRangePayload Request an update of a network range. (required)
 	 * @param _callback Callback for upload/download progress
 	 * @return Call to execute
 	 * @throws ApiException If fail to serialize the request body object
@@ -9070,7 +9078,7 @@ class DefaultApi {
 			@javax.annotation.Nonnull UUID vpcId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull UUID networkRangeId,
-			@javax.annotation.Nonnull V1UpdateVPCNetworkRangeIPv4 body,
+			@javax.annotation.Nonnull UpdateVPCNetworkRangePayload updateVPCNetworkRangePayload,
 			final ApiCallback _callback)
 			throws ApiException {
 		String basePath = null;
@@ -9086,7 +9094,7 @@ class DefaultApi {
 			basePath = null;
 		}
 
-		Object localVarPostBody = body;
+		Object localVarPostBody = updateVPCNetworkRangePayload;
 
 		// create path and map variables
 		String localVarPath =
@@ -9144,7 +9152,7 @@ class DefaultApi {
 			@javax.annotation.Nonnull UUID vpcId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull UUID networkRangeId,
-			@javax.annotation.Nonnull V1UpdateVPCNetworkRangeIPv4 body,
+			@javax.annotation.Nonnull UpdateVPCNetworkRangePayload updateVPCNetworkRangePayload,
 			final ApiCallback _callback)
 			throws ApiException {
 		// verify the required parameter 'projectId' is set
@@ -9171,13 +9179,14 @@ class DefaultApi {
 					"Missing the required parameter 'networkRangeId' when calling updateVPCNetworkRange(Async)");
 		}
 
-		// verify the required parameter 'body' is set
-		if (body == null) {
+		// verify the required parameter 'updateVPCNetworkRangePayload' is set
+		if (updateVPCNetworkRangePayload == null) {
 			throw new ApiException(
-					"Missing the required parameter 'body' when calling updateVPCNetworkRange(Async)");
+					"Missing the required parameter 'updateVPCNetworkRangePayload' when calling updateVPCNetworkRange(Async)");
 		}
 
-		return updateVPCNetworkRangeCall(projectId, vpcId, region, networkRangeId, body, _callback);
+		return updateVPCNetworkRangeCall(
+				projectId, vpcId, region, networkRangeId, updateVPCNetworkRangePayload, _callback);
 	}
 
 	/**
@@ -9188,7 +9197,7 @@ class DefaultApi {
 	 *     (required)
 	 * @param region The STACKIT Region of the resources. (required)
 	 * @param networkRangeId The identifier (ID) of a STACKIT Network Range. (required)
-	 * @param body Request an update of a network range. (required)
+	 * @param updateVPCNetworkRangePayload Request an update of a network range. (required)
 	 * @return VPCNetworkRange
 	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
 	 *     response body
@@ -9211,10 +9220,11 @@ class DefaultApi {
 			@javax.annotation.Nonnull UUID vpcId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull UUID networkRangeId,
-			@javax.annotation.Nonnull V1UpdateVPCNetworkRangeIPv4 body)
+			@javax.annotation.Nonnull UpdateVPCNetworkRangePayload updateVPCNetworkRangePayload)
 			throws ApiException {
 		ApiResponse<VPCNetworkRange> localVarResp =
-				updateVPCNetworkRangeWithHttpInfo(projectId, vpcId, region, networkRangeId, body);
+				updateVPCNetworkRangeWithHttpInfo(
+						projectId, vpcId, region, networkRangeId, updateVPCNetworkRangePayload);
 		return localVarResp.getData();
 	}
 
@@ -9226,7 +9236,7 @@ class DefaultApi {
 	 *     (required)
 	 * @param region The STACKIT Region of the resources. (required)
 	 * @param networkRangeId The identifier (ID) of a STACKIT Network Range. (required)
-	 * @param body Request an update of a network range. (required)
+	 * @param updateVPCNetworkRangePayload Request an update of a network range. (required)
 	 * @return ApiResponse&lt;VPCNetworkRange&gt;
 	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
 	 *     response body
@@ -9249,11 +9259,16 @@ class DefaultApi {
 			@javax.annotation.Nonnull UUID vpcId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull UUID networkRangeId,
-			@javax.annotation.Nonnull V1UpdateVPCNetworkRangeIPv4 body)
+			@javax.annotation.Nonnull UpdateVPCNetworkRangePayload updateVPCNetworkRangePayload)
 			throws ApiException {
 		okhttp3.Call localVarCall =
 				updateVPCNetworkRangeValidateBeforeCall(
-						projectId, vpcId, region, networkRangeId, body, null);
+						projectId,
+						vpcId,
+						region,
+						networkRangeId,
+						updateVPCNetworkRangePayload,
+						null);
 		Type localVarReturnType = new TypeToken<VPCNetworkRange>() {}.getType();
 		return localVarApiClient.execute(localVarCall, localVarReturnType);
 	}
@@ -9267,7 +9282,7 @@ class DefaultApi {
 	 *     (required)
 	 * @param region The STACKIT Region of the resources. (required)
 	 * @param networkRangeId The identifier (ID) of a STACKIT Network Range. (required)
-	 * @param body Request an update of a network range. (required)
+	 * @param updateVPCNetworkRangePayload Request an update of a network range. (required)
 	 * @param _callback The callback to be executed when the API call finishes
 	 * @return The request call
 	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
@@ -9291,13 +9306,18 @@ class DefaultApi {
 			@javax.annotation.Nonnull UUID vpcId,
 			@javax.annotation.Nonnull String region,
 			@javax.annotation.Nonnull UUID networkRangeId,
-			@javax.annotation.Nonnull V1UpdateVPCNetworkRangeIPv4 body,
+			@javax.annotation.Nonnull UpdateVPCNetworkRangePayload updateVPCNetworkRangePayload,
 			final ApiCallback<VPCNetworkRange> _callback)
 			throws ApiException {
 
 		okhttp3.Call localVarCall =
 				updateVPCNetworkRangeValidateBeforeCall(
-						projectId, vpcId, region, networkRangeId, body, _callback);
+						projectId,
+						vpcId,
+						region,
+						networkRangeId,
+						updateVPCNetworkRangePayload,
+						_callback);
 		Type localVarReturnType = new TypeToken<VPCNetworkRange>() {}.getType();
 		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
 		return localVarCall;
