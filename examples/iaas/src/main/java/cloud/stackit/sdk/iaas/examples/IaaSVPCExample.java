@@ -2,20 +2,7 @@ package cloud.stackit.sdk.iaas.examples;
 
 import cloud.stackit.sdk.core.exception.ApiException;
 import cloud.stackit.sdk.iaas.v2alpha1api.api.IaasApi;
-import cloud.stackit.sdk.iaas.v2alpha1api.model.AddVPCRoutingTablePayload;
-import cloud.stackit.sdk.iaas.v2alpha1api.model.AddVPCStaticRoutePayload;
-import cloud.stackit.sdk.iaas.v2alpha1api.model.AddVPCStaticRoutePayloadDestination;
-import cloud.stackit.sdk.iaas.v2alpha1api.model.AddVPCStaticRoutePayloadNexthop;
-import cloud.stackit.sdk.iaas.v2alpha1api.model.CreateVPCPayload;
-import cloud.stackit.sdk.iaas.v2alpha1api.model.CreateVPCRegionPayload;
-import cloud.stackit.sdk.iaas.v2alpha1api.model.DestinationCIDRv4;
-import cloud.stackit.sdk.iaas.v2alpha1api.model.NetworkRangeIPv4Request;
-import cloud.stackit.sdk.iaas.v2alpha1api.model.NexthopInternet;
-import cloud.stackit.sdk.iaas.v2alpha1api.model.RegionalVPC;
-import cloud.stackit.sdk.iaas.v2alpha1api.model.Route;
-import cloud.stackit.sdk.iaas.v2alpha1api.model.VPC;
-import cloud.stackit.sdk.iaas.v2alpha1api.model.VPCNetworkRange;
-import cloud.stackit.sdk.iaas.v2alpha1api.model.VPCRoutingTable;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.*;
 import cloud.stackit.sdk.resourcemanager.v0api.api.ResourceManagerApi;
 import cloud.stackit.sdk.resourcemanager.v0api.model.CreateProjectPayload;
 import cloud.stackit.sdk.resourcemanager.v0api.model.Member;
@@ -238,15 +225,16 @@ public class IaaSVPCExample {
 							r.project.getProjectId(),
 							r.vpc.getId(),
 							region,
-							new NetworkRangeIPv4Request()
-									.ipVersion(NetworkRangeIPv4Request.IpVersionEnum.IPV4)
-									.prefix("192.168.1.0/24")
-									.description("example-network-range")
-									.defaultPrefixLen(26L)
-									.maxPrefixLen(29L)
-									.minPrefixLen(16L)
-									.addNameserversItem("10.0.0.1")
-									.addNameserversItem("10.0.0.8"));
+							new CreateVPCNetworkRangePayload(
+									new NetworkRangeIPv4Request()
+											.ipVersion(NetworkRangeIPv4Request.IpVersionEnum.IPV4)
+											.prefix("192.168.1.0/24")
+											.description("example-network-range")
+											.defaultPrefixLen(26L)
+											.maxPrefixLen(29L)
+											.minPrefixLen(16L)
+											.addNameserversItem("10.0.0.1")
+											.addNameserversItem("10.0.0.8")));
 			while (true) {
 				try {
 					String status =
