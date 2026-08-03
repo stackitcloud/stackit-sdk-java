@@ -90,7 +90,8 @@ public class UpdateSchedule {
 	}
 
 	/**
-	 * Get maintenanceWindow minimum: 1 maximum: 24
+	 * Updates start within the defined hourly window. Depending on the updates, the process may
+	 * exceed this timeframe and require an automatic restart. minimum: 1 maximum: 24
 	 *
 	 * @return maintenanceWindow
 	 */
@@ -128,7 +129,9 @@ public class UpdateSchedule {
 	}
 
 	/**
-	 * Get rrule
+	 * An rrule (Recurrence Rule) is a standardized string format used in iCalendar (RFC 5545) to
+	 * define repeating events, and you can generate one by using a dedicated library or by using
+	 * online generator tools to specify parameters like frequency, interval, and end dates
 	 *
 	 * @return rrule
 	 */
