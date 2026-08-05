@@ -72,7 +72,8 @@ public class CreateUpdatePayload {
 	}
 
 	/**
-	 * Get maintenanceWindow minimum: 1 maximum: 24
+	 * Updates start within the defined hourly window. Depending on the updates, the process may
+	 * exceed this timeframe and require an automatic restart. minimum: 1 maximum: 24
 	 *
 	 * @return maintenanceWindow
 	 */
