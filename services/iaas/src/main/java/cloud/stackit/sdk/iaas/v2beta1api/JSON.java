@@ -469,8 +469,6 @@ public class JSON {
 				new cloud.stackit.sdk.iaas.v2beta1api.model.ServerNetworking
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
-				new cloud.stackit.sdk.iaas.v2beta1api.model.ServerVTPM.CustomTypeAdapterFactory());
-		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.iaas.v2beta1api.model.ServiceAccountMailListResponse
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
