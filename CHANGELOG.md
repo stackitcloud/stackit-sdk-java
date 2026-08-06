@@ -2,6 +2,8 @@
 - `alb`: [v0.6.0](services/alb/CHANGELOG.md#v060)
   - **Breaking change:** Remove `v2beta` API
 - `iaas`:
+  - [v1.5.0](services/iaas/CHANGELOG.md#v150)
+    - **Breaking Change:** Removed the `ServerVTPM` class and the corresponding `vtpm` field from the `Server` model, as this functionality was unintentionally released and non-functional.
   - [v1.4.0](services/iaas/CHANGELOG.md#v140)
     - `v2alpha1api`:
       - **Breaking Change:** `NetworkRangeIPv4Request` was moved into the oneOf class `CreateVPCNetworkRangePayload`. Changes parameter in method `createVPCNetworkRange`.
@@ -9,7 +11,7 @@
   - [v1.3.0](services/iaas/CHANGELOG.md#v130)
     - new example for managing `VPCs` with the `v2alpha1api`
     - `v1api`
-      - **Braking Change:** remove deprecated operations: `updateImageScopeLocal`, `updateImageScopePublic`
+      - **Breaking Change:** remove deprecated operations: `updateImageScopeLocal`, `updateImageScopePublic`
       - **Feature:** add attribute `vtpm` (new model `ServerVTPM`) to model `Server`
       - **Feature:** add attribute `availabilityZone` to model `Snapshot`
     - `v2alpha1api`
