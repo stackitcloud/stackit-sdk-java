@@ -1,3 +1,6 @@
+## v0.2.1
+- `v1api`: **Docs:** Extend the description of the attributes `rrule` and `maintenanceWindow`
+
 ## v0.2.0
 - **Feature (breaking change):** Introduction of multi API version support. See the GitHub discussion post for more details: https://github.com/stackitcloud/stackit-sdk-java/discussions/530
 

@@ -19,6 +19,8 @@
       - **Feature:** add attribute `vpcId` to model `Network`,
       - **Feature:** add attribute `vtpm` (new model `ServerVTPM`) to model `Server`,
       - **Feature:** add attribute `availabilityZone` to model `Snapshot`,
+- `serverupdate`: [v0.2.1](services/serverupdate/CHANGELOG.md#v021)
+  - `v1api`: **Docs:** Extend the description of the attributes `rrule` and `maintenanceWindow`
 
 ## Release (2026-04-28)
 - `alb`: [v0.5.0](services/alb/CHANGELOG.md#v050)
