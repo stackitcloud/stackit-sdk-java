@@ -86,10 +86,11 @@ public class PartialUpdateFolderPayload {
 
 	/**
 	 * Key-value string pairs attached to an existing resource container. Certain labels may be
-	 * enforced via organizational policies. * **Key:** Must match the regex
-	 * &#x60;[A-ZÄÜÖa-zäüöß0-9_-]{1,64}&#x60; * **Value:** Must match the regex
-	 * &#x60;^$|[A-ZÄÜÖa-zäüöß0-9_-]{1,64}&#x60; &gt; Note: Additional naming restrictions may apply
-	 * depending on your specific organization.*
+	 * enforced via organizational policies. Setting an individual label&#39;s value to
+	 * &#x60;null&#x60; removes/deletes that label from the resource. * **Key:** Must match the
+	 * regex &#x60;[A-ZÄÜÖa-zäüöß0-9_-]{1,64}&#x60; * **Value:** Must match the regex
+	 * &#x60;^$|[A-ZÄÜÖa-zäüöß0-9_-]{1,64}&#x60;, or be &#x60;null&#x60; to delete the label &gt;
+	 * Note: Additional naming restrictions may apply depending on your specific organization.*
 	 *
 	 * @return labels
 	 */
