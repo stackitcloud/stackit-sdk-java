@@ -17,6 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.spec.InvalidKeySpecException;
+import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Map;
@@ -56,13 +57,13 @@ class SetupAuthTest {
 				"id",
 				"publicKey",
 				Date.from( // Workaround that ServiceAccountKey can be compared in tests
-						new Date().toInstant().truncatedTo(ChronoUnit.SECONDS)),
+						Instant.now().truncatedTo(ChronoUnit.SECONDS)),
 				"keyType",
 				"keyOrigin",
 				"keyAlgo",
 				true,
 				Date.from( // Workaround that ServiceAccountKey can be compared in tests
-						new Date().toInstant().truncatedTo(ChronoUnit.SECONDS)),
+						Instant.now().truncatedTo(ChronoUnit.SECONDS)),
 				credentials);
 	}
 
