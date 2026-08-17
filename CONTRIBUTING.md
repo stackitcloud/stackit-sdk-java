@@ -16,7 +16,7 @@ We greatly value your feedback, feature requests, additions to the code, bug rep
 ## Developer Guide
 
 Building the STACKIT Java SDK requires:
-1. Java SDK (version 11 to 21 should be supported) installed on your system
+1. Java SDK (version 17, 21 or 25) installed on your system
 
 In case you want to open the project in your preferred IDE, run `./gradlew idea` or `./gradlew eclipse` beforehand.
 
