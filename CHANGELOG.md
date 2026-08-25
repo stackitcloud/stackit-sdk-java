@@ -1,4 +1,5 @@
-## Release (YYYY-MM-DD)
+## Release (2026-08-25)
+
 - `alb`: [v0.6.0](services/alb/CHANGELOG.md#v060)
   - **Breaking change:** Remove `v2beta` API
 - `iaas`:
