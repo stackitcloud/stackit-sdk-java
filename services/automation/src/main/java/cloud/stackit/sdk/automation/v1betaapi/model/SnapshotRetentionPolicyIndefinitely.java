@@ -250,6 +250,15 @@ public class SnapshotRetentionPolicyIndefinitely {
 							"Expected the field `kind` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("kind").toString()));
 		}
+		// OVERRIDE START: this if block fixes oneOf issues
+		if (!"indefinitely".equals(jsonObj.get("kind").getAsString())) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `kind` to have value `indefinitely` but got `%s`",
+							jsonObj.get("kind").toString()));
+		}
+		// OVERRIDE END: this if block fixes oneOf issues
 		// validate the required field `kind`
 		KindEnum.validateJsonElement(jsonObj.get("kind"));
 	}

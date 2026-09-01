@@ -242,6 +242,15 @@ public class CreateSnapshotsResult {
 							"Expected the field `kind` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("kind").toString()));
 		}
+		// OVERRIDE START: this if block fixes oneOf issues
+		if (!"CreateSnapshotsResult".equals(jsonObj.get("kind").getAsString())) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `kind` to have value `CreateSnapshotsResult` but got `%s`",
+							jsonObj.get("kind").toString()));
+		}
+		// OVERRIDE END: this if block fixes oneOf issues
 	}
 
 	public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
