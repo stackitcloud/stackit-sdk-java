@@ -31,13 +31,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** Use this option to limit the IP ranges that can use the Application Load Balancer. */
+/**
+ * Use this option to limit the IP ranges that can use the Application Load Balancer. Only one of
+ * &#x60;allowed_source_ranges&#x60; or &#x60;ip_block_list_name&#x60; may be set at the same time.
+ */
 @javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class LoadbalancerOptionAccessControl {
 	public static final String SERIALIZED_NAME_ALLOWED_SOURCE_RANGES = "allowedSourceRanges";
 
 	@SerializedName(SERIALIZED_NAME_ALLOWED_SOURCE_RANGES)
 	@javax.annotation.Nullable private List<String> allowedSourceRanges = new ArrayList<>();
+
+	public static final String SERIALIZED_NAME_IP_BLOCK_LIST_NAME = "ipBlockListName";
+
+	@SerializedName(SERIALIZED_NAME_IP_BLOCK_LIST_NAME)
+	@javax.annotation.Nullable private String ipBlockListName;
 
 	public LoadbalancerOptionAccessControl() {}
 
@@ -57,7 +65,8 @@ public class LoadbalancerOptionAccessControl {
 	}
 
 	/**
-	 * Application Load Balancer is accessible only from an IP address in this range
+	 * Application Load Balancer is accessible only from an IP address in this range. Mutually
+	 * exclusive with &#x60;ipBlockListName&#x60;.
 	 *
 	 * @return allowedSourceRanges
 	 */
@@ -68,6 +77,27 @@ public class LoadbalancerOptionAccessControl {
 	public void setAllowedSourceRanges(
 			@javax.annotation.Nullable List<String> allowedSourceRanges) {
 		this.allowedSourceRanges = allowedSourceRanges;
+	}
+
+	public LoadbalancerOptionAccessControl ipBlockListName(
+			@javax.annotation.Nullable String ipBlockListName) {
+		this.ipBlockListName = ipBlockListName;
+		return this;
+	}
+
+	/**
+	 * Reference to an IP block list by name. Traffic originating from any IP in the referenced list
+	 * is denied access to the Application Load Balancer. See \&quot;IP Lists API\&quot; for how to
+	 * manage IP block lists. Mutually exclusive with &#x60;allowedSourceRanges&#x60;.
+	 *
+	 * @return ipBlockListName
+	 */
+	@javax.annotation.Nullable public String getIpBlockListName() {
+		return ipBlockListName;
+	}
+
+	public void setIpBlockListName(@javax.annotation.Nullable String ipBlockListName) {
+		this.ipBlockListName = ipBlockListName;
 	}
 
 	/**
@@ -128,13 +158,15 @@ public class LoadbalancerOptionAccessControl {
 						this.allowedSourceRanges,
 						loadbalancerOptionAccessControl.allowedSourceRanges)
 				&& Objects.equals(
+						this.ipBlockListName, loadbalancerOptionAccessControl.ipBlockListName)
+				&& Objects.equals(
 						this.additionalProperties,
 						loadbalancerOptionAccessControl.additionalProperties);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(allowedSourceRanges, additionalProperties);
+		return Objects.hash(allowedSourceRanges, ipBlockListName, additionalProperties);
 	}
 
 	@Override
@@ -144,6 +176,7 @@ public class LoadbalancerOptionAccessControl {
 		sb.append("    allowedSourceRanges: ")
 				.append(toIndentedString(allowedSourceRanges))
 				.append("\n");
+		sb.append("    ipBlockListName: ").append(toIndentedString(ipBlockListName)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -167,7 +200,8 @@ public class LoadbalancerOptionAccessControl {
 
 	static {
 		// a set of all properties/fields (JSON key names)
-		openapiFields = new HashSet<String>(Arrays.asList("allowedSourceRanges"));
+		openapiFields =
+				new HashSet<String>(Arrays.asList("allowedSourceRanges", "ipBlockListName"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(0);
@@ -201,6 +235,14 @@ public class LoadbalancerOptionAccessControl {
 							java.util.Locale.ROOT,
 							"Expected the field `allowedSourceRanges` to be an array in the JSON string but got `%s`",
 							jsonObj.get("allowedSourceRanges").toString()));
+		}
+		if ((jsonObj.get("ipBlockListName") != null && !jsonObj.get("ipBlockListName").isJsonNull())
+				&& !jsonObj.get("ipBlockListName").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `ipBlockListName` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("ipBlockListName").toString()));
 		}
 	}
 
