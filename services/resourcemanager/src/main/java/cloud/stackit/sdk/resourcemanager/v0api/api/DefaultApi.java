@@ -201,7 +201,9 @@ class DefaultApi {
 	}
 
 	/**
-	 * Create Folder Create a new folder.
+	 * Create Folder Creates a new folder within a parent organization or folder. Authorization
+	 * &amp; Permissions: - Evaluated on Target Parent Container: resource-manager.folder.create
+	 * (required permission on the target parent organization or folder to create a folder).
 	 *
 	 * @param createFolderPayload (optional)
 	 * @return FolderResponse
@@ -225,7 +227,9 @@ class DefaultApi {
 	}
 
 	/**
-	 * Create Folder Create a new folder.
+	 * Create Folder Creates a new folder within a parent organization or folder. Authorization
+	 * &amp; Permissions: - Evaluated on Target Parent Container: resource-manager.folder.create
+	 * (required permission on the target parent organization or folder to create a folder).
 	 *
 	 * @param createFolderPayload (optional)
 	 * @return ApiResponse&lt;FolderResponse&gt;
@@ -250,7 +254,10 @@ class DefaultApi {
 	}
 
 	/**
-	 * Create Folder (asynchronously) Create a new folder.
+	 * Create Folder (asynchronously) Creates a new folder within a parent organization or folder.
+	 * Authorization &amp; Permissions: - Evaluated on Target Parent Container:
+	 * resource-manager.folder.create (required permission on the target parent organization or
+	 * folder to create a folder).
 	 *
 	 * @param createFolderPayload (optional)
 	 * @param _callback The callback to be executed when the API call finishes
@@ -360,8 +367,11 @@ class DefaultApi {
 	}
 
 	/**
-	 * Create Project Create a new project. - The request is synchronous, but the workflow-based
-	 * creation is asynchronous. - Lifecycle state remains in CREATING, until workflow completes
+	 * Create Project Creates a new project within a parent container. - Creation request returns
+	 * synchronously, while underlying resource provisioning runs asynchronously. - Initial
+	 * lifecycle state is CREATING until provisioning completes. Authorization &amp; Permissions: -
+	 * Evaluated on Target Parent Container: resource-manager.project.create (required permission on
+	 * the target parent organization or folder to create a project).
 	 *
 	 * @param createProjectPayload (optional)
 	 * @return Project
@@ -385,8 +395,11 @@ class DefaultApi {
 	}
 
 	/**
-	 * Create Project Create a new project. - The request is synchronous, but the workflow-based
-	 * creation is asynchronous. - Lifecycle state remains in CREATING, until workflow completes
+	 * Create Project Creates a new project within a parent container. - Creation request returns
+	 * synchronously, while underlying resource provisioning runs asynchronously. - Initial
+	 * lifecycle state is CREATING until provisioning completes. Authorization &amp; Permissions: -
+	 * Evaluated on Target Parent Container: resource-manager.project.create (required permission on
+	 * the target parent organization or folder to create a project).
 	 *
 	 * @param createProjectPayload (optional)
 	 * @return ApiResponse&lt;Project&gt;
@@ -411,9 +424,11 @@ class DefaultApi {
 	}
 
 	/**
-	 * Create Project (asynchronously) Create a new project. - The request is synchronous, but the
-	 * workflow-based creation is asynchronous. - Lifecycle state remains in CREATING, until
-	 * workflow completes
+	 * Create Project (asynchronously) Creates a new project within a parent container. - Creation
+	 * request returns synchronously, while underlying resource provisioning runs asynchronously. -
+	 * Initial lifecycle state is CREATING until provisioning completes. Authorization &amp;
+	 * Permissions: - Evaluated on Target Parent Container: resource-manager.project.create
+	 * (required permission on the target parent organization or folder to create a project).
 	 *
 	 * @param createProjectPayload (optional)
 	 * @param _callback The callback to be executed when the API call finishes
@@ -542,9 +557,10 @@ class DefaultApi {
 	}
 
 	/**
-	 * Delete Folder Delete a folder and its metadata. - Folder must not be parent of any other
-	 * container - A force flag may be set, deleting all underlying folders recursively - if no
-	 * project is attached!
+	 * Delete Folder Delete a folder and its metadata. - Folder must not contain active child
+	 * containers unless force deletion is enabled without attached projects. Authorization &amp;
+	 * Permissions: - Evaluated on Target Folder: resource-manager.folder.delete (required
+	 * permission on the target folder to delete it).
 	 *
 	 * @param containerId Folder identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -568,9 +584,10 @@ class DefaultApi {
 	}
 
 	/**
-	 * Delete Folder Delete a folder and its metadata. - Folder must not be parent of any other
-	 * container - A force flag may be set, deleting all underlying folders recursively - if no
-	 * project is attached!
+	 * Delete Folder Delete a folder and its metadata. - Folder must not contain active child
+	 * containers unless force deletion is enabled without attached projects. Authorization &amp;
+	 * Permissions: - Evaluated on Target Folder: resource-manager.folder.delete (required
+	 * permission on the target folder to delete it).
 	 *
 	 * @param containerId Folder identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -596,9 +613,10 @@ class DefaultApi {
 	}
 
 	/**
-	 * Delete Folder (asynchronously) Delete a folder and its metadata. - Folder must not be parent
-	 * of any other container - A force flag may be set, deleting all underlying folders recursively
-	 * - if no project is attached!
+	 * Delete Folder (asynchronously) Delete a folder and its metadata. - Folder must not contain
+	 * active child containers unless force deletion is enabled without attached projects.
+	 * Authorization &amp; Permissions: - Evaluated on Target Folder: resource-manager.folder.delete
+	 * (required permission on the target folder to delete it).
 	 *
 	 * @param containerId Folder identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -727,8 +745,9 @@ class DefaultApi {
 	}
 
 	/**
-	 * Delete Folder Labels Deletes all folder labels by given keys. - Specific labels may be
-	 * deleted by key(s) - If no key is specified, all labels will be deleted!
+	 * Delete Folder Labels Deletes folder labels by specified keys, or removes all labels if no key
+	 * is provided. Authorization &amp; Permissions: - Evaluated on Target Folder:
+	 * resource-manager.folder.edit (required permission on the target folder to delete its labels).
 	 *
 	 * @param containerId Folder identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -751,8 +770,9 @@ class DefaultApi {
 	}
 
 	/**
-	 * Delete Folder Labels Deletes all folder labels by given keys. - Specific labels may be
-	 * deleted by key(s) - If no key is specified, all labels will be deleted!
+	 * Delete Folder Labels Deletes folder labels by specified keys, or removes all labels if no key
+	 * is provided. Authorization &amp; Permissions: - Evaluated on Target Folder:
+	 * resource-manager.folder.edit (required permission on the target folder to delete its labels).
 	 *
 	 * @param containerId Folder identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -777,8 +797,9 @@ class DefaultApi {
 	}
 
 	/**
-	 * Delete Folder Labels (asynchronously) Deletes all folder labels by given keys. - Specific
-	 * labels may be deleted by key(s) - If no key is specified, all labels will be deleted!
+	 * Delete Folder Labels (asynchronously) Deletes folder labels by specified keys, or removes all
+	 * labels if no key is provided. Authorization &amp; Permissions: - Evaluated on Target Folder:
+	 * resource-manager.folder.edit (required permission on the target folder to delete its labels).
 	 *
 	 * @param containerId Folder identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -906,8 +927,10 @@ class DefaultApi {
 	}
 
 	/**
-	 * Delete Organization Labels Deletes all organization labels by given keys. - Specific labels
-	 * may be deleted by key(s) - If no key is specified, all labels will be deleted!
+	 * Delete Organization Labels Deletes organization labels by specified keys, or removes all
+	 * labels if no key is provided. Authorization &amp; Permissions: - Evaluated on Target
+	 * Organization: resource-manager.organization.edit (required permission on the organization to
+	 * delete labels).
 	 *
 	 * @param containerId Organization identifier - containerId as well as UUID identifier is
 	 *     supported. (required)
@@ -930,8 +953,10 @@ class DefaultApi {
 	}
 
 	/**
-	 * Delete Organization Labels Deletes all organization labels by given keys. - Specific labels
-	 * may be deleted by key(s) - If no key is specified, all labels will be deleted!
+	 * Delete Organization Labels Deletes organization labels by specified keys, or removes all
+	 * labels if no key is provided. Authorization &amp; Permissions: - Evaluated on Target
+	 * Organization: resource-manager.organization.edit (required permission on the organization to
+	 * delete labels).
 	 *
 	 * @param containerId Organization identifier - containerId as well as UUID identifier is
 	 *     supported. (required)
@@ -957,9 +982,10 @@ class DefaultApi {
 	}
 
 	/**
-	 * Delete Organization Labels (asynchronously) Deletes all organization labels by given keys. -
-	 * Specific labels may be deleted by key(s) - If no key is specified, all labels will be
-	 * deleted!
+	 * Delete Organization Labels (asynchronously) Deletes organization labels by specified keys, or
+	 * removes all labels if no key is provided. Authorization &amp; Permissions: - Evaluated on
+	 * Target Organization: resource-manager.organization.edit (required permission on the
+	 * organization to delete labels).
 	 *
 	 * @param containerId Organization identifier - containerId as well as UUID identifier is
 	 *     supported. (required)
@@ -1073,9 +1099,10 @@ class DefaultApi {
 	}
 
 	/**
-	 * Delete Project Triggers the deletion of a project. - The request is synchronous, but the
-	 * workflow-based deletion is asynchronous - Lifecycle state remains in DELETING, until workflow
-	 * completes
+	 * Delete Project Triggers the deletion of a project. - Request returns synchronously, while
+	 * deletion process runs asynchronously. - Initial lifecycle state is DELETING until workflow
+	 * completes. Authorization &amp; Permissions: - Evaluated on Target Project:
+	 * resource-manager.project.delete (required permission on the project to delete it).
 	 *
 	 * @param id Project identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -1094,9 +1121,10 @@ class DefaultApi {
 	}
 
 	/**
-	 * Delete Project Triggers the deletion of a project. - The request is synchronous, but the
-	 * workflow-based deletion is asynchronous - Lifecycle state remains in DELETING, until workflow
-	 * completes
+	 * Delete Project Triggers the deletion of a project. - Request returns synchronously, while
+	 * deletion process runs asynchronously. - Initial lifecycle state is DELETING until workflow
+	 * completes. Authorization &amp; Permissions: - Evaluated on Target Project:
+	 * resource-manager.project.delete (required permission on the project to delete it).
 	 *
 	 * @param id Project identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -1118,9 +1146,10 @@ class DefaultApi {
 	}
 
 	/**
-	 * Delete Project (asynchronously) Triggers the deletion of a project. - The request is
-	 * synchronous, but the workflow-based deletion is asynchronous - Lifecycle state remains in
-	 * DELETING, until workflow completes
+	 * Delete Project (asynchronously) Triggers the deletion of a project. - Request returns
+	 * synchronously, while deletion process runs asynchronously. - Initial lifecycle state is
+	 * DELETING until workflow completes. Authorization &amp; Permissions: - Evaluated on Target
+	 * Project: resource-manager.project.delete (required permission on the project to delete it).
 	 *
 	 * @param id Project identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -1244,8 +1273,9 @@ class DefaultApi {
 	}
 
 	/**
-	 * Delete Project Labels Deletes all project labels by given keys. - Specific labels may be
-	 * deleted by key(s) - If no key is specified, all labels will be deleted!
+	 * Delete Project Labels Deletes project labels by specified keys, or removes all labels if no
+	 * key is provided. Authorization &amp; Permissions: - Evaluated on Target Project:
+	 * resource-manager.project.edit (required permission on the project to delete its labels).
 	 *
 	 * @param containerId Project identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -1268,8 +1298,9 @@ class DefaultApi {
 	}
 
 	/**
-	 * Delete Project Labels Deletes all project labels by given keys. - Specific labels may be
-	 * deleted by key(s) - If no key is specified, all labels will be deleted!
+	 * Delete Project Labels Deletes project labels by specified keys, or removes all labels if no
+	 * key is provided. Authorization &amp; Permissions: - Evaluated on Target Project:
+	 * resource-manager.project.edit (required permission on the project to delete its labels).
 	 *
 	 * @param containerId Project identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -1294,8 +1325,10 @@ class DefaultApi {
 	}
 
 	/**
-	 * Delete Project Labels (asynchronously) Deletes all project labels by given keys. - Specific
-	 * labels may be deleted by key(s) - If no key is specified, all labels will be deleted!
+	 * Delete Project Labels (asynchronously) Deletes project labels by specified keys, or removes
+	 * all labels if no key is provided. Authorization &amp; Permissions: - Evaluated on Target
+	 * Project: resource-manager.project.edit (required permission on the project to delete its
+	 * labels).
 	 *
 	 * @param containerId Project identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -1424,7 +1457,10 @@ class DefaultApi {
 	}
 
 	/**
-	 * Get Folder Details Returns all metadata for a specific folder.
+	 * Get Folder Details Returns metadata for a specific folder. Authorization &amp; Permissions: -
+	 * Evaluated on Target Folder: resource-manager.folder.get (required primary permission to
+	 * retrieve folder details). - Evaluated on Parent Containers: resource-manager.organization.get
+	 * and resource-manager.folder.get implicitly to resolve parent hierarchy details.
 	 *
 	 * @param containerId Folder identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -1451,7 +1487,10 @@ class DefaultApi {
 	}
 
 	/**
-	 * Get Folder Details Returns all metadata for a specific folder.
+	 * Get Folder Details Returns metadata for a specific folder. Authorization &amp; Permissions: -
+	 * Evaluated on Target Folder: resource-manager.folder.get (required primary permission to
+	 * retrieve folder details). - Evaluated on Parent Containers: resource-manager.organization.get
+	 * and resource-manager.folder.get implicitly to resolve parent hierarchy details.
 	 *
 	 * @param containerId Folder identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -1479,7 +1518,11 @@ class DefaultApi {
 	}
 
 	/**
-	 * Get Folder Details (asynchronously) Returns all metadata for a specific folder.
+	 * Get Folder Details (asynchronously) Returns metadata for a specific folder. Authorization
+	 * &amp; Permissions: - Evaluated on Target Folder: resource-manager.folder.get (required
+	 * primary permission to retrieve folder details). - Evaluated on Parent Containers:
+	 * resource-manager.organization.get and resource-manager.folder.get implicitly to resolve
+	 * parent hierarchy details.
 	 *
 	 * @param containerId Folder identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -1595,7 +1638,9 @@ class DefaultApi {
 	}
 
 	/**
-	 * Get Organization Details Returns the organization and its metadata.
+	 * Get Organization Details Returns metadata for a specific organization. Authorization &amp;
+	 * Permissions: - Evaluated on Target Organization: resource-manager.organization.get (required
+	 * permission on the organization to view its details).
 	 *
 	 * @param id Organization identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -1617,7 +1662,9 @@ class DefaultApi {
 	}
 
 	/**
-	 * Get Organization Details Returns the organization and its metadata.
+	 * Get Organization Details Returns metadata for a specific organization. Authorization &amp;
+	 * Permissions: - Evaluated on Target Organization: resource-manager.organization.get (required
+	 * permission on the organization to view its details).
 	 *
 	 * @param id Organization identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -1640,7 +1687,10 @@ class DefaultApi {
 	}
 
 	/**
-	 * Get Organization Details (asynchronously) Returns the organization and its metadata.
+	 * Get Organization Details (asynchronously) Returns metadata for a specific organization.
+	 * Authorization &amp; Permissions: - Evaluated on Target Organization:
+	 * resource-manager.organization.get (required permission on the organization to view its
+	 * details).
 	 *
 	 * @param id Organization identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -1764,7 +1814,11 @@ class DefaultApi {
 	}
 
 	/**
-	 * Get Project Details Returns the project and its metadata.
+	 * Get Project Details Returns the project and its metadata. Authorization &amp; Permissions: -
+	 * Evaluated on Target Project: resource-manager.project.get (required primary permission to
+	 * view project details). - Evaluated on Parent Containers: resource-manager.organization.get
+	 * and resource-manager.folder.get on parent organizations/folders implicitly to resolve and
+	 * include parent metadata in the response hierarchy.
 	 *
 	 * @param id Project identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -1789,7 +1843,11 @@ class DefaultApi {
 	}
 
 	/**
-	 * Get Project Details Returns the project and its metadata.
+	 * Get Project Details Returns the project and its metadata. Authorization &amp; Permissions: -
+	 * Evaluated on Target Project: resource-manager.project.get (required primary permission to
+	 * view project details). - Evaluated on Parent Containers: resource-manager.organization.get
+	 * and resource-manager.folder.get on parent organizations/folders implicitly to resolve and
+	 * include parent metadata in the response hierarchy.
 	 *
 	 * @param id Project identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -1815,7 +1873,12 @@ class DefaultApi {
 	}
 
 	/**
-	 * Get Project Details (asynchronously) Returns the project and its metadata.
+	 * Get Project Details (asynchronously) Returns the project and its metadata. Authorization
+	 * &amp; Permissions: - Evaluated on Target Project: resource-manager.project.get (required
+	 * primary permission to view project details). - Evaluated on Parent Containers:
+	 * resource-manager.organization.get and resource-manager.folder.get on parent
+	 * organizations/folders implicitly to resolve and include parent metadata in the response
+	 * hierarchy.
 	 *
 	 * @param id Project identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -1988,7 +2051,13 @@ class DefaultApi {
 	 * Either containerParentId OR containerIds OR member must be passed - If containerId and
 	 * containerParentId are given, both are used for filtering - containers must point to the same
 	 * parent - If member and containerParentId are given, both are used for filtering - If member
-	 * is given, containers must not point to the same container parent
+	 * is given, containers must not point to the same container parent Authorization &amp;
+	 * Permissions: - When filtering by member: resource-manager.folder.direct.get is evaluated on
+	 * target folders for the member; if caller differs from target member, system-level
+	 * resource-manager.folder.get is required. - When filtering by containerParentId:
+	 * resource-manager.folder.list is evaluated on the parent container. - When filtering by
+	 * containerIds: resource-manager.folder.get is evaluated on the parent container of requested
+	 * folders.
 	 *
 	 * @param containerParentId Identifier of the parent resource container - containerId as well as
 	 *     UUID identifier is supported. (optional)
@@ -2036,7 +2105,13 @@ class DefaultApi {
 	 * Either containerParentId OR containerIds OR member must be passed - If containerId and
 	 * containerParentId are given, both are used for filtering - containers must point to the same
 	 * parent - If member and containerParentId are given, both are used for filtering - If member
-	 * is given, containers must not point to the same container parent
+	 * is given, containers must not point to the same container parent Authorization &amp;
+	 * Permissions: - When filtering by member: resource-manager.folder.direct.get is evaluated on
+	 * target folders for the member; if caller differs from target member, system-level
+	 * resource-manager.folder.get is required. - When filtering by containerParentId:
+	 * resource-manager.folder.list is evaluated on the parent container. - When filtering by
+	 * containerIds: resource-manager.folder.get is evaluated on the parent container of requested
+	 * folders.
 	 *
 	 * @param containerParentId Identifier of the parent resource container - containerId as well as
 	 *     UUID identifier is supported. (optional)
@@ -2092,6 +2167,12 @@ class DefaultApi {
 	 * containerId and containerParentId are given, both are used for filtering - containers must
 	 * point to the same parent - If member and containerParentId are given, both are used for
 	 * filtering - If member is given, containers must not point to the same container parent
+	 * Authorization &amp; Permissions: - When filtering by member:
+	 * resource-manager.folder.direct.get is evaluated on target folders for the member; if caller
+	 * differs from target member, system-level resource-manager.folder.get is required. - When
+	 * filtering by containerParentId: resource-manager.folder.list is evaluated on the parent
+	 * container. - When filtering by containerIds: resource-manager.folder.get is evaluated on the
+	 * parent container of requested folders.
 	 *
 	 * @param containerParentId Identifier of the parent resource container - containerId as well as
 	 *     UUID identifier is supported. (optional)
@@ -2266,10 +2347,11 @@ class DefaultApi {
 	}
 
 	/**
-	 * Get All Organizations Returns all organizations and their metadata. - If no containerIds are
-	 * specified, all organizations are returned, if permitted - ContainerIds may be set to filter -
-	 * Member may be set to filter - If member and containerIds are given, both are used for
-	 * filtering
+	 * Get all organizations of member Returns all organizations and their metadata accessible to
+	 * the caller. - Filterable by containerIds or member. Authorization &amp; Permissions: -
+	 * Evaluated on Target Organizations: resource-manager.organization.list and/or (depending if
+	 * containerIDs was used in the request) resource-manager.organization.get to filter and list
+	 * accessible organizations.
 	 *
 	 * @param containerIds Organization identifiers - containerId as well as UUID identifier is
 	 *     supported. A combination of both is not allowed. (optional)
@@ -2308,10 +2390,11 @@ class DefaultApi {
 	}
 
 	/**
-	 * Get All Organizations Returns all organizations and their metadata. - If no containerIds are
-	 * specified, all organizations are returned, if permitted - ContainerIds may be set to filter -
-	 * Member may be set to filter - If member and containerIds are given, both are used for
-	 * filtering
+	 * Get all organizations of member Returns all organizations and their metadata accessible to
+	 * the caller. - Filterable by containerIds or member. Authorization &amp; Permissions: -
+	 * Evaluated on Target Organizations: resource-manager.organization.list and/or (depending if
+	 * containerIDs was used in the request) resource-manager.organization.get to filter and list
+	 * accessible organizations.
 	 *
 	 * @param containerIds Organization identifiers - containerId as well as UUID identifier is
 	 *     supported. A combination of both is not allowed. (optional)
@@ -2351,10 +2434,11 @@ class DefaultApi {
 	}
 
 	/**
-	 * Get All Organizations (asynchronously) Returns all organizations and their metadata. - If no
-	 * containerIds are specified, all organizations are returned, if permitted - ContainerIds may
-	 * be set to filter - Member may be set to filter - If member and containerIds are given, both
-	 * are used for filtering
+	 * Get all organizations of member (asynchronously) Returns all organizations and their metadata
+	 * accessible to the caller. - Filterable by containerIds or member. Authorization &amp;
+	 * Permissions: - Evaluated on Target Organizations: resource-manager.organization.list and/or
+	 * (depending if containerIDs was used in the request) resource-manager.organization.get to
+	 * filter and list accessible organizations.
 	 *
 	 * @param containerIds Organization identifiers - containerId as well as UUID identifier is
 	 *     supported. A combination of both is not allowed. (optional)
@@ -2534,12 +2618,15 @@ class DefaultApi {
 	}
 
 	/**
-	 * Get All Projects Returns all projects and their metadata that: - Are children of the specific
-	 * containerParentId - Match the given containerIds - User is member of Filter: - Either
-	 * containerParentId OR containerIds OR member must be passed - If containerId and
+	 * Get All Projects of a member. Returns all projects and their metadata that: - Are children of
+	 * the specific containerParentId - Match the given containerIds - User is member of Filter: -
+	 * Either containerParentId OR containerIds OR member must be passed - If containerId and
 	 * containerParentId are given, both are used for filtering - containers must point to the same
 	 * parent - If member and containerParentId are given, both are used for filtering - If member
-	 * is given, containers must not point to the same container parent
+	 * is given, containers must not point to the same container parent Authorization &amp;
+	 * Permissions: - Evaluated on Target Projects: resource-manager.project.get,
+	 * resource-manager.project.list, or resource-manager.project.direct.get to filter and return
+	 * accessible projects.
 	 *
 	 * @param containerParentId Identifier of the parent resource container - containerId as well as
 	 *     UUID identifier is supported. (optional)
@@ -2581,12 +2668,15 @@ class DefaultApi {
 	}
 
 	/**
-	 * Get All Projects Returns all projects and their metadata that: - Are children of the specific
-	 * containerParentId - Match the given containerIds - User is member of Filter: - Either
-	 * containerParentId OR containerIds OR member must be passed - If containerId and
+	 * Get All Projects of a member. Returns all projects and their metadata that: - Are children of
+	 * the specific containerParentId - Match the given containerIds - User is member of Filter: -
+	 * Either containerParentId OR containerIds OR member must be passed - If containerId and
 	 * containerParentId are given, both are used for filtering - containers must point to the same
 	 * parent - If member and containerParentId are given, both are used for filtering - If member
-	 * is given, containers must not point to the same container parent
+	 * is given, containers must not point to the same container parent Authorization &amp;
+	 * Permissions: - Evaluated on Target Projects: resource-manager.project.get,
+	 * resource-manager.project.list, or resource-manager.project.direct.get to filter and return
+	 * accessible projects.
 	 *
 	 * @param containerParentId Identifier of the parent resource container - containerId as well as
 	 *     UUID identifier is supported. (optional)
@@ -2635,12 +2725,15 @@ class DefaultApi {
 	}
 
 	/**
-	 * Get All Projects (asynchronously) Returns all projects and their metadata that: - Are
-	 * children of the specific containerParentId - Match the given containerIds - User is member of
-	 * Filter: - Either containerParentId OR containerIds OR member must be passed - If containerId
-	 * and containerParentId are given, both are used for filtering - containers must point to the
-	 * same parent - If member and containerParentId are given, both are used for filtering - If
-	 * member is given, containers must not point to the same container parent
+	 * Get All Projects of a member. (asynchronously) Returns all projects and their metadata that:
+	 * - Are children of the specific containerParentId - Match the given containerIds - User is
+	 * member of Filter: - Either containerParentId OR containerIds OR member must be passed - If
+	 * containerId and containerParentId are given, both are used for filtering - containers must
+	 * point to the same parent - If member and containerParentId are given, both are used for
+	 * filtering - If member is given, containers must not point to the same container parent
+	 * Authorization &amp; Permissions: - Evaluated on Target Projects:
+	 * resource-manager.project.get, resource-manager.project.list, or
+	 * resource-manager.project.direct.get to filter and return accessible projects.
 	 *
 	 * @param containerParentId Identifier of the parent resource container - containerId as well as
 	 *     UUID identifier is supported. (optional)
@@ -2788,8 +2881,9 @@ class DefaultApi {
 	}
 
 	/**
-	 * Update Folder Update the folder and its metadata. - Update folder name - Update folder labels
-	 * - Update folder parent (folder or organization)
+	 * Update Folder Update the folder and its metadata (name, labels, parent container).
+	 * Authorization &amp; Permissions: - Evaluated on Target Folder: resource-manager.folder.edit
+	 * (required permission on the target folder to modify its details, labels, or parent).
 	 *
 	 * @param containerId Folder identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -2817,8 +2911,9 @@ class DefaultApi {
 	}
 
 	/**
-	 * Update Folder Update the folder and its metadata. - Update folder name - Update folder labels
-	 * - Update folder parent (folder or organization)
+	 * Update Folder Update the folder and its metadata (name, labels, parent container).
+	 * Authorization &amp; Permissions: - Evaluated on Target Folder: resource-manager.folder.edit
+	 * (required permission on the target folder to modify its details, labels, or parent).
 	 *
 	 * @param containerId Folder identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -2848,8 +2943,10 @@ class DefaultApi {
 	}
 
 	/**
-	 * Update Folder (asynchronously) Update the folder and its metadata. - Update folder name -
-	 * Update folder labels - Update folder parent (folder or organization)
+	 * Update Folder (asynchronously) Update the folder and its metadata (name, labels, parent
+	 * container). Authorization &amp; Permissions: - Evaluated on Target Folder:
+	 * resource-manager.folder.edit (required permission on the target folder to modify its details,
+	 * labels, or parent).
 	 *
 	 * @param containerId Folder identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -2975,8 +3072,9 @@ class DefaultApi {
 	}
 
 	/**
-	 * Update Organization Update the organization and its metadata. - Update organization name -
-	 * Update organization labels
+	 * Update Organization Updates organization metadata (name, labels). Authorization &amp;
+	 * Permissions: - Evaluated on Target Organization: resource-manager.organization.edit (required
+	 * permission on the organization to update metadata and labels).
 	 *
 	 * @param id Organization identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -3003,8 +3101,9 @@ class DefaultApi {
 	}
 
 	/**
-	 * Update Organization Update the organization and its metadata. - Update organization name -
-	 * Update organization labels
+	 * Update Organization Updates organization metadata (name, labels). Authorization &amp;
+	 * Permissions: - Evaluated on Target Organization: resource-manager.organization.edit (required
+	 * permission on the organization to update metadata and labels).
 	 *
 	 * @param id Organization identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -3033,8 +3132,10 @@ class DefaultApi {
 	}
 
 	/**
-	 * Update Organization (asynchronously) Update the organization and its metadata. - Update
-	 * organization name - Update organization labels
+	 * Update Organization (asynchronously) Updates organization metadata (name, labels).
+	 * Authorization &amp; Permissions: - Evaluated on Target Organization:
+	 * resource-manager.organization.edit (required permission on the organization to update
+	 * metadata and labels).
 	 *
 	 * @param id Organization identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -3160,8 +3261,9 @@ class DefaultApi {
 	}
 
 	/**
-	 * Update Project Update the project and its metadata. - Update project name - Update project
-	 * labels - Update project parent (folder or organization)
+	 * Update Project Updates project metadata (name, labels, or parent hierarchy). Authorization
+	 * &amp; Permissions: - Evaluated on Target Project: resource-manager.project.edit (required
+	 * permission on the project to modify its details, labels, or parent).
 	 *
 	 * @param id Project identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -3189,8 +3291,9 @@ class DefaultApi {
 	}
 
 	/**
-	 * Update Project Update the project and its metadata. - Update project name - Update project
-	 * labels - Update project parent (folder or organization)
+	 * Update Project Updates project metadata (name, labels, or parent hierarchy). Authorization
+	 * &amp; Permissions: - Evaluated on Target Project: resource-manager.project.edit (required
+	 * permission on the project to modify its details, labels, or parent).
 	 *
 	 * @param id Project identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
@@ -3219,8 +3322,9 @@ class DefaultApi {
 	}
 
 	/**
-	 * Update Project (asynchronously) Update the project and its metadata. - Update project name -
-	 * Update project labels - Update project parent (folder or organization)
+	 * Update Project (asynchronously) Updates project metadata (name, labels, or parent hierarchy).
+	 * Authorization &amp; Permissions: - Evaluated on Target Project: resource-manager.project.edit
+	 * (required permission on the project to modify its details, labels, or parent).
 	 *
 	 * @param id Project identifier - containerId as well as UUID identifier is supported.
 	 *     (required)
