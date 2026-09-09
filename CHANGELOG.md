@@ -1,3 +1,9 @@
+## Release (2026-09-09)
+- `resourcemanager`: [v0.6.0](services/resourcemanager/CHANGELOG.md#v060)
+  - `v0api`:
+    - Updated javadoc comments of API client methods
+    - **Breaking change:** Removal of unused model class `ContainerSearchResult`
+
 ## Release (2026-08-25)
 
 - `alb`: [v0.6.0](services/alb/CHANGELOG.md#v060)

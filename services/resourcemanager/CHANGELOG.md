@@ -1,3 +1,8 @@
+## v0.6.0
+- `v0api`:
+  - Updated javadoc comments of API client methods
+  - **Breaking change:** Removal of unused model class `ContainerSearchResult`
+
 ## v0.5.0
 - **Feature (breaking change):** Introduction of multi API version support. See the GitHub discussion post for more details: https://github.com/stackitcloud/stackit-sdk-java/discussions/530
 
