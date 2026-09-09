@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.spec.InvalidKeySpecException;
+import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import okhttp3.*;
@@ -61,7 +62,7 @@ class KeyFlowAuthenticatorTest {
 					+ "h/9afEtu5aUE/m+1vGBoH8z1\n"
 					+ "-----END PRIVATE KEY-----\n";
 
-	private static final Request mockRequest =
+	private static final Request MOCK_REQUEST =
 			new Request.Builder().url("https://stackit.com").get().build();
 
 	private ServiceAccountKey createDummyServiceAccount() {
@@ -71,22 +72,22 @@ class KeyFlowAuthenticatorTest {
 				"id",
 				"publicKey",
 				Date.from( // Workaround that ServiceAccountKey can be compared in tests
-						new Date().toInstant().truncatedTo(ChronoUnit.SECONDS)),
+						Instant.now().truncatedTo(ChronoUnit.SECONDS)),
 				"keyType",
 				"keyOrigin",
 				"keyAlgo",
 				true,
 				Date.from( // Workaround that ServiceAccountKey can be compared in tests
-						new Date().toInstant().truncatedTo(ChronoUnit.SECONDS)),
+						Instant.now().truncatedTo(ChronoUnit.SECONDS)),
 				credentials);
 	}
 
 	private KeyFlowAuthenticator.KeyFlowTokenResponse mockResponseBody(boolean expired)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
-		Date issuedAt = new Date();
-		Date expiredAt = Date.from(new Date().toInstant().plusSeconds(60 * 10));
+		Instant issuedAt = Instant.now();
+		Instant expiredAt = issuedAt.plusSeconds(60 * 10);
 		if (expired) {
-			expiredAt = Date.from(new Date().toInstant().minusSeconds(60 * 10));
+			expiredAt = issuedAt.minusSeconds(60 * 10);
 		}
 
 		// Create mock response
@@ -290,31 +291,32 @@ class KeyFlowAuthenticatorTest {
 		HttpUrl url = mockWebServer.url(MOCK_WEBSERVER_PATH);
 
 		// Set unauthorized request
-		Response unauthorizedRequest =
+		try (Response unauthorizedRequest =
 				new Response.Builder()
-						.request(mockRequest)
+						.request(MOCK_REQUEST)
 						.code(401)
 						.message("Unauthorized")
 						.protocol(Protocol.HTTP_2)
-						.build();
+						.build()) {
 
-		// Config
-		CoreConfiguration cfg =
-				new CoreConfiguration().tokenCustomUrl(url.toString()); // Use mockWebServer
+			// Config
+			CoreConfiguration cfg =
+					new CoreConfiguration().tokenCustomUrl(url.toString()); // Use mockWebServer
 
-		// Check if "Authorization" header is unset
-		assertNull(unauthorizedRequest.request().header(authorizationHeader));
+			// Check if "Authorization" header is unset
+			assertNull(unauthorizedRequest.request().header(authorizationHeader));
 
-		// Prepare keyFlowAuthenticator
-		KeyFlowAuthenticator keyFlowAuthenticator =
-				new KeyFlowAuthenticator(httpClient, cfg, createDummyServiceAccount());
-		// authenticator creates new access token and sets it the Authorization header
-		Request newRequest = keyFlowAuthenticator.authenticate(null, unauthorizedRequest);
+			// Prepare keyFlowAuthenticator
+			KeyFlowAuthenticator keyFlowAuthenticator =
+					new KeyFlowAuthenticator(httpClient, cfg, createDummyServiceAccount());
+			// authenticator creates new access token and sets it the Authorization header
+			Request newRequest = keyFlowAuthenticator.authenticate(null, unauthorizedRequest);
 
-		// Check if new request is not null
-		assertNotNull(newRequest);
-		// Check if the "Authorization" Header is set
-		assertNotNull(newRequest.header(authorizationHeader));
+			// Check if new request is not null
+			assertNotNull(newRequest);
+			// Check if the "Authorization" Header is set
+			assertNotNull(newRequest.header(authorizationHeader));
+		}
 	}
 
 	@Test
@@ -334,30 +336,31 @@ class KeyFlowAuthenticatorTest {
 		HttpUrl url = mockWebServer.url(MOCK_WEBSERVER_PATH);
 
 		// Set unauthorized request
-		Response unauthorizedRequest =
+		try (Response unauthorizedRequest =
 				new Response.Builder()
 						.request(
-								mockRequest
+								MOCK_REQUEST
 										.newBuilder()
 										.addHeader(authorizationHeader, "<my-access-token>")
 										.build())
 						.code(401)
 						.message("Unauthorized")
 						.protocol(Protocol.HTTP_2)
-						.build(); // Unauthorized request
+						.build()) { // Unauthorized request
 
-		// Config
-		CoreConfiguration cfg =
-				new CoreConfiguration().tokenCustomUrl(url.toString()); // Use mockWebServer
+			// Config
+			CoreConfiguration cfg =
+					new CoreConfiguration().tokenCustomUrl(url.toString()); // Use mockWebServer
 
-		// Check if "Authorization" header is set
-		assertNotNull(unauthorizedRequest.request().header(authorizationHeader));
+			// Check if "Authorization" header is set
+			assertNotNull(unauthorizedRequest.request().header(authorizationHeader));
 
-		// Prepare keyFlowAuthenticator
-		KeyFlowAuthenticator keyFlowAuthenticator =
-				new KeyFlowAuthenticator(httpClient, cfg, createDummyServiceAccount());
+			// Prepare keyFlowAuthenticator
+			KeyFlowAuthenticator keyFlowAuthenticator =
+					new KeyFlowAuthenticator(httpClient, cfg, createDummyServiceAccount());
 
-		// Authenticator returns no new request, because "Authorization" header was already set
-		assertNull(keyFlowAuthenticator.authenticate(null, unauthorizedRequest));
+			// Authenticator returns no new request, because "Authorization" header was already set
+			assertNull(keyFlowAuthenticator.authenticate(null, unauthorizedRequest));
+		}
 	}
 }
