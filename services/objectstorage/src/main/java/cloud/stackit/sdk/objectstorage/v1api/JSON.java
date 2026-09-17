@@ -170,6 +170,9 @@ public class JSON {
 				new cloud.stackit.sdk.objectstorage.v1api.model.ProjectStatus
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.objectstorage.v1api.model.RateLimitError
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.objectstorage.v1api.model.SetDefaultRetentionPayload
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
