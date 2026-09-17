@@ -42,8 +42,7 @@ public class AccessKey {
 	public static final String SERIALIZED_NAME_EXPIRES = "expires";
 
 	@SerializedName(SERIALIZED_NAME_EXPIRES)
-	@javax.annotation.Nonnull
-	private String expires;
+	@javax.annotation.Nullable private String expires;
 
 	public static final String SERIALIZED_NAME_KEY_ID = "keyId";
 
@@ -72,7 +71,7 @@ public class AccessKey {
 		this.displayName = displayName;
 	}
 
-	public AccessKey expires(@javax.annotation.Nonnull String expires) {
+	public AccessKey expires(@javax.annotation.Nullable String expires) {
 		this.expires = expires;
 		return this;
 	}
@@ -82,12 +81,11 @@ public class AccessKey {
 	 *
 	 * @return expires
 	 */
-	@javax.annotation.Nonnull
-	public String getExpires() {
+	@javax.annotation.Nullable public String getExpires() {
 		return expires;
 	}
 
-	public void setExpires(@javax.annotation.Nonnull String expires) {
+	public void setExpires(@javax.annotation.Nullable String expires) {
 		this.expires = expires;
 	}
 
@@ -248,7 +246,8 @@ public class AccessKey {
 							"Expected the field `displayName` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("displayName").toString()));
 		}
-		if (!jsonObj.get("expires").isJsonPrimitive()) {
+		if ((jsonObj.get("expires") != null && !jsonObj.get("expires").isJsonNull())
+				&& !jsonObj.get("expires").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
 							java.util.Locale.ROOT,
