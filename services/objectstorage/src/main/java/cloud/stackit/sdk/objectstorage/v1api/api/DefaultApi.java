@@ -140,6 +140,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -250,6 +251,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -281,6 +283,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -315,6 +318,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -352,6 +356,7 @@ class DefaultApi {
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -467,6 +472,7 @@ class DefaultApi {
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -500,6 +506,7 @@ class DefaultApi {
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -535,6 +542,7 @@ class DefaultApi {
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -736,6 +744,7 @@ class DefaultApi {
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -839,6 +848,7 @@ class DefaultApi {
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -869,6 +879,7 @@ class DefaultApi {
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -902,6 +913,7 @@ class DefaultApi {
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -938,6 +950,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1052,6 +1065,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1084,6 +1098,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1118,6 +1133,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1151,6 +1167,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1255,6 +1272,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1282,6 +1300,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1310,6 +1329,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1508,6 +1528,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1613,6 +1634,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1641,6 +1663,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1671,6 +1694,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1896,6 +1920,7 @@ class DefaultApi {
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1989,6 +2014,7 @@ class DefaultApi {
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2016,6 +2042,7 @@ class DefaultApi {
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2045,6 +2072,7 @@ class DefaultApi {
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2075,6 +2103,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2168,6 +2197,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2195,6 +2225,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2224,6 +2255,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2254,6 +2286,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2359,6 +2392,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2386,6 +2420,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2415,6 +2450,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2982,6 +3018,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3073,6 +3110,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3098,6 +3136,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3125,6 +3164,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3155,6 +3195,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3256,6 +3297,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3285,6 +3327,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3316,6 +3359,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3348,6 +3392,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3439,6 +3484,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3464,6 +3510,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3491,6 +3538,7 @@ class DefaultApi {
 	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3520,6 +3568,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3610,6 +3659,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3635,6 +3685,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3662,6 +3713,7 @@ class DefaultApi {
 	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
