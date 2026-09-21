@@ -1,4 +1,14 @@
-## Release (2026-09-09)
+## Release (2026-MM-DD)
+- `objectstorage`: [v0.4.0](services/objectstorage/CHANGELOG.md#v040)
+  - `v1api`:
+    - **Feature:** New model class `RateLimitError`
+    - **Improvement:** Add HTTP 429 rate limit error responses in API operations
+    - **Breaking Change:** Field `expires` in `AccessKey` model is now nullable
+    - **Breaking Change:** Field `expires` in `CreateAccessKeyResponse` model is now nullable
+  - `v2api`:
+    - **Feature:** New model class `RateLimitError`
+    - **Improvement:** Add HTTP 429 rate limit error responses in API operations
+    - **Breaking Change:** Field `expires` in `AccessKey` model is now nullable
 - `resourcemanager`: [v0.6.0](services/resourcemanager/CHANGELOG.md#v060)
   - `v0api`:
     - Updated javadoc comments of API client methods
