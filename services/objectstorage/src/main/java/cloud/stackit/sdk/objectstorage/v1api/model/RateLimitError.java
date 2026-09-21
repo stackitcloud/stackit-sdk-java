@@ -23,6 +23,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -30,82 +31,124 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** AccessKey */
+/** RateLimitError */
 @javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
-public class AccessKey {
-	public static final String SERIALIZED_NAME_DISPLAY_NAME = "displayName";
+public class RateLimitError {
+	public static final String SERIALIZED_NAME_ERROR = "error";
 
-	@SerializedName(SERIALIZED_NAME_DISPLAY_NAME)
-	@javax.annotation.Nonnull
-	private String displayName;
+	@SerializedName(SERIALIZED_NAME_ERROR)
+	@javax.annotation.Nullable private String error;
 
-	public static final String SERIALIZED_NAME_EXPIRES = "expires";
+	public static final String SERIALIZED_NAME_MESSAGE = "message";
 
-	@SerializedName(SERIALIZED_NAME_EXPIRES)
-	@javax.annotation.Nullable private String expires;
+	@SerializedName(SERIALIZED_NAME_MESSAGE)
+	@javax.annotation.Nullable private String message;
 
-	public static final String SERIALIZED_NAME_KEY_ID = "keyId";
+	public static final String SERIALIZED_NAME_PATH = "path";
 
-	@SerializedName(SERIALIZED_NAME_KEY_ID)
-	@javax.annotation.Nonnull
-	private String keyId;
+	@SerializedName(SERIALIZED_NAME_PATH)
+	@javax.annotation.Nullable private String path;
 
-	public AccessKey() {}
+	public static final String SERIALIZED_NAME_STATUS = "status";
 
-	public AccessKey displayName(@javax.annotation.Nonnull String displayName) {
-		this.displayName = displayName;
+	@SerializedName(SERIALIZED_NAME_STATUS)
+	@javax.annotation.Nullable private Integer status;
+
+	public static final String SERIALIZED_NAME_TIMESTAMP = "timestamp";
+
+	@SerializedName(SERIALIZED_NAME_TIMESTAMP)
+	@javax.annotation.Nullable private OffsetDateTime timestamp;
+
+	public RateLimitError() {}
+
+	public RateLimitError error(@javax.annotation.Nullable String error) {
+		this.error = error;
 		return this;
 	}
 
 	/**
-	 * Get displayName
+	 * Get error
 	 *
-	 * @return displayName
+	 * @return error
 	 */
-	@javax.annotation.Nonnull
-	public String getDisplayName() {
-		return displayName;
+	@javax.annotation.Nullable public String getError() {
+		return error;
 	}
 
-	public void setDisplayName(@javax.annotation.Nonnull String displayName) {
-		this.displayName = displayName;
+	public void setError(@javax.annotation.Nullable String error) {
+		this.error = error;
 	}
 
-	public AccessKey expires(@javax.annotation.Nullable String expires) {
-		this.expires = expires;
+	public RateLimitError message(@javax.annotation.Nullable String message) {
+		this.message = message;
 		return this;
 	}
 
 	/**
-	 * Get expires
+	 * Get message
 	 *
-	 * @return expires
+	 * @return message
 	 */
-	@javax.annotation.Nullable public String getExpires() {
-		return expires;
+	@javax.annotation.Nullable public String getMessage() {
+		return message;
 	}
 
-	public void setExpires(@javax.annotation.Nullable String expires) {
-		this.expires = expires;
+	public void setMessage(@javax.annotation.Nullable String message) {
+		this.message = message;
 	}
 
-	public AccessKey keyId(@javax.annotation.Nonnull String keyId) {
-		this.keyId = keyId;
+	public RateLimitError path(@javax.annotation.Nullable String path) {
+		this.path = path;
 		return this;
 	}
 
 	/**
-	 * Identifies the pair of access key and secret access key for deletion
+	 * Get path
 	 *
-	 * @return keyId
+	 * @return path
 	 */
-	@javax.annotation.Nonnull
-	public String getKeyId() {
-		return keyId;
+	@javax.annotation.Nullable public String getPath() {
+		return path;
 	}
 
-	public void setKeyId(@javax.annotation.Nonnull String keyId) {
-		this.keyId = keyId;
+	public void setPath(@javax.annotation.Nullable String path) {
+		this.path = path;
+	}
+
+	public RateLimitError status(@javax.annotation.Nullable Integer status) {
+		this.status = status;
+		return this;
+	}
+
+	/**
+	 * Get status
+	 *
+	 * @return status
+	 */
+	@javax.annotation.Nullable public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(@javax.annotation.Nullable Integer status) {
+		this.status = status;
+	}
+
+	public RateLimitError timestamp(@javax.annotation.Nullable OffsetDateTime timestamp) {
+		this.timestamp = timestamp;
+		return this;
+	}
+
+	/**
+	 * Get timestamp
+	 *
+	 * @return timestamp
+	 */
+	@javax.annotation.Nullable public OffsetDateTime getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(@javax.annotation.Nullable OffsetDateTime timestamp) {
+		this.timestamp = timestamp;
 	}
 
 	/**
@@ -120,9 +163,9 @@ public class AccessKey {
 	 *
 	 * @param key name of the property
 	 * @param value value of the property
-	 * @return the AccessKey instance itself
+	 * @return the RateLimitError instance itself
 	 */
-	public AccessKey putAdditionalProperty(String key, Object value) {
+	public RateLimitError putAdditionalProperty(String key, Object value) {
 		if (this.additionalProperties == null) {
 			this.additionalProperties = new HashMap<String, Object>();
 		}
@@ -160,25 +203,29 @@ public class AccessKey {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		AccessKey accessKey = (AccessKey) o;
-		return Objects.equals(this.displayName, accessKey.displayName)
-				&& Objects.equals(this.expires, accessKey.expires)
-				&& Objects.equals(this.keyId, accessKey.keyId)
-				&& Objects.equals(this.additionalProperties, accessKey.additionalProperties);
+		RateLimitError rateLimitError = (RateLimitError) o;
+		return Objects.equals(this.error, rateLimitError.error)
+				&& Objects.equals(this.message, rateLimitError.message)
+				&& Objects.equals(this.path, rateLimitError.path)
+				&& Objects.equals(this.status, rateLimitError.status)
+				&& Objects.equals(this.timestamp, rateLimitError.timestamp)
+				&& Objects.equals(this.additionalProperties, rateLimitError.additionalProperties);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(displayName, expires, keyId, additionalProperties);
+		return Objects.hash(error, message, path, status, timestamp, additionalProperties);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class AccessKey {\n");
-		sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
-		sb.append("    expires: ").append(toIndentedString(expires)).append("\n");
-		sb.append("    keyId: ").append(toIndentedString(keyId)).append("\n");
+		sb.append("class RateLimitError {\n");
+		sb.append("    error: ").append(toIndentedString(error)).append("\n");
+		sb.append("    message: ").append(toIndentedString(message)).append("\n");
+		sb.append("    path: ").append(toIndentedString(path)).append("\n");
+		sb.append("    status: ").append(toIndentedString(status)).append("\n");
+		sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -202,64 +249,55 @@ public class AccessKey {
 
 	static {
 		// a set of all properties/fields (JSON key names)
-		openapiFields = new HashSet<String>(Arrays.asList("displayName", "expires", "keyId"));
+		openapiFields =
+				new HashSet<String>(
+						Arrays.asList("error", "message", "path", "status", "timestamp"));
 
 		// a set of required properties/fields (JSON key names)
-		openapiRequiredFields =
-				new HashSet<String>(Arrays.asList("displayName", "expires", "keyId"));
+		openapiRequiredFields = new HashSet<String>(0);
 	}
 
 	/**
 	 * Validates the JSON Element and throws an exception if issues found
 	 *
 	 * @param jsonElement JSON Element
-	 * @throws IOException if the JSON Element is invalid with respect to AccessKey
+	 * @throws IOException if the JSON Element is invalid with respect to RateLimitError
 	 */
 	public static void validateJsonElement(JsonElement jsonElement) throws IOException {
 		if (jsonElement == null) {
-			if (!AccessKey.openapiRequiredFields
+			if (!RateLimitError.openapiRequiredFields
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
 								java.util.Locale.ROOT,
-								"The required field(s) %s in AccessKey is not found in the empty JSON string",
-								AccessKey.openapiRequiredFields.toString()));
-			}
-		}
-
-		// check to make sure all required properties/fields are present in the JSON string
-		for (String requiredField : AccessKey.openapiRequiredFields) {
-			if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-				throw new IllegalArgumentException(
-						String.format(
-								java.util.Locale.ROOT,
-								"The required field `%s` is not found in the JSON string: %s",
-								requiredField,
-								jsonElement.toString()));
+								"The required field(s) %s in RateLimitError is not found in the empty JSON string",
+								RateLimitError.openapiRequiredFields.toString()));
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
-		if (!jsonObj.get("displayName").isJsonPrimitive()) {
+		if ((jsonObj.get("error") != null && !jsonObj.get("error").isJsonNull())
+				&& !jsonObj.get("error").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
 							java.util.Locale.ROOT,
-							"Expected the field `displayName` to be a primitive type in the JSON string but got `%s`",
-							jsonObj.get("displayName").toString()));
+							"Expected the field `error` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("error").toString()));
 		}
-		if ((jsonObj.get("expires") != null && !jsonObj.get("expires").isJsonNull())
-				&& !jsonObj.get("expires").isJsonPrimitive()) {
+		if ((jsonObj.get("message") != null && !jsonObj.get("message").isJsonNull())
+				&& !jsonObj.get("message").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
 							java.util.Locale.ROOT,
-							"Expected the field `expires` to be a primitive type in the JSON string but got `%s`",
-							jsonObj.get("expires").toString()));
+							"Expected the field `message` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("message").toString()));
 		}
-		if (!jsonObj.get("keyId").isJsonPrimitive()) {
+		if ((jsonObj.get("path") != null && !jsonObj.get("path").isJsonNull())
+				&& !jsonObj.get("path").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
 							java.util.Locale.ROOT,
-							"Expected the field `keyId` to be a primitive type in the JSON string but got `%s`",
-							jsonObj.get("keyId").toString()));
+							"Expected the field `path` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("path").toString()));
 		}
 	}
 
@@ -267,17 +305,17 @@ public class AccessKey {
 		@SuppressWarnings("unchecked")
 		@Override
 		public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-			if (!AccessKey.class.isAssignableFrom(type.getRawType())) {
-				return null; // this class only serializes 'AccessKey' and its subtypes
+			if (!RateLimitError.class.isAssignableFrom(type.getRawType())) {
+				return null; // this class only serializes 'RateLimitError' and its subtypes
 			}
 			final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-			final TypeAdapter<AccessKey> thisAdapter =
-					gson.getDelegateAdapter(this, TypeToken.get(AccessKey.class));
+			final TypeAdapter<RateLimitError> thisAdapter =
+					gson.getDelegateAdapter(this, TypeToken.get(RateLimitError.class));
 
 			return (TypeAdapter<T>)
-					new TypeAdapter<AccessKey>() {
+					new TypeAdapter<RateLimitError>() {
 						@Override
-						public void write(JsonWriter out, AccessKey value) throws IOException {
+						public void write(JsonWriter out, RateLimitError value) throws IOException {
 							JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
 							obj.remove("additionalProperties");
 							// serialize additional properties
@@ -307,12 +345,12 @@ public class AccessKey {
 						}
 
 						@Override
-						public AccessKey read(JsonReader in) throws IOException {
+						public RateLimitError read(JsonReader in) throws IOException {
 							JsonElement jsonElement = elementAdapter.read(in);
 							validateJsonElement(jsonElement);
 							JsonObject jsonObj = jsonElement.getAsJsonObject();
 							// store additional fields in the deserialized instance
-							AccessKey instance = thisAdapter.fromJsonTree(jsonObj);
+							RateLimitError instance = thisAdapter.fromJsonTree(jsonObj);
 							for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
 								if (!openapiFields.contains(entry.getKey())) {
 									if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -351,18 +389,18 @@ public class AccessKey {
 	}
 
 	/**
-	 * Create an instance of AccessKey given an JSON string
+	 * Create an instance of RateLimitError given an JSON string
 	 *
 	 * @param jsonString JSON string
-	 * @return An instance of AccessKey
-	 * @throws IOException if the JSON string is invalid with respect to AccessKey
+	 * @return An instance of RateLimitError
+	 * @throws IOException if the JSON string is invalid with respect to RateLimitError
 	 */
-	public static AccessKey fromJson(String jsonString) throws IOException {
-		return JSON.getGson().fromJson(jsonString, AccessKey.class);
+	public static RateLimitError fromJson(String jsonString) throws IOException {
+		return JSON.getGson().fromJson(jsonString, RateLimitError.class);
 	}
 
 	/**
-	 * Convert an instance of AccessKey to an JSON string
+	 * Convert an instance of RateLimitError to an JSON string
 	 *
 	 * @return JSON string
 	 */
