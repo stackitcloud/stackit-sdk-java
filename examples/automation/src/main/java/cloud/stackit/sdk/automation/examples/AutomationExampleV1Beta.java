@@ -1,21 +1,23 @@
 package cloud.stackit.sdk.automation.examples;
 
-import cloud.stackit.sdk.automation.v1api.api.AutomationApi;
-import cloud.stackit.sdk.automation.v1api.model.*;
-import cloud.stackit.sdk.automation.v1api.model.VolumeExecutionResponse.StatusEnum;
+import cloud.stackit.sdk.automation.v1betaapi.api.AutomationApi;
+import cloud.stackit.sdk.automation.v1betaapi.model.*;
+import cloud.stackit.sdk.automation.v1betaapi.model.SnapshotRetentionPolicyCount.KindEnum;
+import cloud.stackit.sdk.automation.v1betaapi.model.VolumeExecutionResponse.StatusEnum;
 import cloud.stackit.sdk.core.exception.ApiException;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-final class AutomationExample {
+// @Deprecated AutomationExampleV1Beta
+// Check AutomationExample instead to see how to interact with the v1 API.
+final class AutomationExampleV1Beta {
 
-	private AutomationExample() {}
+	private AutomationExampleV1Beta() {}
 
 	@SuppressWarnings({
 		"PMD.CyclomaticComplexity",
 		"PMD.CognitiveComplexity",
-		"PMD.DoubleBraceInitialization",
 		"PMD.NPathComplexity",
 		"PMD.NcssCount",
 		"PMD.SystemPrintln",
@@ -38,7 +40,7 @@ final class AutomationExample {
 		// the region which should be used to interact with the automation service
 		String region = "eu01";
 
-		System.out.println("Running automation v1 example\n");
+		System.out.println("Running automation v1beta example\n");
 		try {
 			/*
 			 * ///////////////////////////////////////////////////////
@@ -91,26 +93,23 @@ final class AutomationExample {
 									.name("My Daily Volume Recovery Point Creation Automation")
 									.templateId(UUID.fromString(template.getId()))
 									.input(
-											new VolumeAutomationInput()
-													.kind("VolumeRecoveryPointManagement")
-													.putAdditionalProperty(
-															"inheritVolumeLabels", true)
-													.putAdditionalProperty(
-															"recoveryPointLabels",
-															Collections.singletonMap(
-																	"exampleLabelKey1",
-																	"exampleLabelValue1"))
-													.putAdditionalProperty(
-															"snapshotRetentionPolicy",
-															new HashMap<String, Object>() {
-																{
-																	put("kind", "count");
-																	put("value", 2);
-																}
-															})
-													.putAdditionalProperty(
-															"volumeLabelSelector",
-															"myLabelkey1=myLabelValue,myLabelKey2=myOtherLabelValue"))
+											new VolumeAutomationInput(
+													new VolumeRecoveryPointManagementInput()
+															.inheritVolumeLabels(true)
+															.kind("VolumeRecoveryPointManagement")
+															.recoveryPointLabels(
+																	Collections.singletonMap(
+																			"exampleLabelKey1",
+																			"exampleLabelValue1"))
+															.snapshotRetentionPolicy(
+																	new SnapshotRetentionPolicy(
+																			new SnapshotRetentionPolicyCount()
+																					.kind(
+																							KindEnum
+																									.COUNT)
+																					.value(2)))
+															.volumeLabelSelector(
+																	"myLabelkey1=myLabelValue,myLabelKey2=myOtherLabelValue")))
 									.triggers(
 											new AutomationTriggers()
 													.schedule(
