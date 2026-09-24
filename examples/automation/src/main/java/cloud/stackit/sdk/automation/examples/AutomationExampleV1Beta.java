@@ -9,8 +9,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-// @Deprecated AutomationExampleV1Beta
-// Check AutomationExample instead to see how to interact with the v1 API.
+// The v1 API is already GA. Check AutomationExample to see how to interact with the v1 API.
 final class AutomationExampleV1Beta {
 
 	private AutomationExampleV1Beta() {}
