@@ -1,4 +1,7 @@
 ## Release (2026-MM-DD)
+
+- `automation`: [v0.1.0](services/automation/CHANGELOG.md#v010)
+  - Initial onboarding of STACKIT Java SDK for Automation service
 - `objectstorage`: [v0.4.0](services/objectstorage/CHANGELOG.md#v040)
   - `v1api`:
     - **Feature:** New model class `RateLimitError`
