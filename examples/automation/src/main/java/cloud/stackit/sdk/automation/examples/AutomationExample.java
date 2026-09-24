@@ -211,7 +211,7 @@ final class AutomationExample {
 			 * //                  D E L E T I O N                  //
 			 * ///////////////////////////////////////////////////////
 			 */
-			/* trigger deletion of the created application load balancer instance */
+			/* trigger deletion of the created volume automation */
 			System.out.println("\n\nDeleting created volume automation");
 			automationApi.deleteVolumeAutomation(
 					projectId, region, volumeAutomation.getId().toString());
