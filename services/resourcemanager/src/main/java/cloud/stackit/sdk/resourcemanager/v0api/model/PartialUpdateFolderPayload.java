@@ -87,10 +87,16 @@ public class PartialUpdateFolderPayload {
 	/**
 	 * Key-value string pairs attached to an existing resource container. Certain labels may be
 	 * enforced via organizational policies. Setting an individual label&#39;s value to
-	 * &#x60;null&#x60; removes/deletes that label from the resource. * **Key:** Must match the
-	 * regex &#x60;[A-ZÄÜÖa-zäüöß0-9_-]{1,64}&#x60; * **Value:** Must match the regex
-	 * &#x60;^$|[A-ZÄÜÖa-zäüöß0-9_-]{1,64}&#x60;, or be &#x60;null&#x60; to delete the label &gt;
-	 * Note: Additional naming restrictions may apply depending on your specific organization.*
+	 * &#x60;null&#x60; removes/deletes that label from the resource. * **Key:** Must be between 1
+	 * and 63 characters long (excluding an optional domain prefix). Must start and end with an
+	 * alphanumeric character &#x60;[a-zA-Z0-9]&#x60; and can contain alphanumerics, dashes (-),
+	 * underscores (_), and dots (.). May include an optional domain prefix up to 250 characters (a
+	 * lowercase DNS subdomain containing &#x60;[a-z0-9]&#x60;, &#x60;-&#x60;, and &#x60;.&#x60;)
+	 * followed by a slash (/). Total maximum key length is 314 characters. * **Value:** Must be 63
+	 * characters or less. May be empty (\&quot;\&quot;). If non-empty, must start and end with an
+	 * alphanumeric character &#x60;[a-zA-Z0-9]&#x60; and can contain alphanumerics, dashes (-),
+	 * underscores (_), and dots (.). &gt; Note: Additional naming restrictions may apply depending
+	 * on your specific organization.*
 	 *
 	 * @return labels
 	 */
