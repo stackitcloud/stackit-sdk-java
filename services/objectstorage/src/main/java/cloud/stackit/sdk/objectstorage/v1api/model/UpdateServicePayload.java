@@ -30,34 +30,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** ProjectStatus */
+/** UpdateServicePayload */
 @javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
-public class ProjectStatus {
+public class UpdateServicePayload {
 	public static final String SERIALIZED_NAME_LABELS = "labels";
 
 	@SerializedName(SERIALIZED_NAME_LABELS)
-	@javax.annotation.Nullable private Map<String, String> labels = new HashMap<>();
-
-	public static final String SERIALIZED_NAME_PROJECT = "project";
-
-	@SerializedName(SERIALIZED_NAME_PROJECT)
 	@javax.annotation.Nonnull
-	private String project;
+	private Map<String, String> labels = new HashMap<>();
 
-	public static final String SERIALIZED_NAME_SCOPE = "scope";
+	public UpdateServicePayload() {}
 
-	@SerializedName(SERIALIZED_NAME_SCOPE)
-	@javax.annotation.Nonnull
-	private ProjectScope scope;
-
-	public ProjectStatus() {}
-
-	public ProjectStatus labels(@javax.annotation.Nullable Map<String, String> labels) {
+	public UpdateServicePayload labels(@javax.annotation.Nonnull Map<String, String> labels) {
 		this.labels = labels;
 		return this;
 	}
 
-	public ProjectStatus putLabelsItem(String key, String labelsItem) {
+	public UpdateServicePayload putLabelsItem(String key, String labelsItem) {
 		if (this.labels == null) {
 			this.labels = new HashMap<>();
 		}
@@ -70,50 +59,13 @@ public class ProjectStatus {
 	 *
 	 * @return labels
 	 */
-	@javax.annotation.Nullable public Map<String, String> getLabels() {
+	@javax.annotation.Nonnull
+	public Map<String, String> getLabels() {
 		return labels;
 	}
 
-	public void setLabels(@javax.annotation.Nullable Map<String, String> labels) {
+	public void setLabels(@javax.annotation.Nonnull Map<String, String> labels) {
 		this.labels = labels;
-	}
-
-	public ProjectStatus project(@javax.annotation.Nonnull String project) {
-		this.project = project;
-		return this;
-	}
-
-	/**
-	 * Project ID
-	 *
-	 * @return project
-	 */
-	@javax.annotation.Nonnull
-	public String getProject() {
-		return project;
-	}
-
-	public void setProject(@javax.annotation.Nonnull String project) {
-		this.project = project;
-	}
-
-	public ProjectStatus scope(@javax.annotation.Nonnull ProjectScope scope) {
-		this.scope = scope;
-		return this;
-	}
-
-	/**
-	 * Project Scope
-	 *
-	 * @return scope
-	 */
-	@javax.annotation.Nonnull
-	public ProjectScope getScope() {
-		return scope;
-	}
-
-	public void setScope(@javax.annotation.Nonnull ProjectScope scope) {
-		this.scope = scope;
 	}
 
 	/**
@@ -128,9 +80,9 @@ public class ProjectStatus {
 	 *
 	 * @param key name of the property
 	 * @param value value of the property
-	 * @return the ProjectStatus instance itself
+	 * @return the UpdateServicePayload instance itself
 	 */
-	public ProjectStatus putAdditionalProperty(String key, Object value) {
+	public UpdateServicePayload putAdditionalProperty(String key, Object value) {
 		if (this.additionalProperties == null) {
 			this.additionalProperties = new HashMap<String, Object>();
 		}
@@ -168,25 +120,22 @@ public class ProjectStatus {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		ProjectStatus projectStatus = (ProjectStatus) o;
-		return Objects.equals(this.labels, projectStatus.labels)
-				&& Objects.equals(this.project, projectStatus.project)
-				&& Objects.equals(this.scope, projectStatus.scope)
-				&& Objects.equals(this.additionalProperties, projectStatus.additionalProperties);
+		UpdateServicePayload updateServicePayload = (UpdateServicePayload) o;
+		return Objects.equals(this.labels, updateServicePayload.labels)
+				&& Objects.equals(
+						this.additionalProperties, updateServicePayload.additionalProperties);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(labels, project, scope, additionalProperties);
+		return Objects.hash(labels, additionalProperties);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class ProjectStatus {\n");
+		sb.append("class UpdateServicePayload {\n");
 		sb.append("    labels: ").append(toIndentedString(labels)).append("\n");
-		sb.append("    project: ").append(toIndentedString(project)).append("\n");
-		sb.append("    scope: ").append(toIndentedString(scope)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -210,32 +159,32 @@ public class ProjectStatus {
 
 	static {
 		// a set of all properties/fields (JSON key names)
-		openapiFields = new HashSet<String>(Arrays.asList("labels", "project", "scope"));
+		openapiFields = new HashSet<String>(Arrays.asList("labels"));
 
 		// a set of required properties/fields (JSON key names)
-		openapiRequiredFields = new HashSet<String>(Arrays.asList("project", "scope"));
+		openapiRequiredFields = new HashSet<String>(Arrays.asList("labels"));
 	}
 
 	/**
 	 * Validates the JSON Element and throws an exception if issues found
 	 *
 	 * @param jsonElement JSON Element
-	 * @throws IOException if the JSON Element is invalid with respect to ProjectStatus
+	 * @throws IOException if the JSON Element is invalid with respect to UpdateServicePayload
 	 */
 	public static void validateJsonElement(JsonElement jsonElement) throws IOException {
 		if (jsonElement == null) {
-			if (!ProjectStatus.openapiRequiredFields
+			if (!UpdateServicePayload.openapiRequiredFields
 					.isEmpty()) { // has required fields but JSON element is null
 				throw new IllegalArgumentException(
 						String.format(
 								java.util.Locale.ROOT,
-								"The required field(s) %s in ProjectStatus is not found in the empty JSON string",
-								ProjectStatus.openapiRequiredFields.toString()));
+								"The required field(s) %s in UpdateServicePayload is not found in the empty JSON string",
+								UpdateServicePayload.openapiRequiredFields.toString()));
 			}
 		}
 
 		// check to make sure all required properties/fields are present in the JSON string
-		for (String requiredField : ProjectStatus.openapiRequiredFields) {
+		for (String requiredField : UpdateServicePayload.openapiRequiredFields) {
 			if (jsonElement.getAsJsonObject().get(requiredField) == null) {
 				throw new IllegalArgumentException(
 						String.format(
@@ -246,32 +195,24 @@ public class ProjectStatus {
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
-		if (!jsonObj.get("project").isJsonPrimitive()) {
-			throw new IllegalArgumentException(
-					String.format(
-							java.util.Locale.ROOT,
-							"Expected the field `project` to be a primitive type in the JSON string but got `%s`",
-							jsonObj.get("project").toString()));
-		}
-		// validate the required field `scope`
-		ProjectScope.validateJsonElement(jsonObj.get("scope"));
 	}
 
 	public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
 		@SuppressWarnings("unchecked")
 		@Override
 		public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-			if (!ProjectStatus.class.isAssignableFrom(type.getRawType())) {
-				return null; // this class only serializes 'ProjectStatus' and its subtypes
+			if (!UpdateServicePayload.class.isAssignableFrom(type.getRawType())) {
+				return null; // this class only serializes 'UpdateServicePayload' and its subtypes
 			}
 			final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-			final TypeAdapter<ProjectStatus> thisAdapter =
-					gson.getDelegateAdapter(this, TypeToken.get(ProjectStatus.class));
+			final TypeAdapter<UpdateServicePayload> thisAdapter =
+					gson.getDelegateAdapter(this, TypeToken.get(UpdateServicePayload.class));
 
 			return (TypeAdapter<T>)
-					new TypeAdapter<ProjectStatus>() {
+					new TypeAdapter<UpdateServicePayload>() {
 						@Override
-						public void write(JsonWriter out, ProjectStatus value) throws IOException {
+						public void write(JsonWriter out, UpdateServicePayload value)
+								throws IOException {
 							JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
 							obj.remove("additionalProperties");
 							// serialize additional properties
@@ -301,12 +242,12 @@ public class ProjectStatus {
 						}
 
 						@Override
-						public ProjectStatus read(JsonReader in) throws IOException {
+						public UpdateServicePayload read(JsonReader in) throws IOException {
 							JsonElement jsonElement = elementAdapter.read(in);
 							validateJsonElement(jsonElement);
 							JsonObject jsonObj = jsonElement.getAsJsonObject();
 							// store additional fields in the deserialized instance
-							ProjectStatus instance = thisAdapter.fromJsonTree(jsonObj);
+							UpdateServicePayload instance = thisAdapter.fromJsonTree(jsonObj);
 							for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
 								if (!openapiFields.contains(entry.getKey())) {
 									if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -345,18 +286,18 @@ public class ProjectStatus {
 	}
 
 	/**
-	 * Create an instance of ProjectStatus given an JSON string
+	 * Create an instance of UpdateServicePayload given an JSON string
 	 *
 	 * @param jsonString JSON string
-	 * @return An instance of ProjectStatus
-	 * @throws IOException if the JSON string is invalid with respect to ProjectStatus
+	 * @return An instance of UpdateServicePayload
+	 * @throws IOException if the JSON string is invalid with respect to UpdateServicePayload
 	 */
-	public static ProjectStatus fromJson(String jsonString) throws IOException {
-		return JSON.getGson().fromJson(jsonString, ProjectStatus.class);
+	public static UpdateServicePayload fromJson(String jsonString) throws IOException {
+		return JSON.getGson().fromJson(jsonString, UpdateServicePayload.class);
 	}
 
 	/**
-	 * Convert an instance of ProjectStatus to an JSON string
+	 * Convert an instance of UpdateServicePayload to an JSON string
 	 *
 	 * @return JSON string
 	 */
