@@ -1,3 +1,7 @@
+## v0.6.1
+- `v0api`:
+  - Updated javadoc comments regarding labels of model classes
+
 ## v0.6.0
 - `v0api`:
   - Updated javadoc comments of API client methods
