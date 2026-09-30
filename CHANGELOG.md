@@ -12,10 +12,14 @@
     - **Feature:** New model class `RateLimitError`
     - **Improvement:** Add HTTP 429 rate limit error responses in API operations
     - **Breaking Change:** Field `expires` in `AccessKey` model is now nullable
-- `resourcemanager`: [v0.6.0](services/resourcemanager/CHANGELOG.md#v060)
-  - `v0api`:
-    - Updated javadoc comments of API client methods
-    - **Breaking change:** Removal of unused model class `ContainerSearchResult`
+- `resourcemanager`:
+  - [v0.6.1](services/resourcemanager/CHANGELOG.md#v061)
+    - `v0api`:
+      - Updated javadoc comments regarding labels of model classes
+  - [v0.6.0](services/resourcemanager/CHANGELOG.md#v060)
+    - `v0api`:
+      - Updated javadoc comments of API client methods
+      - **Breaking change:** Removal of unused model class `ContainerSearchResult`
 
 ## Release (2026-08-25)
 
