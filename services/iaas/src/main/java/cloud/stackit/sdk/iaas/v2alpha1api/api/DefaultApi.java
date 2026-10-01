@@ -22,6 +22,7 @@ import cloud.stackit.sdk.iaas.v2alpha1api.model.AddRoutesToRoutingTablePayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.AddRoutingTableToAreaPayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.AddVPCRoutingTablePayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.AddVPCStaticRoutePayload;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.AllRouteListResponse;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.CreateNetworkPayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.CreateVPCNetworkRangePayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.CreateVPCPayload;
@@ -30,8 +31,12 @@ import cloud.stackit.sdk.iaas.v2alpha1api.model.Network;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.NetworkListResponse;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.PartialUpdateNetworkPayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.PartialUpdateVPCPayload;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.PrefixEntries;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.PrefixList;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.PrefixListListResponse;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.RegionalVPC;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.RegionalVPCList;
+import cloud.stackit.sdk.iaas.v2alpha1api.model.RetypeVolumePayload;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.Route;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.RouteListResponse;
 import cloud.stackit.sdk.iaas.v2alpha1api.model.RoutingTable;
@@ -2320,6 +2325,224 @@ class DefaultApi {
 	}
 
 	/**
+	 * Build call for deletePrefixList
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param prefixListId The identifier (ID) of a STACKIT Prefix List. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 204 </td><td> Delete request for prefix list has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call deletePrefixListCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID prefixListId,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/regions/{region}/prefix-lists/{prefixListId}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "prefixListId" + "}",
+								localVarApiClient.escapeString(prefixListId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"DELETE",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call deletePrefixListValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID prefixListId,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling deletePrefixList(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling deletePrefixList(Async)");
+		}
+
+		// verify the required parameter 'prefixListId' is set
+		if (prefixListId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'prefixListId' when calling deletePrefixList(Async)");
+		}
+
+		return deletePrefixListCall(projectId, region, prefixListId, _callback);
+	}
+
+	/**
+	 * Delete prefix list. Delete a prefix list. If the prefix list is still in use, the deletion
+	 * will fail.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param prefixListId The identifier (ID) of a STACKIT Prefix List. (required)
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 204 </td><td> Delete request for prefix list has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public void deletePrefixList(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID prefixListId)
+			throws ApiException {
+		deletePrefixListWithHttpInfo(projectId, region, prefixListId);
+	}
+
+	/**
+	 * Delete prefix list. Delete a prefix list. If the prefix list is still in use, the deletion
+	 * will fail.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param prefixListId The identifier (ID) of a STACKIT Prefix List. (required)
+	 * @return ApiResponse&lt;Void&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 204 </td><td> Delete request for prefix list has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<Void> deletePrefixListWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID prefixListId)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				deletePrefixListValidateBeforeCall(projectId, region, prefixListId, null);
+		return localVarApiClient.execute(localVarCall);
+	}
+
+	/**
+	 * Delete prefix list. (asynchronously) Delete a prefix list. If the prefix list is still in
+	 * use, the deletion will fail.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param prefixListId The identifier (ID) of a STACKIT Prefix List. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 204 </td><td> Delete request for prefix list has been accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call deletePrefixListAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID prefixListId,
+			final ApiCallback<Void> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				deletePrefixListValidateBeforeCall(projectId, region, prefixListId, _callback);
+		localVarApiClient.executeAsync(localVarCall, _callback);
+		return localVarCall;
+	}
+
+	/**
 	 * Build call for deleteRouteFromRoutingTable
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
@@ -4193,6 +4416,438 @@ class DefaultApi {
 	}
 
 	/**
+	 * Build call for getPrefixList
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param prefixListId The identifier (ID) of a STACKIT Prefix List. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show prefix list details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getPrefixListCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID prefixListId,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/regions/{region}/prefix-lists/{prefixListId}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "prefixListId" + "}",
+								localVarApiClient.escapeString(prefixListId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call getPrefixListValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID prefixListId,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling getPrefixList(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling getPrefixList(Async)");
+		}
+
+		// verify the required parameter 'prefixListId' is set
+		if (prefixListId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'prefixListId' when calling getPrefixList(Async)");
+		}
+
+		return getPrefixListCall(projectId, region, prefixListId, _callback);
+	}
+
+	/**
+	 * Get prefix list details. Get details about a prefix list of a project.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param prefixListId The identifier (ID) of a STACKIT Prefix List. (required)
+	 * @return PrefixList
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show prefix list details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public PrefixList getPrefixList(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID prefixListId)
+			throws ApiException {
+		ApiResponse<PrefixList> localVarResp =
+				getPrefixListWithHttpInfo(projectId, region, prefixListId);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Get prefix list details. Get details about a prefix list of a project.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param prefixListId The identifier (ID) of a STACKIT Prefix List. (required)
+	 * @return ApiResponse&lt;PrefixList&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show prefix list details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<PrefixList> getPrefixListWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID prefixListId)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				getPrefixListValidateBeforeCall(projectId, region, prefixListId, null);
+		Type localVarReturnType = new TypeToken<PrefixList>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Get prefix list details. (asynchronously) Get details about a prefix list of a project.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param prefixListId The identifier (ID) of a STACKIT Prefix List. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Show prefix list details. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getPrefixListAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID prefixListId,
+			final ApiCallback<PrefixList> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				getPrefixListValidateBeforeCall(projectId, region, prefixListId, _callback);
+		Type localVarReturnType = new TypeToken<PrefixList>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for getPrefixListEntries
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param prefixListId The identifier (ID) of a STACKIT Prefix List. (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Get prefix list entries was successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getPrefixListEntriesCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID prefixListId,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/regions/{region}/prefix-lists/{prefixListId}/entries"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "prefixListId" + "}",
+								localVarApiClient.escapeString(prefixListId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call getPrefixListEntriesValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID prefixListId,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling getPrefixListEntries(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling getPrefixListEntries(Async)");
+		}
+
+		// verify the required parameter 'prefixListId' is set
+		if (prefixListId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'prefixListId' when calling getPrefixListEntries(Async)");
+		}
+
+		return getPrefixListEntriesCall(projectId, region, prefixListId, _callback);
+	}
+
+	/**
+	 * Get prefix list entries. Get the list of all CIDR entries in a prefix list.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param prefixListId The identifier (ID) of a STACKIT Prefix List. (required)
+	 * @return PrefixEntries
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Get prefix list entries was successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public PrefixEntries getPrefixListEntries(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID prefixListId)
+			throws ApiException {
+		ApiResponse<PrefixEntries> localVarResp =
+				getPrefixListEntriesWithHttpInfo(projectId, region, prefixListId);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Get prefix list entries. Get the list of all CIDR entries in a prefix list.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param prefixListId The identifier (ID) of a STACKIT Prefix List. (required)
+	 * @return ApiResponse&lt;PrefixEntries&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Get prefix list entries was successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<PrefixEntries> getPrefixListEntriesWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID prefixListId)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				getPrefixListEntriesValidateBeforeCall(projectId, region, prefixListId, null);
+		Type localVarReturnType = new TypeToken<PrefixEntries>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Get prefix list entries. (asynchronously) Get the list of all CIDR entries in a prefix list.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param prefixListId The identifier (ID) of a STACKIT Prefix List. (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Get prefix list entries was successful. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call getPrefixListEntriesAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID prefixListId,
+			final ApiCallback<PrefixEntries> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				getPrefixListEntriesValidateBeforeCall(projectId, region, prefixListId, _callback);
+		Type localVarReturnType = new TypeToken<PrefixEntries>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
 	 * Build call for getRouteOfRoutingTable
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
@@ -5874,6 +6529,264 @@ class DefaultApi {
 	}
 
 	/**
+	 * Build call for listAllRoutesOfRoutingTable
+	 *
+	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
+	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all routes of a routing table including system, dynamic, service and static routes. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listAllRoutesOfRoutingTableCall(
+			@javax.annotation.Nonnull UUID organizationId,
+			@javax.annotation.Nonnull UUID areaId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nullable String filter,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/organizations/{organizationId}/network-areas/{areaId}/regions/{region}/routing-tables/{routingTableId}/all-routes"
+						.replace(
+								"{" + "organizationId" + "}",
+								localVarApiClient.escapeString(organizationId.toString()))
+						.replace(
+								"{" + "areaId" + "}",
+								localVarApiClient.escapeString(areaId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "routingTableId" + "}",
+								localVarApiClient.escapeString(routingTableId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		if (filter != null) {
+			localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+		}
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call listAllRoutesOfRoutingTableValidateBeforeCall(
+			@javax.annotation.Nonnull UUID organizationId,
+			@javax.annotation.Nonnull UUID areaId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nullable String filter,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'organizationId' is set
+		if (organizationId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'organizationId' when calling listAllRoutesOfRoutingTable(Async)");
+		}
+
+		// verify the required parameter 'areaId' is set
+		if (areaId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'areaId' when calling listAllRoutesOfRoutingTable(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling listAllRoutesOfRoutingTable(Async)");
+		}
+
+		// verify the required parameter 'routingTableId' is set
+		if (routingTableId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'routingTableId' when calling listAllRoutesOfRoutingTable(Async)");
+		}
+
+		return listAllRoutesOfRoutingTableCall(
+				organizationId, areaId, region, routingTableId, filter, _callback);
+	}
+
+	/**
+	 * List all routes of a routing table. Get a list of all routes in a routing table including
+	 * system, dynamic, service and static routes.
+	 *
+	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
+	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @return AllRouteListResponse
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all routes of a routing table including system, dynamic, service and static routes. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public AllRouteListResponse listAllRoutesOfRoutingTable(
+			@javax.annotation.Nonnull UUID organizationId,
+			@javax.annotation.Nonnull UUID areaId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nullable String filter)
+			throws ApiException {
+		ApiResponse<AllRouteListResponse> localVarResp =
+				listAllRoutesOfRoutingTableWithHttpInfo(
+						organizationId, areaId, region, routingTableId, filter);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * List all routes of a routing table. Get a list of all routes in a routing table including
+	 * system, dynamic, service and static routes.
+	 *
+	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
+	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @return ApiResponse&lt;AllRouteListResponse&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all routes of a routing table including system, dynamic, service and static routes. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<AllRouteListResponse> listAllRoutesOfRoutingTableWithHttpInfo(
+			@javax.annotation.Nonnull UUID organizationId,
+			@javax.annotation.Nonnull UUID areaId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nullable String filter)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				listAllRoutesOfRoutingTableValidateBeforeCall(
+						organizationId, areaId, region, routingTableId, filter, null);
+		Type localVarReturnType = new TypeToken<AllRouteListResponse>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * List all routes of a routing table. (asynchronously) Get a list of all routes in a routing
+	 * table including system, dynamic, service and static routes.
+	 *
+	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
+	 * @param areaId The identifier (ID) of a STACKIT Network Area. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all routes of a routing table including system, dynamic, service and static routes. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listAllRoutesOfRoutingTableAsync(
+			@javax.annotation.Nonnull UUID organizationId,
+			@javax.annotation.Nonnull UUID areaId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nullable String filter,
+			final ApiCallback<AllRouteListResponse> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				listAllRoutesOfRoutingTableValidateBeforeCall(
+						organizationId, areaId, region, routingTableId, filter, _callback);
+		Type localVarReturnType = new TypeToken<AllRouteListResponse>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
 	 * Build call for listNetworks
 	 *
 	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
@@ -6323,6 +7236,219 @@ class DefaultApi {
 				listNetworksOfRoutingTableValidateBeforeCall(
 						organizationId, areaId, region, routingTableId, _callback);
 		Type localVarReturnType = new TypeToken<NetworkListResponse>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for listPrefixLists
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all prefix lists of a project. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listPrefixListsCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nullable String labelSelector,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/regions/{region}/prefix-lists"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		if (labelSelector != null) {
+			localVarQueryParams.addAll(
+					localVarApiClient.parameterToPair("label_selector", labelSelector));
+		}
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call listPrefixListsValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nullable String labelSelector,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling listPrefixLists(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling listPrefixLists(Async)");
+		}
+
+		return listPrefixListsCall(projectId, region, labelSelector, _callback);
+	}
+
+	/**
+	 * List all prefix lists inside a project. Get a list of all prefix lists inside a project.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @return PrefixListListResponse
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all prefix lists of a project. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public PrefixListListResponse listPrefixLists(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nullable String labelSelector)
+			throws ApiException {
+		ApiResponse<PrefixListListResponse> localVarResp =
+				listPrefixListsWithHttpInfo(projectId, region, labelSelector);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * List all prefix lists inside a project. Get a list of all prefix lists inside a project.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @return ApiResponse&lt;PrefixListListResponse&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all prefix lists of a project. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<PrefixListListResponse> listPrefixListsWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nullable String labelSelector)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				listPrefixListsValidateBeforeCall(projectId, region, labelSelector, null);
+		Type localVarReturnType = new TypeToken<PrefixListListResponse>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * List all prefix lists inside a project. (asynchronously) Get a list of all prefix lists
+	 * inside a project.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param labelSelector Filter resources by labels. (optional)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List all prefix lists of a project. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listPrefixListsAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nullable String labelSelector,
+			final ApiCallback<PrefixListListResponse> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				listPrefixListsValidateBeforeCall(projectId, region, labelSelector, _callback);
+		Type localVarReturnType = new TypeToken<PrefixListListResponse>() {}.getType();
 		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
 		return localVarCall;
 	}
@@ -8461,6 +9587,241 @@ class DefaultApi {
 						projectId, vpcId, partialUpdateVPCPayload, _callback);
 		Type localVarReturnType = new TypeToken<VPC>() {}.getType();
 		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for retypeVolume
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param volumeId The identifier (ID) of a STACKIT Volume. (required)
+	 * @param retypeVolumePayload Request a volume retype. (optional)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Volume retype request accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call retypeVolumeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID volumeId,
+			@javax.annotation.Nullable RetypeVolumePayload retypeVolumePayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = retypeVolumePayload;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/regions/{region}/volumes/{volumeId}/retype"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "volumeId" + "}",
+								localVarApiClient.escapeString(volumeId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {"application/json"};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"POST",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call retypeVolumeValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID volumeId,
+			@javax.annotation.Nullable RetypeVolumePayload retypeVolumePayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling retypeVolume(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling retypeVolume(Async)");
+		}
+
+		// verify the required parameter 'volumeId' is set
+		if (volumeId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'volumeId' when calling retypeVolume(Async)");
+		}
+
+		return retypeVolumeCall(projectId, region, volumeId, retypeVolumePayload, _callback);
+	}
+
+	/**
+	 * Update the performanceClass of a volume. Update the performanceClass of a block device
+	 * volume. This request can only be performend once in 7 days if the requested performanceClass
+	 * is slower compared to the current one. Upgrades to faster performanceClasses are always
+	 * allowed. This operation is async can take a few minutes to complete.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param volumeId The identifier (ID) of a STACKIT Volume. (required)
+	 * @param retypeVolumePayload Request a volume retype. (optional)
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Volume retype request accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public void retypeVolume(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID volumeId,
+			@javax.annotation.Nullable RetypeVolumePayload retypeVolumePayload)
+			throws ApiException {
+		retypeVolumeWithHttpInfo(projectId, region, volumeId, retypeVolumePayload);
+	}
+
+	/**
+	 * Update the performanceClass of a volume. Update the performanceClass of a block device
+	 * volume. This request can only be performend once in 7 days if the requested performanceClass
+	 * is slower compared to the current one. Upgrades to faster performanceClasses are always
+	 * allowed. This operation is async can take a few minutes to complete.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param volumeId The identifier (ID) of a STACKIT Volume. (required)
+	 * @param retypeVolumePayload Request a volume retype. (optional)
+	 * @return ApiResponse&lt;Void&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Volume retype request accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<Void> retypeVolumeWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID volumeId,
+			@javax.annotation.Nullable RetypeVolumePayload retypeVolumePayload)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				retypeVolumeValidateBeforeCall(
+						projectId, region, volumeId, retypeVolumePayload, null);
+		return localVarApiClient.execute(localVarCall);
+	}
+
+	/**
+	 * Update the performanceClass of a volume. (asynchronously) Update the performanceClass of a
+	 * block device volume. This request can only be performend once in 7 days if the requested
+	 * performanceClass is slower compared to the current one. Upgrades to faster performanceClasses
+	 * are always allowed. This operation is async can take a few minutes to complete.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param volumeId The identifier (ID) of a STACKIT Volume. (required)
+	 * @param retypeVolumePayload Request a volume retype. (optional)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 202 </td><td> Volume retype request accepted. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> A conflict has occurred. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call retypeVolumeAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID volumeId,
+			@javax.annotation.Nullable RetypeVolumePayload retypeVolumePayload,
+			final ApiCallback<Void> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				retypeVolumeValidateBeforeCall(
+						projectId, region, volumeId, retypeVolumePayload, _callback);
+		localVarApiClient.executeAsync(localVarCall, _callback);
 		return localVarCall;
 	}
 
