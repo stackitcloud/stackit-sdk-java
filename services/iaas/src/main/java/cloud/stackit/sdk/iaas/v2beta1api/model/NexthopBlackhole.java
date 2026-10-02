@@ -245,6 +245,14 @@ public class NexthopBlackhole {
 							"Expected the field `type` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("type").toString()));
 		}
+		// OVERRIDE: this if block fixes oneOf issues
+		if (!"blackhole".equals(jsonObj.get("type").getAsString())) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expectd the field `type` to have value `blackhole` but got `%s`",
+							jsonObj.get("type")));
+		}
 		// validate the required field `type`
 		TypeEnum.validateJsonElement(jsonObj.get("type"));
 	}
