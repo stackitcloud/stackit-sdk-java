@@ -2,6 +2,24 @@
 
 - `automation`: [v0.1.0](services/automation/CHANGELOG.md#v010)
   - Initial onboarding of STACKIT Java SDK for Automation service
+- `iaas`: [v1.6.0](services/iaas/CHANGELOG.md#v160)
+  - `v2alpha1api`:
+    - **Breaking Change:** In `DestinationCIDRv4`, `DestinationCIDRv6`, `NexthopBlackhole`, `NexthopIPv4`, `NexthopIPv6`, and `NexthopInternet`, changed `type` field from `String` to enum `TypeEnum`.
+    - **Feature:** Add operations to manage prefix lists: `deletePrefixList`, `getPrefixList`, `getPrefixListEntries`, and `listPrefixLists`.
+    - **Feature:** Add operations `getRouteOfRoutingTable`, `listAllRoutesOfRoutingTable`, and `retypeVolume`.
+    - **Feature:** Add new models for routes and prefix lists: `AllRouteListResponse`, `AnyRoute`, `AnyRouteDynamic`, `AnyRouteService`, `AnyRouteSource`, `AnyRouteSourceId`, `AnyRouteStatic`, `AnyRouteSystem`, `BaseRoute`, `PrefixEntries`, `PrefixList`, `PrefixListListResponse`, and `RetypeVolumePayload`.
+    - **Feature:** Add attribute `description` to model `PartialUpdateNetworkPayload`.
+    - **Docs:** Update documentation for `labels` field constraints across models.
+  - `v2api`:
+    - **Breaking Change:** In `DestinationCIDRv4`, `DestinationCIDRv6`, `NexthopBlackhole`, `NexthopIPv4`, `NexthopIPv6`, and `NexthopInternet`, changed `type` field from `String` to enum `TypeEnum`.
+    - **Feature:** Add attribute `description` to model `PartialUpdateNetworkPayload`.
+    - **Feature:** Add attributes `projectType` and `vpcId` to model `Project`.
+    - **Docs:** Update documentation for `labels` field constraints across models.
+  - `v2beta1api`:
+    - **Breaking Change:** In `NexthopBlackhole`, `NexthopIPv4`, `NexthopIPv6`, and `NexthopInternet`, changed `type` field from `String` to enum `TypeEnum`.
+    - **Feature:** Add attribute `description` to model `PartialUpdateNetworkPayload`.
+    - **Feature:** Add attributes `projectType` and `vpcId` to model `Project`.
+    - **Docs:** Update documentation for `labels` field constraints across models.
 - `objectstorage`: [v0.4.0](services/objectstorage/CHANGELOG.md#v040)
   - `v1api`:
     - **Feature:** New model class `RateLimitError`

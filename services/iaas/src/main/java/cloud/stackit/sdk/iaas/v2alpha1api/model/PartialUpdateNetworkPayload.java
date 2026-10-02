@@ -34,6 +34,11 @@ import java.util.UUID;
 /** Object that represents the request body for a network update. */
 @javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class PartialUpdateNetworkPayload {
+	public static final String SERIALIZED_NAME_DESCRIPTION = "description";
+
+	@SerializedName(SERIALIZED_NAME_DESCRIPTION)
+	@javax.annotation.Nullable private String description;
+
 	public static final String SERIALIZED_NAME_DHCP = "dhcp";
 
 	@SerializedName(SERIALIZED_NAME_DHCP)
@@ -70,6 +75,24 @@ public class PartialUpdateNetworkPayload {
 	@javax.annotation.Nullable private UUID routingTableId;
 
 	public PartialUpdateNetworkPayload() {}
+
+	public PartialUpdateNetworkPayload description(@javax.annotation.Nullable String description) {
+		this.description = description;
+		return this;
+	}
+
+	/**
+	 * Description Object. Allows string up to 255 Characters.
+	 *
+	 * @return description
+	 */
+	@javax.annotation.Nullable public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(@javax.annotation.Nullable String description) {
+		this.description = description;
+	}
 
 	public PartialUpdateNetworkPayload dhcp(@javax.annotation.Nullable Boolean dhcp) {
 		this.dhcp = dhcp;
@@ -131,11 +154,21 @@ public class PartialUpdateNetworkPayload {
 	}
 
 	/**
-	 * Object that represents the labels of an object. Regex for keys:
-	 * &#x60;^(?&#x3D;.{1,63}$)([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$&#x60;. Regex for values:
-	 * &#x60;^(?&#x3D;.{0,63}$)(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])*$&#x60;. Providing a
-	 * &#x60;null&#x60; value for a key will remove that key. The &#x60;stackit-&#x60; prefix is
-	 * reserved and cannot be used for Keys.
+	 * Object that represents the labels as key-value pairs of a resource. Key constraints: - May
+	 * contain an optional domain prefix separated by a slash (&#x60;/&#x60;). - Domain prefix must
+	 * be less than or equal to 250 characters. - Domain prefix must ba a valid DNS subdomain
+	 * containing only lowercase alphanumerics (&#x60;[a-z0-9]&#x60;) and dashes (&#x60;-&#x60;),
+	 * separated by dots (&#x60;.&#x60;). - Length (excluding the domain prefix) must be between 1
+	 * and 63 characters. - Must begin and end with an alphanumerical character
+	 * (&#x60;[a-z0-9A-Z]&#x60;). - May contain dashes (&#x60;-&#x60;), underscores (&#x60;_&#x60;),
+	 * dots (&#x60;.&#x60;), and alphanumerics in between. - Keys starting with the prefix
+	 * &#x60;stackit-&#x60; or having a domain prefix of &#x60;stackit.cloud&#x60; (including its
+	 * subdomains, e.g., &#x60;*.stackit.cloud/&#x60;) are reserved for system use. Value
+	 * constraints: - Must be less than or equal to 63 characters long (can be empty). - If not
+	 * empty it must begin and end with an alphanumeric character (&#x60;[a-z0-9A-Z]&#x60;). - May
+	 * contain dashes (&#x60;-&#x60;), underscores (&#x60;_&#x60;), dots (&#x60;.&#x60;), and
+	 * alphanumerics in between. A resource can have a maximum of 64 labels. Reserved labels are
+	 * excluded from this count. Providing a &#x60;null&#x60; value for a key will remove that key.
 	 *
 	 * @return labels
 	 */
@@ -255,7 +288,8 @@ public class PartialUpdateNetworkPayload {
 			return false;
 		}
 		PartialUpdateNetworkPayload partialUpdateNetworkPayload = (PartialUpdateNetworkPayload) o;
-		return Objects.equals(this.dhcp, partialUpdateNetworkPayload.dhcp)
+		return Objects.equals(this.description, partialUpdateNetworkPayload.description)
+				&& Objects.equals(this.dhcp, partialUpdateNetworkPayload.dhcp)
 				&& Objects.equals(this.ipv4, partialUpdateNetworkPayload.ipv4)
 				&& Objects.equals(this.ipv6, partialUpdateNetworkPayload.ipv6)
 				&& Objects.equals(this.labels, partialUpdateNetworkPayload.labels)
@@ -270,13 +304,22 @@ public class PartialUpdateNetworkPayload {
 	@Override
 	public int hashCode() {
 		return Objects.hash(
-				dhcp, ipv4, ipv6, labels, name, routed, routingTableId, additionalProperties);
+				description,
+				dhcp,
+				ipv4,
+				ipv6,
+				labels,
+				name,
+				routed,
+				routingTableId,
+				additionalProperties);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class PartialUpdateNetworkPayload {\n");
+		sb.append("    description: ").append(toIndentedString(description)).append("\n");
 		sb.append("    dhcp: ").append(toIndentedString(dhcp)).append("\n");
 		sb.append("    ipv4: ").append(toIndentedString(ipv4)).append("\n");
 		sb.append("    ipv6: ").append(toIndentedString(ipv6)).append("\n");
@@ -310,6 +353,7 @@ public class PartialUpdateNetworkPayload {
 		openapiFields =
 				new HashSet<String>(
 						Arrays.asList(
+								"description",
 								"dhcp",
 								"ipv4",
 								"ipv6",
@@ -341,6 +385,14 @@ public class PartialUpdateNetworkPayload {
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
+		if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull())
+				&& !jsonObj.get("description").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `description` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("description").toString()));
+		}
 		// validate the optional field `ipv4`
 		if (jsonObj.get("ipv4") != null && !jsonObj.get("ipv4").isJsonNull()) {
 			UpdateNetworkIPv4Body.validateJsonElement(jsonObj.get("ipv4"));

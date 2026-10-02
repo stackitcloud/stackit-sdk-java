@@ -211,11 +211,14 @@ public class IaaSVPCExample {
 									.destination(
 											new AddVPCStaticRoutePayloadDestination(
 													new DestinationCIDRv4()
-															.type("cidrv4")
+															.type(DestinationCIDRv4.TypeEnum.CIDRV4)
 															.value("0.0.0.0/0")))
 									.nexthop(
 											new AddVPCStaticRoutePayloadNexthop(
-													new NexthopInternet().type("internet"))));
+													new NexthopInternet()
+															.type(
+																	NexthopInternet.TypeEnum
+																			.INTERNET))));
 			System.out.println("static route created: " + r.staticRoute.getId());
 
 			// create a network range

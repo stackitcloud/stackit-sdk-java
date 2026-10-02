@@ -130,6 +130,43 @@ public class JSON {
 									}
 								})
 						.registerTypeSelector(
+								cloud.stackit.sdk.iaas.v2alpha1api.model.AnyRoute.class,
+								new TypeSelector<
+										cloud.stackit.sdk.iaas.v2alpha1api.model.AnyRoute>() {
+									@Override
+									public Class<
+													? extends
+															cloud.stackit.sdk.iaas.v2alpha1api.model
+																	.AnyRoute>
+											getClassForElement(JsonElement readElement) {
+										Map<String, Class> classByDiscriminatorValue =
+												new HashMap<String, Class>();
+										classByDiscriminatorValue.put(
+												"dynamic",
+												cloud.stackit.sdk.iaas.v2alpha1api.model
+														.AnyRouteDynamic.class);
+										classByDiscriminatorValue.put(
+												"service",
+												cloud.stackit.sdk.iaas.v2alpha1api.model
+														.AnyRouteService.class);
+										classByDiscriminatorValue.put(
+												"static",
+												cloud.stackit.sdk.iaas.v2alpha1api.model
+														.AnyRouteStatic.class);
+										classByDiscriminatorValue.put(
+												"system",
+												cloud.stackit.sdk.iaas.v2alpha1api.model
+														.AnyRouteSystem.class);
+										classByDiscriminatorValue.put(
+												"AnyRoute",
+												cloud.stackit.sdk.iaas.v2alpha1api.model.AnyRoute
+														.class);
+										return getClassByDiscriminator(
+												classByDiscriminatorValue,
+												getDiscriminatorValue(readElement, "type"));
+									}
+								})
+						.registerTypeSelector(
 								cloud.stackit.sdk.iaas.v2alpha1api.model
 										.CreateVPCNetworkRangePayload.class,
 								new TypeSelector<
@@ -338,6 +375,31 @@ public class JSON {
 				new cloud.stackit.sdk.iaas.v2alpha1api.model.AddVPCStaticRoutePayloadNexthop
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.AllRouteListResponse
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.AnyRoute.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.AnyRouteDynamic
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.AnyRouteService
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.AnyRouteSource
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.AnyRouteSourceId
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.AnyRouteStatic
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.AnyRouteSystem
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.BaseRoute.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.iaas.v2alpha1api.model.CreateNetworkIPv4
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
@@ -408,6 +470,14 @@ public class JSON {
 				new cloud.stackit.sdk.iaas.v2alpha1api.model.PartialUpdateVPCPayload
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.PrefixEntries
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.PrefixList.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.PrefixListListResponse
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.iaas.v2alpha1api.model.RegionalVPC
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
@@ -415,6 +485,9 @@ public class JSON {
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.iaas.v2alpha1api.model.RegionalVPCList
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2alpha1api.model.RetypeVolumePayload
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.iaas.v2alpha1api.model.Route.CustomTypeAdapterFactory());

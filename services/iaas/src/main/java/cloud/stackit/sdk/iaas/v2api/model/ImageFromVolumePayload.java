@@ -42,6 +42,11 @@ public class ImageFromVolumePayload {
 	@javax.annotation.Nonnull
 	private String diskFormat;
 
+	public static final String SERIALIZED_NAME_FORCE = "force";
+
+	@SerializedName(SERIALIZED_NAME_FORCE)
+	@javax.annotation.Nullable private Boolean force = false;
+
 	public static final String SERIALIZED_NAME_NAME = "name";
 
 	@SerializedName(SERIALIZED_NAME_NAME)
@@ -73,6 +78,24 @@ public class ImageFromVolumePayload {
 
 	public void setDiskFormat(@javax.annotation.Nonnull String diskFormat) {
 		this.diskFormat = diskFormat;
+	}
+
+	public ImageFromVolumePayload force(@javax.annotation.Nullable Boolean force) {
+		this.force = force;
+		return this;
+	}
+
+	/**
+	 * When true the image is force created from a volume is currently being used.
+	 *
+	 * @return force
+	 */
+	@javax.annotation.Nullable public Boolean getForce() {
+		return force;
+	}
+
+	public void setForce(@javax.annotation.Nullable Boolean force) {
+		this.force = force;
 	}
 
 	public ImageFromVolumePayload name(@javax.annotation.Nonnull String name) {
@@ -166,6 +189,7 @@ public class ImageFromVolumePayload {
 		}
 		ImageFromVolumePayload imageFromVolumePayload = (ImageFromVolumePayload) o;
 		return Objects.equals(this.diskFormat, imageFromVolumePayload.diskFormat)
+				&& Objects.equals(this.force, imageFromVolumePayload.force)
 				&& Objects.equals(this.name, imageFromVolumePayload.name)
 				&& Objects.equals(this._protected, imageFromVolumePayload._protected)
 				&& Objects.equals(
@@ -174,7 +198,7 @@ public class ImageFromVolumePayload {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(diskFormat, name, _protected, additionalProperties);
+		return Objects.hash(diskFormat, force, name, _protected, additionalProperties);
 	}
 
 	@Override
@@ -182,6 +206,7 @@ public class ImageFromVolumePayload {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class ImageFromVolumePayload {\n");
 		sb.append("    diskFormat: ").append(toIndentedString(diskFormat)).append("\n");
+		sb.append("    force: ").append(toIndentedString(force)).append("\n");
 		sb.append("    name: ").append(toIndentedString(name)).append("\n");
 		sb.append("    _protected: ").append(toIndentedString(_protected)).append("\n");
 		sb.append("    additionalProperties: ")
@@ -207,7 +232,8 @@ public class ImageFromVolumePayload {
 
 	static {
 		// a set of all properties/fields (JSON key names)
-		openapiFields = new HashSet<String>(Arrays.asList("diskFormat", "name", "protected"));
+		openapiFields =
+				new HashSet<String>(Arrays.asList("diskFormat", "force", "name", "protected"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(Arrays.asList("diskFormat", "name"));

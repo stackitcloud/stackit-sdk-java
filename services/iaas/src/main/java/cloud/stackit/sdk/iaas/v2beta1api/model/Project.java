@@ -57,6 +57,11 @@ public class Project {
 	@SerializedName(SERIALIZED_NAME_INTERNET_ACCESS)
 	@javax.annotation.Nullable private Boolean internetAccess;
 
+	public static final String SERIALIZED_NAME_PROJECT_TYPE = "projectType";
+
+	@SerializedName(SERIALIZED_NAME_PROJECT_TYPE)
+	@javax.annotation.Nullable private String projectType;
+
 	public static final String SERIALIZED_NAME_STATUS = "status";
 
 	@SerializedName(SERIALIZED_NAME_STATUS)
@@ -67,6 +72,11 @@ public class Project {
 
 	@SerializedName(SERIALIZED_NAME_UPDATED_AT)
 	@javax.annotation.Nullable private OffsetDateTime updatedAt;
+
+	public static final String SERIALIZED_NAME_VPC_ID = "vpcId";
+
+	@SerializedName(SERIALIZED_NAME_VPC_ID)
+	@javax.annotation.Nullable private UUID vpcId;
 
 	public Project() {}
 
@@ -141,6 +151,24 @@ public class Project {
 		this.internetAccess = internetAccess;
 	}
 
+	public Project projectType(@javax.annotation.Nullable String projectType) {
+		this.projectType = projectType;
+		return this;
+	}
+
+	/**
+	 * Possible values: &#x60;Schwarz&#x60;, &#x60;Public&#x60;, &#x60;SNA&#x60;, &#x60;VPC&#x60;.
+	 *
+	 * @return projectType
+	 */
+	@javax.annotation.Nullable public String getProjectType() {
+		return projectType;
+	}
+
+	public void setProjectType(@javax.annotation.Nullable String projectType) {
+		this.projectType = projectType;
+	}
+
 	public Project status(@javax.annotation.Nonnull String status) {
 		this.status = status;
 		return this;
@@ -169,6 +197,24 @@ public class Project {
 	 */
 	@javax.annotation.Nullable public OffsetDateTime getUpdatedAt() {
 		return updatedAt;
+	}
+
+	public Project vpcId(@javax.annotation.Nullable UUID vpcId) {
+		this.vpcId = vpcId;
+		return this;
+	}
+
+	/**
+	 * Universally Unique Identifier (UUID).
+	 *
+	 * @return vpcId
+	 */
+	@javax.annotation.Nullable public UUID getVpcId() {
+		return vpcId;
+	}
+
+	public void setVpcId(@javax.annotation.Nullable UUID vpcId) {
+		this.vpcId = vpcId;
 	}
 
 	/**
@@ -228,15 +274,25 @@ public class Project {
 				&& Objects.equals(this.createdAt, project.createdAt)
 				&& Objects.equals(this.id, project.id)
 				&& Objects.equals(this.internetAccess, project.internetAccess)
+				&& Objects.equals(this.projectType, project.projectType)
 				&& Objects.equals(this.status, project.status)
 				&& Objects.equals(this.updatedAt, project.updatedAt)
+				&& Objects.equals(this.vpcId, project.vpcId)
 				&& Objects.equals(this.additionalProperties, project.additionalProperties);
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(
-				areaId, createdAt, id, internetAccess, status, updatedAt, additionalProperties);
+				areaId,
+				createdAt,
+				id,
+				internetAccess,
+				projectType,
+				status,
+				updatedAt,
+				vpcId,
+				additionalProperties);
 	}
 
 	@Override
@@ -247,8 +303,10 @@ public class Project {
 		sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    internetAccess: ").append(toIndentedString(internetAccess)).append("\n");
+		sb.append("    projectType: ").append(toIndentedString(projectType)).append("\n");
 		sb.append("    status: ").append(toIndentedString(status)).append("\n");
 		sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
+		sb.append("    vpcId: ").append(toIndentedString(vpcId)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -279,8 +337,10 @@ public class Project {
 								"createdAt",
 								"id",
 								"internetAccess",
+								"projectType",
 								"status",
-								"updatedAt"));
+								"updatedAt",
+								"vpcId"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(Arrays.asList("areaId", "id", "status"));
@@ -325,12 +385,28 @@ public class Project {
 							"Expected the field `id` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("id").toString()));
 		}
+		if ((jsonObj.get("projectType") != null && !jsonObj.get("projectType").isJsonNull())
+				&& !jsonObj.get("projectType").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `projectType` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("projectType").toString()));
+		}
 		if (!jsonObj.get("status").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
 							java.util.Locale.ROOT,
 							"Expected the field `status` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("status").toString()));
+		}
+		if ((jsonObj.get("vpcId") != null && !jsonObj.get("vpcId").isJsonNull())
+				&& !jsonObj.get("vpcId").isJsonPrimitive()) {
+			throw new IllegalArgumentException(
+					String.format(
+							java.util.Locale.ROOT,
+							"Expected the field `vpcId` to be a primitive type in the JSON string but got `%s`",
+							jsonObj.get("vpcId").toString()));
 		}
 	}
 

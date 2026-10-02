@@ -18,6 +18,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -33,15 +34,66 @@ import java.util.Objects;
 /** Object that represents a blackhole route. */
 @javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class NexthopBlackhole {
+	/** Gets or Sets type */
+	@JsonAdapter(TypeEnum.Adapter.class)
+	public enum TypeEnum {
+		BLACKHOLE("blackhole"),
+
+		UNKNOWN_DEFAULT_OPEN_API("unknown_default_open_api");
+
+		private String value;
+
+		TypeEnum(String value) {
+			this.value = value;
+		}
+
+		public String getValue() {
+			return value;
+		}
+
+		@Override
+		public String toString() {
+			return String.valueOf(value);
+		}
+
+		public static TypeEnum fromValue(String value) {
+			for (TypeEnum b : TypeEnum.values()) {
+				if (b.value.equals(value)) {
+					return b;
+				}
+			}
+			return UNKNOWN_DEFAULT_OPEN_API;
+		}
+
+		public static class Adapter extends TypeAdapter<TypeEnum> {
+			@Override
+			public void write(final JsonWriter jsonWriter, final TypeEnum enumeration)
+					throws IOException {
+				jsonWriter.value(enumeration.getValue());
+			}
+
+			@Override
+			public TypeEnum read(final JsonReader jsonReader) throws IOException {
+				String value = jsonReader.nextString();
+				return TypeEnum.fromValue(value);
+			}
+		}
+
+		public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+			String value = jsonElement.getAsString();
+			TypeEnum.fromValue(value);
+		}
+	}
+
 	public static final String SERIALIZED_NAME_TYPE = "type";
 
 	@SerializedName(SERIALIZED_NAME_TYPE)
 	@javax.annotation.Nonnull
-	private String type;
+	private TypeEnum type;
 
 	public NexthopBlackhole() {}
 
-	public NexthopBlackhole type(@javax.annotation.Nonnull String type) {
+	public NexthopBlackhole type(@javax.annotation.Nonnull TypeEnum type) {
 		this.type = type;
 		return this;
 	}
@@ -52,11 +104,11 @@ public class NexthopBlackhole {
 	 * @return type
 	 */
 	@javax.annotation.Nonnull
-	public String getType() {
+	public TypeEnum getType() {
 		return type;
 	}
 
-	public void setType(@javax.annotation.Nonnull String type) {
+	public void setType(@javax.annotation.Nonnull TypeEnum type) {
 		this.type = type;
 	}
 
@@ -201,6 +253,8 @@ public class NexthopBlackhole {
 							"Expectd the field `type` to have value `blackhole` but got `%s`",
 							jsonObj.get("type")));
 		}
+		// validate the required field `type`
+		TypeEnum.validateJsonElement(jsonObj.get("type"));
 	}
 
 	public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

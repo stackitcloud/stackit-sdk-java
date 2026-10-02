@@ -1,3 +1,22 @@
+## v1.6.0
+- `v2alpha1api`:
+  - **Breaking Change:** In `DestinationCIDRv4`, `DestinationCIDRv6`, `NexthopBlackhole`, `NexthopIPv4`, `NexthopIPv6`, and `NexthopInternet`, changed `type` field from `String` to enum `TypeEnum`.
+  - **Feature:** Add operations to manage prefix lists: `deletePrefixList`, `getPrefixList`, `getPrefixListEntries`, and `listPrefixLists`.
+  - **Feature:** Add operations `getRouteOfRoutingTable`, `listAllRoutesOfRoutingTable`, and `retypeVolume`.
+  - **Feature:** Add new models for routes and prefix lists: `AllRouteListResponse`, `AnyRoute`, `AnyRouteDynamic`, `AnyRouteService`, `AnyRouteSource`, `AnyRouteSourceId`, `AnyRouteStatic`, `AnyRouteSystem`, `BaseRoute`, `PrefixEntries`, `PrefixList`, `PrefixListListResponse`, and `RetypeVolumePayload`.
+  - **Feature:** Add attribute `description` to model `PartialUpdateNetworkPayload`.
+  - **Docs:** Update documentation for `labels` field constraints across models.
+- `v2api`:
+  - **Breaking Change:** In `DestinationCIDRv4`, `DestinationCIDRv6`, `NexthopBlackhole`, `NexthopIPv4`, `NexthopIPv6`, and `NexthopInternet`, changed `type` field from `String` to enum `TypeEnum`.
+  - **Feature:** Add attribute `description` to model `PartialUpdateNetworkPayload`.
+  - **Feature:** Add attributes `projectType` and `vpcId` to model `Project`.
+  - **Docs:** Update documentation for `labels` field constraints across models.
+- `v2beta1api`:
+  - **Breaking Change:** In `NexthopBlackhole`, `NexthopIPv4`, `NexthopIPv6`, and `NexthopInternet`, changed `type` field from `String` to enum `TypeEnum`.
+  - **Feature:** Add attribute `description` to model `PartialUpdateNetworkPayload`.
+  - **Feature:** Add attributes `projectType` and `vpcId` to model `Project`.
+  - **Docs:** Update documentation for `labels` field constraints across models.
+
 ## v1.5.0
 - **Breaking Change:** Removed the `ServerVTPM` class and the corresponding `vtpm` field from the `Server` model, as this functionality was unintentionally released and non-functional.
 
