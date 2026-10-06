@@ -176,6 +176,9 @@ public class JSON {
 				new cloud.stackit.sdk.objectstorage.v2api.model.SetDefaultRetentionPayload
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.objectstorage.v2api.model.UpdateServicePayload
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.objectstorage.v2api.model.ValidationError
 						.CustomTypeAdapterFactory());
 		gson = gsonBuilder.create();
