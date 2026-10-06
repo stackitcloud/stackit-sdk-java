@@ -67,10 +67,7 @@ public class CreateShareExportPolicyPayload {
 	}
 
 	/**
-	 * An optional object that represents the labels associated with the share export policy keys
-	 * are validated using the following regex &#39;^[\\\\p{Ll}][\\\\p{Ll}\\\\p{N}_-]*$&#39; and
-	 * cannot be empty values are validated using the following regex
-	 * &#39;^[\\\\p{Ll}\\\\p{N}_-]*$&#39;
+	 * An optional object that represents the labels associated with the share export policy.
 	 *
 	 * @return labels
 	 */
