@@ -7709,6 +7709,268 @@ class DefaultApi {
 	}
 
 	/**
+	 * Build call for listRoutesOfRoutingTableVPC
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List routes of a VPC routing table including system, dynamic, service and static routes. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listRoutesOfRoutingTableVPCCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nullable String filter,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = null;
+
+		// create path and map variables
+		String localVarPath =
+				"/v2alpha1/projects/{projectId}/vpcs/{vpcId}/regions/{region}/routing-tables/{routingTableId}/routes"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()))
+						.replace(
+								"{" + "vpcId" + "}",
+								localVarApiClient.escapeString(vpcId.toString()))
+						.replace(
+								"{" + "region" + "}",
+								localVarApiClient.escapeString(region.toString()))
+						.replace(
+								"{" + "routingTableId" + "}",
+								localVarApiClient.escapeString(routingTableId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		if (filter != null) {
+			localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter", filter));
+		}
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"GET",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call listRoutesOfRoutingTableVPCValidateBeforeCall(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nullable String filter,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling listRoutesOfRoutingTableVPC(Async)");
+		}
+
+		// verify the required parameter 'vpcId' is set
+		if (vpcId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'vpcId' when calling listRoutesOfRoutingTableVPC(Async)");
+		}
+
+		// verify the required parameter 'region' is set
+		if (region == null) {
+			throw new ApiException(
+					"Missing the required parameter 'region' when calling listRoutesOfRoutingTableVPC(Async)");
+		}
+
+		// verify the required parameter 'routingTableId' is set
+		if (routingTableId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'routingTableId' when calling listRoutesOfRoutingTableVPC(Async)");
+		}
+
+		return listRoutesOfRoutingTableVPCCall(
+				projectId, vpcId, region, routingTableId, filter, _callback);
+	}
+
+	/**
+	 * List routes of a routing table of a VPC. Get a list of routes in a VPC routing table
+	 * including system, dynamic, service and static routes.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @return AllRouteListResponse
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List routes of a VPC routing table including system, dynamic, service and static routes. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public AllRouteListResponse listRoutesOfRoutingTableVPC(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nullable String filter)
+			throws ApiException {
+		ApiResponse<AllRouteListResponse> localVarResp =
+				listRoutesOfRoutingTableVPCWithHttpInfo(
+						projectId, vpcId, region, routingTableId, filter);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * List routes of a routing table of a VPC. Get a list of routes in a VPC routing table
+	 * including system, dynamic, service and static routes.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @return ApiResponse&lt;AllRouteListResponse&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List routes of a VPC routing table including system, dynamic, service and static routes. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public ApiResponse<AllRouteListResponse> listRoutesOfRoutingTableVPCWithHttpInfo(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nullable String filter)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				listRoutesOfRoutingTableVPCValidateBeforeCall(
+						projectId, vpcId, region, routingTableId, filter, null);
+		Type localVarReturnType = new TypeToken<AllRouteListResponse>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * List routes of a routing table of a VPC. (asynchronously) Get a list of routes in a VPC
+	 * routing table including system, dynamic, service and static routes.
+	 *
+	 * @param projectId The identifier (ID) of a STACKIT Project. (required)
+	 * @param vpcId The unique identifier (ID) of the target STACKIT VPC in the request path.
+	 *     (required)
+	 * @param region The STACKIT Region of the resources. (required)
+	 * @param routingTableId The identifier (ID) of a STACKIT Routing Table. (required)
+	 * @param filter Filter resources by fields. A subset of expr-lang is supported. See
+	 *     https://expr-lang.org/docs/language-definition for usage details. (optional)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> List routes of a VPC routing table including system, dynamic, service and static routes. </td><td>  -  </td></tr>
+	 * <tr><td> 400 </td><td> A bad request. </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> A request which was not authorized. </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> A request which was forbidden. </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> The object was not found. </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error, returns a 500 if something is broken on IaaS API Side. </td><td>  -  </td></tr>
+	 * </table>
+	 */
+	public okhttp3.Call listRoutesOfRoutingTableVPCAsync(
+			@javax.annotation.Nonnull UUID projectId,
+			@javax.annotation.Nonnull UUID vpcId,
+			@javax.annotation.Nonnull String region,
+			@javax.annotation.Nonnull UUID routingTableId,
+			@javax.annotation.Nullable String filter,
+			final ApiCallback<AllRouteListResponse> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				listRoutesOfRoutingTableVPCValidateBeforeCall(
+						projectId, vpcId, region, routingTableId, filter, _callback);
+		Type localVarReturnType = new TypeToken<AllRouteListResponse>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
 	 * Build call for listRoutingTablesOfArea
 	 *
 	 * @param organizationId The identifier (ID) of a STACKIT Organization. (required)
