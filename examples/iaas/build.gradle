@@ -5,3 +5,12 @@ dependencies {
 }
 
 ext.mainClassName = 'cloud.stackit.sdk.iaas.examples.IaaSExample'
+
+sourceSets {
+	main {
+		java {
+			// STACKITSDK-552 tempoarily exclude IaasVPCExample until generator is fixed, remove whole sourceSets block when done
+			exclude '**/IaaSVPCExample.java'
+		}
+	}
+}
