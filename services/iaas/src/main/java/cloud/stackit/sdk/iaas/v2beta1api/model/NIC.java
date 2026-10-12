@@ -24,6 +24,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -40,6 +41,11 @@ public class NIC {
 
 	@SerializedName(SERIALIZED_NAME_ALLOWED_ADDRESSES)
 	@javax.annotation.Nullable private List<AllowedAddressesInner> allowedAddresses = new ArrayList<>();
+
+	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
+
+	@SerializedName(SERIALIZED_NAME_CREATED_AT)
+	@javax.annotation.Nullable private OffsetDateTime createdAt;
 
 	public static final String SERIALIZED_NAME_DESCRIPTION = "description";
 
@@ -106,16 +112,31 @@ public class NIC {
 	@SerializedName(SERIALIZED_NAME_TYPE)
 	@javax.annotation.Nullable private String type;
 
+	public static final String SERIALIZED_NAME_UPDATED_AT = "updatedAt";
+
+	@SerializedName(SERIALIZED_NAME_UPDATED_AT)
+	@javax.annotation.Nullable private OffsetDateTime updatedAt;
+
 	public NIC() {}
 
-	public NIC(UUID device, UUID id, String mac, UUID networkId, String status, String type) {
+	public NIC(
+			OffsetDateTime createdAt,
+			UUID device,
+			UUID id,
+			String mac,
+			UUID networkId,
+			String status,
+			String type,
+			OffsetDateTime updatedAt) {
 		this();
+		this.createdAt = createdAt;
 		this.device = device;
 		this.id = id;
 		this.mac = mac;
 		this.networkId = networkId;
 		this.status = status;
 		this.type = type;
+		this.updatedAt = updatedAt;
 	}
 
 	public NIC allowedAddresses(
@@ -144,6 +165,15 @@ public class NIC {
 	public void setAllowedAddresses(
 			@javax.annotation.Nullable List<AllowedAddressesInner> allowedAddresses) {
 		this.allowedAddresses = allowedAddresses;
+	}
+
+	/**
+	 * Date-time when resource was created.
+	 *
+	 * @return createdAt
+	 */
+	@javax.annotation.Nullable public OffsetDateTime getCreatedAt() {
+		return createdAt;
 	}
 
 	public NIC description(@javax.annotation.Nullable String description) {
@@ -350,6 +380,15 @@ public class NIC {
 	}
 
 	/**
+	 * Date-time when resource was last updated.
+	 *
+	 * @return updatedAt
+	 */
+	@javax.annotation.Nullable public OffsetDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	/**
 	 * A container for additional, undeclared properties. This is a holder for any undeclared
 	 * properties as specified with the 'additionalProperties' keyword in the OAS document.
 	 */
@@ -403,6 +442,7 @@ public class NIC {
 		}
 		NIC NIC = (NIC) o;
 		return Objects.equals(this.allowedAddresses, NIC.allowedAddresses)
+				&& Objects.equals(this.createdAt, NIC.createdAt)
 				&& Objects.equals(this.description, NIC.description)
 				&& Objects.equals(this.device, NIC.device)
 				&& Objects.equals(this.id, NIC.id)
@@ -416,6 +456,7 @@ public class NIC {
 				&& Objects.equals(this.securityGroups, NIC.securityGroups)
 				&& Objects.equals(this.status, NIC.status)
 				&& Objects.equals(this.type, NIC.type)
+				&& Objects.equals(this.updatedAt, NIC.updatedAt)
 				&& Objects.equals(this.additionalProperties, NIC.additionalProperties);
 	}
 
@@ -423,6 +464,7 @@ public class NIC {
 	public int hashCode() {
 		return Objects.hash(
 				allowedAddresses,
+				createdAt,
 				description,
 				device,
 				id,
@@ -436,6 +478,7 @@ public class NIC {
 				securityGroups,
 				status,
 				type,
+				updatedAt,
 				additionalProperties);
 	}
 
@@ -444,6 +487,7 @@ public class NIC {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class NIC {\n");
 		sb.append("    allowedAddresses: ").append(toIndentedString(allowedAddresses)).append("\n");
+		sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
 		sb.append("    description: ").append(toIndentedString(description)).append("\n");
 		sb.append("    device: ").append(toIndentedString(device)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
@@ -457,6 +501,7 @@ public class NIC {
 		sb.append("    securityGroups: ").append(toIndentedString(securityGroups)).append("\n");
 		sb.append("    status: ").append(toIndentedString(status)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
+		sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -484,6 +529,7 @@ public class NIC {
 				new HashSet<String>(
 						Arrays.asList(
 								"allowedAddresses",
+								"createdAt",
 								"description",
 								"device",
 								"id",
@@ -496,7 +542,8 @@ public class NIC {
 								"nicSecurity",
 								"securityGroups",
 								"status",
-								"type"));
+								"type",
+								"updatedAt"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(0);
