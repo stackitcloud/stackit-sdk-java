@@ -1,5 +1,7 @@
 ## Release (2026-MM-DD)
 
+- `alb`: [v0.7.0](services/alb/CHANGELOG.md#v070)
+  - **Feature:** Add `ipBlockListName` to `LoadbalancerOptionAccessControl` for IP block-list-based access control
 - `automation`: [v0.1.0](services/automation/CHANGELOG.md#v010)
   - Initial onboarding of STACKIT Java SDK for Automation service
 - `iaas`: [v1.6.0](services/iaas/CHANGELOG.md#v160)
