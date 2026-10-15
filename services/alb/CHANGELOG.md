@@ -1,3 +1,6 @@
+## v0.7.0
+- **Feature:** Add field `ipBlockListName` to `LoadbalancerOptionAccessControl` for IP block-list-based access control
+
 ## v0.6.0
 - **Breaking change:** Remove `v2beta` API
 
