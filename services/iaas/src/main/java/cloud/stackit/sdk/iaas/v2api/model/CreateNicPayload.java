@@ -24,6 +24,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -40,6 +41,11 @@ public class CreateNicPayload {
 
 	@SerializedName(SERIALIZED_NAME_ALLOWED_ADDRESSES)
 	@javax.annotation.Nullable private List<AllowedAddressesInner> allowedAddresses = new ArrayList<>();
+
+	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
+
+	@SerializedName(SERIALIZED_NAME_CREATED_AT)
+	@javax.annotation.Nullable private OffsetDateTime createdAt;
 
 	public static final String SERIALIZED_NAME_DESCRIPTION = "description";
 
@@ -106,17 +112,31 @@ public class CreateNicPayload {
 	@SerializedName(SERIALIZED_NAME_TYPE)
 	@javax.annotation.Nullable private String type;
 
+	public static final String SERIALIZED_NAME_UPDATED_AT = "updatedAt";
+
+	@SerializedName(SERIALIZED_NAME_UPDATED_AT)
+	@javax.annotation.Nullable private OffsetDateTime updatedAt;
+
 	public CreateNicPayload() {}
 
 	public CreateNicPayload(
-			UUID device, UUID id, String mac, UUID networkId, String status, String type) {
+			OffsetDateTime createdAt,
+			UUID device,
+			UUID id,
+			String mac,
+			UUID networkId,
+			String status,
+			String type,
+			OffsetDateTime updatedAt) {
 		this();
+		this.createdAt = createdAt;
 		this.device = device;
 		this.id = id;
 		this.mac = mac;
 		this.networkId = networkId;
 		this.status = status;
 		this.type = type;
+		this.updatedAt = updatedAt;
 	}
 
 	public CreateNicPayload allowedAddresses(
@@ -145,6 +165,15 @@ public class CreateNicPayload {
 	public void setAllowedAddresses(
 			@javax.annotation.Nullable List<AllowedAddressesInner> allowedAddresses) {
 		this.allowedAddresses = allowedAddresses;
+	}
+
+	/**
+	 * Date-time when resource was created.
+	 *
+	 * @return createdAt
+	 */
+	@javax.annotation.Nullable public OffsetDateTime getCreatedAt() {
+		return createdAt;
 	}
 
 	public CreateNicPayload description(@javax.annotation.Nullable String description) {
@@ -351,6 +380,15 @@ public class CreateNicPayload {
 	}
 
 	/**
+	 * Date-time when resource was last updated.
+	 *
+	 * @return updatedAt
+	 */
+	@javax.annotation.Nullable public OffsetDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	/**
 	 * A container for additional, undeclared properties. This is a holder for any undeclared
 	 * properties as specified with the 'additionalProperties' keyword in the OAS document.
 	 */
@@ -404,6 +442,7 @@ public class CreateNicPayload {
 		}
 		CreateNicPayload createNicPayload = (CreateNicPayload) o;
 		return Objects.equals(this.allowedAddresses, createNicPayload.allowedAddresses)
+				&& Objects.equals(this.createdAt, createNicPayload.createdAt)
 				&& Objects.equals(this.description, createNicPayload.description)
 				&& Objects.equals(this.device, createNicPayload.device)
 				&& Objects.equals(this.id, createNicPayload.id)
@@ -417,6 +456,7 @@ public class CreateNicPayload {
 				&& Objects.equals(this.securityGroups, createNicPayload.securityGroups)
 				&& Objects.equals(this.status, createNicPayload.status)
 				&& Objects.equals(this.type, createNicPayload.type)
+				&& Objects.equals(this.updatedAt, createNicPayload.updatedAt)
 				&& Objects.equals(this.additionalProperties, createNicPayload.additionalProperties);
 	}
 
@@ -424,6 +464,7 @@ public class CreateNicPayload {
 	public int hashCode() {
 		return Objects.hash(
 				allowedAddresses,
+				createdAt,
 				description,
 				device,
 				id,
@@ -437,6 +478,7 @@ public class CreateNicPayload {
 				securityGroups,
 				status,
 				type,
+				updatedAt,
 				additionalProperties);
 	}
 
@@ -445,6 +487,7 @@ public class CreateNicPayload {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class CreateNicPayload {\n");
 		sb.append("    allowedAddresses: ").append(toIndentedString(allowedAddresses)).append("\n");
+		sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
 		sb.append("    description: ").append(toIndentedString(description)).append("\n");
 		sb.append("    device: ").append(toIndentedString(device)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
@@ -458,6 +501,7 @@ public class CreateNicPayload {
 		sb.append("    securityGroups: ").append(toIndentedString(securityGroups)).append("\n");
 		sb.append("    status: ").append(toIndentedString(status)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
+		sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -485,6 +529,7 @@ public class CreateNicPayload {
 				new HashSet<String>(
 						Arrays.asList(
 								"allowedAddresses",
+								"createdAt",
 								"description",
 								"device",
 								"id",
@@ -497,7 +542,8 @@ public class CreateNicPayload {
 								"nicSecurity",
 								"securityGroups",
 								"status",
-								"type"));
+								"type",
+								"updatedAt"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(0);
