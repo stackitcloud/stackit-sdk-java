@@ -1,4 +1,4 @@
-## Release (2026-MM-DD)
+## Release (2026-10-16)
 
 - `alb`: [v0.7.0](services/alb/CHANGELOG.md#v070)
   - **Feature:** Add `ipBlockListName` to `LoadbalancerOptionAccessControl` for IP block-list-based access control
