@@ -144,6 +144,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -258,6 +259,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -287,6 +289,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -319,6 +322,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -354,6 +358,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -483,6 +488,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -516,6 +522,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -552,6 +559,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -593,6 +601,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -719,6 +728,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -750,6 +760,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -784,6 +795,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -819,6 +831,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -934,6 +947,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -964,6 +978,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -997,6 +1012,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1031,6 +1047,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1148,6 +1165,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1177,6 +1195,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1208,6 +1227,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1242,6 +1262,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1372,6 +1393,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1404,6 +1426,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1439,6 +1462,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3917,6 +3941,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -4044,6 +4069,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -4076,6 +4102,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -4110,6 +4137,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
 	 * <tr><td> 400 </td><td> Some fields of the request have failed the validation procedure. </td><td>  -  </td></tr>
 	 * <tr><td> 401 </td><td> Please make sure the Authorization Header is set and uses correct credentials </td><td>  -  </td></tr>
+	 * <tr><td> 409 </td><td> The request conflicts with the current state of the resource. </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Please retry again later or contact support if the issue persists </td><td>  -  </td></tr>
 	 * </table>
 	 */
