@@ -23,6 +23,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -35,6 +36,11 @@ import org.openapitools.jackson.nullable.JsonNullable;
 /** Object that represents a public IP. */
 @javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class UpdatePublicIPPayload {
+	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
+
+	@SerializedName(SERIALIZED_NAME_CREATED_AT)
+	@javax.annotation.Nullable private OffsetDateTime createdAt;
+
 	public static final String SERIALIZED_NAME_ID = "id";
 
 	@SerializedName(SERIALIZED_NAME_ID)
@@ -55,12 +61,29 @@ public class UpdatePublicIPPayload {
 	@SerializedName(SERIALIZED_NAME_NETWORK_INTERFACE)
 	@javax.annotation.Nullable private UUID networkInterface;
 
+	public static final String SERIALIZED_NAME_UPDATED_AT = "updatedAt";
+
+	@SerializedName(SERIALIZED_NAME_UPDATED_AT)
+	@javax.annotation.Nullable private OffsetDateTime updatedAt;
+
 	public UpdatePublicIPPayload() {}
 
-	public UpdatePublicIPPayload(UUID id, String ip) {
+	public UpdatePublicIPPayload(
+			OffsetDateTime createdAt, UUID id, String ip, OffsetDateTime updatedAt) {
 		this();
+		this.createdAt = createdAt;
 		this.id = id;
 		this.ip = ip;
+		this.updatedAt = updatedAt;
+	}
+
+	/**
+	 * Date-time when resource was created.
+	 *
+	 * @return createdAt
+	 */
+	@javax.annotation.Nullable public OffsetDateTime getCreatedAt() {
+		return createdAt;
 	}
 
 	/**
@@ -87,11 +110,21 @@ public class UpdatePublicIPPayload {
 	}
 
 	/**
-	 * Object that represents the labels of an object. Regex for keys:
-	 * &#x60;^(?&#x3D;.{1,63}$)([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$&#x60;. Regex for values:
-	 * &#x60;^(?&#x3D;.{0,63}$)(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])*$&#x60;. Providing a
-	 * &#x60;null&#x60; value for a key will remove that key. The &#x60;stackit-&#x60; prefix is
-	 * reserved and cannot be used for Keys.
+	 * Object that represents the labels as key-value pairs of a resource. Key constraints: - May
+	 * contain an optional domain prefix separated by a slash (&#x60;/&#x60;). - Domain prefix must
+	 * be less than or equal to 250 characters. - Domain prefix must ba a valid DNS subdomain
+	 * containing only lowercase alphanumerics (&#x60;[a-z0-9]&#x60;) and dashes (&#x60;-&#x60;),
+	 * separated by dots (&#x60;.&#x60;). - Length (excluding the domain prefix) must be between 1
+	 * and 63 characters. - Must begin and end with an alphanumerical character
+	 * (&#x60;[a-z0-9A-Z]&#x60;). - May contain dashes (&#x60;-&#x60;), underscores (&#x60;_&#x60;),
+	 * dots (&#x60;.&#x60;), and alphanumerics in between. - Keys starting with the prefix
+	 * &#x60;stackit-&#x60; or having a domain prefix of &#x60;stackit.cloud&#x60; (including its
+	 * subdomains, e.g., &#x60;*.stackit.cloud/&#x60;) are reserved for system use. Value
+	 * constraints: - Must be less than or equal to 63 characters long (can be empty). - If not
+	 * empty it must begin and end with an alphanumeric character (&#x60;[a-z0-9A-Z]&#x60;). - May
+	 * contain dashes (&#x60;-&#x60;), underscores (&#x60;_&#x60;), dots (&#x60;.&#x60;), and
+	 * alphanumerics in between. A resource can have a maximum of 64 labels. Reserved labels are
+	 * excluded from this count. Providing a &#x60;null&#x60; value for a key will remove that key.
 	 *
 	 * @return labels
 	 */
@@ -120,6 +153,15 @@ public class UpdatePublicIPPayload {
 
 	public void setNetworkInterface(@javax.annotation.Nullable UUID networkInterface) {
 		this.networkInterface = networkInterface;
+	}
+
+	/**
+	 * Date-time when resource was last updated.
+	 *
+	 * @return updatedAt
+	 */
+	@javax.annotation.Nullable public OffsetDateTime getUpdatedAt() {
+		return updatedAt;
 	}
 
 	/**
@@ -175,10 +217,12 @@ public class UpdatePublicIPPayload {
 			return false;
 		}
 		UpdatePublicIPPayload updatePublicIPPayload = (UpdatePublicIPPayload) o;
-		return Objects.equals(this.id, updatePublicIPPayload.id)
+		return Objects.equals(this.createdAt, updatePublicIPPayload.createdAt)
+				&& Objects.equals(this.id, updatePublicIPPayload.id)
 				&& Objects.equals(this.ip, updatePublicIPPayload.ip)
 				&& Objects.equals(this.labels, updatePublicIPPayload.labels)
 				&& Objects.equals(this.networkInterface, updatePublicIPPayload.networkInterface)
+				&& Objects.equals(this.updatedAt, updatePublicIPPayload.updatedAt)
 				&& Objects.equals(
 						this.additionalProperties, updatePublicIPPayload.additionalProperties);
 	}
@@ -194,7 +238,8 @@ public class UpdatePublicIPPayload {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, ip, labels, networkInterface, additionalProperties);
+		return Objects.hash(
+				createdAt, id, ip, labels, networkInterface, updatedAt, additionalProperties);
 	}
 
 	private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -208,10 +253,12 @@ public class UpdatePublicIPPayload {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class UpdatePublicIPPayload {\n");
+		sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    ip: ").append(toIndentedString(ip)).append("\n");
 		sb.append("    labels: ").append(toIndentedString(labels)).append("\n");
 		sb.append("    networkInterface: ").append(toIndentedString(networkInterface)).append("\n");
+		sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -236,7 +283,14 @@ public class UpdatePublicIPPayload {
 	static {
 		// a set of all properties/fields (JSON key names)
 		openapiFields =
-				new HashSet<String>(Arrays.asList("id", "ip", "labels", "networkInterface"));
+				new HashSet<String>(
+						Arrays.asList(
+								"createdAt",
+								"id",
+								"ip",
+								"labels",
+								"networkInterface",
+								"updatedAt"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(0);
