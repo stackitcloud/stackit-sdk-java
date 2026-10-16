@@ -96,6 +96,8 @@ public class JSON {
 		gsonBuilder.registerTypeAdapter(LocalDate.class, localDateTypeAdapter);
 		gsonBuilder.registerTypeAdapter(byte[].class, byteArrayAdapter);
 		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.sfs.v1betaapi.model.ConflictError.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.sfs.v1betaapi.model.CreateResourcePoolPayload
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
