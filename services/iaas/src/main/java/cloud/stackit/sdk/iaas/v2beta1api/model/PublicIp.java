@@ -23,6 +23,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -35,6 +36,11 @@ import org.openapitools.jackson.nullable.JsonNullable;
 /** Object that represents a public IP. */
 @javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
 public class PublicIp {
+	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
+
+	@SerializedName(SERIALIZED_NAME_CREATED_AT)
+	@javax.annotation.Nullable private OffsetDateTime createdAt;
+
 	public static final String SERIALIZED_NAME_ID = "id";
 
 	@SerializedName(SERIALIZED_NAME_ID)
@@ -55,12 +61,28 @@ public class PublicIp {
 	@SerializedName(SERIALIZED_NAME_NETWORK_INTERFACE)
 	@javax.annotation.Nullable private UUID networkInterface;
 
+	public static final String SERIALIZED_NAME_UPDATED_AT = "updatedAt";
+
+	@SerializedName(SERIALIZED_NAME_UPDATED_AT)
+	@javax.annotation.Nullable private OffsetDateTime updatedAt;
+
 	public PublicIp() {}
 
-	public PublicIp(UUID id, String ip) {
+	public PublicIp(OffsetDateTime createdAt, UUID id, String ip, OffsetDateTime updatedAt) {
 		this();
+		this.createdAt = createdAt;
 		this.id = id;
 		this.ip = ip;
+		this.updatedAt = updatedAt;
+	}
+
+	/**
+	 * Date-time when resource was created.
+	 *
+	 * @return createdAt
+	 */
+	@javax.annotation.Nullable public OffsetDateTime getCreatedAt() {
+		return createdAt;
 	}
 
 	/**
@@ -132,6 +154,15 @@ public class PublicIp {
 	}
 
 	/**
+	 * Date-time when resource was last updated.
+	 *
+	 * @return updatedAt
+	 */
+	@javax.annotation.Nullable public OffsetDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	/**
 	 * A container for additional, undeclared properties. This is a holder for any undeclared
 	 * properties as specified with the 'additionalProperties' keyword in the OAS document.
 	 */
@@ -184,10 +215,12 @@ public class PublicIp {
 			return false;
 		}
 		PublicIp publicIp = (PublicIp) o;
-		return Objects.equals(this.id, publicIp.id)
+		return Objects.equals(this.createdAt, publicIp.createdAt)
+				&& Objects.equals(this.id, publicIp.id)
 				&& Objects.equals(this.ip, publicIp.ip)
 				&& Objects.equals(this.labels, publicIp.labels)
 				&& Objects.equals(this.networkInterface, publicIp.networkInterface)
+				&& Objects.equals(this.updatedAt, publicIp.updatedAt)
 				&& Objects.equals(this.additionalProperties, publicIp.additionalProperties);
 	}
 
@@ -202,7 +235,8 @@ public class PublicIp {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, ip, labels, networkInterface, additionalProperties);
+		return Objects.hash(
+				createdAt, id, ip, labels, networkInterface, updatedAt, additionalProperties);
 	}
 
 	private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -216,10 +250,12 @@ public class PublicIp {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class PublicIp {\n");
+		sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    ip: ").append(toIndentedString(ip)).append("\n");
 		sb.append("    labels: ").append(toIndentedString(labels)).append("\n");
 		sb.append("    networkInterface: ").append(toIndentedString(networkInterface)).append("\n");
+		sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -244,7 +280,14 @@ public class PublicIp {
 	static {
 		// a set of all properties/fields (JSON key names)
 		openapiFields =
-				new HashSet<String>(Arrays.asList("id", "ip", "labels", "networkInterface"));
+				new HashSet<String>(
+						Arrays.asList(
+								"createdAt",
+								"id",
+								"ip",
+								"labels",
+								"networkInterface",
+								"updatedAt"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(0);
