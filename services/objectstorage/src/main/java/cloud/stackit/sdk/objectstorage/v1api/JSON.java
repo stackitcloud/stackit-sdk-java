@@ -1,6 +1,6 @@
 /*
- * STACKIT Object Storage API
- * STACKIT API to manage the Object Storage
+ * [DEPRECATED] STACKIT Object Storage API
+ * ## ⚠️ WARNING: THIS API IS DEPRECATED Use V2
  *
  * The version of the OpenAPI document: 1.1.0
  *
@@ -174,6 +174,9 @@ public class JSON {
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.objectstorage.v1api.model.SetDefaultRetentionPayload
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.objectstorage.v1api.model.UpdateServicePayload
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.objectstorage.v1api.model.ValidationError
