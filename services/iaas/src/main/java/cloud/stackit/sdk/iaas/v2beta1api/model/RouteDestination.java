@@ -43,6 +43,8 @@ public class RouteDestination extends AbstractOpenApiSchema {
 					gson.getDelegateAdapter(this, TypeToken.get(DestinationCIDRv4.class));
 			final TypeAdapter<DestinationCIDRv6> adapterDestinationCIDRv6 =
 					gson.getDelegateAdapter(this, TypeToken.get(DestinationCIDRv6.class));
+			final TypeAdapter<DestinationPrefixList> adapterDestinationPrefixList =
+					gson.getDelegateAdapter(this, TypeToken.get(DestinationPrefixList.class));
 
 			return (TypeAdapter<T>)
 					new TypeAdapter<RouteDestination>() {
@@ -70,8 +72,16 @@ public class RouteDestination extends AbstractOpenApiSchema {
 								elementAdapter.write(out, element);
 								return;
 							}
+							// check if the actual instance is of the type `DestinationPrefixList`
+							if (value.getActualInstance() instanceof DestinationPrefixList) {
+								JsonElement element =
+										adapterDestinationPrefixList.toJsonTree(
+												(DestinationPrefixList) value.getActualInstance());
+								elementAdapter.write(out, element);
+								return;
+							}
 							throw new IOException(
-									"Failed to serialize as the type doesn't match oneOf schemas: DestinationCIDRv4, DestinationCIDRv6");
+									"Failed to serialize as the type doesn't match oneOf schemas: DestinationCIDRv4, DestinationCIDRv6, DestinationPrefixList");
 						}
 
 						@Override
@@ -125,6 +135,27 @@ public class RouteDestination extends AbstractOpenApiSchema {
 										"Input data does not match schema 'DestinationCIDRv6'",
 										e);
 							}
+							// deserialize DestinationPrefixList
+							try {
+								// validate the JSON object to see if any exception is thrown
+								DestinationPrefixList.validateJsonElement(jsonElement);
+								actualAdapter = adapterDestinationPrefixList;
+								match++;
+								log.log(
+										Level.FINER,
+										"Input data matches schema 'DestinationPrefixList'");
+							} catch (Exception e) {
+								// deserialization failed, continue
+								errorMessages.add(
+										String.format(
+												java.util.Locale.ROOT,
+												"Deserialization for DestinationPrefixList failed with `%s`.",
+												e.getMessage()));
+								log.log(
+										Level.FINER,
+										"Input data does not match schema 'DestinationPrefixList'",
+										e);
+							}
 
 							if (match == 1) {
 								RouteDestination ret = new RouteDestination();
@@ -159,6 +190,7 @@ public class RouteDestination extends AbstractOpenApiSchema {
 	static {
 		schemas.put("DestinationCIDRv4", DestinationCIDRv4.class);
 		schemas.put("DestinationCIDRv6", DestinationCIDRv6.class);
+		schemas.put("DestinationPrefixList", DestinationPrefixList.class);
 	}
 
 	@Override
@@ -168,7 +200,7 @@ public class RouteDestination extends AbstractOpenApiSchema {
 
 	/**
 	 * Set the instance that matches the oneOf child schema, check the instance parameter is valid
-	 * against the oneOf child schemas: DestinationCIDRv4, DestinationCIDRv6
+	 * against the oneOf child schemas: DestinationCIDRv4, DestinationCIDRv6, DestinationPrefixList
 	 *
 	 * <p>It could be an instance of the 'oneOf' schemas.
 	 */
@@ -184,14 +216,20 @@ public class RouteDestination extends AbstractOpenApiSchema {
 			return;
 		}
 
+		if (instance instanceof DestinationPrefixList) {
+			super.setActualInstance(instance);
+			return;
+		}
+
 		throw new RuntimeException(
-				"Invalid instance type. Must be DestinationCIDRv4, DestinationCIDRv6");
+				"Invalid instance type. Must be DestinationCIDRv4, DestinationCIDRv6, DestinationPrefixList");
 	}
 
 	/**
-	 * Get the actual instance, which can be the following: DestinationCIDRv4, DestinationCIDRv6
+	 * Get the actual instance, which can be the following: DestinationCIDRv4, DestinationCIDRv6,
+	 * DestinationPrefixList
 	 *
-	 * @return The actual instance (DestinationCIDRv4, DestinationCIDRv6)
+	 * @return The actual instance (DestinationCIDRv4, DestinationCIDRv6, DestinationPrefixList)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -219,6 +257,17 @@ public class RouteDestination extends AbstractOpenApiSchema {
 	 */
 	public DestinationCIDRv6 getDestinationCIDRv6() throws ClassCastException {
 		return (DestinationCIDRv6) super.getActualInstance();
+	}
+
+	/**
+	 * Get the actual instance of `DestinationPrefixList`. If the actual instance is not
+	 * `DestinationPrefixList`, the ClassCastException will be thrown.
+	 *
+	 * @return The actual instance of `DestinationPrefixList`
+	 * @throws ClassCastException if the instance is not `DestinationPrefixList`
+	 */
+	public DestinationPrefixList getDestinationPrefixList() throws ClassCastException {
+		return (DestinationPrefixList) super.getActualInstance();
 	}
 
 	/**
@@ -255,11 +304,23 @@ public class RouteDestination extends AbstractOpenApiSchema {
 							e.getMessage()));
 			// continue to the next one
 		}
+		// validate the json string with DestinationPrefixList
+		try {
+			DestinationPrefixList.validateJsonElement(jsonElement);
+			validCount++;
+		} catch (Exception e) {
+			errorMessages.add(
+					String.format(
+							java.util.Locale.ROOT,
+							"Deserialization for DestinationPrefixList failed with `%s`.",
+							e.getMessage()));
+			// continue to the next one
+		}
 		if (validCount != 1) {
 			throw new IOException(
 					String.format(
 							java.util.Locale.ROOT,
-							"The JSON string is invalid for RouteDestination with oneOf schemas: DestinationCIDRv4, DestinationCIDRv6. %d class(es) match the result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s",
+							"The JSON string is invalid for RouteDestination with oneOf schemas: DestinationCIDRv4, DestinationCIDRv6, DestinationPrefixList. %d class(es) match the result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s",
 							validCount,
 							errorMessages,
 							jsonElement.toString()));
