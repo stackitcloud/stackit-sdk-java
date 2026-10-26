@@ -50,8 +50,7 @@ public class CreateProjectPayload {
 	public static final String SERIALIZED_NAME_MEMBERS = "members";
 
 	@SerializedName(SERIALIZED_NAME_MEMBERS)
-	@javax.annotation.Nonnull
-	private Set<Member> members = new LinkedHashSet<>();
+	@javax.annotation.Nullable private Set<Member> members = new LinkedHashSet<>();
 
 	public static final String SERIALIZED_NAME_NAME = "name";
 
@@ -121,7 +120,7 @@ public class CreateProjectPayload {
 		this.labels = labels;
 	}
 
-	public CreateProjectPayload members(@javax.annotation.Nonnull Set<Member> members) {
+	public CreateProjectPayload members(@javax.annotation.Nullable Set<Member> members) {
 		this.members = members;
 		return this;
 	}
@@ -140,12 +139,11 @@ public class CreateProjectPayload {
 	 *
 	 * @return members
 	 */
-	@javax.annotation.Nonnull
-	public Set<Member> getMembers() {
+	@javax.annotation.Nullable public Set<Member> getMembers() {
 		return members;
 	}
 
-	public void setMembers(@javax.annotation.Nonnull Set<Member> members) {
+	public void setMembers(@javax.annotation.Nullable Set<Member> members) {
 		this.members = members;
 	}
 
@@ -156,7 +154,7 @@ public class CreateProjectPayload {
 
 	/**
 	 * Project name matching the regex &#x60;^[a-zA-ZäüöÄÜÖ0-9](
-	 * ?[a-zA-ZäüöÄÜÖß0-9_+&amp;-]){0,39}$&#x60;.
+	 * ?[a-zA-ZäüöÄÜÖß0-9_+&amp;-]){1,40}$&#x60;.
 	 *
 	 * @return name
 	 */
@@ -273,8 +271,7 @@ public class CreateProjectPayload {
 						Arrays.asList("containerParentId", "labels", "members", "name"));
 
 		// a set of required properties/fields (JSON key names)
-		openapiRequiredFields =
-				new HashSet<String>(Arrays.asList("containerParentId", "members", "name"));
+		openapiRequiredFields = new HashSet<String>(Arrays.asList("containerParentId", "name"));
 	}
 
 	/**
@@ -314,21 +311,25 @@ public class CreateProjectPayload {
 							"Expected the field `containerParentId` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("containerParentId").toString()));
 		}
-		// ensure the json data is an array
-		if (!jsonObj.get("members").isJsonArray()) {
-			throw new IllegalArgumentException(
-					String.format(
-							java.util.Locale.ROOT,
-							"Expected the field `members` to be an array in the JSON string but got `%s`",
-							jsonObj.get("members").toString()));
-		}
+		if (jsonObj.get("members") != null && !jsonObj.get("members").isJsonNull()) {
+			JsonArray jsonArraymembers = jsonObj.getAsJsonArray("members");
+			if (jsonArraymembers != null) {
+				// ensure the json data is an array
+				if (!jsonObj.get("members").isJsonArray()) {
+					throw new IllegalArgumentException(
+							String.format(
+									java.util.Locale.ROOT,
+									"Expected the field `members` to be an array in the JSON string but got `%s`",
+									jsonObj.get("members").toString()));
+				}
 
-		JsonArray jsonArraymembers = jsonObj.getAsJsonArray("members");
-		// validate the required field `members` (array)
-		for (int i = 0; i < jsonArraymembers.size(); i++) {
-			Member.validateJsonElement(jsonArraymembers.get(i));
+				// validate the optional field `members` (array)
+				for (int i = 0; i < jsonArraymembers.size(); i++) {
+					Member.validateJsonElement(jsonArraymembers.get(i));
+				}
+				;
+			}
 		}
-		;
 		if (!jsonObj.get("name").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
