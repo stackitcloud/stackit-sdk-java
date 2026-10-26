@@ -145,8 +145,8 @@ public class Project {
 	 * Total maximum key length is 314 characters. * **Value:** Must be 63 characters or less. May
 	 * be empty (\&quot;\&quot;). If non-empty, must start and end with an alphanumeric character
 	 * &#x60;[a-zA-Z0-9]&#x60; and can contain alphanumerics, dashes (-), underscores (_), and dots
-	 * (.). &gt; Note: Additional naming restrictions may apply depending on your specific
-	 * organization.*
+	 * (.). Can be set to null to delete the label. &gt; Note: Additional naming restrictions may
+	 * apply depending on your specific organization.*
 	 *
 	 * @return labels
 	 */
