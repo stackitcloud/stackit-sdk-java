@@ -40,6 +40,11 @@ public class LoadBalancerOptions {
 	@SerializedName(SERIALIZED_NAME_ACCESS_CONTROL)
 	@javax.annotation.Nullable private LoadbalancerOptionAccessControl accessControl;
 
+	public static final String SERIALIZED_NAME_ACCESS_LOGS = "accessLogs";
+
+	@SerializedName(SERIALIZED_NAME_ACCESS_LOGS)
+	@javax.annotation.Nullable private Boolean accessLogs;
+
 	public static final String SERIALIZED_NAME_EPHEMERAL_ADDRESS = "ephemeralAddress";
 
 	@SerializedName(SERIALIZED_NAME_EPHEMERAL_ADDRESS)
@@ -75,6 +80,27 @@ public class LoadBalancerOptions {
 	public void setAccessControl(
 			@javax.annotation.Nullable LoadbalancerOptionAccessControl accessControl) {
 		this.accessControl = accessControl;
+	}
+
+	public LoadBalancerOptions accessLogs(@javax.annotation.Nullable Boolean accessLogs) {
+		this.accessLogs = accessLogs;
+		return this;
+	}
+
+	/**
+	 * Enable per-request access logs on the Application Load Balancer. Defaults to false. Enable
+	 * only when the Application Load Balancer&#39;s expected traffic volume can be sustained by the
+	 * downstream logging pipeline, as access-log volume scales linearly with request rate. Requires
+	 * a STACKIT Telemetry Router to be set up for the logs to be viewable.
+	 *
+	 * @return accessLogs
+	 */
+	@javax.annotation.Nullable public Boolean getAccessLogs() {
+		return accessLogs;
+	}
+
+	public void setAccessLogs(@javax.annotation.Nullable Boolean accessLogs) {
+		this.accessLogs = accessLogs;
 	}
 
 	public LoadBalancerOptions ephemeralAddress(
@@ -192,6 +218,7 @@ public class LoadBalancerOptions {
 		}
 		LoadBalancerOptions loadBalancerOptions = (LoadBalancerOptions) o;
 		return Objects.equals(this.accessControl, loadBalancerOptions.accessControl)
+				&& Objects.equals(this.accessLogs, loadBalancerOptions.accessLogs)
 				&& Objects.equals(this.ephemeralAddress, loadBalancerOptions.ephemeralAddress)
 				&& Objects.equals(this.observability, loadBalancerOptions.observability)
 				&& Objects.equals(this.privateNetworkOnly, loadBalancerOptions.privateNetworkOnly)
@@ -203,6 +230,7 @@ public class LoadBalancerOptions {
 	public int hashCode() {
 		return Objects.hash(
 				accessControl,
+				accessLogs,
 				ephemeralAddress,
 				observability,
 				privateNetworkOnly,
@@ -214,6 +242,7 @@ public class LoadBalancerOptions {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class LoadBalancerOptions {\n");
 		sb.append("    accessControl: ").append(toIndentedString(accessControl)).append("\n");
+		sb.append("    accessLogs: ").append(toIndentedString(accessLogs)).append("\n");
 		sb.append("    ephemeralAddress: ").append(toIndentedString(ephemeralAddress)).append("\n");
 		sb.append("    observability: ").append(toIndentedString(observability)).append("\n");
 		sb.append("    privateNetworkOnly: ")
@@ -246,6 +275,7 @@ public class LoadBalancerOptions {
 				new HashSet<String>(
 						Arrays.asList(
 								"accessControl",
+								"accessLogs",
 								"ephemeralAddress",
 								"observability",
 								"privateNetworkOnly"));
