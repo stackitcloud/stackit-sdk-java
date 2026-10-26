@@ -81,6 +81,10 @@ public class JSON {
 												cloud.stackit.sdk.iaas.v2beta1api.model
 														.DestinationCIDRv6.class);
 										classByDiscriminatorValue.put(
+												"prefixlist",
+												cloud.stackit.sdk.iaas.v2beta1api.model
+														.DestinationPrefixList.class);
+										classByDiscriminatorValue.put(
 												"Route_destination",
 												cloud.stackit.sdk.iaas.v2beta1api.model
 														.RouteDestination.class);
@@ -287,6 +291,9 @@ public class JSON {
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.iaas.v2beta1api.model.DestinationCIDRv6
+						.CustomTypeAdapterFactory());
+		gsonBuilder.registerTypeAdapterFactory(
+				new cloud.stackit.sdk.iaas.v2beta1api.model.DestinationPrefixList
 						.CustomTypeAdapterFactory());
 		gsonBuilder.registerTypeAdapterFactory(
 				new cloud.stackit.sdk.iaas.v2beta1api.model.Error.CustomTypeAdapterFactory());
