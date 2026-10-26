@@ -50,6 +50,11 @@ public class Snapshot {
 	@SerializedName(SERIALIZED_NAME_DESCRIPTION)
 	@javax.annotation.Nullable private String description;
 
+	public static final String SERIALIZED_NAME_ENCRYPTED = "encrypted";
+
+	@SerializedName(SERIALIZED_NAME_ENCRYPTED)
+	@javax.annotation.Nullable private Boolean encrypted;
+
 	public static final String SERIALIZED_NAME_ID = "id";
 
 	@SerializedName(SERIALIZED_NAME_ID)
@@ -91,6 +96,7 @@ public class Snapshot {
 	public Snapshot(
 			String availabilityZone,
 			OffsetDateTime createdAt,
+			Boolean encrypted,
 			UUID id,
 			Long size,
 			String status,
@@ -98,6 +104,7 @@ public class Snapshot {
 		this();
 		this.availabilityZone = availabilityZone;
 		this.createdAt = createdAt;
+		this.encrypted = encrypted;
 		this.id = id;
 		this.size = size;
 		this.status = status;
@@ -138,6 +145,15 @@ public class Snapshot {
 
 	public void setDescription(@javax.annotation.Nullable String description) {
 		this.description = description;
+	}
+
+	/**
+	 * Indicates if a volume is encrypted.
+	 *
+	 * @return encrypted
+	 */
+	@javax.annotation.Nullable public Boolean getEncrypted() {
+		return encrypted;
 	}
 
 	/**
@@ -303,6 +319,7 @@ public class Snapshot {
 		return Objects.equals(this.availabilityZone, snapshot.availabilityZone)
 				&& Objects.equals(this.createdAt, snapshot.createdAt)
 				&& Objects.equals(this.description, snapshot.description)
+				&& Objects.equals(this.encrypted, snapshot.encrypted)
 				&& Objects.equals(this.id, snapshot.id)
 				&& Objects.equals(this.labels, snapshot.labels)
 				&& Objects.equals(this.name, snapshot.name)
@@ -319,6 +336,7 @@ public class Snapshot {
 				availabilityZone,
 				createdAt,
 				description,
+				encrypted,
 				id,
 				labels,
 				name,
@@ -336,6 +354,7 @@ public class Snapshot {
 		sb.append("    availabilityZone: ").append(toIndentedString(availabilityZone)).append("\n");
 		sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
 		sb.append("    description: ").append(toIndentedString(description)).append("\n");
+		sb.append("    encrypted: ").append(toIndentedString(encrypted)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    labels: ").append(toIndentedString(labels)).append("\n");
 		sb.append("    name: ").append(toIndentedString(name)).append("\n");
@@ -372,6 +391,7 @@ public class Snapshot {
 								"availabilityZone",
 								"createdAt",
 								"description",
+								"encrypted",
 								"id",
 								"labels",
 								"name",

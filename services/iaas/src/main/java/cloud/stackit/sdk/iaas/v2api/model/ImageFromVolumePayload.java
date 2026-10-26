@@ -86,7 +86,7 @@ public class ImageFromVolumePayload {
 	}
 
 	/**
-	 * When true the image is force created from a volume is currently being used.
+	 * When true the image is force created from a volume that is currently being used.
 	 *
 	 * @return force
 	 */
