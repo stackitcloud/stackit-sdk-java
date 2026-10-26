@@ -95,8 +95,8 @@ public class PartialUpdateProjectPayload {
 	 * followed by a slash (/). Total maximum key length is 314 characters. * **Value:** Must be 63
 	 * characters or less. May be empty (\&quot;\&quot;). If non-empty, must start and end with an
 	 * alphanumeric character &#x60;[a-zA-Z0-9]&#x60; and can contain alphanumerics, dashes (-),
-	 * underscores (_), and dots (.). &gt; Note: Additional naming restrictions may apply depending
-	 * on your specific organization.*
+	 * underscores (_), and dots (.). Can be set to null to delete the label. &gt; Note: Additional
+	 * naming restrictions may apply depending on your specific organization.*
 	 *
 	 * @return labels
 	 */
@@ -115,7 +115,7 @@ public class PartialUpdateProjectPayload {
 
 	/**
 	 * New name for the resource container matching the regex &#x60;^[a-zA-ZäüöÄÜÖ0-9](
-	 * ?[a-zA-ZäüöÄÜÖß0-9_+&amp;-]){0,39}$&#x60;.
+	 * ?[a-zA-ZäüöÄÜÖß0-9_+&amp;-]){1,40}$&#x60;.
 	 *
 	 * @return name
 	 */
