@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class ErrorResponseContentDetails extends AbstractOpenApiSchema {
 	private static final Logger log = Logger.getLogger(ErrorResponseContentDetails.class.getName());
 
@@ -244,6 +244,7 @@ public class ErrorResponseContentDetails extends AbstractOpenApiSchema {
 	 * @return The actual instance of `ErrorInfoDetail`
 	 * @throws ClassCastException if the instance is not `ErrorInfoDetail`
 	 */
+	@SuppressWarnings("unchecked")
 	public ErrorInfoDetail getErrorInfoDetail() throws ClassCastException {
 		return (ErrorInfoDetail) super.getActualInstance();
 	}
@@ -255,6 +256,7 @@ public class ErrorResponseContentDetails extends AbstractOpenApiSchema {
 	 * @return The actual instance of `LocalizedMessageErrorDetail`
 	 * @throws ClassCastException if the instance is not `LocalizedMessageErrorDetail`
 	 */
+	@SuppressWarnings("unchecked")
 	public LocalizedMessageErrorDetail getLocalizedMessageErrorDetail() throws ClassCastException {
 		return (LocalizedMessageErrorDetail) super.getActualInstance();
 	}
@@ -266,6 +268,7 @@ public class ErrorResponseContentDetails extends AbstractOpenApiSchema {
 	 * @return The actual instance of `HelpErrorDetail`
 	 * @throws ClassCastException if the instance is not `HelpErrorDetail`
 	 */
+	@SuppressWarnings("unchecked")
 	public HelpErrorDetail getHelpErrorDetail() throws ClassCastException {
 		return (HelpErrorDetail) super.getActualInstance();
 	}

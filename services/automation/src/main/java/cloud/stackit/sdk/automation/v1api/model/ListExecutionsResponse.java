@@ -16,6 +16,7 @@ import cloud.stackit.sdk.automation.v1api.JSON;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
@@ -33,7 +34,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** ListExecutionsResponse */
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class ListExecutionsResponse {
 	public static final String SERIALIZED_NAME_ITEMS = "items";
 
@@ -176,10 +177,7 @@ public class ListExecutionsResponse {
 	 * line).
 	 */
 	private String toIndentedString(Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
+		return o == null ? "null" : o.toString().replace("\n", "\n    ");
 	}
 
 	public static HashSet<String> openapiFields;
@@ -223,21 +221,20 @@ public class ListExecutionsResponse {
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
-		// ensure the json data is an array
-		if (!jsonObj.get("items").isJsonArray()) {
-			throw new IllegalArgumentException(
-					String.format(
-							java.util.Locale.ROOT,
-							"Expected the field `items` to be an array in the JSON string but got `%s`",
-							jsonObj.get("items").toString()));
+		if (jsonObj.get("items") != null) {
+			if (!jsonObj.get("items").isJsonArray()) {
+				throw new IllegalArgumentException(
+						String.format(
+								java.util.Locale.ROOT,
+								"Expected the field `items` to be an array in the JSON string but got `%s`",
+								jsonObj.get("items").toString()));
+			}
+			JsonArray jsonArrayitems = jsonObj.getAsJsonArray("items");
+			// validate the required field `items` (array)
+			for (int i = 0; i < jsonArrayitems.size(); i++) {
+				ListExecutionsItem.validateJsonElement(jsonArrayitems.get(i));
+			}
 		}
-
-		JsonArray jsonArrayitems = jsonObj.getAsJsonArray("items");
-		// validate the required field `items` (array)
-		for (int i = 0; i < jsonArrayitems.size(); i++) {
-			ListExecutionsItem.validateJsonElement(jsonArrayitems.get(i));
-		}
-		;
 		if ((jsonObj.get("nextPageToken") != null && !jsonObj.get("nextPageToken").isJsonNull())
 				&& !jsonObj.get("nextPageToken").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
@@ -281,7 +278,9 @@ public class ListExecutionsResponse {
 												entry.getKey(), (Character) entry.getValue());
 									else {
 										JsonElement jsonElement = gson.toJsonTree(entry.getValue());
-										if (jsonElement.isJsonArray()) {
+										if (jsonElement.isJsonNull()) {
+											obj.add(entry.getKey(), JsonNull.INSTANCE);
+										} else if (jsonElement.isJsonArray()) {
 											obj.add(entry.getKey(), jsonElement.getAsJsonArray());
 										} else {
 											obj.add(entry.getKey(), jsonElement.getAsJsonObject());
