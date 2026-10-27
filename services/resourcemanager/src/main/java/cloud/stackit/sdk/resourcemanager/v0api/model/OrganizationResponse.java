@@ -15,6 +15,7 @@ package cloud.stackit.sdk.resourcemanager.v0api.model;
 import cloud.stackit.sdk.resourcemanager.v0api.JSON;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
@@ -33,7 +34,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /** OrganizationResponse */
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class OrganizationResponse {
 	public static final String SERIALIZED_NAME_CONTAINER_ID = "containerId";
 
@@ -131,8 +132,8 @@ public class OrganizationResponse {
 	}
 
 	/**
-	 * Key-value string pairs attached to an existing resource container. Certain labels may be
-	 * enforced via organizational policies. * **Key:** Must be between 1 and 63 characters long
+	 * Key-value string pairs attached to a resource container during creation. Certain labels may
+	 * be enforced via organizational policies. * **Key:** Must be between 1 and 63 characters long
 	 * (excluding an optional domain prefix). Must start and end with an alphanumeric character
 	 * &#x60;[a-zA-Z0-9]&#x60; and can contain alphanumerics, dashes (-), underscores (_), and dots
 	 * (.). May include an optional domain prefix up to 250 characters (a lowercase DNS subdomain
@@ -140,8 +141,11 @@ public class OrganizationResponse {
 	 * Total maximum key length is 314 characters. * **Value:** Must be 63 characters or less. May
 	 * be empty (\&quot;\&quot;). If non-empty, must start and end with an alphanumeric character
 	 * &#x60;[a-zA-Z0-9]&#x60; and can contain alphanumerics, dashes (-), underscores (_), and dots
-	 * (.). &gt; Note: Additional naming restrictions may apply depending on your specific
-	 * organization.*
+	 * (.). * Either a &#x60;\&quot;scope\&quot;: \&quot;PUBLIC\&quot;&#x60; label or a valid
+	 * &#x60;networkArea&#x60; label must be provided for project creation. * To create a project
+	 * within a STACKIT Network Area, you must set the label &#x60;\&quot;networkArea\&quot;:
+	 * \&quot;&lt;networkAreaID&gt;\&quot;&#x60;. &gt; **Important:** The &#x60;networkArea&#x60;
+	 * label is immutable and **cannot be changed** after project creation.
 	 *
 	 * @return labels
 	 */
@@ -330,10 +334,7 @@ public class OrganizationResponse {
 	 * line).
 	 */
 	private String toIndentedString(Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
+		return o == null ? "null" : o.toString().replace("\n", "\n    ");
 	}
 
 	public static HashSet<String> openapiFields;
@@ -452,7 +453,9 @@ public class OrganizationResponse {
 												entry.getKey(), (Character) entry.getValue());
 									else {
 										JsonElement jsonElement = gson.toJsonTree(entry.getValue());
-										if (jsonElement.isJsonArray()) {
+										if (jsonElement.isJsonNull()) {
+											obj.add(entry.getKey(), JsonNull.INSTANCE);
+										} else if (jsonElement.isJsonArray()) {
 											obj.add(entry.getKey(), jsonElement.getAsJsonArray());
 										} else {
 											obj.add(entry.getKey(), jsonElement.getAsJsonObject());
