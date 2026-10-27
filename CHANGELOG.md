@@ -1,3 +1,10 @@
+## Release (2026-MM-DD)
+
+- `resourcemanager`:
+  - [v0.7.0](services/resourcemanager/CHANGELOG.md#v070)
+    - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
+    - **Feature:** The `members` attribute in the `CreateProjectPayload` model class is now optional (previously required) and therefore changed from `@javax.annotation.Nonnull` to `@javax.annotation.Nullable`
+
 ## Release (2026-10-16)
 
 - `alb`: [v0.7.0](services/alb/CHANGELOG.md#v070)
