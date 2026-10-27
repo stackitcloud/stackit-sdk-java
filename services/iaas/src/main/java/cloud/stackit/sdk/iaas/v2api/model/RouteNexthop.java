@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class RouteNexthop extends AbstractOpenApiSchema {
 	private static final Logger log = Logger.getLogger(RouteNexthop.class.getName());
 
@@ -274,6 +274,7 @@ public class RouteNexthop extends AbstractOpenApiSchema {
 	 * @return The actual instance of `NexthopIPv4`
 	 * @throws ClassCastException if the instance is not `NexthopIPv4`
 	 */
+	@SuppressWarnings("unchecked")
 	public NexthopIPv4 getNexthopIPv4() throws ClassCastException {
 		return (NexthopIPv4) super.getActualInstance();
 	}
@@ -285,6 +286,7 @@ public class RouteNexthop extends AbstractOpenApiSchema {
 	 * @return The actual instance of `NexthopIPv6`
 	 * @throws ClassCastException if the instance is not `NexthopIPv6`
 	 */
+	@SuppressWarnings("unchecked")
 	public NexthopIPv6 getNexthopIPv6() throws ClassCastException {
 		return (NexthopIPv6) super.getActualInstance();
 	}
@@ -296,6 +298,7 @@ public class RouteNexthop extends AbstractOpenApiSchema {
 	 * @return The actual instance of `NexthopInternet`
 	 * @throws ClassCastException if the instance is not `NexthopInternet`
 	 */
+	@SuppressWarnings("unchecked")
 	public NexthopInternet getNexthopInternet() throws ClassCastException {
 		return (NexthopInternet) super.getActualInstance();
 	}
@@ -307,6 +310,7 @@ public class RouteNexthop extends AbstractOpenApiSchema {
 	 * @return The actual instance of `NexthopBlackhole`
 	 * @throws ClassCastException if the instance is not `NexthopBlackhole`
 	 */
+	@SuppressWarnings("unchecked")
 	public NexthopBlackhole getNexthopBlackhole() throws ClassCastException {
 		return (NexthopBlackhole) super.getActualInstance();
 	}
