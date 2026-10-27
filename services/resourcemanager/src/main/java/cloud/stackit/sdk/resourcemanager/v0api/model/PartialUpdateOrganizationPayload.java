@@ -15,6 +15,7 @@ package cloud.stackit.sdk.resourcemanager.v0api.model;
 import cloud.stackit.sdk.resourcemanager.v0api.JSON;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
@@ -31,7 +32,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** PartialUpdateOrganizationPayload */
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class PartialUpdateOrganizationPayload {
 	public static final String SERIALIZED_NAME_LABELS = "labels";
 
@@ -70,8 +71,8 @@ public class PartialUpdateOrganizationPayload {
 	 * followed by a slash (/). Total maximum key length is 314 characters. * **Value:** Must be 63
 	 * characters or less. May be empty (\&quot;\&quot;). If non-empty, must start and end with an
 	 * alphanumeric character &#x60;[a-zA-Z0-9]&#x60; and can contain alphanumerics, dashes (-),
-	 * underscores (_), and dots (.). &gt; Note: Additional naming restrictions may apply depending
-	 * on your specific organization.*
+	 * underscores (_), and dots (.). Can be set to null to delete the label. &gt; Note: Additional
+	 * naming restrictions may apply depending on your specific organization.*
 	 *
 	 * @return labels
 	 */
@@ -90,7 +91,7 @@ public class PartialUpdateOrganizationPayload {
 
 	/**
 	 * The new name of the organization matching the regex &#x60;^[a-zA-ZäüöÄÜÖ0-9](
-	 * ?[a-zA-ZäüöÄÜÖß0-9_+&amp;-]){0,39}$&#x60;.
+	 * ?[a-zA-ZäüöÄÜÖß0-9_+&amp;-]){1,40}$&#x60;.
 	 *
 	 * @return name
 	 */
@@ -186,10 +187,7 @@ public class PartialUpdateOrganizationPayload {
 	 * line).
 	 */
 	private String toIndentedString(Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
+		return o == null ? "null" : o.toString().replace("\n", "\n    ");
 	}
 
 	public static HashSet<String> openapiFields;
@@ -267,7 +265,9 @@ public class PartialUpdateOrganizationPayload {
 												entry.getKey(), (Character) entry.getValue());
 									else {
 										JsonElement jsonElement = gson.toJsonTree(entry.getValue());
-										if (jsonElement.isJsonArray()) {
+										if (jsonElement.isJsonNull()) {
+											obj.add(entry.getKey(), JsonNull.INSTANCE);
+										} else if (jsonElement.isJsonArray()) {
 											obj.add(entry.getKey(), jsonElement.getAsJsonArray());
 										} else {
 											obj.add(entry.getKey(), jsonElement.getAsJsonObject());
