@@ -1,6 +1,6 @@
 /*
- * STACKIT Object Storage API
- * STACKIT API to manage the Object Storage
+ * [DEPRECATED] STACKIT Object Storage API
+ * ## ⚠️ WARNING: THIS API IS DEPRECATED Use V2
  *
  * The version of the OpenAPI document: 1.1.0
  *
@@ -16,6 +16,7 @@ import cloud.stackit.sdk.objectstorage.v1api.JSON;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
@@ -33,7 +34,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** ValidationError */
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class ValidationError {
 	public static final String SERIALIZED_NAME_LOC = "loc";
 
@@ -203,10 +204,7 @@ public class ValidationError {
 	 * line).
 	 */
 	private String toIndentedString(Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
+		return o == null ? "null" : o.toString().replace("\n", "\n    ");
 	}
 
 	public static HashSet<String> openapiFields;
@@ -250,21 +248,20 @@ public class ValidationError {
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
-		// ensure the json data is an array
-		if (!jsonObj.get("loc").isJsonArray()) {
-			throw new IllegalArgumentException(
-					String.format(
-							java.util.Locale.ROOT,
-							"Expected the field `loc` to be an array in the JSON string but got `%s`",
-							jsonObj.get("loc").toString()));
+		if (jsonObj.get("loc") != null) {
+			if (!jsonObj.get("loc").isJsonArray()) {
+				throw new IllegalArgumentException(
+						String.format(
+								java.util.Locale.ROOT,
+								"Expected the field `loc` to be an array in the JSON string but got `%s`",
+								jsonObj.get("loc").toString()));
+			}
+			JsonArray jsonArrayloc = jsonObj.getAsJsonArray("loc");
+			// validate the required field `loc` (array)
+			for (int i = 0; i < jsonArrayloc.size(); i++) {
+				LocationInner.validateJsonElement(jsonArrayloc.get(i));
+			}
 		}
-
-		JsonArray jsonArrayloc = jsonObj.getAsJsonArray("loc");
-		// validate the required field `loc` (array)
-		for (int i = 0; i < jsonArrayloc.size(); i++) {
-			LocationInner.validateJsonElement(jsonArrayloc.get(i));
-		}
-		;
 		if (!jsonObj.get("msg").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
@@ -314,7 +311,9 @@ public class ValidationError {
 												entry.getKey(), (Character) entry.getValue());
 									else {
 										JsonElement jsonElement = gson.toJsonTree(entry.getValue());
-										if (jsonElement.isJsonArray()) {
+										if (jsonElement.isJsonNull()) {
+											obj.add(entry.getKey(), JsonNull.INSTANCE);
+										} else if (jsonElement.isJsonArray()) {
 											obj.add(entry.getKey(), jsonElement.getAsJsonArray());
 										} else {
 											obj.add(entry.getKey(), jsonElement.getAsJsonObject());
