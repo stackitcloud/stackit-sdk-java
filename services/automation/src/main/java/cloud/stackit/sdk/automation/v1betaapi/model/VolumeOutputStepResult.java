@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class VolumeOutputStepResult extends AbstractOpenApiSchema {
 	private static final Logger log = Logger.getLogger(VolumeOutputStepResult.class.getName());
 
@@ -207,6 +207,7 @@ public class VolumeOutputStepResult extends AbstractOpenApiSchema {
 	 * @return The actual instance of `GetVolumeIDsResult`
 	 * @throws ClassCastException if the instance is not `GetVolumeIDsResult`
 	 */
+	@SuppressWarnings("unchecked")
 	public GetVolumeIDsResult getGetVolumeIDsResult() throws ClassCastException {
 		return (GetVolumeIDsResult) super.getActualInstance();
 	}
@@ -218,6 +219,7 @@ public class VolumeOutputStepResult extends AbstractOpenApiSchema {
 	 * @return The actual instance of `CreateSnapshotsResult`
 	 * @throws ClassCastException if the instance is not `CreateSnapshotsResult`
 	 */
+	@SuppressWarnings("unchecked")
 	public CreateSnapshotsResult getCreateSnapshotsResult() throws ClassCastException {
 		return (CreateSnapshotsResult) super.getActualInstance();
 	}
