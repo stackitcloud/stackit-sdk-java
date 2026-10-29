@@ -23,6 +23,13 @@
   - [v0.7.0](services/resourcemanager/CHANGELOG.md#v070)
     - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
     - **Feature:** The `members` attribute in the `CreateProjectPayload` model class is now optional (previously required) and therefore changed from `@javax.annotation.Nonnull` to `@javax.annotation.Nullable`
+- `sfs`:
+  - [v0.6.0](services/sfs/CHANGELOG.md#v060)
+    - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
+    - `v1api`:
+      - **Feature:** Add new `ConflictError` model for responses with 409 status code
+    - `v1betaapi`:
+      - **Feature:** Add new `ConflictError` model for responses with 409 status code
 
 ## Release (2026-10-16)
 
