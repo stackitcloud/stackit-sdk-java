@@ -1,6 +1,6 @@
 /*
- * STACKIT Object Storage API
- * STACKIT API to manage the Object Storage
+ * [DEPRECATED] STACKIT Object Storage API
+ * ## ⚠️ WARNING: THIS API IS DEPRECATED Use V2
  *
  * The version of the OpenAPI document: 1.1.0
  *
@@ -12,7 +12,7 @@
 
 package cloud.stackit.sdk.objectstorage.v1api;
 
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class Pair {
 	private final String name;
 	private final String value;

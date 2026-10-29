@@ -15,6 +15,7 @@ package cloud.stackit.sdk.objectstorage.v2api.model;
 import cloud.stackit.sdk.objectstorage.v2api.JSON;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
@@ -31,8 +32,13 @@ import java.util.Map;
 import java.util.Objects;
 
 /** ProjectStatus */
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class ProjectStatus {
+	public static final String SERIALIZED_NAME_LABELS = "labels";
+
+	@SerializedName(SERIALIZED_NAME_LABELS)
+	@javax.annotation.Nullable private Map<String, String> labels = new HashMap<>();
+
 	public static final String SERIALIZED_NAME_PROJECT = "project";
 
 	@SerializedName(SERIALIZED_NAME_PROJECT)
@@ -46,6 +52,32 @@ public class ProjectStatus {
 	private ProjectScope scope;
 
 	public ProjectStatus() {}
+
+	public ProjectStatus labels(@javax.annotation.Nullable Map<String, String> labels) {
+		this.labels = labels;
+		return this;
+	}
+
+	public ProjectStatus putLabelsItem(String key, String labelsItem) {
+		if (this.labels == null) {
+			this.labels = new HashMap<>();
+		}
+		this.labels.put(key, labelsItem);
+		return this;
+	}
+
+	/**
+	 * Project labels
+	 *
+	 * @return labels
+	 */
+	@javax.annotation.Nullable public Map<String, String> getLabels() {
+		return labels;
+	}
+
+	public void setLabels(@javax.annotation.Nullable Map<String, String> labels) {
+		this.labels = labels;
+	}
 
 	public ProjectStatus project(@javax.annotation.Nonnull String project) {
 		this.project = project;
@@ -138,20 +170,22 @@ public class ProjectStatus {
 			return false;
 		}
 		ProjectStatus projectStatus = (ProjectStatus) o;
-		return Objects.equals(this.project, projectStatus.project)
+		return Objects.equals(this.labels, projectStatus.labels)
+				&& Objects.equals(this.project, projectStatus.project)
 				&& Objects.equals(this.scope, projectStatus.scope)
 				&& Objects.equals(this.additionalProperties, projectStatus.additionalProperties);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(project, scope, additionalProperties);
+		return Objects.hash(labels, project, scope, additionalProperties);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class ProjectStatus {\n");
+		sb.append("    labels: ").append(toIndentedString(labels)).append("\n");
 		sb.append("    project: ").append(toIndentedString(project)).append("\n");
 		sb.append("    scope: ").append(toIndentedString(scope)).append("\n");
 		sb.append("    additionalProperties: ")
@@ -166,10 +200,7 @@ public class ProjectStatus {
 	 * line).
 	 */
 	private String toIndentedString(Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
+		return o == null ? "null" : o.toString().replace("\n", "\n    ");
 	}
 
 	public static HashSet<String> openapiFields;
@@ -177,7 +208,7 @@ public class ProjectStatus {
 
 	static {
 		// a set of all properties/fields (JSON key names)
-		openapiFields = new HashSet<String>(Arrays.asList("project", "scope"));
+		openapiFields = new HashSet<String>(Arrays.asList("labels", "project", "scope"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(Arrays.asList("project", "scope"));
@@ -256,7 +287,9 @@ public class ProjectStatus {
 												entry.getKey(), (Character) entry.getValue());
 									else {
 										JsonElement jsonElement = gson.toJsonTree(entry.getValue());
-										if (jsonElement.isJsonArray()) {
+										if (jsonElement.isJsonNull()) {
+											obj.add(entry.getKey(), JsonNull.INSTANCE);
+										} else if (jsonElement.isJsonArray()) {
 											obj.add(entry.getKey(), jsonElement.getAsJsonArray());
 										} else {
 											obj.add(entry.getKey(), jsonElement.getAsJsonObject());
