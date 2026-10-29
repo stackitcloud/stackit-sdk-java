@@ -1,6 +1,6 @@
 /*
- * STACKIT Object Storage API
- * STACKIT API to manage the Object Storage
+ * [DEPRECATED] STACKIT Object Storage API
+ * ## ⚠️ WARNING: THIS API IS DEPRECATED Use V2
  *
  * The version of the OpenAPI document: 1.1.0
  *
@@ -36,6 +36,7 @@ import cloud.stackit.sdk.objectstorage.v1api.model.ListBucketsResponse;
 import cloud.stackit.sdk.objectstorage.v1api.model.ListCredentialsGroupsResponse;
 import cloud.stackit.sdk.objectstorage.v1api.model.ProjectStatus;
 import cloud.stackit.sdk.objectstorage.v1api.model.SetDefaultRetentionPayload;
+import cloud.stackit.sdk.objectstorage.v1api.model.UpdateServicePayload;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -143,7 +144,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call createAccessKeyCall(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull CreateAccessKeyPayload createAccessKeyPayload,
@@ -211,6 +215,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call createAccessKeyValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId,
@@ -254,7 +259,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public CreateAccessKeyResponse createAccessKey(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull CreateAccessKeyPayload createAccessKeyPayload,
@@ -286,7 +294,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<CreateAccessKeyResponse> createAccessKeyWithHttpInfo(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull CreateAccessKeyPayload createAccessKeyPayload,
@@ -321,7 +332,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call createAccessKeyAsync(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull CreateAccessKeyPayload createAccessKeyPayload,
@@ -359,7 +373,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call createBucketCall(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String bucketName,
@@ -430,6 +447,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call createBucketValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId,
@@ -475,7 +493,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public CreateBucketResponse createBucket(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String bucketName,
@@ -509,7 +530,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<CreateBucketResponse> createBucketWithHttpInfo(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String bucketName,
@@ -545,7 +569,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call createBucketAsync(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String bucketName,
@@ -576,7 +603,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call createComplianceLockCall(
 			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
 			throws ApiException {
@@ -636,6 +666,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call createComplianceLockValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
@@ -665,7 +696,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ComplianceLockResponse createComplianceLock(@javax.annotation.Nonnull String projectId)
 			throws ApiException {
 		ApiResponse<ComplianceLockResponse> localVarResp =
@@ -689,7 +723,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<ComplianceLockResponse> createComplianceLockWithHttpInfo(
 			@javax.annotation.Nonnull String projectId) throws ApiException {
 		okhttp3.Call localVarCall = createComplianceLockValidateBeforeCall(projectId, null);
@@ -714,7 +751,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call createComplianceLockAsync(
 			@javax.annotation.Nonnull String projectId,
 			final ApiCallback<ComplianceLockResponse> _callback)
@@ -747,7 +787,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call createCredentialsGroupCall(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull CreateCredentialsGroupPayload createCredentialsGroupPayload,
@@ -809,6 +852,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call createCredentialsGroupValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId,
@@ -851,7 +895,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public CreateCredentialsGroupResponse createCredentialsGroup(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull CreateCredentialsGroupPayload createCredentialsGroupPayload)
@@ -882,7 +929,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<CreateCredentialsGroupResponse> createCredentialsGroupWithHttpInfo(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull CreateCredentialsGroupPayload createCredentialsGroupPayload)
@@ -916,7 +966,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call createCredentialsGroupAsync(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull CreateCredentialsGroupPayload createCredentialsGroupPayload,
@@ -953,7 +1006,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call deleteAccessKeyCall(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String keyId,
@@ -1024,6 +1080,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call deleteAccessKeyValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId,
@@ -1068,7 +1125,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public DeleteAccessKeyResponse deleteAccessKey(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String keyId,
@@ -1101,7 +1161,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<DeleteAccessKeyResponse> deleteAccessKeyWithHttpInfo(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String keyId,
@@ -1136,7 +1199,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call deleteAccessKeyAsync(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String keyId,
@@ -1170,7 +1236,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call deleteBucketCall(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String bucketName,
@@ -1235,6 +1304,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call deleteBucketValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId,
@@ -1275,7 +1345,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public DeleteBucketResponse deleteBucket(
 			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String bucketName)
 			throws ApiException {
@@ -1303,7 +1376,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<DeleteBucketResponse> deleteBucketWithHttpInfo(
 			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String bucketName)
 			throws ApiException {
@@ -1332,7 +1408,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call deleteBucketAsync(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String bucketName,
@@ -1362,7 +1441,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call deleteComplianceLockCall(
 			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
 			throws ApiException {
@@ -1422,6 +1504,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call deleteComplianceLockValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
@@ -1451,7 +1534,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ComplianceLockResponse deleteComplianceLock(@javax.annotation.Nonnull String projectId)
 			throws ApiException {
 		ApiResponse<ComplianceLockResponse> localVarResp =
@@ -1475,7 +1561,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<ComplianceLockResponse> deleteComplianceLockWithHttpInfo(
 			@javax.annotation.Nonnull String projectId) throws ApiException {
 		okhttp3.Call localVarCall = deleteComplianceLockValidateBeforeCall(projectId, null);
@@ -1500,7 +1589,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call deleteComplianceLockAsync(
 			@javax.annotation.Nonnull String projectId,
 			final ApiCallback<ComplianceLockResponse> _callback)
@@ -1531,7 +1623,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call deleteCredentialsGroupCall(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String groupId,
@@ -1596,6 +1691,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call deleteCredentialsGroupValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId,
@@ -1637,7 +1733,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public DeleteCredentialsGroupResponse deleteCredentialsGroup(
 			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String groupId)
 			throws ApiException {
@@ -1666,7 +1765,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<DeleteCredentialsGroupResponse> deleteCredentialsGroupWithHttpInfo(
 			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String groupId)
 			throws ApiException {
@@ -1697,7 +1799,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call deleteCredentialsGroupAsync(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String groupId,
@@ -1728,7 +1833,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call deleteDefaultRetentionCall(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String bucketName,
@@ -1793,6 +1901,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call deleteDefaultRetentionValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId,
@@ -1832,7 +1941,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public DeleteDefaultRetentionResponse deleteDefaultRetention(
 			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String bucketName)
 			throws ApiException {
@@ -1859,7 +1971,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<DeleteDefaultRetentionResponse> deleteDefaultRetentionWithHttpInfo(
 			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String bucketName)
 			throws ApiException {
@@ -1888,7 +2003,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call deleteDefaultRetentionAsync(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String bucketName,
@@ -1923,7 +2041,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call disableServiceCall(
 			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
 			throws ApiException {
@@ -1983,6 +2104,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call disableServiceValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
@@ -2017,7 +2139,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ProjectStatus disableService(@javax.annotation.Nonnull String projectId)
 			throws ApiException {
 		ApiResponse<ProjectStatus> localVarResp = disableServiceWithHttpInfo(projectId);
@@ -2045,7 +2170,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<ProjectStatus> disableServiceWithHttpInfo(
 			@javax.annotation.Nonnull String projectId) throws ApiException {
 		okhttp3.Call localVarCall = disableServiceValidateBeforeCall(projectId, null);
@@ -2075,7 +2203,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call disableServiceAsync(
 			@javax.annotation.Nonnull String projectId, final ApiCallback<ProjectStatus> _callback)
 			throws ApiException {
@@ -2106,7 +2237,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call enableServiceCall(
 			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
 			throws ApiException {
@@ -2166,6 +2300,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call enableServiceValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
@@ -2200,7 +2335,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ProjectStatus enableService(@javax.annotation.Nonnull String projectId)
 			throws ApiException {
 		ApiResponse<ProjectStatus> localVarResp = enableServiceWithHttpInfo(projectId);
@@ -2228,7 +2366,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<ProjectStatus> enableServiceWithHttpInfo(
 			@javax.annotation.Nonnull String projectId) throws ApiException {
 		okhttp3.Call localVarCall = enableServiceValidateBeforeCall(projectId, null);
@@ -2258,7 +2399,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call enableServiceAsync(
 			@javax.annotation.Nonnull String projectId, final ApiCallback<ProjectStatus> _callback)
 			throws ApiException {
@@ -2289,7 +2433,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call getBucketCall(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String bucketName,
@@ -2354,6 +2501,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call getBucketValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId,
@@ -2395,7 +2543,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public GetBucketResponse getBucket(
 			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String bucketName)
 			throws ApiException {
@@ -2423,7 +2574,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<GetBucketResponse> getBucketWithHttpInfo(
 			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String bucketName)
 			throws ApiException {
@@ -2453,7 +2607,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call getBucketAsync(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String bucketName,
@@ -2481,7 +2638,10 @@ class DefaultApi {
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call getComplianceLockCall(
 			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
 			throws ApiException {
@@ -2541,6 +2701,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call getComplianceLockValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
@@ -2569,7 +2730,10 @@ class DefaultApi {
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ComplianceLockResponse getComplianceLock(@javax.annotation.Nonnull String projectId)
 			throws ApiException {
 		ApiResponse<ComplianceLockResponse> localVarResp = getComplianceLockWithHttpInfo(projectId);
@@ -2591,7 +2755,10 @@ class DefaultApi {
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<ComplianceLockResponse> getComplianceLockWithHttpInfo(
 			@javax.annotation.Nonnull String projectId) throws ApiException {
 		okhttp3.Call localVarCall = getComplianceLockValidateBeforeCall(projectId, null);
@@ -2615,7 +2782,10 @@ class DefaultApi {
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call getComplianceLockAsync(
 			@javax.annotation.Nonnull String projectId,
 			final ApiCallback<ComplianceLockResponse> _callback)
@@ -2644,7 +2814,10 @@ class DefaultApi {
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call getCredentialsGroupCall(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String groupId,
@@ -2709,6 +2882,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call getCredentialsGroupValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId,
@@ -2747,7 +2921,10 @@ class DefaultApi {
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public GetCredentialsGroupResponse getCredentialsGroup(
 			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String groupId)
 			throws ApiException {
@@ -2773,7 +2950,10 @@ class DefaultApi {
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<GetCredentialsGroupResponse> getCredentialsGroupWithHttpInfo(
 			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String groupId)
 			throws ApiException {
@@ -2800,7 +2980,10 @@ class DefaultApi {
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call getCredentialsGroupAsync(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String groupId,
@@ -2831,7 +3014,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call getDefaultRetentionCall(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String bucketName,
@@ -2896,6 +3082,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call getDefaultRetentionValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId,
@@ -2934,7 +3121,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public DefaultRetentionResponse getDefaultRetention(
 			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String bucketName)
 			throws ApiException {
@@ -2960,7 +3150,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<DefaultRetentionResponse> getDefaultRetentionWithHttpInfo(
 			@javax.annotation.Nonnull String projectId, @javax.annotation.Nonnull String bucketName)
 			throws ApiException {
@@ -2988,7 +3181,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call getDefaultRetentionAsync(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String bucketName,
@@ -3021,7 +3217,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call getServiceStatusCall(
 			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
 			throws ApiException {
@@ -3081,6 +3280,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call getServiceStatusValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
@@ -3113,7 +3313,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ProjectStatus getServiceStatus(@javax.annotation.Nonnull String projectId)
 			throws ApiException {
 		ApiResponse<ProjectStatus> localVarResp = getServiceStatusWithHttpInfo(projectId);
@@ -3139,7 +3342,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<ProjectStatus> getServiceStatusWithHttpInfo(
 			@javax.annotation.Nonnull String projectId) throws ApiException {
 		okhttp3.Call localVarCall = getServiceStatusValidateBeforeCall(projectId, null);
@@ -3167,7 +3373,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call getServiceStatusAsync(
 			@javax.annotation.Nonnull String projectId, final ApiCallback<ProjectStatus> _callback)
 			throws ApiException {
@@ -3198,7 +3407,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call listAccessKeysCall(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nullable String credentialsGroup,
@@ -3265,6 +3477,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call listAccessKeysValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId,
@@ -3300,7 +3513,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ListAccessKeysResponse listAccessKeys(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nullable String credentialsGroup)
@@ -3330,7 +3546,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<ListAccessKeysResponse> listAccessKeysWithHttpInfo(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nullable String credentialsGroup)
@@ -3362,7 +3581,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call listAccessKeysAsync(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nullable String credentialsGroup,
@@ -3395,7 +3617,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call listBucketsCall(
 			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
 			throws ApiException {
@@ -3455,6 +3680,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call listBucketsValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
@@ -3487,7 +3713,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ListBucketsResponse listBuckets(@javax.annotation.Nonnull String projectId)
 			throws ApiException {
 		ApiResponse<ListBucketsResponse> localVarResp = listBucketsWithHttpInfo(projectId);
@@ -3513,7 +3742,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<ListBucketsResponse> listBucketsWithHttpInfo(
 			@javax.annotation.Nonnull String projectId) throws ApiException {
 		okhttp3.Call localVarCall = listBucketsValidateBeforeCall(projectId, null);
@@ -3541,7 +3773,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call listBucketsAsync(
 			@javax.annotation.Nonnull String projectId,
 			final ApiCallback<ListBucketsResponse> _callback)
@@ -3571,7 +3806,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call listCredentialsGroupsCall(
 			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
 			throws ApiException {
@@ -3631,6 +3869,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call listCredentialsGroupsValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId, final ApiCallback _callback)
@@ -3662,7 +3901,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ListCredentialsGroupsResponse listCredentialsGroups(
 			@javax.annotation.Nonnull String projectId) throws ApiException {
 		ApiResponse<ListCredentialsGroupsResponse> localVarResp =
@@ -3688,7 +3930,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<ListCredentialsGroupsResponse> listCredentialsGroupsWithHttpInfo(
 			@javax.annotation.Nonnull String projectId) throws ApiException {
 		okhttp3.Call localVarCall = listCredentialsGroupsValidateBeforeCall(projectId, null);
@@ -3716,7 +3961,10 @@ class DefaultApi {
 	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call listCredentialsGroupsAsync(
 			@javax.annotation.Nonnull String projectId,
 			final ApiCallback<ListCredentialsGroupsResponse> _callback)
@@ -3747,7 +3995,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call setDefaultRetentionCall(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String bucketName,
@@ -3813,6 +4064,7 @@ class DefaultApi {
 				_callback);
 	}
 
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	private okhttp3.Call setDefaultRetentionValidateBeforeCall(
 			@javax.annotation.Nonnull String projectId,
@@ -3861,7 +4113,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public DefaultRetentionResponse setDefaultRetention(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String bucketName,
@@ -3891,7 +4146,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public ApiResponse<DefaultRetentionResponse> setDefaultRetentionWithHttpInfo(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String bucketName,
@@ -3924,7 +4182,10 @@ class DefaultApi {
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
+	 *
+	 * @deprecated
 	 */
+	@Deprecated
 	public okhttp3.Call setDefaultRetentionAsync(
 			@javax.annotation.Nonnull String projectId,
 			@javax.annotation.Nonnull String bucketName,
@@ -3936,6 +4197,218 @@ class DefaultApi {
 				setDefaultRetentionValidateBeforeCall(
 						projectId, bucketName, setDefaultRetentionPayload, _callback);
 		Type localVarReturnType = new TypeToken<DefaultRetentionResponse>() {}.getType();
+		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+		return localVarCall;
+	}
+
+	/**
+	 * Build call for updateService
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param updateServicePayload (required)
+	 * @param _callback Callback for upload/download progress
+	 * @return Call to execute
+	 * @throws ApiException If fail to serialize the request body object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 *
+	 * @deprecated
+	 */
+	@Deprecated
+	public okhttp3.Call updateServiceCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull UpdateServicePayload updateServicePayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		String basePath = null;
+		// Operation Servers
+		String[] localBasePaths = new String[] {};
+
+		// Determine Base Path to Use
+		if (localCustomBaseUrl != null) {
+			basePath = localCustomBaseUrl;
+		} else if (localBasePaths.length > 0) {
+			basePath = localBasePaths[localHostIndex];
+		} else {
+			basePath = null;
+		}
+
+		Object localVarPostBody = updateServicePayload;
+
+		// create path and map variables
+		String localVarPath =
+				"/v1/project/{projectId}"
+						.replace(
+								"{" + "projectId" + "}",
+								localVarApiClient.escapeString(projectId.toString()));
+
+		List<Pair> localVarQueryParams = new ArrayList<Pair>();
+		List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+		Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+		Map<String, String> localVarCookieParams = new HashMap<String, String>();
+		Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+		final String[] localVarAccepts = {"application/json"};
+		final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+		if (localVarAccept != null) {
+			localVarHeaderParams.put("Accept", localVarAccept);
+		}
+
+		final String[] localVarContentTypes = {"application/json"};
+		final String localVarContentType =
+				localVarApiClient.selectHeaderContentType(localVarContentTypes);
+		if (localVarContentType != null) {
+			localVarHeaderParams.put("Content-Type", localVarContentType);
+		}
+
+		String[] localVarAuthNames = new String[] {};
+		return localVarApiClient.buildCall(
+				basePath,
+				localVarPath,
+				"PUT",
+				localVarQueryParams,
+				localVarCollectionQueryParams,
+				localVarPostBody,
+				localVarHeaderParams,
+				localVarCookieParams,
+				localVarFormParams,
+				localVarAuthNames,
+				_callback);
+	}
+
+	@Deprecated
+	@SuppressWarnings("rawtypes")
+	private okhttp3.Call updateServiceValidateBeforeCall(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull UpdateServicePayload updateServicePayload,
+			final ApiCallback _callback)
+			throws ApiException {
+		// verify the required parameter 'projectId' is set
+		if (projectId == null) {
+			throw new ApiException(
+					"Missing the required parameter 'projectId' when calling updateService(Async)");
+		}
+
+		// verify the required parameter 'updateServicePayload' is set
+		if (updateServicePayload == null) {
+			throw new ApiException(
+					"Missing the required parameter 'updateServicePayload' when calling updateService(Async)");
+		}
+
+		return updateServiceCall(projectId, updateServicePayload, _callback);
+	}
+
+	/**
+	 * Update Project Update project details.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param updateServicePayload (required)
+	 * @return ProjectStatus
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 *
+	 * @deprecated
+	 */
+	@Deprecated
+	public ProjectStatus updateService(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull UpdateServicePayload updateServicePayload)
+			throws ApiException {
+		ApiResponse<ProjectStatus> localVarResp =
+				updateServiceWithHttpInfo(projectId, updateServicePayload);
+		return localVarResp.getData();
+	}
+
+	/**
+	 * Update Project Update project details.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param updateServicePayload (required)
+	 * @return ApiResponse&lt;ProjectStatus&gt;
+	 * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
+	 *     response body
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 *
+	 * @deprecated
+	 */
+	@Deprecated
+	public ApiResponse<ProjectStatus> updateServiceWithHttpInfo(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull UpdateServicePayload updateServicePayload)
+			throws ApiException {
+		okhttp3.Call localVarCall =
+				updateServiceValidateBeforeCall(projectId, updateServicePayload, null);
+		Type localVarReturnType = new TypeToken<ProjectStatus>() {}.getType();
+		return localVarApiClient.execute(localVarCall, localVarReturnType);
+	}
+
+	/**
+	 * Update Project (asynchronously) Update project details.
+	 *
+	 * @param projectId STACKIT project ID (required)
+	 * @param updateServicePayload (required)
+	 * @param _callback The callback to be executed when the API call finishes
+	 * @return The request call
+	 * @throws ApiException If fail to process the API call, e.g. serializing the request body
+	 *     object
+	 * @http.response.details
+	 *     <table border="1">
+	 * <caption>Response Details</caption>
+	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
+	 * <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+	 * <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+	 * </table>
+	 *
+	 * @deprecated
+	 */
+	@Deprecated
+	public okhttp3.Call updateServiceAsync(
+			@javax.annotation.Nonnull String projectId,
+			@javax.annotation.Nonnull UpdateServicePayload updateServicePayload,
+			final ApiCallback<ProjectStatus> _callback)
+			throws ApiException {
+
+		okhttp3.Call localVarCall =
+				updateServiceValidateBeforeCall(projectId, updateServicePayload, _callback);
+		Type localVarReturnType = new TypeToken<ProjectStatus>() {}.getType();
 		localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
 		return localVarCall;
 	}

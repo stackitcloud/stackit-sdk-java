@@ -16,6 +16,7 @@ import cloud.stackit.sdk.objectstorage.v2api.JSON;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
@@ -33,7 +34,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** ListBucketsResponse */
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class ListBucketsResponse {
 	public static final String SERIALIZED_NAME_BUCKETS = "buckets";
 
@@ -177,10 +178,7 @@ public class ListBucketsResponse {
 	 * line).
 	 */
 	private String toIndentedString(Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
+		return o == null ? "null" : o.toString().replace("\n", "\n    ");
 	}
 
 	public static HashSet<String> openapiFields;
@@ -224,21 +222,20 @@ public class ListBucketsResponse {
 			}
 		}
 		JsonObject jsonObj = jsonElement.getAsJsonObject();
-		// ensure the json data is an array
-		if (!jsonObj.get("buckets").isJsonArray()) {
-			throw new IllegalArgumentException(
-					String.format(
-							java.util.Locale.ROOT,
-							"Expected the field `buckets` to be an array in the JSON string but got `%s`",
-							jsonObj.get("buckets").toString()));
+		if (jsonObj.get("buckets") != null) {
+			if (!jsonObj.get("buckets").isJsonArray()) {
+				throw new IllegalArgumentException(
+						String.format(
+								java.util.Locale.ROOT,
+								"Expected the field `buckets` to be an array in the JSON string but got `%s`",
+								jsonObj.get("buckets").toString()));
+			}
+			JsonArray jsonArraybuckets = jsonObj.getAsJsonArray("buckets");
+			// validate the required field `buckets` (array)
+			for (int i = 0; i < jsonArraybuckets.size(); i++) {
+				Bucket.validateJsonElement(jsonArraybuckets.get(i));
+			}
 		}
-
-		JsonArray jsonArraybuckets = jsonObj.getAsJsonArray("buckets");
-		// validate the required field `buckets` (array)
-		for (int i = 0; i < jsonArraybuckets.size(); i++) {
-			Bucket.validateJsonElement(jsonArraybuckets.get(i));
-		}
-		;
 		if (!jsonObj.get("project").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
@@ -281,7 +278,9 @@ public class ListBucketsResponse {
 												entry.getKey(), (Character) entry.getValue());
 									else {
 										JsonElement jsonElement = gson.toJsonTree(entry.getValue());
-										if (jsonElement.isJsonArray()) {
+										if (jsonElement.isJsonNull()) {
+											obj.add(entry.getKey(), JsonNull.INSTANCE);
+										} else if (jsonElement.isJsonArray()) {
 											obj.add(entry.getKey(), jsonElement.getAsJsonArray());
 										} else {
 											obj.add(entry.getKey(), jsonElement.getAsJsonObject());
