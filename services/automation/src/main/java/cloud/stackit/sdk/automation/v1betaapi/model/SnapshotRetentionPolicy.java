@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class SnapshotRetentionPolicy extends AbstractOpenApiSchema {
 	private static final Logger log = Logger.getLogger(SnapshotRetentionPolicy.class.getName());
 
@@ -220,6 +220,7 @@ public class SnapshotRetentionPolicy extends AbstractOpenApiSchema {
 	 * @return The actual instance of `SnapshotRetentionPolicyCount`
 	 * @throws ClassCastException if the instance is not `SnapshotRetentionPolicyCount`
 	 */
+	@SuppressWarnings("unchecked")
 	public SnapshotRetentionPolicyCount getSnapshotRetentionPolicyCount()
 			throws ClassCastException {
 		return (SnapshotRetentionPolicyCount) super.getActualInstance();
@@ -232,6 +233,7 @@ public class SnapshotRetentionPolicy extends AbstractOpenApiSchema {
 	 * @return The actual instance of `SnapshotRetentionPolicyIndefinitely`
 	 * @throws ClassCastException if the instance is not `SnapshotRetentionPolicyIndefinitely`
 	 */
+	@SuppressWarnings("unchecked")
 	public SnapshotRetentionPolicyIndefinitely getSnapshotRetentionPolicyIndefinitely()
 			throws ClassCastException {
 		return (SnapshotRetentionPolicyIndefinitely) super.getActualInstance();
