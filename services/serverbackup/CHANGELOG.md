@@ -1,3 +1,6 @@
+## v0.2.1
+- **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
+
 ## v0.2.0
 - **Feature (breaking change):** Introduction of multi API version support. See the GitHub discussion post for more details: https://github.com/stackitcloud/stackit-sdk-java/discussions/530
 
