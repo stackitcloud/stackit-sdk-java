@@ -1,3 +1,10 @@
+## v0.6.0
+- **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
+- `v1api`:
+  - **Feature:** Add new `ConflictError` model for responses with 409 status code
+- `v1betaapi`:
+  - **Feature:** Add new `ConflictError` model for responses with 409 status code
+
 ## v0.5.0
 - **Deprecation:** deprecated field `schedules` in model `SnapshotPolicy`
 - **Feature:** new field `snapshotSchedules` in model `SnapshotPolicy`

@@ -16,6 +16,7 @@ import cloud.stackit.sdk.sfs.v1betaapi.JSON;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
@@ -34,7 +35,7 @@ import java.util.Objects;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 /** ValidationError */
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class ValidationError {
 	public static final String SERIALIZED_NAME_ERROR_DESCRIPTION = "error_description";
 
@@ -251,10 +252,7 @@ public class ValidationError {
 	 * line).
 	 */
 	private String toIndentedString(Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
+		return o == null ? "null" : o.toString().replace("\n", "\n    ");
 	}
 
 	public static HashSet<String> openapiFields;
@@ -313,21 +311,20 @@ public class ValidationError {
 							"Expected the field `type` to be a primitive type in the JSON string but got `%s`",
 							jsonObj.get("type").toString()));
 		}
-		// ensure the json data is an array
-		if (!jsonObj.get("fields").isJsonArray()) {
-			throw new IllegalArgumentException(
-					String.format(
-							java.util.Locale.ROOT,
-							"Expected the field `fields` to be an array in the JSON string but got `%s`",
-							jsonObj.get("fields").toString()));
+		if (jsonObj.get("fields") != null) {
+			if (!jsonObj.get("fields").isJsonArray()) {
+				throw new IllegalArgumentException(
+						String.format(
+								java.util.Locale.ROOT,
+								"Expected the field `fields` to be an array in the JSON string but got `%s`",
+								jsonObj.get("fields").toString()));
+			}
+			JsonArray jsonArrayfields = jsonObj.getAsJsonArray("fields");
+			// validate the required field `fields` (array)
+			for (int i = 0; i < jsonArrayfields.size(); i++) {
+				ValidationErrorField.validateJsonElement(jsonArrayfields.get(i));
+			}
 		}
-
-		JsonArray jsonArrayfields = jsonObj.getAsJsonArray("fields");
-		// validate the required field `fields` (array)
-		for (int i = 0; i < jsonArrayfields.size(); i++) {
-			ValidationErrorField.validateJsonElement(jsonArrayfields.get(i));
-		}
-		;
 	}
 
 	public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
@@ -363,7 +360,9 @@ public class ValidationError {
 												entry.getKey(), (Character) entry.getValue());
 									else {
 										JsonElement jsonElement = gson.toJsonTree(entry.getValue());
-										if (jsonElement.isJsonArray()) {
+										if (jsonElement.isJsonNull()) {
+											obj.add(entry.getKey(), JsonNull.INSTANCE);
+										} else if (jsonElement.isJsonArray()) {
 											obj.add(entry.getKey(), jsonElement.getAsJsonArray());
 										} else {
 											obj.add(entry.getKey(), jsonElement.getAsJsonObject());
