@@ -1,3 +1,6 @@
+## v0.2.2
+- **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
+
 ## v0.2.1
 - `v1api`: **Docs:** Extend the description of the attributes `rrule` and `maintenanceWindow`
 

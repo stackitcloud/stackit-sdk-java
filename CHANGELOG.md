@@ -6,6 +6,9 @@
 - `serverbackup`:
   - [v0.2.1](services/serverbackup/CHANGELOG.md#v021)
     - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
+- `serverupdate`:
+  - [v0.2.2](services/serverupdate/CHANGELOG.md#v022)
+    - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
 - `resourcemanager`:
   - [v0.7.0](services/resourcemanager/CHANGELOG.md#v070)
     - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
