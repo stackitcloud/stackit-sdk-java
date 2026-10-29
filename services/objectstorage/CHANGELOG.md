@@ -1,3 +1,13 @@
+## v0.5.0
+- **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
+- `v1api`:
+  - **Deprecation:** The `v1api` is deprecated and is planned to retire in one year. Use the regional v2 api.
+  - **Feature:** New field `Labels` in `ProjectStatus` model struct
+  - **Feature:** New API client method `UpdateService`
+- `v2api`:
+  - **Feature:** New field `Labels` in `ProjectStatus` model struct
+  - **Feature:** New API client method `UpdateService`
+
 ## v0.4.0
 - `v1api`:
   - **Feature:** New model class `RateLimitError`
