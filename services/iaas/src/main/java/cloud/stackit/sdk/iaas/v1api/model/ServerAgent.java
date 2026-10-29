@@ -15,6 +15,7 @@ package cloud.stackit.sdk.iaas.v1api.model;
 import cloud.stackit.sdk.iaas.v1api.JSON;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
@@ -31,12 +32,17 @@ import java.util.Map;
 import java.util.Objects;
 
 /** STACKIT server agent options for a server. */
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class ServerAgent {
 	public static final String SERIALIZED_NAME_PROVISIONED = "provisioned";
 
 	@SerializedName(SERIALIZED_NAME_PROVISIONED)
 	@javax.annotation.Nullable private Boolean provisioned;
+
+	public static final String SERIALIZED_NAME_VM_MONITORING = "vmMonitoring";
+
+	@SerializedName(SERIALIZED_NAME_VM_MONITORING)
+	@javax.annotation.Nullable private Boolean vmMonitoring;
 
 	public ServerAgent() {}
 
@@ -46,10 +52,11 @@ public class ServerAgent {
 	}
 
 	/**
-	 * Configure the STACKIT server agent provisioning during the first boot of the server. Only
-	 * works when booting from an images that supports the STACKIT server agent. When
-	 * &#x60;false&#x60; the agent IS NOT installed. When &#x60;true&#x60; the agent IS installed.
-	 * When its not set the result depend on the used image and its default provisioning setting.
+	 * Configure the STACKIT server agent provisioning during the first boot of the server. When
+	 * &#x60;false&#x60;, the agent is not installed. When &#x60;true&#x60;, the agent is installed.
+	 * Setting it to &#x60;true&#x60; when booting from an image requires an image that supports the
+	 * agent; otherwise, the request is rejected. If omitted when booting from an image, the image
+	 * default (&#x60;provisionByDefault&#x60;) applies.
 	 *
 	 * @return provisioned
 	 */
@@ -59,6 +66,28 @@ public class ServerAgent {
 
 	public void setProvisioned(@javax.annotation.Nullable Boolean provisioned) {
 		this.provisioned = provisioned;
+	}
+
+	public ServerAgent vmMonitoring(@javax.annotation.Nullable Boolean vmMonitoring) {
+		this.vmMonitoring = vmMonitoring;
+		return this;
+	}
+
+	/**
+	 * Configuration property that controls whether active virtual machine monitoring is enabled for
+	 * a server instance. When &#x60;true&#x60; it allows the platform to collect metrics, monitor
+	 * system health, and track guest-level performance on the VM. It operates as a dependent option
+	 * - meaning &#x60;vmMonitoring&#x60; cannot be active unless the main server agent is also
+	 * enabled.
+	 *
+	 * @return vmMonitoring
+	 */
+	@javax.annotation.Nullable public Boolean getVmMonitoring() {
+		return vmMonitoring;
+	}
+
+	public void setVmMonitoring(@javax.annotation.Nullable Boolean vmMonitoring) {
+		this.vmMonitoring = vmMonitoring;
 	}
 
 	/**
@@ -115,12 +144,13 @@ public class ServerAgent {
 		}
 		ServerAgent serverAgent = (ServerAgent) o;
 		return Objects.equals(this.provisioned, serverAgent.provisioned)
+				&& Objects.equals(this.vmMonitoring, serverAgent.vmMonitoring)
 				&& Objects.equals(this.additionalProperties, serverAgent.additionalProperties);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(provisioned, additionalProperties);
+		return Objects.hash(provisioned, vmMonitoring, additionalProperties);
 	}
 
 	@Override
@@ -128,6 +158,7 @@ public class ServerAgent {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class ServerAgent {\n");
 		sb.append("    provisioned: ").append(toIndentedString(provisioned)).append("\n");
+		sb.append("    vmMonitoring: ").append(toIndentedString(vmMonitoring)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -140,10 +171,7 @@ public class ServerAgent {
 	 * line).
 	 */
 	private String toIndentedString(Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
+		return o == null ? "null" : o.toString().replace("\n", "\n    ");
 	}
 
 	public static HashSet<String> openapiFields;
@@ -151,7 +179,7 @@ public class ServerAgent {
 
 	static {
 		// a set of all properties/fields (JSON key names)
-		openapiFields = new HashSet<String>(Arrays.asList("provisioned"));
+		openapiFields = new HashSet<String>(Arrays.asList("provisioned", "vmMonitoring"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(0);
@@ -209,7 +237,9 @@ public class ServerAgent {
 												entry.getKey(), (Character) entry.getValue());
 									else {
 										JsonElement jsonElement = gson.toJsonTree(entry.getValue());
-										if (jsonElement.isJsonArray()) {
+										if (jsonElement.isJsonNull()) {
+											obj.add(entry.getKey(), JsonNull.INSTANCE);
+										} else if (jsonElement.isJsonArray()) {
 											obj.add(entry.getKey(), jsonElement.getAsJsonArray());
 										} else {
 											obj.add(entry.getKey(), jsonElement.getAsJsonObject());
