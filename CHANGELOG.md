@@ -1,5 +1,8 @@
 ## Release (2026-MM-DD)
 
+- `automation`:
+  - [v0.1.1](services/automation/CHANGELOG.md#v011)
+    - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
 - `resourcemanager`:
   - [v0.7.0](services/resourcemanager/CHANGELOG.md#v070)
     - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`

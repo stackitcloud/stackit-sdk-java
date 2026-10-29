@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class VolumeAutomationInput extends AbstractOpenApiSchema {
 	private static final Logger log = Logger.getLogger(VolumeAutomationInput.class.getName());
 
@@ -174,6 +174,7 @@ public class VolumeAutomationInput extends AbstractOpenApiSchema {
 	 * @return The actual instance of `VolumeRecoveryPointManagementInput`
 	 * @throws ClassCastException if the instance is not `VolumeRecoveryPointManagementInput`
 	 */
+	@SuppressWarnings("unchecked")
 	public VolumeRecoveryPointManagementInput getVolumeRecoveryPointManagementInput()
 			throws ClassCastException {
 		return (VolumeRecoveryPointManagementInput) super.getActualInstance();
