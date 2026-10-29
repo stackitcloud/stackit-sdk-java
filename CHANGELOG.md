@@ -9,6 +9,16 @@
 - `serverupdate`:
   - [v0.2.2](services/serverupdate/CHANGELOG.md#v022)
     - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
+- `objectstorage`:
+  - [v0.5.0](services/objectstorage/CHANGELOG.md#v050)
+    - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
+    - `v1api`:
+      - **Deprecation:** The `v1api` is deprecated and is planned to retire in one year. Use the regional v2 api.
+      - **Feature:** New field `Labels` in `ProjectStatus` model struct
+      - **Feature:** New API client method `UpdateService`
+    - `v2api`:
+      - **Feature:** New field `Labels` in `ProjectStatus` model struct
+      - **Feature:** New API client method `UpdateService`
 - `resourcemanager`:
   - [v0.7.0](services/resourcemanager/CHANGELOG.md#v070)
     - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
