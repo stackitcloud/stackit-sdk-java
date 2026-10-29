@@ -15,6 +15,7 @@ package cloud.stackit.sdk.iaas.v2beta1api.model;
 import cloud.stackit.sdk.iaas.v2beta1api.JSON;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
@@ -34,7 +35,7 @@ import java.util.Objects;
 /**
  * Object that represents the request body for a regional network area IPv4 configuration update.
  */
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class UpdateRegionalAreaIPv4 {
 	public static final String SERIALIZED_NAME_DEFAULT_NAMESERVERS = "defaultNameservers";
 
@@ -233,10 +234,7 @@ public class UpdateRegionalAreaIPv4 {
 	 * line).
 	 */
 	private String toIndentedString(Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
+		return o == null ? "null" : o.toString().replace("\n", "\n    ");
 	}
 
 	public static HashSet<String> openapiFields;
@@ -319,7 +317,9 @@ public class UpdateRegionalAreaIPv4 {
 												entry.getKey(), (Character) entry.getValue());
 									else {
 										JsonElement jsonElement = gson.toJsonTree(entry.getValue());
-										if (jsonElement.isJsonArray()) {
+										if (jsonElement.isJsonNull()) {
+											obj.add(entry.getKey(), JsonNull.INSTANCE);
+										} else if (jsonElement.isJsonArray()) {
 											obj.add(entry.getKey(), jsonElement.getAsJsonArray());
 										} else {
 											obj.add(entry.getKey(), jsonElement.getAsJsonObject());
