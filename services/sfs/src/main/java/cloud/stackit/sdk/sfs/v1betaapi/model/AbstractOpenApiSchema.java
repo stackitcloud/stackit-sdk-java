@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Abstract class for oneOf,anyOf schemas defined in OpenAPI spec */
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public abstract class AbstractOpenApiSchema {
 
 	// store the actual instance of the schema/object
@@ -104,10 +104,7 @@ public abstract class AbstractOpenApiSchema {
 	 * line).
 	 */
 	private String toIndentedString(Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
+		return o == null ? "null" : o.toString().replace("\n", "\n    ");
 	}
 
 	public boolean equals(Object o) {
