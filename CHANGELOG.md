@@ -1,5 +1,8 @@
 ## Release (2026-MM-DD)
 
+- `kms`:
+  - [v0.1.0](services/kms/CHANGELOG.md#v010)
+    - Initial onboarding of STACKIT Java SDK for STACKIT Key Management Service (KMS)
 - `automation`:
   - [v0.1.1](services/automation/CHANGELOG.md#v011)
     - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
