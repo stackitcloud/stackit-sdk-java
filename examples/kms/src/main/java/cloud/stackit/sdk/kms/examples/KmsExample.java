@@ -95,7 +95,8 @@ public final class KmsExample {
 				// schedule key for deletion
 				System.out.println("scheduling key deletion");
 				kmsApi.deleteKey(projectId, REGION, keyRingID, keyID);
-				System.out.println("Key scheduled for deletion. ⚠️ The key ring can't be deleted until the key deletion is done. This may take some days. Delete the key ring manually after this period.");
+				System.out.println(
+						"Key scheduled for deletion. ⚠️ The key ring can't be deleted until the key deletion is done. This may take some days. Delete the key ring manually after this period.");
 			}
 			// key ring can only be deleted if no key exists.
 			if (keyRingID != null && keyID == null) {
