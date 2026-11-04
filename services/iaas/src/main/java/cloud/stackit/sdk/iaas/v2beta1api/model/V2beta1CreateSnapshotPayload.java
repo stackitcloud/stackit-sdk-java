@@ -15,6 +15,7 @@ package cloud.stackit.sdk.iaas.v2beta1api.model;
 import cloud.stackit.sdk.iaas.v2beta1api.JSON;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
@@ -33,7 +34,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /** Object that represents a snapshot. */
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class V2beta1CreateSnapshotPayload {
 	public static final String SERIALIZED_NAME_AVAILABILITY_ZONE = "availabilityZone";
 
@@ -49,6 +50,11 @@ public class V2beta1CreateSnapshotPayload {
 
 	@SerializedName(SERIALIZED_NAME_DESCRIPTION)
 	@javax.annotation.Nullable private String description;
+
+	public static final String SERIALIZED_NAME_ENCRYPTED = "encrypted";
+
+	@SerializedName(SERIALIZED_NAME_ENCRYPTED)
+	@javax.annotation.Nullable private Boolean encrypted;
 
 	public static final String SERIALIZED_NAME_ID = "id";
 
@@ -91,6 +97,7 @@ public class V2beta1CreateSnapshotPayload {
 	public V2beta1CreateSnapshotPayload(
 			String availabilityZone,
 			OffsetDateTime createdAt,
+			Boolean encrypted,
 			UUID id,
 			Long size,
 			String status,
@@ -98,6 +105,7 @@ public class V2beta1CreateSnapshotPayload {
 		this();
 		this.availabilityZone = availabilityZone;
 		this.createdAt = createdAt;
+		this.encrypted = encrypted;
 		this.id = id;
 		this.size = size;
 		this.status = status;
@@ -138,6 +146,15 @@ public class V2beta1CreateSnapshotPayload {
 
 	public void setDescription(@javax.annotation.Nullable String description) {
 		this.description = description;
+	}
+
+	/**
+	 * Indicates if a volume is encrypted.
+	 *
+	 * @return encrypted
+	 */
+	@javax.annotation.Nullable public Boolean getEncrypted() {
+		return encrypted;
 	}
 
 	/**
@@ -304,6 +321,7 @@ public class V2beta1CreateSnapshotPayload {
 		return Objects.equals(this.availabilityZone, v2beta1CreateSnapshotPayload.availabilityZone)
 				&& Objects.equals(this.createdAt, v2beta1CreateSnapshotPayload.createdAt)
 				&& Objects.equals(this.description, v2beta1CreateSnapshotPayload.description)
+				&& Objects.equals(this.encrypted, v2beta1CreateSnapshotPayload.encrypted)
 				&& Objects.equals(this.id, v2beta1CreateSnapshotPayload.id)
 				&& Objects.equals(this.labels, v2beta1CreateSnapshotPayload.labels)
 				&& Objects.equals(this.name, v2beta1CreateSnapshotPayload.name)
@@ -322,6 +340,7 @@ public class V2beta1CreateSnapshotPayload {
 				availabilityZone,
 				createdAt,
 				description,
+				encrypted,
 				id,
 				labels,
 				name,
@@ -339,6 +358,7 @@ public class V2beta1CreateSnapshotPayload {
 		sb.append("    availabilityZone: ").append(toIndentedString(availabilityZone)).append("\n");
 		sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
 		sb.append("    description: ").append(toIndentedString(description)).append("\n");
+		sb.append("    encrypted: ").append(toIndentedString(encrypted)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    labels: ").append(toIndentedString(labels)).append("\n");
 		sb.append("    name: ").append(toIndentedString(name)).append("\n");
@@ -358,10 +378,7 @@ public class V2beta1CreateSnapshotPayload {
 	 * line).
 	 */
 	private String toIndentedString(Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
+		return o == null ? "null" : o.toString().replace("\n", "\n    ");
 	}
 
 	public static HashSet<String> openapiFields;
@@ -375,6 +392,7 @@ public class V2beta1CreateSnapshotPayload {
 								"availabilityZone",
 								"createdAt",
 								"description",
+								"encrypted",
 								"id",
 								"labels",
 								"name",
@@ -503,7 +521,9 @@ public class V2beta1CreateSnapshotPayload {
 												entry.getKey(), (Character) entry.getValue());
 									else {
 										JsonElement jsonElement = gson.toJsonTree(entry.getValue());
-										if (jsonElement.isJsonArray()) {
+										if (jsonElement.isJsonNull()) {
+											obj.add(entry.getKey(), JsonNull.INSTANCE);
+										} else if (jsonElement.isJsonArray()) {
 											obj.add(entry.getKey(), jsonElement.getAsJsonArray());
 										} else {
 											obj.add(entry.getKey(), jsonElement.getAsJsonObject());
