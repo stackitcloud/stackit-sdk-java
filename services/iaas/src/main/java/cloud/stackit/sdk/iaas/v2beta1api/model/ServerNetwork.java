@@ -16,6 +16,7 @@ import cloud.stackit.sdk.iaas.v2beta1api.JSON;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
@@ -24,6 +25,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -34,12 +36,17 @@ import java.util.Objects;
 import java.util.UUID;
 
 /** Describes the object that matches servers to its networks. */
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class ServerNetwork {
 	public static final String SERIALIZED_NAME_ALLOWED_ADDRESSES = "allowedAddresses";
 
 	@SerializedName(SERIALIZED_NAME_ALLOWED_ADDRESSES)
 	@javax.annotation.Nullable private List<AllowedAddressesInner> allowedAddresses = new ArrayList<>();
+
+	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
+
+	@SerializedName(SERIALIZED_NAME_CREATED_AT)
+	@javax.annotation.Nullable private OffsetDateTime createdAt;
 
 	public static final String SERIALIZED_NAME_IPV4 = "ipv4";
 
@@ -91,7 +98,18 @@ public class ServerNetwork {
 	@SerializedName(SERIALIZED_NAME_SECURITY_GROUPS)
 	@javax.annotation.Nullable private List<UUID> securityGroups = new ArrayList<>();
 
+	public static final String SERIALIZED_NAME_UPDATED_AT = "updatedAt";
+
+	@SerializedName(SERIALIZED_NAME_UPDATED_AT)
+	@javax.annotation.Nullable private OffsetDateTime updatedAt;
+
 	public ServerNetwork() {}
+
+	public ServerNetwork(OffsetDateTime createdAt, OffsetDateTime updatedAt) {
+		this();
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+	}
 
 	public ServerNetwork allowedAddresses(
 			@javax.annotation.Nullable List<AllowedAddressesInner> allowedAddresses) {
@@ -119,6 +137,15 @@ public class ServerNetwork {
 	public void setAllowedAddresses(
 			@javax.annotation.Nullable List<AllowedAddressesInner> allowedAddresses) {
 		this.allowedAddresses = allowedAddresses;
+	}
+
+	/**
+	 * Date-time when resource was created.
+	 *
+	 * @return createdAt
+	 */
+	@javax.annotation.Nullable public OffsetDateTime getCreatedAt() {
+		return createdAt;
 	}
 
 	public ServerNetwork ipv4(@javax.annotation.Nullable String ipv4) {
@@ -297,6 +324,15 @@ public class ServerNetwork {
 	}
 
 	/**
+	 * Date-time when resource was last updated.
+	 *
+	 * @return updatedAt
+	 */
+	@javax.annotation.Nullable public OffsetDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	/**
 	 * A container for additional, undeclared properties. This is a holder for any undeclared
 	 * properties as specified with the 'additionalProperties' keyword in the OAS document.
 	 */
@@ -350,6 +386,7 @@ public class ServerNetwork {
 		}
 		ServerNetwork serverNetwork = (ServerNetwork) o;
 		return Objects.equals(this.allowedAddresses, serverNetwork.allowedAddresses)
+				&& Objects.equals(this.createdAt, serverNetwork.createdAt)
 				&& Objects.equals(this.ipv4, serverNetwork.ipv4)
 				&& Objects.equals(this.ipv6, serverNetwork.ipv6)
 				&& Objects.equals(this.mac, serverNetwork.mac)
@@ -359,6 +396,7 @@ public class ServerNetwork {
 				&& Objects.equals(this.nicSecurity, serverNetwork.nicSecurity)
 				&& Objects.equals(this.publicIp, serverNetwork.publicIp)
 				&& Objects.equals(this.securityGroups, serverNetwork.securityGroups)
+				&& Objects.equals(this.updatedAt, serverNetwork.updatedAt)
 				&& Objects.equals(this.additionalProperties, serverNetwork.additionalProperties);
 	}
 
@@ -366,6 +404,7 @@ public class ServerNetwork {
 	public int hashCode() {
 		return Objects.hash(
 				allowedAddresses,
+				createdAt,
 				ipv4,
 				ipv6,
 				mac,
@@ -375,6 +414,7 @@ public class ServerNetwork {
 				nicSecurity,
 				publicIp,
 				securityGroups,
+				updatedAt,
 				additionalProperties);
 	}
 
@@ -383,6 +423,7 @@ public class ServerNetwork {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class ServerNetwork {\n");
 		sb.append("    allowedAddresses: ").append(toIndentedString(allowedAddresses)).append("\n");
+		sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
 		sb.append("    ipv4: ").append(toIndentedString(ipv4)).append("\n");
 		sb.append("    ipv6: ").append(toIndentedString(ipv6)).append("\n");
 		sb.append("    mac: ").append(toIndentedString(mac)).append("\n");
@@ -392,6 +433,7 @@ public class ServerNetwork {
 		sb.append("    nicSecurity: ").append(toIndentedString(nicSecurity)).append("\n");
 		sb.append("    publicIp: ").append(toIndentedString(publicIp)).append("\n");
 		sb.append("    securityGroups: ").append(toIndentedString(securityGroups)).append("\n");
+		sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -404,10 +446,7 @@ public class ServerNetwork {
 	 * line).
 	 */
 	private String toIndentedString(Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
+		return o == null ? "null" : o.toString().replace("\n", "\n    ");
 	}
 
 	public static HashSet<String> openapiFields;
@@ -419,6 +458,7 @@ public class ServerNetwork {
 				new HashSet<String>(
 						Arrays.asList(
 								"allowedAddresses",
+								"createdAt",
 								"ipv4",
 								"ipv6",
 								"mac",
@@ -427,7 +467,8 @@ public class ServerNetwork {
 								"nicId",
 								"nicSecurity",
 								"publicIp",
-								"securityGroups"));
+								"securityGroups",
+								"updatedAt"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields =
@@ -581,7 +622,9 @@ public class ServerNetwork {
 												entry.getKey(), (Character) entry.getValue());
 									else {
 										JsonElement jsonElement = gson.toJsonTree(entry.getValue());
-										if (jsonElement.isJsonArray()) {
+										if (jsonElement.isJsonNull()) {
+											obj.add(entry.getKey(), JsonNull.INSTANCE);
+										} else if (jsonElement.isJsonArray()) {
 											obj.add(entry.getKey(), jsonElement.getAsJsonArray());
 										} else {
 											obj.add(entry.getKey(), jsonElement.getAsJsonObject());
