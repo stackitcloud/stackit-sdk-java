@@ -72,7 +72,7 @@ public final class KmsExample {
 									.displayName("java-sdk-example-keyring")
 									.description("A Java SDK example key ring"));
 			keyRingID = Objects.requireNonNull(keyRing.getId());
-			waitForKeyring(kmsApi, projectId, keyRingID);
+			waitForKeyRing(kmsApi, projectId, keyRingID);
 			System.out.println("key ring created: " + keyRingID);
 			System.out.println("creating key");
 			Key key =
@@ -95,7 +95,7 @@ public final class KmsExample {
 				// schedule key for deletion
 				System.out.println("scheduling key deletion");
 				kmsApi.deleteKey(projectId, REGION, keyRingID, keyID);
-				System.out.println("key scheduled for deletion, delete keyring manually");
+				System.out.println("Key scheduled for deletion. ⚠️ The key ring can't be deleted until the key deletion is done. This may take some days. Delete the key ring manually after this period.");
 			}
 			// key ring can only be deleted if no key exists.
 			if (keyRingID != null && keyID == null) {
@@ -106,7 +106,7 @@ public final class KmsExample {
 		}
 	}
 
-	private static void waitForKeyring(KmsApi kmsApi, UUID projectId, UUID keyRingId)
+	private static void waitForKeyRing(KmsApi kmsApi, UUID projectId, UUID keyRingId)
 			throws ApiException, InterruptedException {
 		waitUntil(
 				"key ring " + keyRingId + " to become active",
