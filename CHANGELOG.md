@@ -1,17 +1,11 @@
 ## Release (2026-MM-DD)
 
-- `kms`:
-  - [v0.1.0](services/kms/CHANGELOG.md#v010)
-    - Initial onboarding of STACKIT Java SDK for STACKIT Key Management Service (KMS)
 - `automation`:
   - [v0.1.1](services/automation/CHANGELOG.md#v011)
     - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
-- `serverbackup`:
-  - [v0.2.1](services/serverbackup/CHANGELOG.md#v021)
-    - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
-- `serverupdate`:
-  - [v0.2.2](services/serverupdate/CHANGELOG.md#v022)
-    - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
+- `kms`:
+  - [v0.1.0](services/kms/CHANGELOG.md#v010)
+    - Initial onboarding of STACKIT Java SDK for STACKIT Key Management Service (KMS)
 - `objectstorage`:
   - [v0.5.0](services/objectstorage/CHANGELOG.md#v050)
     - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
@@ -26,6 +20,12 @@
   - [v0.7.0](services/resourcemanager/CHANGELOG.md#v070)
     - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
     - **Feature:** The `members` attribute in the `CreateProjectPayload` model class is now optional (previously required) and therefore changed from `@javax.annotation.Nonnull` to `@javax.annotation.Nullable`
+- `serverbackup`:
+  - [v0.2.1](services/serverbackup/CHANGELOG.md#v021)
+    - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
+- `serverupdate`:
+  - [v0.2.2](services/serverupdate/CHANGELOG.md#v022)
+    - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
 - `sfs`:
   - [v0.6.0](services/sfs/CHANGELOG.md#v060)
     - **Dependencies:** Bump `org.openapitools:jackson-databind-nullable` from `0.2.8` to `0.2.12`
