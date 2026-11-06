@@ -15,6 +15,7 @@ package cloud.stackit.sdk.alb.v2api.model;
 import cloud.stackit.sdk.alb.v2api.JSON;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
@@ -33,12 +34,17 @@ import java.util.Objects;
 /**
  * Defines any optional functionality you want to have enabled on your Application Load Balancer.
  */
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class LoadBalancerOptions {
 	public static final String SERIALIZED_NAME_ACCESS_CONTROL = "accessControl";
 
 	@SerializedName(SERIALIZED_NAME_ACCESS_CONTROL)
 	@javax.annotation.Nullable private LoadbalancerOptionAccessControl accessControl;
+
+	public static final String SERIALIZED_NAME_ACCESS_LOGS = "accessLogs";
+
+	@SerializedName(SERIALIZED_NAME_ACCESS_LOGS)
+	@javax.annotation.Nullable private Boolean accessLogs;
 
 	public static final String SERIALIZED_NAME_EPHEMERAL_ADDRESS = "ephemeralAddress";
 
@@ -75,6 +81,27 @@ public class LoadBalancerOptions {
 	public void setAccessControl(
 			@javax.annotation.Nullable LoadbalancerOptionAccessControl accessControl) {
 		this.accessControl = accessControl;
+	}
+
+	public LoadBalancerOptions accessLogs(@javax.annotation.Nullable Boolean accessLogs) {
+		this.accessLogs = accessLogs;
+		return this;
+	}
+
+	/**
+	 * Enable per-request access logs on the Application Load Balancer. Defaults to false. Enable
+	 * only when the Application Load Balancer&#39;s expected traffic volume can be sustained by the
+	 * downstream logging pipeline, as access-log volume scales linearly with request rate. Requires
+	 * a STACKIT Telemetry Router to be set up for the logs to be viewable.
+	 *
+	 * @return accessLogs
+	 */
+	@javax.annotation.Nullable public Boolean getAccessLogs() {
+		return accessLogs;
+	}
+
+	public void setAccessLogs(@javax.annotation.Nullable Boolean accessLogs) {
+		this.accessLogs = accessLogs;
 	}
 
 	public LoadBalancerOptions ephemeralAddress(
@@ -192,6 +219,7 @@ public class LoadBalancerOptions {
 		}
 		LoadBalancerOptions loadBalancerOptions = (LoadBalancerOptions) o;
 		return Objects.equals(this.accessControl, loadBalancerOptions.accessControl)
+				&& Objects.equals(this.accessLogs, loadBalancerOptions.accessLogs)
 				&& Objects.equals(this.ephemeralAddress, loadBalancerOptions.ephemeralAddress)
 				&& Objects.equals(this.observability, loadBalancerOptions.observability)
 				&& Objects.equals(this.privateNetworkOnly, loadBalancerOptions.privateNetworkOnly)
@@ -203,6 +231,7 @@ public class LoadBalancerOptions {
 	public int hashCode() {
 		return Objects.hash(
 				accessControl,
+				accessLogs,
 				ephemeralAddress,
 				observability,
 				privateNetworkOnly,
@@ -214,6 +243,7 @@ public class LoadBalancerOptions {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class LoadBalancerOptions {\n");
 		sb.append("    accessControl: ").append(toIndentedString(accessControl)).append("\n");
+		sb.append("    accessLogs: ").append(toIndentedString(accessLogs)).append("\n");
 		sb.append("    ephemeralAddress: ").append(toIndentedString(ephemeralAddress)).append("\n");
 		sb.append("    observability: ").append(toIndentedString(observability)).append("\n");
 		sb.append("    privateNetworkOnly: ")
@@ -231,10 +261,7 @@ public class LoadBalancerOptions {
 	 * line).
 	 */
 	private String toIndentedString(Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
+		return o == null ? "null" : o.toString().replace("\n", "\n    ");
 	}
 
 	public static HashSet<String> openapiFields;
@@ -246,6 +273,7 @@ public class LoadBalancerOptions {
 				new HashSet<String>(
 						Arrays.asList(
 								"accessControl",
+								"accessLogs",
 								"ephemeralAddress",
 								"observability",
 								"privateNetworkOnly"));
@@ -315,7 +343,9 @@ public class LoadBalancerOptions {
 												entry.getKey(), (Character) entry.getValue());
 									else {
 										JsonElement jsonElement = gson.toJsonTree(entry.getValue());
-										if (jsonElement.isJsonArray()) {
+										if (jsonElement.isJsonNull()) {
+											obj.add(entry.getKey(), JsonNull.INSTANCE);
+										} else if (jsonElement.isJsonArray()) {
 											obj.add(entry.getKey(), jsonElement.getAsJsonArray());
 										} else {
 											obj.add(entry.getKey(), jsonElement.getAsJsonObject());
