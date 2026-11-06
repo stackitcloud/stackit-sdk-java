@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class AllowedAddressesInner extends AbstractOpenApiSchema {
 	private static final Logger log = Logger.getLogger(AllowedAddressesInner.class.getName());
 
@@ -174,6 +174,7 @@ public class AllowedAddressesInner extends AbstractOpenApiSchema {
 	 * @return The actual instance of `String`
 	 * @throws ClassCastException if the instance is not `String`
 	 */
+	@SuppressWarnings("unchecked")
 	public String getString() throws ClassCastException {
 		return (String) super.getActualInstance();
 	}
