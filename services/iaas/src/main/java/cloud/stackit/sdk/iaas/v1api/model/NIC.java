@@ -16,6 +16,7 @@ import cloud.stackit.sdk.iaas.v1api.JSON;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
@@ -24,6 +25,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -34,12 +36,17 @@ import java.util.Objects;
 import java.util.UUID;
 
 /** Object that represents a network interface. */
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class NIC {
 	public static final String SERIALIZED_NAME_ALLOWED_ADDRESSES = "allowedAddresses";
 
 	@SerializedName(SERIALIZED_NAME_ALLOWED_ADDRESSES)
 	@javax.annotation.Nullable private List<AllowedAddressesInner> allowedAddresses = new ArrayList<>();
+
+	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
+
+	@SerializedName(SERIALIZED_NAME_CREATED_AT)
+	@javax.annotation.Nullable private OffsetDateTime createdAt;
 
 	public static final String SERIALIZED_NAME_DESCRIPTION = "description";
 
@@ -106,16 +113,31 @@ public class NIC {
 	@SerializedName(SERIALIZED_NAME_TYPE)
 	@javax.annotation.Nullable private String type;
 
+	public static final String SERIALIZED_NAME_UPDATED_AT = "updatedAt";
+
+	@SerializedName(SERIALIZED_NAME_UPDATED_AT)
+	@javax.annotation.Nullable private OffsetDateTime updatedAt;
+
 	public NIC() {}
 
-	public NIC(UUID device, UUID id, String mac, UUID networkId, String status, String type) {
+	public NIC(
+			OffsetDateTime createdAt,
+			UUID device,
+			UUID id,
+			String mac,
+			UUID networkId,
+			String status,
+			String type,
+			OffsetDateTime updatedAt) {
 		this();
+		this.createdAt = createdAt;
 		this.device = device;
 		this.id = id;
 		this.mac = mac;
 		this.networkId = networkId;
 		this.status = status;
 		this.type = type;
+		this.updatedAt = updatedAt;
 	}
 
 	public NIC allowedAddresses(
@@ -144,6 +166,15 @@ public class NIC {
 	public void setAllowedAddresses(
 			@javax.annotation.Nullable List<AllowedAddressesInner> allowedAddresses) {
 		this.allowedAddresses = allowedAddresses;
+	}
+
+	/**
+	 * Date-time when resource was created.
+	 *
+	 * @return createdAt
+	 */
+	@javax.annotation.Nullable public OffsetDateTime getCreatedAt() {
+		return createdAt;
 	}
 
 	public NIC description(@javax.annotation.Nullable String description) {
@@ -224,11 +255,21 @@ public class NIC {
 	}
 
 	/**
-	 * Object that represents the labels of an object. Regex for keys:
-	 * &#x60;^(?&#x3D;.{1,63}$)([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$&#x60;. Regex for values:
-	 * &#x60;^(?&#x3D;.{0,63}$)(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])*$&#x60;. Providing a
-	 * &#x60;null&#x60; value for a key will remove that key. The &#x60;stackit-&#x60; prefix is
-	 * reserved and cannot be used for Keys.
+	 * Object that represents the labels as key-value pairs of a resource. Key constraints: - May
+	 * contain an optional domain prefix separated by a slash (&#x60;/&#x60;). - Domain prefix must
+	 * be less than or equal to 250 characters. - Domain prefix must ba a valid DNS subdomain
+	 * containing only lowercase alphanumerics (&#x60;[a-z0-9]&#x60;) and dashes (&#x60;-&#x60;),
+	 * separated by dots (&#x60;.&#x60;). - Length (excluding the domain prefix) must be between 1
+	 * and 63 characters. - Must begin and end with an alphanumerical character
+	 * (&#x60;[a-z0-9A-Z]&#x60;). - May contain dashes (&#x60;-&#x60;), underscores (&#x60;_&#x60;),
+	 * dots (&#x60;.&#x60;), and alphanumerics in between. - Keys starting with the prefix
+	 * &#x60;stackit-&#x60; or having a domain prefix of &#x60;stackit.cloud&#x60; (including its
+	 * subdomains, e.g., &#x60;*.stackit.cloud/&#x60;) are reserved for system use. Value
+	 * constraints: - Must be less than or equal to 63 characters long (can be empty). - If not
+	 * empty it must begin and end with an alphanumeric character (&#x60;[a-z0-9A-Z]&#x60;). - May
+	 * contain dashes (&#x60;-&#x60;), underscores (&#x60;_&#x60;), dots (&#x60;.&#x60;), and
+	 * alphanumerics in between. A resource can have a maximum of 64 labels. Reserved labels are
+	 * excluded from this count. Providing a &#x60;null&#x60; value for a key will remove that key.
 	 *
 	 * @return labels
 	 */
@@ -340,6 +381,15 @@ public class NIC {
 	}
 
 	/**
+	 * Date-time when resource was last updated.
+	 *
+	 * @return updatedAt
+	 */
+	@javax.annotation.Nullable public OffsetDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	/**
 	 * A container for additional, undeclared properties. This is a holder for any undeclared
 	 * properties as specified with the 'additionalProperties' keyword in the OAS document.
 	 */
@@ -393,6 +443,7 @@ public class NIC {
 		}
 		NIC NIC = (NIC) o;
 		return Objects.equals(this.allowedAddresses, NIC.allowedAddresses)
+				&& Objects.equals(this.createdAt, NIC.createdAt)
 				&& Objects.equals(this.description, NIC.description)
 				&& Objects.equals(this.device, NIC.device)
 				&& Objects.equals(this.id, NIC.id)
@@ -406,6 +457,7 @@ public class NIC {
 				&& Objects.equals(this.securityGroups, NIC.securityGroups)
 				&& Objects.equals(this.status, NIC.status)
 				&& Objects.equals(this.type, NIC.type)
+				&& Objects.equals(this.updatedAt, NIC.updatedAt)
 				&& Objects.equals(this.additionalProperties, NIC.additionalProperties);
 	}
 
@@ -413,6 +465,7 @@ public class NIC {
 	public int hashCode() {
 		return Objects.hash(
 				allowedAddresses,
+				createdAt,
 				description,
 				device,
 				id,
@@ -426,6 +479,7 @@ public class NIC {
 				securityGroups,
 				status,
 				type,
+				updatedAt,
 				additionalProperties);
 	}
 
@@ -434,6 +488,7 @@ public class NIC {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class NIC {\n");
 		sb.append("    allowedAddresses: ").append(toIndentedString(allowedAddresses)).append("\n");
+		sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
 		sb.append("    description: ").append(toIndentedString(description)).append("\n");
 		sb.append("    device: ").append(toIndentedString(device)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
@@ -447,6 +502,7 @@ public class NIC {
 		sb.append("    securityGroups: ").append(toIndentedString(securityGroups)).append("\n");
 		sb.append("    status: ").append(toIndentedString(status)).append("\n");
 		sb.append("    type: ").append(toIndentedString(type)).append("\n");
+		sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -459,10 +515,7 @@ public class NIC {
 	 * line).
 	 */
 	private String toIndentedString(Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
+		return o == null ? "null" : o.toString().replace("\n", "\n    ");
 	}
 
 	public static HashSet<String> openapiFields;
@@ -474,6 +527,7 @@ public class NIC {
 				new HashSet<String>(
 						Arrays.asList(
 								"allowedAddresses",
+								"createdAt",
 								"description",
 								"device",
 								"id",
@@ -486,7 +540,8 @@ public class NIC {
 								"nicSecurity",
 								"securityGroups",
 								"status",
-								"type"));
+								"type",
+								"updatedAt"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(0);
@@ -654,7 +709,9 @@ public class NIC {
 												entry.getKey(), (Character) entry.getValue());
 									else {
 										JsonElement jsonElement = gson.toJsonTree(entry.getValue());
-										if (jsonElement.isJsonArray()) {
+										if (jsonElement.isJsonNull()) {
+											obj.add(entry.getKey(), JsonNull.INSTANCE);
+										} else if (jsonElement.isJsonArray()) {
 											obj.add(entry.getKey(), jsonElement.getAsJsonArray());
 										} else {
 											obj.add(entry.getKey(), jsonElement.getAsJsonObject());
