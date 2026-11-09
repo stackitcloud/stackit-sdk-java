@@ -33,7 +33,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /** The initial networking setup for the server creation with a network interface. */
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class CreateServerNetworkingWithNics {
 	public static final String SERIALIZED_NAME_NIC_IDS = "nicIds";
 
@@ -100,10 +100,7 @@ public class CreateServerNetworkingWithNics {
 	 * line).
 	 */
 	private String toIndentedString(Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
+		return o == null ? "null" : o.toString().replace("\n", "\n    ");
 	}
 
 	public static HashSet<String> openapiFields;
