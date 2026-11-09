@@ -1,5 +1,7 @@
 name: CI/CD
 
+permissions: {}
+
 on:
   pull_request:
   workflow_dispatch:
@@ -15,10 +17,12 @@ jobs:
         version: [17, 21, 25]
     steps:
       - name: Checkout
-        uses: actions/checkout@v7.0.1
-      
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
       - name: Install java
-        uses: actions/setup-java@v6.1.0
+        uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
         with:
           distribution: 'temurin'
           java-version: '${{ matrix.version }}'
@@ -39,6 +43,20 @@ jobs:
       - name: Publish to local maven repo
         run: make install
 
+  zizmor:
+    name: zizmor
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Run zizmor
+        uses: zizmorcore/zizmor-action@53290badfa369cb0bf7ad16342cb62c2fa47ac7b # v0.8.0
+
   cd:
     name: CD
     runs-on: ubuntu-latest
@@ -46,13 +64,13 @@ jobs:
     needs: [ci]
     permissions:
       contents: write
-      actions: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           # we need to fetch all existing git tags
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Create git tags and publish to Maven Central
         env:
@@ -60,6 +78,7 @@ jobs:
           GPG_SIGNING_PASSWORD: "${{ secrets.GPG_SIGNING_PASSWORD }}"
           ORG_GRADLE_PROJECT_mavenCentralUsername: "${{ secrets.MAVEN_CENTRAL_USERNAME }}"
           ORG_GRADLE_PROJECT_mavenCentralPassword: "${{ secrets.MAVEN_CENTRAL_PASSWORD }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "SDK Releaser Bot"
           git config --global user.email "noreply@stackit.de"
