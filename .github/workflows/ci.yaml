@@ -43,20 +43,6 @@ jobs:
       - name: Publish to local maven repo
         run: make install
 
-  zizmor:
-    name: zizmor
-    runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-
-      - name: Run zizmor
-        uses: zizmorcore/zizmor-action@53290badfa369cb0bf7ad16342cb62c2fa47ac7b # v0.8.0
-
   cd:
     name: CD
     runs-on: ubuntu-latest
@@ -70,7 +56,8 @@ jobs:
         with:
           # we need to fetch all existing git tags
           fetch-depth: 0
-          persist-credentials: false
+          # Required to push release tags from scripts/publish.sh.
+          persist-credentials: true
 
       - name: Create git tags and publish to Maven Central
         env:
@@ -78,7 +65,6 @@ jobs:
           GPG_SIGNING_PASSWORD: "${{ secrets.GPG_SIGNING_PASSWORD }}"
           ORG_GRADLE_PROJECT_mavenCentralUsername: "${{ secrets.MAVEN_CENTRAL_USERNAME }}"
           ORG_GRADLE_PROJECT_mavenCentralPassword: "${{ secrets.MAVEN_CENTRAL_PASSWORD }}"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "SDK Releaser Bot"
           git config --global user.email "noreply@stackit.de"
