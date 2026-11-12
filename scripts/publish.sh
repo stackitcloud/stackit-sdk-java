@@ -27,7 +27,7 @@ for file in $(find . -print | sed 's|^./||' | grep -E "(^services/[^/]+/VERSION$
         # Tag doesn't exist. Create a tag and push it.
         echo "Tag '$expected_tag' does not exist."
         git tag -a $expected_tag -m "Release $version"
-        git push origin tag $expected_tag
+        git push origin tag "$expected_tag"
         
         ./gradlew "${gradle_subproject}:publishToMavenCentral"
     fi

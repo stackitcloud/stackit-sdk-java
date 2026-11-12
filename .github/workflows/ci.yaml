@@ -1,5 +1,7 @@
 name: CI/CD
 
+permissions: {}
+
 on:
   pull_request:
   workflow_dispatch:
@@ -15,10 +17,12 @@ jobs:
         version: [17, 21, 25]
     steps:
       - name: Checkout
-        uses: actions/checkout@v7.0.1
-      
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
       - name: Install java
-        uses: actions/setup-java@v6.2.0
+        uses: actions/setup-java@77dd5b2ce225ea11469928ac317850245a74ae78 # v6.2.0
         with:
           distribution: 'temurin'
           java-version: '${{ matrix.version }}'
@@ -46,13 +50,14 @@ jobs:
     needs: [ci]
     permissions:
       contents: write
-      actions: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           # we need to fetch all existing git tags
           fetch-depth: 0
+          # Required to push release tags from scripts/publish.sh.
+          persist-credentials: true
 
       - name: Create git tags and publish to Maven Central
         env:
