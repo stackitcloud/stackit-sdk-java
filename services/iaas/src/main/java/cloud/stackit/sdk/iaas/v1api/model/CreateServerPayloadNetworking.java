@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class CreateServerPayloadNetworking extends AbstractOpenApiSchema {
 	private static final Logger log =
 			Logger.getLogger(CreateServerPayloadNetworking.class.getName());
@@ -216,6 +216,7 @@ public class CreateServerPayloadNetworking extends AbstractOpenApiSchema {
 	 * @return The actual instance of `CreateServerNetworking`
 	 * @throws ClassCastException if the instance is not `CreateServerNetworking`
 	 */
+	@SuppressWarnings("unchecked")
 	public CreateServerNetworking getCreateServerNetworking() throws ClassCastException {
 		return (CreateServerNetworking) super.getActualInstance();
 	}
@@ -227,6 +228,7 @@ public class CreateServerPayloadNetworking extends AbstractOpenApiSchema {
 	 * @return The actual instance of `CreateServerNetworkingWithNics`
 	 * @throws ClassCastException if the instance is not `CreateServerNetworkingWithNics`
 	 */
+	@SuppressWarnings("unchecked")
 	public CreateServerNetworkingWithNics getCreateServerNetworkingWithNics()
 			throws ClassCastException {
 		return (CreateServerNetworkingWithNics) super.getActualInstance();

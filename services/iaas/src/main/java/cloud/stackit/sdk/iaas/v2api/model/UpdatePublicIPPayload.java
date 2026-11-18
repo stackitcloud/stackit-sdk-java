@@ -15,6 +15,7 @@ package cloud.stackit.sdk.iaas.v2api.model;
 import cloud.stackit.sdk.iaas.v2api.JSON;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
@@ -23,6 +24,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -33,8 +35,13 @@ import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 /** Object that represents a public IP. */
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class UpdatePublicIPPayload {
+	public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
+
+	@SerializedName(SERIALIZED_NAME_CREATED_AT)
+	@javax.annotation.Nullable private OffsetDateTime createdAt;
+
 	public static final String SERIALIZED_NAME_ID = "id";
 
 	@SerializedName(SERIALIZED_NAME_ID)
@@ -55,12 +62,29 @@ public class UpdatePublicIPPayload {
 	@SerializedName(SERIALIZED_NAME_NETWORK_INTERFACE)
 	@javax.annotation.Nullable private UUID networkInterface;
 
+	public static final String SERIALIZED_NAME_UPDATED_AT = "updatedAt";
+
+	@SerializedName(SERIALIZED_NAME_UPDATED_AT)
+	@javax.annotation.Nullable private OffsetDateTime updatedAt;
+
 	public UpdatePublicIPPayload() {}
 
-	public UpdatePublicIPPayload(UUID id, String ip) {
+	public UpdatePublicIPPayload(
+			OffsetDateTime createdAt, UUID id, String ip, OffsetDateTime updatedAt) {
 		this();
+		this.createdAt = createdAt;
 		this.id = id;
 		this.ip = ip;
+		this.updatedAt = updatedAt;
+	}
+
+	/**
+	 * Date-time when resource was created.
+	 *
+	 * @return createdAt
+	 */
+	@javax.annotation.Nullable public OffsetDateTime getCreatedAt() {
+		return createdAt;
 	}
 
 	/**
@@ -133,6 +157,15 @@ public class UpdatePublicIPPayload {
 	}
 
 	/**
+	 * Date-time when resource was last updated.
+	 *
+	 * @return updatedAt
+	 */
+	@javax.annotation.Nullable public OffsetDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	/**
 	 * A container for additional, undeclared properties. This is a holder for any undeclared
 	 * properties as specified with the 'additionalProperties' keyword in the OAS document.
 	 */
@@ -185,10 +218,12 @@ public class UpdatePublicIPPayload {
 			return false;
 		}
 		UpdatePublicIPPayload updatePublicIPPayload = (UpdatePublicIPPayload) o;
-		return Objects.equals(this.id, updatePublicIPPayload.id)
+		return Objects.equals(this.createdAt, updatePublicIPPayload.createdAt)
+				&& Objects.equals(this.id, updatePublicIPPayload.id)
 				&& Objects.equals(this.ip, updatePublicIPPayload.ip)
 				&& Objects.equals(this.labels, updatePublicIPPayload.labels)
 				&& Objects.equals(this.networkInterface, updatePublicIPPayload.networkInterface)
+				&& Objects.equals(this.updatedAt, updatePublicIPPayload.updatedAt)
 				&& Objects.equals(
 						this.additionalProperties, updatePublicIPPayload.additionalProperties);
 	}
@@ -204,7 +239,8 @@ public class UpdatePublicIPPayload {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, ip, labels, networkInterface, additionalProperties);
+		return Objects.hash(
+				createdAt, id, ip, labels, networkInterface, updatedAt, additionalProperties);
 	}
 
 	private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -218,10 +254,12 @@ public class UpdatePublicIPPayload {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class UpdatePublicIPPayload {\n");
+		sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    ip: ").append(toIndentedString(ip)).append("\n");
 		sb.append("    labels: ").append(toIndentedString(labels)).append("\n");
 		sb.append("    networkInterface: ").append(toIndentedString(networkInterface)).append("\n");
+		sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
 		sb.append("    additionalProperties: ")
 				.append(toIndentedString(additionalProperties))
 				.append("\n");
@@ -234,10 +272,7 @@ public class UpdatePublicIPPayload {
 	 * line).
 	 */
 	private String toIndentedString(Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
+		return o == null ? "null" : o.toString().replace("\n", "\n    ");
 	}
 
 	public static HashSet<String> openapiFields;
@@ -246,7 +281,14 @@ public class UpdatePublicIPPayload {
 	static {
 		// a set of all properties/fields (JSON key names)
 		openapiFields =
-				new HashSet<String>(Arrays.asList("id", "ip", "labels", "networkInterface"));
+				new HashSet<String>(
+						Arrays.asList(
+								"createdAt",
+								"id",
+								"ip",
+								"labels",
+								"networkInterface",
+								"updatedAt"));
 
 		// a set of required properties/fields (JSON key names)
 		openapiRequiredFields = new HashSet<String>(0);
@@ -330,7 +372,9 @@ public class UpdatePublicIPPayload {
 												entry.getKey(), (Character) entry.getValue());
 									else {
 										JsonElement jsonElement = gson.toJsonTree(entry.getValue());
-										if (jsonElement.isJsonArray()) {
+										if (jsonElement.isJsonNull()) {
+											obj.add(entry.getKey(), JsonNull.INSTANCE);
+										} else if (jsonElement.isJsonArray()) {
 											obj.add(entry.getKey(), jsonElement.getAsJsonArray());
 										} else {
 											obj.add(entry.getKey(), jsonElement.getAsJsonObject());
