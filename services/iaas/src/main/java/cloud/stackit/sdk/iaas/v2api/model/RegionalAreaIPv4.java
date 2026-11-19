@@ -16,6 +16,7 @@ import cloud.stackit.sdk.iaas.v2api.JSON;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
@@ -33,7 +34,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** The regional IPv4 config of a network area. */
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class RegionalAreaIPv4 {
 	public static final String SERIALIZED_NAME_DEFAULT_NAMESERVERS = "defaultNameservers";
 
@@ -301,10 +302,7 @@ public class RegionalAreaIPv4 {
 	 * line).
 	 */
 	private String toIndentedString(Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
+		return o == null ? "null" : o.toString().replace("\n", "\n    ");
 	}
 
 	public static HashSet<String> openapiFields;
@@ -373,21 +371,20 @@ public class RegionalAreaIPv4 {
 							"Expected the field `defaultNameservers` to be an array in the JSON string but got `%s`",
 							jsonObj.get("defaultNameservers").toString()));
 		}
-		// ensure the json data is an array
-		if (!jsonObj.get("networkRanges").isJsonArray()) {
-			throw new IllegalArgumentException(
-					String.format(
-							java.util.Locale.ROOT,
-							"Expected the field `networkRanges` to be an array in the JSON string but got `%s`",
-							jsonObj.get("networkRanges").toString()));
+		if (jsonObj.get("networkRanges") != null) {
+			if (!jsonObj.get("networkRanges").isJsonArray()) {
+				throw new IllegalArgumentException(
+						String.format(
+								java.util.Locale.ROOT,
+								"Expected the field `networkRanges` to be an array in the JSON string but got `%s`",
+								jsonObj.get("networkRanges").toString()));
+			}
+			JsonArray jsonArraynetworkRanges = jsonObj.getAsJsonArray("networkRanges");
+			// validate the required field `networkRanges` (array)
+			for (int i = 0; i < jsonArraynetworkRanges.size(); i++) {
+				NetworkRange.validateJsonElement(jsonArraynetworkRanges.get(i));
+			}
 		}
-
-		JsonArray jsonArraynetworkRanges = jsonObj.getAsJsonArray("networkRanges");
-		// validate the required field `networkRanges` (array)
-		for (int i = 0; i < jsonArraynetworkRanges.size(); i++) {
-			NetworkRange.validateJsonElement(jsonArraynetworkRanges.get(i));
-		}
-		;
 		if (!jsonObj.get("transferNetwork").isJsonPrimitive()) {
 			throw new IllegalArgumentException(
 					String.format(
@@ -430,7 +427,9 @@ public class RegionalAreaIPv4 {
 												entry.getKey(), (Character) entry.getValue());
 									else {
 										JsonElement jsonElement = gson.toJsonTree(entry.getValue());
-										if (jsonElement.isJsonArray()) {
+										if (jsonElement.isJsonNull()) {
+											obj.add(entry.getKey(), JsonNull.INSTANCE);
+										} else if (jsonElement.isJsonArray()) {
 											obj.add(entry.getKey(), jsonElement.getAsJsonArray());
 										} else {
 											obj.add(entry.getKey(), jsonElement.getAsJsonObject());
