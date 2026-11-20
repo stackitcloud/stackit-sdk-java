@@ -33,6 +33,10 @@
       - **Feature:** Add new `ConflictError` model for responses with 409 status code
     - `v1betaapi`:
       - **Feature:** Add new `ConflictError` model for responses with 409 status code
+- `vpn`:
+  - [v0.1.0](services/vpn/CHANGELOG.md#v010)
+    - Initial onboarding of STACKIT Java SDK for STACKIT VPN service
+
 
 ## Release (2026-10-16)
 
@@ -369,4 +373,3 @@
   - Initial onboarding of STACKIT Java SDK for IaaS service
 - `resourcemanger`: [v0.1.0](services/resourcemanager/CHANGELOG.md#v010)
   - Initial onboarding of STACKIT Java SDK for Resourcemanager service
-
