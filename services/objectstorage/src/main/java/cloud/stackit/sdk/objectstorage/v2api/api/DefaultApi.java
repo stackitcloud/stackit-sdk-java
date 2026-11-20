@@ -616,6 +616,7 @@ class DefaultApi {
 	 * <tr><td> 201 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -719,6 +720,7 @@ class DefaultApi {
 	 * <tr><td> 201 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -745,6 +747,7 @@ class DefaultApi {
 	 * <tr><td> 201 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -772,6 +775,7 @@ class DefaultApi {
 	 * <tr><td> 201 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1483,6 +1487,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1586,6 +1591,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1612,6 +1618,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1639,6 +1646,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -1890,6 +1898,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2006,6 +2015,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2036,6 +2046,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2068,6 +2079,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2728,6 +2740,7 @@ class DefaultApi {
 	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2830,6 +2843,7 @@ class DefaultApi {
 	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2855,6 +2869,7 @@ class DefaultApi {
 	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2881,6 +2896,7 @@ class DefaultApi {
 	 * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -2913,6 +2929,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3028,6 +3045,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3057,6 +3075,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3088,6 +3107,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 422 </td><td> Validation Error </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3121,6 +3141,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3236,6 +3257,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3265,6 +3287,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -3296,6 +3319,7 @@ class DefaultApi {
 	 * <tr><td> 200 </td><td> Successful Response </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -4139,6 +4163,7 @@ class DefaultApi {
 	 * <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -4265,6 +4290,7 @@ class DefaultApi {
 	 * <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -4298,6 +4324,7 @@ class DefaultApi {
 	 * <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
@@ -4333,6 +4360,7 @@ class DefaultApi {
 	 * <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
 	 * <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
 	 * <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
+	 * <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
 	 * <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
 	 * </table>
 	 */
