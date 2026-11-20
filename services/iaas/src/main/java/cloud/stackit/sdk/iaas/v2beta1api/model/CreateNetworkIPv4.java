@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class CreateNetworkIPv4 extends AbstractOpenApiSchema {
 	private static final Logger log = Logger.getLogger(CreateNetworkIPv4.class.getName());
 
@@ -215,6 +215,7 @@ public class CreateNetworkIPv4 extends AbstractOpenApiSchema {
 	 * @return The actual instance of `CreateNetworkIPv4WithPrefix`
 	 * @throws ClassCastException if the instance is not `CreateNetworkIPv4WithPrefix`
 	 */
+	@SuppressWarnings("unchecked")
 	public CreateNetworkIPv4WithPrefix getCreateNetworkIPv4WithPrefix() throws ClassCastException {
 		return (CreateNetworkIPv4WithPrefix) super.getActualInstance();
 	}
@@ -226,6 +227,7 @@ public class CreateNetworkIPv4 extends AbstractOpenApiSchema {
 	 * @return The actual instance of `CreateNetworkIPv4WithPrefixLength`
 	 * @throws ClassCastException if the instance is not `CreateNetworkIPv4WithPrefixLength`
 	 */
+	@SuppressWarnings("unchecked")
 	public CreateNetworkIPv4WithPrefixLength getCreateNetworkIPv4WithPrefixLength()
 			throws ClassCastException {
 		return (CreateNetworkIPv4WithPrefixLength) super.getActualInstance();
