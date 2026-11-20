@@ -26,7 +26,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public final class VpnExample {
-	private static final String REGION = "eu01";
+	private static final Region REGION = Region.fromValue("eu01");
 
 	private VpnExample() {}
 
@@ -50,7 +50,6 @@ public final class VpnExample {
 			System.err.println("Environment variable 'STACKIT_PROJECT_ID' not found.");
 			return;
 		}
-		Region region = Region.fromValue(REGION);
 
 		try {
 			/*
@@ -63,7 +62,7 @@ public final class VpnExample {
 			GatewayResponse gatewayResponse =
 					vpnApi.createGateway(
 							projectId,
-							region,
+							REGION,
 							new CreateGatewayPayload()
 									.displayName("example-vpn-gateway")
 									.planId("p500")
@@ -78,9 +77,9 @@ public final class VpnExample {
 			/* wait for the gateway creation to complete */
 			UUID gatewayId = gatewayResponse.getId();
 			Objects.requireNonNull(gatewayId);
-			System.out.println(vpnApi.getGateway(projectId, region, gatewayId).getState());
+			System.out.println(vpnApi.getGateway(projectId, REGION, gatewayId).getState());
 			while (Objects.equals(
-					vpnApi.getGateway(projectId, region, gatewayId).getState(),
+					vpnApi.getGateway(projectId, REGION, gatewayId).getState(),
 					GatewayStatus.PENDING)) {
 				System.out.println("Waiting for gateway creation to complete ...");
 				TimeUnit.SECONDS.sleep(5);
@@ -95,7 +94,7 @@ public final class VpnExample {
 			/* update the gateway we just created (send complete resource because of the PUT endpoint) */
 			vpnApi.updateGateway(
 					projectId,
-					region,
+					REGION,
 					gatewayId,
 					new UpdateGatewayPayload()
 							.displayName("example-vpn-gateway-updated")
@@ -108,13 +107,13 @@ public final class VpnExample {
 							.labels(Collections.singletonMap("some-gateway-label", "updated")));
 
 			/* fetch the gateway we just created */
-			GatewayResponse fetchedGateway = vpnApi.getGateway(projectId, region, gatewayId);
+			GatewayResponse fetchedGateway = vpnApi.getGateway(projectId, REGION, gatewayId);
 			System.out.println("\nFetched gateway: ");
 			System.out.println("* Gateway name: " + fetchedGateway.getDisplayName());
 			System.out.println("* Id: " + fetchedGateway.getId());
 
 			/* list all available gateways in the project */
-			GatewayList gateways = vpnApi.listGateways(projectId, region, null);
+			GatewayList gateways = vpnApi.listGateways(projectId, REGION, null);
 			System.out.println("\nAvailable gateways: ");
 			for (GatewayResponse gateway : gateways.getGateways()) {
 				System.out.println("* " + gateway.getDisplayName());
@@ -167,7 +166,7 @@ public final class VpnExample {
 			ConnectionResponse connectionResponse =
 					vpnApi.createGatewayConnection(
 							projectId,
-							region,
+							REGION,
 							gatewayId,
 							new CreateGatewayConnectionPayload()
 									.displayName("example-vpn-connection")
@@ -185,7 +184,7 @@ public final class VpnExample {
 			/* update the connection we just created */
 			vpnApi.updateGatewayConnection(
 					projectId,
-					region,
+					REGION,
 					gatewayId,
 					connectionId.toString(),
 					new UpdateGatewayConnectionPayload()
@@ -198,21 +197,21 @@ public final class VpnExample {
 			/* fetch the connection we just created */
 			ConnectionResponse fetchedConnection =
 					vpnApi.getGatewayConnection(
-							projectId, region, gatewayId, connectionId.toString());
+							projectId, REGION, gatewayId, connectionId.toString());
 			System.out.println("\nFetched connection: ");
 			System.out.println("* Connection name: " + fetchedConnection.getDisplayName());
 			System.out.println("* Id: " + fetchedConnection.getId());
 
 			/* list all available connection in the project */
 			ConnectionList connections =
-					vpnApi.listGatewayConnections(projectId, region, gatewayId, null);
+					vpnApi.listGatewayConnections(projectId, REGION, gatewayId, null);
 			System.out.println("\nAvailable connections: ");
 			for (ConnectionResponse connection : connections.getConnections()) {
 				System.out.println("* " + connection.getDisplayName());
 			}
 
 			/* delete the connection */
-			vpnApi.deleteGatewayConnection(projectId, region, gatewayId, connectionId.toString());
+			vpnApi.deleteGatewayConnection(projectId, REGION, gatewayId, connectionId.toString());
 			System.out.println("Deleted connection: " + connectionId.toString());
 
 			/*
@@ -222,13 +221,13 @@ public final class VpnExample {
 			 * */
 
 			/* delete the gateway we created */
-			vpnApi.deleteGateway(projectId, region, gatewayId);
+			vpnApi.deleteGateway(projectId, REGION, gatewayId);
 			System.out.println("Started gateway deletion: " + gatewayId);
 
 			/* wait for gateway deletion to complete */
 			while (true) {
 				try {
-					vpnApi.getGateway(projectId, region, gatewayId);
+					vpnApi.getGateway(projectId, REGION, gatewayId);
 					System.out.println("Waiting for gateway deletion to complete...");
 					TimeUnit.SECONDS.sleep(5);
 				} catch (ApiException e) {
