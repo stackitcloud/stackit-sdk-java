@@ -4,20 +4,20 @@ import cloud.stackit.sdk.core.exception.ApiException;
 import cloud.stackit.sdk.vpn.v1api.api.VpnApi;
 import cloud.stackit.sdk.vpn.v1api.model.ConnectionList;
 import cloud.stackit.sdk.vpn.v1api.model.ConnectionResponse;
+import cloud.stackit.sdk.vpn.v1api.model.CreateGatewayConnectionPayload;
 import cloud.stackit.sdk.vpn.v1api.model.CreateGatewayPayload;
 import cloud.stackit.sdk.vpn.v1api.model.CreateGatewayPayloadAvailabilityZones;
 import cloud.stackit.sdk.vpn.v1api.model.GatewayList;
+import cloud.stackit.sdk.vpn.v1api.model.GatewayResponse;
+import cloud.stackit.sdk.vpn.v1api.model.GatewayStatus;
+import cloud.stackit.sdk.vpn.v1api.model.Region;
 import cloud.stackit.sdk.vpn.v1api.model.RoutingType;
 import cloud.stackit.sdk.vpn.v1api.model.TunnelConfiguration;
 import cloud.stackit.sdk.vpn.v1api.model.TunnelConfigurationPhase1;
 import cloud.stackit.sdk.vpn.v1api.model.TunnelConfigurationPhase2;
+import cloud.stackit.sdk.vpn.v1api.model.UpdateGatewayConnectionPayload;
 import cloud.stackit.sdk.vpn.v1api.model.UpdateGatewayPayload;
 import cloud.stackit.sdk.vpn.v1api.model.UpdateGatewayPayloadAvailabilityZones;
-import cloud.stackit.sdk.vpn.v1api.model.UpdateGatewayConnectionPayload;
-import cloud.stackit.sdk.vpn.v1api.model.CreateGatewayConnectionPayload;
-import cloud.stackit.sdk.vpn.v1api.model.GatewayResponse;
-import cloud.stackit.sdk.vpn.v1api.model.GatewayStatus;
-import cloud.stackit.sdk.vpn.v1api.model.Region;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Collections;
@@ -37,21 +37,20 @@ public final class VpnExample {
 		"PMD.AvoidThrowingRawExceptionTypes"
 	})
 	public static void main(String[] args) throws IOException, ApiException, InterruptedException {
-    	/*
-    	 * Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env
-    	 * STACKIT_SERVICE_ACCOUNT_KEY_PATH / STACKIT_SERVICE_ACCOUNT_KEY
-    	 * */
+		/*
+		 * Credentials are read from the credentialsFile in `~/.stackit/credentials.json` or the env
+		 * STACKIT_SERVICE_ACCOUNT_KEY_PATH / STACKIT_SERVICE_ACCOUNT_KEY
+		 * */
 
-    	VpnApi vpnApi = new VpnApi();
+		VpnApi vpnApi = new VpnApi();
 
-    	// the id of your STACKIT project, read from env var for this example
-    	String projectId = System.getenv("STACKIT_PROJECT_ID");
-    	if (projectId == null || projectId.isEmpty()) {
-    		System.err.println("Environment variable 'STACKIT_PROJECT_ID' not found.");
-    		return;
-    	}
-        Region region = Region.fromValue(REGION);
-
+		// the id of your STACKIT project, read from env var for this example
+		String projectId = System.getenv("STACKIT_PROJECT_ID");
+		if (projectId == null || projectId.isEmpty()) {
+			System.err.println("Environment variable 'STACKIT_PROJECT_ID' not found.");
+			return;
+		}
+		Region region = Region.fromValue(REGION);
 
 		try {
 			/*
@@ -66,11 +65,13 @@ public final class VpnExample {
 							projectId,
 							region,
 							new CreateGatewayPayload()
-							    .displayName("example-vpn-gateway")
-								.planId("p500")
-								.routingType(RoutingType.ROUTE_BASED)
-								.availabilityZones(
-								    new CreateGatewayPayloadAvailabilityZones().tunnel1("eu01-1").tunnel2("eu01-2")));
+									.displayName("example-vpn-gateway")
+									.planId("p500")
+									.routingType(RoutingType.ROUTE_BASED)
+									.availabilityZones(
+											new CreateGatewayPayloadAvailabilityZones()
+													.tunnel1("eu01-1")
+													.tunnel2("eu01-2")));
 
 			Objects.requireNonNull(gatewayResponse.getId());
 
@@ -86,18 +87,25 @@ public final class VpnExample {
 			}
 			System.out.println("Gateway created with the ID: " + gatewayId.toString());
 
-			// Delay because of API service: If the Gateway is updated directly after the creation, it will throw
-			// an Error 409 "Internal conflict - please retry again later or contact support if the issue persists"
+			// Delay because of API service: If the Gateway is updated directly after the creation,
+			// it will throw an Error 409 "Internal conflict - please retry again later or contact
+			// support if the issue persists"
 			TimeUnit.SECONDS.sleep(10);
 
 			/* update the gateway we just created (send complete resource because of the PUT endpoint) */
-			vpnApi.updateGateway(projectId, region, gatewayId,
-			    new UpdateGatewayPayload().displayName("example-vpn-gateway-updated")
-					.planId("p500")
-					.routingType(RoutingType.ROUTE_BASED)
-					.availabilityZones(
-					    new UpdateGatewayPayloadAvailabilityZones().tunnel1("eu01-1").tunnel2("eu01-2"))
-					.labels(Collections.singletonMap("some-gateway-label", "updated")));
+			vpnApi.updateGateway(
+					projectId,
+					region,
+					gatewayId,
+					new UpdateGatewayPayload()
+							.displayName("example-vpn-gateway-updated")
+							.planId("p500")
+							.routingType(RoutingType.ROUTE_BASED)
+							.availabilityZones(
+									new UpdateGatewayPayloadAvailabilityZones()
+											.tunnel1("eu01-1")
+											.tunnel2("eu01-2"))
+							.labels(Collections.singletonMap("some-gateway-label", "updated")));
 
 			/* fetch the gateway we just created */
 			GatewayResponse fetchedGateway = vpnApi.getGateway(projectId, region, gatewayId);
@@ -120,19 +128,41 @@ public final class VpnExample {
 
 			/* create a connection in the gateway */
 			TunnelConfiguration tunnelConfiguration =
-			    new TunnelConfiguration()
-					.remoteAddress("198.51.100.10")
-					.preSharedKey("Example-super-secret-key-tunnel-0123")
-					.phase1(
-					    new TunnelConfigurationPhase1()
-							.dhGroups(Collections.singletonList(TunnelConfigurationPhase1.DhGroupsEnum.ECP384))
-							.encryptionAlgorithms(Collections.singletonList(TunnelConfigurationPhase1.EncryptionAlgorithmsEnum.AES256))
-							.integrityAlgorithms(Collections.singletonList(TunnelConfigurationPhase1.IntegrityAlgorithmsEnum.SHA2_384)))
-					.phase2(
-                	    new TunnelConfigurationPhase2()
-                			.dhGroups(Collections.singletonList(TunnelConfigurationPhase2.DhGroupsEnum.ECP384))
-                			.encryptionAlgorithms(Collections.singletonList(TunnelConfigurationPhase2.EncryptionAlgorithmsEnum.AES256))
-                			.integrityAlgorithms(Collections.singletonList(TunnelConfigurationPhase2.IntegrityAlgorithmsEnum.SHA2_384)));
+					new TunnelConfiguration()
+							.remoteAddress("198.51.100.10")
+							.preSharedKey("Example-super-secret-key-tunnel-0123")
+							.phase1(
+									new TunnelConfigurationPhase1()
+											.dhGroups(
+													Collections.singletonList(
+															TunnelConfigurationPhase1.DhGroupsEnum
+																	.ECP384))
+											.encryptionAlgorithms(
+													Collections.singletonList(
+															TunnelConfigurationPhase1
+																	.EncryptionAlgorithmsEnum
+																	.AES256))
+											.integrityAlgorithms(
+													Collections.singletonList(
+															TunnelConfigurationPhase1
+																	.IntegrityAlgorithmsEnum
+																	.SHA2_384)))
+							.phase2(
+									new TunnelConfigurationPhase2()
+											.dhGroups(
+													Collections.singletonList(
+															TunnelConfigurationPhase2.DhGroupsEnum
+																	.ECP384))
+											.encryptionAlgorithms(
+													Collections.singletonList(
+															TunnelConfigurationPhase2
+																	.EncryptionAlgorithmsEnum
+																	.AES256))
+											.integrityAlgorithms(
+													Collections.singletonList(
+															TunnelConfigurationPhase2
+																	.IntegrityAlgorithmsEnum
+																	.SHA2_384)));
 
 			ConnectionResponse connectionResponse =
 					vpnApi.createGatewayConnection(
@@ -140,11 +170,11 @@ public final class VpnExample {
 							region,
 							gatewayId,
 							new CreateGatewayConnectionPayload()
-							    .displayName("example-vpn-connection")
-								.tunnel1(tunnelConfiguration)
-                                .tunnel2(tunnelConfiguration)
-                                .localSubnets(Collections.singletonList("172.16.0.0/24"))
-                                .remoteSubnets(Collections.singletonList("172.17.0.0/24")));
+									.displayName("example-vpn-connection")
+									.tunnel1(tunnelConfiguration)
+									.tunnel2(tunnelConfiguration)
+									.localSubnets(Collections.singletonList("172.16.0.0/24"))
+									.remoteSubnets(Collections.singletonList("172.17.0.0/24")));
 
 			Objects.requireNonNull(connectionResponse.getId());
 
@@ -153,22 +183,29 @@ public final class VpnExample {
 			System.out.println("Gateway created with the ID:" + connectionId.toString());
 
 			/* update the connection we just created */
-			vpnApi.updateGatewayConnection(projectId, region, gatewayId, connectionId.toString(),
-			    new UpdateGatewayConnectionPayload()
-    			    .displayName("example-vpn-connection-updated")
-    				.tunnel1(tunnelConfiguration)
-                    .tunnel2(tunnelConfiguration)
-                    .localSubnets(Collections.singletonList("172.16.0.0/24"))
-                    .remoteSubnets(Collections.singletonList("172.17.0.0/24")));
+			vpnApi.updateGatewayConnection(
+					projectId,
+					region,
+					gatewayId,
+					connectionId.toString(),
+					new UpdateGatewayConnectionPayload()
+							.displayName("example-vpn-connection-updated")
+							.tunnel1(tunnelConfiguration)
+							.tunnel2(tunnelConfiguration)
+							.localSubnets(Collections.singletonList("172.16.0.0/24"))
+							.remoteSubnets(Collections.singletonList("172.17.0.0/24")));
 
 			/* fetch the connection we just created */
-			ConnectionResponse fetchedConnection = vpnApi.getGatewayConnection(projectId, region, gatewayId, connectionId.toString());
+			ConnectionResponse fetchedConnection =
+					vpnApi.getGatewayConnection(
+							projectId, region, gatewayId, connectionId.toString());
 			System.out.println("\nFetched connection: ");
 			System.out.println("* Connection name: " + fetchedConnection.getDisplayName());
 			System.out.println("* Id: " + fetchedConnection.getId());
 
 			/* list all available connection in the project */
-			ConnectionList connections = vpnApi.listGatewayConnections(projectId, region, gatewayId, null);
+			ConnectionList connections =
+					vpnApi.listGatewayConnections(projectId, region, gatewayId, null);
 			System.out.println("\nAvailable connections: ");
 			for (ConnectionResponse connection : connections.getConnections()) {
 				System.out.println("* " + connection.getDisplayName());
@@ -196,7 +233,7 @@ public final class VpnExample {
 					TimeUnit.SECONDS.sleep(5);
 				} catch (ApiException e) {
 					if (e.getCode() == HttpURLConnection.HTTP_NOT_FOUND) {
-					    System.out.println("Successfully deleted");
+						System.out.println("Successfully deleted");
 						break;
 					}
 				}
