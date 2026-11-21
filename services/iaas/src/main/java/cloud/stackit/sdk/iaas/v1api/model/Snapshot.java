@@ -15,6 +15,7 @@ package cloud.stackit.sdk.iaas.v1api.model;
 import cloud.stackit.sdk.iaas.v1api.JSON;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
@@ -33,7 +34,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /** Object that represents a snapshot. */
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class Snapshot {
 	public static final String SERIALIZED_NAME_AVAILABILITY_ZONE = "availabilityZone";
 
@@ -49,6 +50,11 @@ public class Snapshot {
 
 	@SerializedName(SERIALIZED_NAME_DESCRIPTION)
 	@javax.annotation.Nullable private String description;
+
+	public static final String SERIALIZED_NAME_ENCRYPTED = "encrypted";
+
+	@SerializedName(SERIALIZED_NAME_ENCRYPTED)
+	@javax.annotation.Nullable private Boolean encrypted;
 
 	public static final String SERIALIZED_NAME_ID = "id";
 
@@ -91,6 +97,7 @@ public class Snapshot {
 	public Snapshot(
 			String availabilityZone,
 			OffsetDateTime createdAt,
+			Boolean encrypted,
 			UUID id,
 			Long size,
 			String status,
@@ -98,6 +105,7 @@ public class Snapshot {
 		this();
 		this.availabilityZone = availabilityZone;
 		this.createdAt = createdAt;
+		this.encrypted = encrypted;
 		this.id = id;
 		this.size = size;
 		this.status = status;
@@ -141,6 +149,15 @@ public class Snapshot {
 	}
 
 	/**
+	 * Indicates if a volume is encrypted.
+	 *
+	 * @return encrypted
+	 */
+	@javax.annotation.Nullable public Boolean getEncrypted() {
+		return encrypted;
+	}
+
+	/**
 	 * Universally Unique Identifier (UUID).
 	 *
 	 * @return id
@@ -155,11 +172,21 @@ public class Snapshot {
 	}
 
 	/**
-	 * Object that represents the labels of an object. Regex for keys:
-	 * &#x60;^(?&#x3D;.{1,63}$)([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]$&#x60;. Regex for values:
-	 * &#x60;^(?&#x3D;.{0,63}$)(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])*$&#x60;. Providing a
-	 * &#x60;null&#x60; value for a key will remove that key. The &#x60;stackit-&#x60; prefix is
-	 * reserved and cannot be used for Keys.
+	 * Object that represents the labels as key-value pairs of a resource. Key constraints: - May
+	 * contain an optional domain prefix separated by a slash (&#x60;/&#x60;). - Domain prefix must
+	 * be less than or equal to 250 characters. - Domain prefix must ba a valid DNS subdomain
+	 * containing only lowercase alphanumerics (&#x60;[a-z0-9]&#x60;) and dashes (&#x60;-&#x60;),
+	 * separated by dots (&#x60;.&#x60;). - Length (excluding the domain prefix) must be between 1
+	 * and 63 characters. - Must begin and end with an alphanumerical character
+	 * (&#x60;[a-z0-9A-Z]&#x60;). - May contain dashes (&#x60;-&#x60;), underscores (&#x60;_&#x60;),
+	 * dots (&#x60;.&#x60;), and alphanumerics in between. - Keys starting with the prefix
+	 * &#x60;stackit-&#x60; or having a domain prefix of &#x60;stackit.cloud&#x60; (including its
+	 * subdomains, e.g., &#x60;*.stackit.cloud/&#x60;) are reserved for system use. Value
+	 * constraints: - Must be less than or equal to 63 characters long (can be empty). - If not
+	 * empty it must begin and end with an alphanumeric character (&#x60;[a-z0-9A-Z]&#x60;). - May
+	 * contain dashes (&#x60;-&#x60;), underscores (&#x60;_&#x60;), dots (&#x60;.&#x60;), and
+	 * alphanumerics in between. A resource can have a maximum of 64 labels. Reserved labels are
+	 * excluded from this count. Providing a &#x60;null&#x60; value for a key will remove that key.
 	 *
 	 * @return labels
 	 */
@@ -293,6 +320,7 @@ public class Snapshot {
 		return Objects.equals(this.availabilityZone, snapshot.availabilityZone)
 				&& Objects.equals(this.createdAt, snapshot.createdAt)
 				&& Objects.equals(this.description, snapshot.description)
+				&& Objects.equals(this.encrypted, snapshot.encrypted)
 				&& Objects.equals(this.id, snapshot.id)
 				&& Objects.equals(this.labels, snapshot.labels)
 				&& Objects.equals(this.name, snapshot.name)
@@ -309,6 +337,7 @@ public class Snapshot {
 				availabilityZone,
 				createdAt,
 				description,
+				encrypted,
 				id,
 				labels,
 				name,
@@ -326,6 +355,7 @@ public class Snapshot {
 		sb.append("    availabilityZone: ").append(toIndentedString(availabilityZone)).append("\n");
 		sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
 		sb.append("    description: ").append(toIndentedString(description)).append("\n");
+		sb.append("    encrypted: ").append(toIndentedString(encrypted)).append("\n");
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    labels: ").append(toIndentedString(labels)).append("\n");
 		sb.append("    name: ").append(toIndentedString(name)).append("\n");
@@ -345,10 +375,7 @@ public class Snapshot {
 	 * line).
 	 */
 	private String toIndentedString(Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
+		return o == null ? "null" : o.toString().replace("\n", "\n    ");
 	}
 
 	public static HashSet<String> openapiFields;
@@ -362,6 +389,7 @@ public class Snapshot {
 								"availabilityZone",
 								"createdAt",
 								"description",
+								"encrypted",
 								"id",
 								"labels",
 								"name",
@@ -486,7 +514,9 @@ public class Snapshot {
 												entry.getKey(), (Character) entry.getValue());
 									else {
 										JsonElement jsonElement = gson.toJsonTree(entry.getValue());
-										if (jsonElement.isJsonArray()) {
+										if (jsonElement.isJsonNull()) {
+											obj.add(entry.getKey(), JsonNull.INSTANCE);
+										} else if (jsonElement.isJsonArray()) {
 											obj.add(entry.getKey(), jsonElement.getAsJsonArray());
 										} else {
 											obj.add(entry.getKey(), jsonElement.getAsJsonObject());
