@@ -28,7 +28,7 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.19.0")
+@javax.annotation.Generated(value = "JavaGenerator", comments = "Generator version: 7.26.0")
 public class AreaId extends AbstractOpenApiSchema {
 	private static final Logger log = Logger.getLogger(AreaId.class.getName());
 
@@ -197,6 +197,7 @@ public class AreaId extends AbstractOpenApiSchema {
 	 * @return The actual instance of `UUID`
 	 * @throws ClassCastException if the instance is not `UUID`
 	 */
+	@SuppressWarnings("unchecked")
 	public UUID getUUID() throws ClassCastException {
 		return (UUID) super.getActualInstance();
 	}
@@ -208,6 +209,7 @@ public class AreaId extends AbstractOpenApiSchema {
 	 * @return The actual instance of `StaticAreaID`
 	 * @throws ClassCastException if the instance is not `StaticAreaID`
 	 */
+	@SuppressWarnings("unchecked")
 	public StaticAreaID getStaticAreaID() throws ClassCastException {
 		return (StaticAreaID) super.getActualInstance();
 	}
